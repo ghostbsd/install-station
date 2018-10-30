@@ -1,0 +1,2 @@
+# gbinstall
+New GhostBSD installer
