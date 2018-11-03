@@ -1,0 +1,19 @@
+#!/usr/local/bin/python
+
+import sys
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
+installer = "/usr/local/lib/gbinstall/"
+sys.path.append(installer)
+from gbiWindow import MainWindow
+
+
+def main():
+    Gtk.main()
+    return 0
+
+
+if __name__ == "__main__":
+    MainWindow()
+    main()
