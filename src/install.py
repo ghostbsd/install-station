@@ -13,10 +13,9 @@ from gi.repository import Gtk, GLib
 import threading
 # import locale
 import os
-from subprocess import Popen, PIPE, STDOUT, call
+from subprocess import Popen, PIPE, call
 from time import sleep
 from db_partition import rDeleteParttion, destroyParttion, makingParttion
-from create_cfg import gbsd_cfg
 from slides import gbsdSlides
 # from slides import dbsdSlides
 import sys
@@ -34,13 +33,12 @@ def update_progess(probar, bartext):
 
 
 def read_output(command, probar):
+    GLib.idle_add(update_progess, probar, "Stoping hald service")
     call('service hald stop', shell=True)
-    GLib.idle_add(update_progess, probar, "Creating pcinstall.cfg")
-
-    # If rc.conf.ghostbsd exists run gbsd_cfg
-    gbsd_cfg()
+    sleep(1)
+    GLib.idle_add(update_progess, probar, "Umount /media/GhostBSD")
     call('umount /media/GhostBSD', shell=True)
-    sleep(2)
+    sleep(1)
     if os.path.exists(tmp + 'delete'):
         GLib.idle_add(update_progess, probar, "Deleting partition")
         rDeleteParttion()
@@ -55,10 +53,15 @@ def read_output(command, probar):
         GLib.idle_add(update_progess, probar, "Creating new partitions")
         makingParttion()
         sleep(1)
-    p = Popen(command, shell=True, stdin=PIPE, stdout=PIPE,
-              stderr=STDOUT, close_fds=True, universal_newlines=True)
+    process = Popen(
+        command,
+        shell=True,
+        stdout=PIPE,
+        close_fds=True,
+        universal_newlines=True
+    )
     while True:
-        line = p.stdout.readline()
+        line = process.stdout.readline()
         if not line:
             break
         bartext = line.rstrip()
@@ -70,11 +73,11 @@ def read_output(command, probar):
         print(bartext)
     call('service hald start', shell=True)
     if bartext.rstrip() == "Installation finished!":
-        Popen('python2.7 %send.py' % installer, shell=True, close_fds=True)
+        Popen(f'python3.6 {installer}end.py', shell=True, close_fds=True)
         call("rm -rf /tmp/.gbi/", shell=True, close_fds=True)
         Gtk.main_quit()
     else:
-        Popen('python2.7 %serror.py' % installer, shell=True, close_fds=True)
+        Popen(f'python3.6 {installer}error.py', shell=True, close_fds=True)
         Gtk.main_quit()
 
 
@@ -103,12 +106,12 @@ class installProgress():
     def __init__(self):
         self.pbar = Gtk.ProgressBar()
         self.pbar.set_show_text(True)
-        command = '%s -c %spcinstall.cfg' % (sysinstall, tmp)
-        thr = threading.Thread(target=read_output,
-                               args=(command, self.pbar))
-        thr.setDaemon(True)
-        thr.start()
-        self.pbar.show()
+        # command = '%s -c %spcinstall.cfg' % (sysinstall, tmp)
+        # thr = threading.Thread(target=read_output,
+        #                        args=(command, self.pbar))
+        # thr.setDaemon(True)
+        # thr.start()
+        # self.pbar.show()
 
     def getProgressBar(self):
         return self.pbar

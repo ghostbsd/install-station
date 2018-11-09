@@ -44,6 +44,7 @@ from language import Language
 from installType import Types
 from use_ufs import use_ufs
 from partition import Partitions
+from confirm_installation import Summary
 from use_zfs import ZFS
 from db_partition import partition_repos
 from install import installProgress, installSlide
@@ -80,6 +81,7 @@ class MainWindow():
             get_types = self.types.get_model()
             typebox.pack_start(get_types, True, True, 0)
             label = Gtk.Label("Types")
+            self.button1.set_sensitive(True)
             self.notebook.insert_page(typebox, label, 1)
             self.window.show_all()
             self.notebook.next_page()
@@ -123,19 +125,16 @@ class MainWindow():
             self.partition.save_selection()
             Rbox = Gtk.VBox(False, 0)
             Rbox.show()
-            self.rootuser = RootUser(self.button3)
-            get_root = self.rootuser.get_model()
+            self.summary = Summary(self.button3)
+            get_root = self.summary.get_model()
             Rbox.pack_start(get_root, True, True, 0)
             label = Gtk.Label("Root Password")
+            self.button3.set_label("Install")
             self.notebook.insert_page(Rbox, label, 3)
             self.window.show_all()
             self.notebook.next_page()
-            self.button3.set_sensitive(False)
-            self.rootuser.save_selection()
-            Abox = Gtk.VBox(False, 0)
-            Abox.show()
         elif page == 3:
-            self.adduser.save_selection()
+            # self.adduser.save_selection()
             Ibox = Gtk.VBox(False, 0)
             Ibox.show()
             install = installSlide()

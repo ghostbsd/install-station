@@ -10,7 +10,7 @@
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
+from gi.repository import Gtk, Gdk
 import os
 import os.path
 
@@ -24,6 +24,17 @@ logo = "/usr/local/lib/gbinstall/logo.png"
 disk_file = '%sdisk' % tmp
 boot_file = '%sboot' % tmp
 signal = '%ssignal' % tmp
+
+cssProvider = Gtk.CssProvider()
+# if os.path.exists(rcconfgbsd):
+#     print(True)
+cssProvider.load_from_path('/usr/local/lib/gbinstall/ghostbsd-style.css')
+# elif os.path.exists(rcconfdbsd):
+#     cssProvider.load_from_path('/usr/local/lib/gbi/desktopbsd-style.css')
+screen = Gdk.Screen.get_default()
+styleContext = Gtk.StyleContext()
+styleContext.add_provider_for_screen(screen, cssProvider,
+                                     Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
 
 class Types():
@@ -54,7 +65,7 @@ class Types():
         return self.ne
 
     def get_model(self):
-        return self.box1
+        return self.vbox1
 
     def boot_manager(self, radiobutton, val):
         self.boot = val
@@ -63,20 +74,14 @@ class Types():
         boot.close()
 
     def __init__(self):
-        self.box1 = Gtk.VBox(False, 0)
-        self.box1.show()
-        box2 = Gtk.VBox(False, 10)
-        # box2.set_border_width(10)
-        self.box1.pack_start(box2, False, False, 0)
-        box2.show()
-        # auto partition or Customize Disk Partition.
+        self.vbox1 = Gtk.VBox(False, 0)
+        self.vbox1.show()
+        label = Gtk.Label("Installation Type And Boot Manager", name="Header")
+        label.set_property("height-request", 40)
+        self.vbox1.pack_start(label, False, False, 0)
         bbox = Gtk.VBox()
-        label = Gtk.Label('<b><span size="xx-large">Installation Type And Boot Manager</span></b>')
-        label.set_use_markup(True)
-        box2.pack_start(label, False, False, 10)
-        # create a Hbox to center the radio button.
         hbox = Gtk.HBox()
-        box2.pack_start(hbox, False, False, 10)
+        self.vbox1.pack_start(hbox, False, False, 10)
         full_ufs = Gtk.RadioButton.new_with_label_from_widget(None, "UFS Full Disk Configuration")
         bbox.pack_start(full_ufs, False, True, 10)
         full_ufs.connect("toggled", self.fstype, "ufs")
@@ -98,7 +103,7 @@ class Types():
         # Boot option.
         box3 = Gtk.VBox(False, 0)
         box3.set_border_width(10)
-        self.box1.pack_start(box3, False, False, 0)
+        self.vbox1.pack_start(box3, False, False, 0)
         box3.show()
         label = Gtk.Label('<b><span size="x-large">Boot Manager Option</span></b>')
         label.set_use_markup(True)
@@ -130,5 +135,5 @@ class Types():
         boot.close()
         self.box3 = Gtk.VBox(False, 0)
         self.box3.set_border_width(0)
-        self.box1.pack_start(self.box3, True, True, 0)
+        self.vbox1.pack_start(self.box3, True, True, 0)
         return

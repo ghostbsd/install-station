@@ -56,5 +56,6 @@ class PyApp:
         box2.pack_start(table)
         window.show_all()
 
+
 PyApp()
 gtk.main()

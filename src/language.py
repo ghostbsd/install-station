@@ -35,7 +35,7 @@
 # language.py show the language for the installer.
 
 
-from gi.repository import Gtk
+from gi.repository import Gtk, Gdk
 import os
 import os.path
 from sys_handler import language_dictionary
@@ -50,6 +50,18 @@ lang_dictionary = language_dictionary()
 # Text to be replace be multiple language file.
 title = "Welcome To GhostBSD!"
 welltext = """Select the language you want to use with GhostBSD."""
+
+
+cssProvider = Gtk.CssProvider()
+# if os.path.exists(rcconfgbsd):
+#     print(True)
+cssProvider.load_from_path('/usr/local/lib/gbinstall/ghostbsd-style.css')
+# elif os.path.exists(rcconfdbsd):
+#     cssProvider.load_from_path('/usr/local/lib/gbi/desktopbsd-style.css')
+screen = Gdk.Screen.get_default()
+styleContext = Gtk.StyleContext()
+styleContext.add_provider_for_screen(screen, cssProvider,
+                                     Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
 
 class Language:
@@ -84,7 +96,9 @@ class Language:
         # Add a Default vertical box
         self.vbox1 = Gtk.VBox(False, 0)
         self.vbox1.show()
-        # Add a second vertical box
+        label = Gtk.Label("Welcome To GhostBSD!", name="Header")
+        label.set_property("height-request", 40)
+        self.vbox1.pack_start(label, False, False, 0)
         grid = Gtk.Grid()
         self.vbox1.pack_start(grid, True, True, 0)
         grid.set_row_spacing(10)
@@ -130,7 +144,7 @@ class Language:
         image = Gtk.Image()
         image.set_from_file(logo)
         image.show()
-        grid.attach(self.wellcome, 1, 1, 3, 1)
+        # grid.attach(self.wellcome, 1, 1, 3, 1)
         vhbox.pack_start(image, True, True, 5)
         grid.attach(vhbox, 2, 2, 2, 9)
         grid.show()

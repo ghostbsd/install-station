@@ -42,11 +42,19 @@ pc_sysinstall = "/usr/local/sbin/pc-sysinstall"
 partitiondb = f"{tmp}partitiondb/"
 diskdb = f"{partitiondb}disk"
 
-query_disk = f'{pc_sysinstall} disk-list'
-detect_sheme = f'{pc_sysinstall} detect-sheme'
-query_partition = f'{pc_sysinstall} disk-part'
-query_label = f'{pc_sysinstall} disk-label'
-disk_info = f'{pc_sysinstall} disk-info'
+query = f'{installer}backend-query'
+
+query_disk = f'sh {query}/disk-list.sh'
+detect_sheme = f'sh {query}/detect-sheme.sh'
+query_partition = f'sh {query}/disk-part.sh'
+query_label = f'sh {query}/disk-label.sh'
+disk_info = f'sh {query}/disk-info.sh'
+
+# query_disk = f'{pc_sysinstall} disk-list'
+# detect_sheme = f'{pc_sysinstall} detect-sheme'
+# query_partition = f'{pc_sysinstall} disk-part'
+# query_label = f'{pc_sysinstall} disk-label'
+# disk_info = f'{pc_sysinstall} disk-info'
 
 memory = 'sysctl hw.physmem'
 disk_file = f'{tmp}disk'
@@ -503,7 +511,7 @@ class autoDiskPartition():
         slice_file.writelines('%s\n' % number)
         slice_file.close()
         ram = Popen(memory, shell=True, stdin=PIPE, stdout=PIPE,
-                    universal_newlines=True,  close_fds=True)
+                    universal_newlines=True, close_fds=True)
         mem = ram.stdout.read()
         swap = int(int(mem.partition(':')[2].strip()) / (1024 * 1024))
         if bios_or_uefi() == "UEFI":

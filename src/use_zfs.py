@@ -28,7 +28,7 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 """
 
-from gi.repository import Gtk
+from gi.repository import Gtk, Gdk
 import os
 import os.path
 import re
@@ -54,6 +54,18 @@ boot_file = '%sboot' % tmp
 
 global zfs_dsk_list
 zfs_dsk_list = []
+
+
+cssProvider = Gtk.CssProvider()
+# if os.path.exists(rcconfgbsd):
+#     print(True)
+cssProvider.load_from_path('/usr/local/lib/gbinstall/ghostbsd-style.css')
+# elif os.path.exists(rcconfdbsd):
+#     cssProvider.load_from_path('/usr/local/lib/gbi/desktopbsd-style.css')
+screen = Gdk.Screen.get_default()
+styleContext = Gtk.StyleContext()
+styleContext.add_provider_for_screen(screen, cssProvider,
+                                     Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
 
 # Find if pasword contain only lower case and number
@@ -283,14 +295,12 @@ class ZFS():
 
     def __init__(self, button3):
         self.button3 = button3
-        self.box1 = Gtk.VBox(False, 0)
-        self.box1.show()
-        box2 = Gtk.HBox(False, 0)
-        self.box1.pack_start(box2, True, True, 0)
-        box2.show()
+        self.vbox1 = Gtk.VBox(False, 0)
+        self.vbox1.show()
         # Title
-        Title = Gtk.Label("<b><span size='xx-large'>ZFS Configuration</span></b>")
-        Title.set_use_markup(True)
+        label = Gtk.Label("ZFS Full Disk Configuration", name="Header")
+        label.set_property("height-request", 40)
+        self.vbox1.pack_start(label, False, False, 0)
         # Chose disk
         sw = Gtk.ScrolledWindow(hexpand=True, vexpand=True)
         sw.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
@@ -420,9 +430,13 @@ class ZFS():
         # table = Gtk.Table(12, 12, True)
         grid = Gtk.Grid()
         grid.set_row_spacing(10)
+        grid.set_margin_left(10)
+        grid.set_margin_right(10)
+        grid.set_margin_top(10)
+        grid.set_margin_bottom(10)
         # grid.set_column_homogeneous(True)
         # grid.set_row_homogeneous(True)
-        grid.attach(Title, 1, 0, 8, 2)
+        # grid.attach(Title, 1, 0, 8, 2)
         grid.attach(mirror_label, 1, 2, 1, 1)
         grid.attach(mirror_box, 2, 2, 1, 1)
         # grid.attach(label, 6, 2, 2, 1)
@@ -443,11 +457,11 @@ class ZFS():
         # grid.attach(self.vpasswd_label, 1, 11, 1, 1)
         # grid.attach(self.repassword, 2, 11, 2, 1)
         # grid.attach(self.img, 4, 11, 2, 1)
-        box2.pack_start(grid, True, True, 10)
+        self.vbox1.pack_start(grid, True, True, 0)
         return
 
     def get_model(self):
-        return self.box1
+        return self.vbox1
 
     def digit_only(self, *args):
         text = self.swap_entry.get_text().strip()

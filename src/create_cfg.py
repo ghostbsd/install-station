@@ -45,7 +45,7 @@ class gbsd_cfg():
         if os.path.exists(language):
             langfile = open(language, 'r')
             lang = langfile.readlines()[0].rstrip()
-            f.writelines('\n# System Language\n\n')
+            f.writelines('\n# System Language\n')
             f.writelines(f'localizeLang={lang}\n')
             os.remove(language)
         # Keyboard Setting
@@ -148,6 +148,7 @@ class gbsd_cfg():
             root = rf[0]
             f.writelines('\n# Set the root pass\n')
             f.writelines(f'rootPass={root}\n')
+            os.remove(f'{tmp}root')
         if os.path.exists(user_passwd):
             # Network Configuration
             f.writelines('\n# Network Configuration\n')
@@ -170,29 +171,10 @@ class gbsd_cfg():
             f.writelines(f'defaultGroup=wheel\n')
             f.writelines(f'userGroups=operator\n')
             f.writelines('commitUser\n')
+            os.remove(user_passwd)
         f.writelines('runScript=/root/iso_to_hd.sh\n')
         f.writelines('runCommand=rm -f /root/iso_to_hd.sh\n')
         if os.path.exists(zfs_config):
             zfsark = """echo 'vfs.zfs.arc_max="512M"' >> /boot/loader.conf"""
             f.writelines(f'runCommand={zfsark}')
-        # adding setting for keyboard in slim
-        keyboard_conf = '/usr/local/etc/X11/xorg.conf.d/keyboard.conf'
-        k_conf_list = [
-            'Section "InputClass"',
-            '        Identifier "Keyboard0"',
-            '        Driver "kbd"',
-            f'        Option "XkbLayout"      "{kbl}"'
-        ]
-        if kbv != 'None':
-            k_conf_list.append(f'        Option "XkbVariant"     "{kbv}"')
-        if kbm != 'None':
-            k_conf_list.append(f'        Option "XkbModel"       "{kbm}"')
-        k_conf_list.append('EndSection')
-        for conf_line in k_conf_list:
-            if 'Section "InputClass"' == conf_line:
-                cmd = f"""echo '{conf_line}' > {keyboard_conf}"""
-            else:
-                cmd = f"""echo '{conf_line}' >> {keyboard_conf}"""
-            f.writelines(f'runCommand={cmd}\n')
         f.close()
-        os.remove(user_passwd)
