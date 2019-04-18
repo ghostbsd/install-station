@@ -34,13 +34,13 @@ from subprocess import Popen, PIPE, STDOUT, call
 import pickle
 from time import sleep
 
-tmp = "/tmp/.gbi/"
+tmp = "/tmp/.gbinstall/"
 if not os.path.exists(tmp):
     os.makedirs(tmp)
-installer = "/usr/local/lib/gbi/"
+installer = "/usr/local/lib/gbinstall/"
 sysinstall = "/usr/local/sbin/pc-sysinstall"
 partitiondb = "%spartitiondb/" % tmp
-query = "sh /usr/local/lib/gbi/backend-query/"
+query = "sh /usr/local/lib/gbinstall/backend-query/"
 query_disk = '%sdisk-list.sh' % query
 detect_sheme = '%sdetect-sheme.sh' % query
 diskdb = "%sdisk" % partitiondb

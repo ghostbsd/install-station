@@ -64,7 +64,7 @@ disk_label = '%sdisk-label.sh' % query
 disk_schem = '%sscheme' % tmp
 disk_file = '%sdisk' % tmp
 psize = '%spart_size' % tmp
-logo = "/usr/local/lib/gbi/logo.png"
+logo = "/usr/local/lib/gbinstall/logo.png"
 Part_label = '%spartlabel' % tmp
 part_schem = '%sscheme' % tmp
 partitiondb = "%spartitiondb/" % tmp
@@ -73,11 +73,7 @@ ufs_Partiton_list = []
 
 
 cssProvider = Gtk.CssProvider()
-# if os.path.exists(rcconfgbsd):
-#     print(True)
 cssProvider.load_from_path('/usr/local/lib/gbinstall/ghostbsd-style.css')
-# elif os.path.exists(rcconfdbsd):
-#     cssProvider.load_from_path('/usr/local/lib/gbi/desktopbsd-style.css')
 screen = Gdk.Screen.get_default()
 styleContext = Gtk.StyleContext()
 styleContext.add_provider_for_screen(screen, cssProvider,
@@ -272,7 +268,7 @@ class Partitions():
         self.window.set_title("Partition Scheme")
         self.window.set_border_width(0)
         self.window.set_size_request(400, 150)
-        self.window.set_icon_from_file("/usr/local/lib/gbi/logo.png")
+        self.window.set_icon_from_file(logo)
         box1 = Gtk.VBox(False, 0)
         self.window.add(box1)
         box1.show()
@@ -324,7 +320,7 @@ class Partitions():
         self.window.set_title("Add Partition")
         self.window.set_border_width(0)
         self.window.set_size_request(400, 150)
-        self.window.set_icon_from_file("/usr/local/lib/gbi/logo.png")
+        self.window.set_icon_from_file(logo)
         box1 = Gtk.VBox(False, 0)
         self.window.add(box1)
         box1.show()
@@ -461,91 +457,93 @@ class Partitions():
 
     def partition_selection(self, widget):
         model, self.iter, = widget.get_selected()
-        if self.iter is not None:
-            self.path = model.get_path(self.iter)
-            tree_iter3 = model.get_iter(self.path[0])
-            self.scheme = model.get_value(tree_iter3, 3)
-            self.disk = model.get_value(tree_iter3, 0)
-            tree_iter = model.get_iter(self.path)
-            self.slice = model.get_value(tree_iter, 0)
-            self.size = model.get_value(tree_iter, 1)
-            if len(self.path) == 2 and self.path[1] > 0 and self.scheme == "MBR":
-                pathbehind = str(self.path[0]) + ":" + str(int(self.path[1] - 1))
-                tree_iter2 = model.get_iter(pathbehind)
+        print(self.iter)
+        if self.iter is None:
+            return
+        self.path = model.get_path(self.iter)
+        tree_iter3 = model.get_iter(self.path[0])
+        self.scheme = model.get_value(tree_iter3, 3)
+        self.disk = model.get_value(tree_iter3, 0)
+        tree_iter = model.get_iter(self.path)
+        self.slice = model.get_value(tree_iter, 0)
+        self.size = model.get_value(tree_iter, 1)
+        if len(self.path) == 2 and self.path[1] > 0 and self.scheme == "MBR":
+            pathbehind = str(self.path[0]) + ":" + str(int(self.path[1] - 1))
+            tree_iter2 = model.get_iter(pathbehind)
+            self.slicebehind = model.get_value(tree_iter2, 0)
+            sl = int(self.path[1]) + 1
+            if 'freespace' in self.slicebehind:
+                slbehind = self.path[1]
+            else:
+                slbehind = int(self.slicebehind.partition('s')[2])
+        elif len(self.path) == 2 and self.path[1] > 0 and self.scheme == "GPT":
+            pathbehind = str(self.path[0]) + ":" + str(int(self.path[1] - 1))
+            tree_iter2 = model.get_iter(pathbehind)
+            self.slicebehind = model.get_value(tree_iter2, 0)
+            self.lablebehind = model.get_value(tree_iter2, 2)
+            sl = int(self.path[1]) + 1
+            if 'freespace' in self.slicebehind:
+                slbehind = self.path[1]
+            else:
+                slbehind = int(self.slicebehind.partition('p')[2])
+        elif len(self.path) == 3 and self.path[2] > 0 and self.scheme == "MBR":
+            if self.path[1] > 0:
+                pathbehind1 = str(self.path[0]) + ":" + str(int(self.path[1] - 1))
+                tree_iter2 = model.get_iter(pathbehind1)
                 self.slicebehind = model.get_value(tree_iter2, 0)
-                sl = int(self.path[1]) + 1
-                if 'freespace' in self.slicebehind:
-                    slbehind = self.path[1]
-                else:
-                    slbehind = int(self.slicebehind.partition('s')[2])
-            elif len(self.path) == 2 and self.path[1] > 0 and self.scheme == "GPT":
-                pathbehind = str(self.path[0]) + ":" + str(int(self.path[1] - 1))
-                tree_iter2 = model.get_iter(pathbehind)
-                self.slicebehind = model.get_value(tree_iter2, 0)
-                self.lablebehind = model.get_value(tree_iter2, 2)
-                sl = int(self.path[1]) + 1
-                if 'freespace' in self.slicebehind:
-                    slbehind = self.path[1]
-                else:
-                    slbehind = int(self.slicebehind.partition('p')[2])
-            elif len(self.path) == 3 and self.path[2] > 0 and self.scheme == "MBR":
-                if self.path[1] > 0:
-                    pathbehind1 = str(self.path[0]) + ":" + str(int(self.path[1] - 1))
-                    tree_iter2 = model.get_iter(pathbehind1)
-                    self.slicebehind = model.get_value(tree_iter2, 0)
-                else:
-                    self.slicebehind = None
-                pathbehind2 = str(self.path[0]) + ":" + str(self.path[1]) + ":" + str(int(self.path[2] - 1))
-                tree_iter3 = model.get_iter(pathbehind2)
-                self.lablebehind = model.get_value(tree_iter3, 2)
-                sl = int(self.path[1]) + 1
-                if self.slicebehind is None:
-                    slbehind = self.path[1]
-                elif 'freespace' in self.slicebehind:
-                    slbehind = self.path[1]
-                else:
-                    slbehind = int(self.slicebehind.partition('s')[2])
             else:
                 self.slicebehind = None
-                self.lablebehind = None
-                sl = 1
-                slbehind = 0
-            if 'freespace' in self.slice:
-                if self.path[1] > 3 and self.scheme == "MBR":
-                    self.create_bt.set_sensitive(False)
-                elif self.slicebehind is None:
-                    self.create_bt.set_sensitive(True)
-                elif sl == slbehind:
-                    self.create_bt.set_sensitive(False)
-                elif slbehind > 4:
-                    self.create_bt.set_sensitive(False)
-                else:
-                    self.create_bt.set_sensitive(True)
-                self.delete_bt.set_sensitive(False)
-                self.modifi_bt.set_sensitive(False)
-                self.auto_bt.set_sensitive(True)
-            elif 's' in self.slice:
-                self.create_bt.set_sensitive(False)
-                self.delete_bt.set_sensitive(True)
-                # self.modifi_bt.set_sensitive(True)
-                self.auto_bt.set_sensitive(False)
-            elif 'p' in self.slice:
-                self.create_bt.set_sensitive(False)
-                self.delete_bt.set_sensitive(True)
-                # self.modifi_bt.set_sensitive(True)
-                self.auto_bt.set_sensitive(False)
+            pathbehind2 = str(self.path[0]) + ":" + str(self.path[1]) + ":" + str(int(self.path[2] - 1))
+            tree_iter3 = model.get_iter(pathbehind2)
+            self.lablebehind = model.get_value(tree_iter3, 2)
+            sl = int(self.path[1]) + 1
+            if self.slicebehind is None:
+                slbehind = self.path[1]
+            elif 'freespace' in self.slicebehind:
+                slbehind = self.path[1]
             else:
-                self.delete_bt.set_sensitive(False)
-                self.modifi_bt.set_sensitive(False)
-                self.auto_bt.set_sensitive(False)
-                how_many_prt = how_partition(self.path)
-                firstisfree = first_is_free(self.path)
-                if how_many_prt == 1 and firstisfree == 'freespace':
-                    self.create_bt.set_sensitive(False)
-                elif how_partition(self.path) == 0:
-                    self.create_bt.set_sensitive(True)
-                else:
-                    self.create_bt.set_sensitive(False)
+                slbehind = int(self.slicebehind.partition('s')[2])
+        else:
+            self.slicebehind = None
+            self.lablebehind = None
+            sl = 1
+            slbehind = 0
+        if 'freespace' in self.slice:
+            if self.path[1] > 3 and self.scheme == "MBR":
+                self.create_bt.set_sensitive(False)
+            elif self.slicebehind is None:
+                self.create_bt.set_sensitive(True)
+            elif sl == slbehind:
+                self.create_bt.set_sensitive(False)
+            elif slbehind > 4:
+                self.create_bt.set_sensitive(False)
+            else:
+                self.create_bt.set_sensitive(True)
+            self.delete_bt.set_sensitive(False)
+            self.modifi_bt.set_sensitive(False)
+            self.auto_bt.set_sensitive(True)
+        elif 's' in self.slice:
+            self.create_bt.set_sensitive(False)
+            self.delete_bt.set_sensitive(True)
+            # self.modifi_bt.set_sensitive(True)
+            self.auto_bt.set_sensitive(False)
+        elif 'p' in self.slice:
+            self.create_bt.set_sensitive(False)
+            self.delete_bt.set_sensitive(True)
+            # self.modifi_bt.set_sensitive(True)
+            self.auto_bt.set_sensitive(False)
+        else:
+            self.delete_bt.set_sensitive(False)
+            self.modifi_bt.set_sensitive(False)
+            self.auto_bt.set_sensitive(False)
+            how_many_prt = how_partition(self.path)
+            firstisfree = first_is_free(self.path)
+            if how_many_prt == 1 and firstisfree == 'freespace':
+                self.create_bt.set_sensitive(False)
+            elif how_partition(self.path) == 0:
+                self.create_bt.set_sensitive(True)
+            else:
+                self.create_bt.set_sensitive(False)
         if os.path.exists(Part_label):
             rd = open(Part_label, 'r')
             self.prttn = rd.readlines()
