@@ -36,6 +36,7 @@ prefix = sys.prefix
 
 lib_gbinstall = [
     'src/confirm_installation.py',
+    'src/boot_manager.py',
     'src/create_cfg.py',
     'src/db_partition.py',
     'src/end.py',

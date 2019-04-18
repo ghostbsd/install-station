@@ -47,6 +47,7 @@ from partition import Partitions
 from confirm_installation import Summary
 from use_zfs import ZFS
 from db_partition import partition_repos
+from boot_manager import bootManager
 from install import installProgress, installSlide
 logo = "/usr/local/lib/gbinstall/logo.png"
 tmp = "/tmp/.gbinstall/"
@@ -123,17 +124,28 @@ class MainWindow():
                 self.button3.set_sensitive(False)
         elif page == 2:
             self.partition.save_selection()
+            Mbox = Gtk.VBox(False, 0)
+            Mbox.show()
+            self.bootmanager = bootManager()
+            get_boot = self.bootmanager.get_model()
+            Mbox.pack_start(get_boot, True, True, 0)
+            label = Gtk.Label("Boot Option")
+            self.notebook.insert_page(Mbox, label, 3)
+            self.window.show_all()
+            self.notebook.next_page()
+            self.button3.set_sensitive(True)
+        elif page == 3:
             Rbox = Gtk.VBox(False, 0)
             Rbox.show()
             self.summary = Summary(self.button3)
-            get_root = self.summary.get_model()
-            Rbox.pack_start(get_root, True, True, 0)
+            get_summary = self.summary.get_model()
+            Rbox.pack_start(get_summary, True, True, 0)
             label = Gtk.Label("Root Password")
             self.button3.set_label("Install")
-            self.notebook.insert_page(Rbox, label, 3)
+            self.notebook.insert_page(Rbox, label, 4)
             self.window.show_all()
             self.notebook.next_page()
-        elif page == 3:
+        elif page == 4:
             # self.adduser.save_selection()
             Ibox = Gtk.VBox(False, 0)
             Ibox.show()
@@ -141,7 +153,7 @@ class MainWindow():
             get_install = install.get_model()
             Ibox.pack_start(get_install, True, True, 0)
             label = Gtk.Label("Installation")
-            self.notebook.insert_page(Ibox, label, 7)
+            self.notebook.insert_page(Ibox, label, 5)
             self.notebook.next_page()
             instpro = installProgress()
             progressBar = instpro.getProgressBar()
@@ -158,7 +170,7 @@ class MainWindow():
         current_page = self.notebook.get_current_page()
         if current_page == 1:
             self.button1.set_sensitive(False)
-        elif current_page == 3:
+        elif current_page == 4:
             self.button3.set_label("Next")
         self.notebook.prev_page()
         new_page = self.notebook.get_current_page()
