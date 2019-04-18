@@ -41,7 +41,7 @@ from db_partition import partition_query, label_query, bios_or_uefi
 from db_partition import autoDiskPartition, autoFreeSpace, first_is_free
 from db_partition import createLabel, scheme_query, how_partition
 from db_partition import diskSchemeChanger, createSlice, createPartition
-from partition_handler import efi_exist
+from db_partition import efi_exist
 
 
 # Folder use pr the installer.
@@ -729,4 +729,4 @@ class Partitions():
 
     def get_model(self):
         self.tree_selection.select_path(0)
-        return self.box1
+        return self.vbox1
