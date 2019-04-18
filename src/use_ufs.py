@@ -126,13 +126,8 @@ class use_ufs():
         pfile.writelines('partition=ALL\n')
         pfile.writelines('partscheme=%s\n' % self.scheme)
         pfile.writelines('commitDiskPart\n\n')
-        read = open(boot_file, 'r')
-        line = read.readlines()
-        boot = line[0].strip()
         if bios_or_uefi() == "UEFI":
             root_size = root_size - 100
-        elif boot == 'GRUB':
-            root_size = root_size - 1
         else:
             root_size = root_size - 1
         zfsPart = 'disk0-part=%s%s %s /\n' % (self.fs, dgeli, root_size)
@@ -306,6 +301,10 @@ class use_ufs():
         shemebox.append_text("MBR")
         shemebox.connect('changed', self.sheme_selection)
         shemebox.set_active(0)
+        if bios_or_uefi() == "UEFI":
+            shemebox.set_sensitive(False)
+        else:
+            shemebox.set_sensitive(True)
         # Swap Size
         ram = Popen(memory, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT,
                     universal_newlines=True, close_fds=True)
@@ -497,17 +496,37 @@ class use_ufs():
 
     def passwdVerification(self, widget):
         if self.password.get_text() == self.repassword.get_text():
-            self.img.set_from_stock(Gtk.STOCK_YES, 10)
-            if self.mirror == "none":
-                if len(ufs_dsk_list) != 1:
+            self.img.set_from_stock(Gtk.STOCK_YES, 5)
+            if self.mirror == "single disk":
+                if len(zfs_dsk_list) != 1:
                     self.button3.set_sensitive(False)
                 else:
                     self.button3.set_sensitive(True)
-            elif self.mirror == "mirror":
-                if len(ufs_dsk_list) > 1:
+            elif self.mirror == "2 disk mirror":
+                if len(zfs_dsk_list) == 2:
+                    self.button3.set_sensitive(True)
+                else:
+                    self.button3.set_sensitive(False)
+            elif self.mirror == "3 disk raidz1":
+                if len(zfs_dsk_list) == 3:
+                    self.button3.set_sensitive(True)
+                else:
+                    self.button3.set_sensitive(False)
+            elif self.mirror == "4 disk raidz2":
+                if len(zfs_dsk_list) == 4:
+                    self.button3.set_sensitive(True)
+                else:
+                    self.button3.set_sensitive(False)
+            elif self.mirror == "5 disk raidz3":
+                if len(zfs_dsk_list) == 5:
+                    self.button3.set_sensitive(True)
+                else:
+                    self.button3.set_sensitive(False)
+            elif self.mirror == "2+ disk stripe":
+                if len(zfs_dsk_list) >= 2:
                     self.button3.set_sensitive(True)
                 else:
                     self.button3.set_sensitive(False)
         else:
-            self.img.set_from_stock(Gtk.STOCK_NO, 10)
+            self.img.set_from_stock(Gtk.STOCK_NO, 5)
             self.button3.set_sensitive(False)

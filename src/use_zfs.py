@@ -139,13 +139,8 @@ class ZFS():
                 num += 1
                 disk_len -= 1
             pool_disk = ' (%s:%s)\n' % (self.poolType, mirror_dsk)
-        read = open(boot_file, 'r')
-        line = read.readlines()
-        boot = line[0].strip()
         if bios_or_uefi() == "UEFI":
             ZFS_NUM = ZFS_NUM - 100
-        elif boot == 'GRUB':
-            ZFS_NUM = ZFS_NUM - 1
         else:
             ZFS_NUM = ZFS_NUM - 1
         zfslayout = "/(compress=lz4|atime=off),/root(compress=lz4)," \
@@ -374,8 +369,8 @@ class ZFS():
         self.pool.set_text('tank')
         self.pool.set_sensitive(False)
         # Creating MBR or GPT drive
-        label = Gtk.Label('<b>Partition Scheme</b>')
-        label.set_use_markup(True)
+        scheme_label = Gtk.Label('<b>Partition Scheme</b>')
+        scheme_label.set_use_markup(True)
         # Adding a combo box to selecting MBR or GPT sheme.
         self.scheme = 'GPT'
         shemebox = Gtk.ComboBoxText()
@@ -383,6 +378,10 @@ class ZFS():
         shemebox.append_text("MBR")
         shemebox.connect('changed', self.sheme_selection)
         shemebox.set_active(0)
+        if bios_or_uefi() == "UEFI":
+            shemebox.set_sensitive(False)
+        else:
+            shemebox.set_sensitive(True)
         # Force 4k Sectors
         self.zfs_four_k = "True"
         zfs4kcheck = Gtk.CheckButton("Force ZFS 4k block size")
@@ -436,27 +435,27 @@ class ZFS():
         grid.set_margin_bottom(10)
         # grid.set_column_homogeneous(True)
         # grid.set_row_homogeneous(True)
-        # grid.attach(Title, 1, 0, 8, 2)
+        # grid.attach(Title, 1, 1, 10, 1)
         grid.attach(mirror_label, 1, 2, 1, 1)
         grid.attach(mirror_box, 2, 2, 1, 1)
-        # grid.attach(label, 6, 2, 2, 1)
-        # grid.attach(shemebox, 8, 2, 1, 1)
+        grid.attach(pool_check, 7, 2, 2, 1)
+        grid.attach(self.pool, 9, 2, 2, 1)
         grid.attach(self.mirrorTips, 1, 3, 8, 1)
-        grid.attach(sw, 1, 4, 8, 4)
-        grid.attach(pool_check, 5, 9, 2, 1)
-        grid.attach(self.pool, 7, 9, 2, 1)
-        grid.attach(zfs4kcheck, 1, 9, 3, 1)
-        grid.attach(swp_size_label, 5, 2, 2, 1)
-        grid.attach(self.swap_entry, 7, 2, 2, 1)
+        grid.attach(zfs4kcheck, 9, 3, 2, 1)
+        grid.attach(sw, 1, 4, 10, 3)
+        grid.attach(scheme_label, 1, 9, 1, 1)
+        grid.attach(shemebox, 2, 9, 1, 1)
+        grid.attach(swp_size_label, 9, 9, 1, 1)
+        grid.attach(self.swap_entry, 10, 9, 1, 1)
         # grid.attach(self.swap_encrypt_check, 9, 15, 11, 12)
         # grid.attach(swap_mirror_check, 9, 15, 11, 12)
-        # grid.attach(encrypt_check, 1, 9, 2, 1)
-        # grid.attach(self.passwd_label, 1, 10, 1, 1)
-        # grid.attach(self.password, 2, 10, 2, 1)
-        # grid.attach(self.strenght_label, 4, 10, 2, 1)
-        # grid.attach(self.vpasswd_label, 1, 11, 1, 1)
-        # grid.attach(self.repassword, 2, 11, 2, 1)
-        # grid.attach(self.img, 4, 11, 2, 1)
+        # grid.attach(encrypt_check, 2, 8, 2, 1)
+        # grid.attach(self.passwd_label, 1, 9, 1, 1)
+        # grid.attach(self.password, 2, 9, 2, 1)
+        # grid.attach(self.strenght_label, 4, 9, 2, 1)
+        # grid.attach(self.vpasswd_label, 1, 10, 1, 1)
+        # grid.attach(self.repassword, 2, 10, 2, 1)
+        # grid.attach(self.img, 4, 10, 2, 1)
         self.vbox1.pack_start(grid, True, True, 0)
         return
 
@@ -667,7 +666,7 @@ class ZFS():
 
     def passwdVerification(self, widget):
         if self.password.get_text() == self.repassword.get_text():
-            self.img.set_from_stock(Gtk.STOCK_YES, 10)
+            self.img.set_from_stock(Gtk.STOCK_YES, 5)
             if self.mirror == "single disk":
                 if len(zfs_dsk_list) != 1:
                     self.button3.set_sensitive(False)
@@ -699,5 +698,5 @@ class ZFS():
                 else:
                     self.button3.set_sensitive(False)
         else:
-            self.img.set_from_stock(Gtk.STOCK_NO, 10)
+            self.img.set_from_stock(Gtk.STOCK_NO, 5)
             self.button3.set_sensitive(False)
