@@ -78,7 +78,12 @@ class gbsd_cfg():
                     f.writelines(line)
                     read = open(boot_file, 'r')
                     boot = read.readlines()[0].strip()
-                    f.writelines(f'bootManager={boot}\n')
+                    if boot == 'refind':
+                        f.writelines('bootManager=none\n')
+                        f.writelines('efiLoader=%s\n' % boot)
+                    else:
+                        f.writelines('bootManager=%s\n' % boot)
+                        f.writelines('efiLoader=none\n')
                     os.remove(boot_file)
                 else:
                     f.writelines(line)
@@ -90,9 +95,12 @@ class gbsd_cfg():
             for line in ufsconf:
                 if 'partscheme' in line:
                     f.writelines(line)
-                    read = open(boot_file, 'r')
-                    boot = read.readlines()[0].strip()
-                    f.writelines(f'bootManager={boot}\n')
+                    if boot == 'refind':
+                        f.writelines('bootManager=none\n')
+                        f.writelines('efiLoader=%s\n' % boot)
+                    else:
+                        f.writelines('bootManager=%s\n' % boot)
+                        f.writelines('efiLoader=none\n')
                     os.remove(boot_file)
                 else:
                     f.writelines(line)
@@ -114,7 +122,12 @@ class gbsd_cfg():
             read = open(boot_file, 'r')
             line = read.readlines()
             boot = line[0].strip()
-            f.writelines(f'bootManager={boot}\n')
+            if boot == 'refind':
+                f.writelines('bootManager=none\n')
+                f.writelines('efiLoader=%s\n' % boot)
+            else:
+                f.writelines('bootManager=%s\n' % boot)
+                f.writelines('efiLoader=none\n')
             # os.remove(boot_file)
             # Sheme sheme
             read = open(disk_schem, 'r')
@@ -172,6 +185,9 @@ class gbsd_cfg():
             f.writelines(f'userGroups=operator\n')
             f.writelines('commitUser\n')
             os.remove(user_passwd)
+        f.writelines('runExtCommand=cat /etc/rc.conf | grep kld_list >> $FSMNT/etc/rc.conf\n')
+        if os.path.exists("/etc/X11/xorg.conf"):
+            f.writelines('runExtCommand=cp /etc/X11/xorg.conf $FSMNT/etc/X11/xorg.conf\n')
         f.writelines('runScript=/root/iso_to_hd.sh\n')
         f.writelines('runCommand=rm -f /root/iso_to_hd.sh\n')
         if os.path.exists(zfs_config):
