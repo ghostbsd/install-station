@@ -41,6 +41,8 @@ from db_partition import partition_query, label_query, bios_or_uefi
 from db_partition import autoDiskPartition, autoFreeSpace, first_is_free
 from db_partition import createLabel, scheme_query, how_partition
 from db_partition import diskSchemeChanger, createSlice, createPartition
+from partition_handler import efi_exist
+
 
 # Folder use pr the installer.
 tmp = "/tmp/.gbinstall/"
@@ -93,7 +95,7 @@ class Partitions():
     def save_selection(self):
         pass
 
-    def on_add_label(self, widget, entry, inumb, path, data):
+    def on_add_label(self, widget, entry, inumb, path, create):
         if self.fs == '' or self.label == '':
             pass
         else:
@@ -101,11 +103,11 @@ class Partitions():
             lb = self.label
             cnumb = entry.get_value_as_int()
             lnumb = inumb - cnumb
-            createLabel(path, lnumb, cnumb, lb, fs, data)
+            createLabel(path, lnumb, cnumb, lb, fs, create)
         self.window.hide()
         self.update()
 
-    def on_add_partition(self, widget, entry, inumb, path, data):
+    def on_add_partition(self, widget, entry, inumb, path, create):
         if self.fs == '' or self.label == '':
             pass
         else:
@@ -113,14 +115,14 @@ class Partitions():
             lb = self.label
             cnumb = entry.get_value_as_int()
             lnumb = inumb - cnumb
-            createPartition(path, lnumb, inumb, cnumb, lb, fs, data)
+            createPartition(path, lnumb, inumb, cnumb, lb, fs, create)
         self.window.hide()
         self.update()
 
     def cancel(self, widget):
         self.window.hide()
 
-    def labelEditor(self, path, pslice, size, data1, modify):
+    def labelEditor(self, path, pslice, size, scheme, modify):
         numb = int(size)
         self.window = Gtk.Window()
         self.window.set_title("Add Partition")
@@ -146,23 +148,23 @@ class Partitions():
         self.fstype.append_text('UFS+J')
         self.fstype.append_text('UFS+SUJ')
         self.fstype.append_text('SWAP')
-        if data1 == 1:
-            read = open(boot_file, 'r')
-            line = read.readlines()
-            boot = line[0].strip()
+        if scheme == 'GPT':
             if bios_or_uefi() == "UEFI":
                 self.fstype.append_text("UEFI")
                 self.fs = "UEFI"
-            elif boot == "grub":
-                self.fstype.append_text("BIOS")
-                self.fs = "BIOS"
             else:
                 self.fstype.append_text("BOOT")
                 self.fs = "BOOT"
-        if data1 == 1 and not os.path.exists(Part_label):
-            self.fstype.set_active(5)
-        elif data1 == 1 and len(self.partfile) == 0:
-            self.fstype.set_active(5)
+            if self.fs == "UEFI" and efi_exist(self.disk) is False:
+                if not os.path.exists(Part_label):
+                    self.fstype.set_active(5)
+                elif len(self.prttn) == 0:
+                    self.fstype.set_active(5)
+            elif self.fs == "BOOT":
+                if not os.path.exists(Part_label):
+                    self.fstype.set_active(5)
+                elif len(self.prttn) == 0:
+                    self.fstype.set_active(5)
         elif self.lablebehind == "/":
             self.fstype.set_active(4)
             self.fs = "SWAP"
@@ -183,11 +185,11 @@ class Partitions():
         # The space for root '/ ' is to recognise / from the file.
         self.mountpoint.append_text('/')
         if os.path.exists(Part_label):
-            if data1 == 1 and len(self.partfile) == 1:
+            if scheme == 'GPT' and len(self.prttn) == 1:
                 self.mountpoint.append_text('/boot')
-            elif data1 == 0 and len(self.partfile) == 0:
+            elif scheme == 'MBR' and len(self.prttn) == 0:
                 self.mountpoint.append_text('/boot')
-        elif data1 == 0 and not os.path.exists(Part_label):
+        elif scheme == 'MBR' and not os.path.exists(Part_label):
             self.mountpoint.append_text('/boot')
         self.mountpoint.append_text('/etc')
         self.mountpoint.append_text('/root')
@@ -218,17 +220,23 @@ class Partitions():
         bbox.add(button)
         button = Gtk.Button(stock=Gtk.STOCK_ADD)
         if modify is False:
-            if data1 == 0:
+            if scheme == 'MBR':
                 button.connect("clicked", self.on_add_label, self.entry,
                                numb, path, True)
-            elif data1 == 1:
+            elif scheme == 'GPT' and self.fs == 'BOOT':
                 button.connect("clicked", self.on_add_partition, self.entry,
                                numb, path, True)
+            elif scheme == 'GPT' and self.fs == 'UEFI' and efi_exist(self.disk) is False:
+                button.connect("clicked", self.on_add_partition, self.entry,
+                               numb, path, True)
+            else:
+                button.connect("clicked", self.on_add_partition, self.entry,
+                               numb, path, False)
         else:
-            if data1 == 0:
+            if scheme == 'MBR':
                 button.connect("clicked", self.on_add_label, self.entry, numb,
                                path, False)
-            elif data1 == 1:
+            elif scheme == 'GPT':
                 button.connect("clicked", self.on_add_partition, self.entry,
                                numb, path, False)
         bbox.add(button)
@@ -250,7 +258,7 @@ class Partitions():
             if scheme_query(self.path) == "MBR" and self.path[1] < 4:
                 self.sliceEditor()
             elif scheme_query(self.path) == "GPT":
-                self.labelEditor(self.path, self.slice, self.size, 1, False)
+                self.labelEditor(self.path, self.slice, self.size, 'GPT', False)
 
     def autoSchemePartition(self, widget):
         diskSchemeChanger(self.scheme, self.path, self.slice, self.size)
@@ -390,10 +398,10 @@ class Partitions():
     def modify_partition(self, widget):
         if len(self.path) == 3:
             if self.slice != 'freespace':
-                self.labelEditor(self.path, self.slice, self.size, 0, True)
+                self.labelEditor(self.path, self.slice, self.size, 'MBR', True)
         elif len(self.path) == 2 and self.slice != 'freespace':
             if scheme_query(self.path) == "GPT":
-                self.labelEditor(self.path, self.slice, self.size, 1, True)
+                self.labelEditor(self.path, self.slice, self.size, 'GPT', True)
 
     def autoPartition(self, widget):
         if len(self.path) == 3:
@@ -433,21 +441,17 @@ class Partitions():
         self.treeview.expand_all()
 
     def create_partition(self, widget):
-        print(len(self.path))
-        print(self.path)
-        print(how_partition(self.path))
         if len(self.path) == 2 and how_partition(self.path) == 1 and self.slice == 'freespace':
             self.schemeEditor(False)
         elif len(self.path) == 3:
             if self.slice == 'freespace':
-                self.labelEditor(self.path, self.slice, self.size, 0, False)
+                self.labelEditor(self.path, self.slice, self.size, 'MBR', False)
         elif len(self.path) == 2 and self.slice == 'freespace':
             if scheme_query(self.path) == "MBR" and self.path[1] < 4:
                 self.sliceEditor()
             elif scheme_query(self.path) == "GPT":
-                self.labelEditor(self.path, self.slice, self.size, 1, False)
+                self.labelEditor(self.path, self.slice, self.size, 'GPT', False)
         else:
-            print('scheme')
             if how_partition(self.path) == 1:
                 self.schemeEditor(True)
             elif how_partition(self.path) == 0:
@@ -461,6 +465,7 @@ class Partitions():
             self.path = model.get_path(self.iter)
             tree_iter3 = model.get_iter(self.path[0])
             self.scheme = model.get_value(tree_iter3, 3)
+            self.disk = model.get_value(tree_iter3, 0)
             tree_iter = model.get_iter(self.path)
             self.slice = model.get_value(tree_iter, 0)
             self.size = model.get_value(tree_iter, 1)
@@ -533,7 +538,9 @@ class Partitions():
                 self.delete_bt.set_sensitive(False)
                 self.modifi_bt.set_sensitive(False)
                 self.auto_bt.set_sensitive(False)
-                if how_partition(self.path) == 1 and first_is_free(self.path) == 'freespace':
+                how_many_prt = how_partition(self.path)
+                firstisfree = first_is_free(self.path)
+                if how_many_prt == 1 and firstisfree == 'freespace':
                     self.create_bt.set_sensitive(False)
                 elif how_partition(self.path) == 0:
                     self.create_bt.set_sensitive(True)
@@ -541,41 +548,76 @@ class Partitions():
                     self.create_bt.set_sensitive(False)
         if os.path.exists(Part_label):
             rd = open(Part_label, 'r')
-            self.partfile = rd.readlines()
+            self.prttn = rd.readlines()
+            rtbt = False
+            for line in self.prttn:
+                if "/boot\n" in line:
+                    rtbt = True
+                    break
             # If Find GPT scheme.
             if os.path.exists(disk_schem):
                 rschm = open(disk_schem, 'r')
                 schm = rschm.readlines()[0]
+                efi = efi_exist(self.disk)
                 if 'GPT' in schm:
-                    if len(self.partfile) >= 2:
-                        if 'BOOT' in self.partfile[0] or 'BIOS' in self.partfile[0] or 'UEFI' in self.partfile[0]:
-                            if "/boot\n" in self.partfile[1]:
-                                if len(self.partfile) >= 3:
-                                    if '/\n' in self.partfile[1]:
+                    if len(self.prttn) >= 2:
+                        if 'BOOT' in self.prttn[0]:
+                            if rtbt is True and "/boot\n" not in self.prttn[1]:
+                                self.button3.set_sensitive(False)
+                            elif "/boot\n" in self.prttn[1]:
+                                if len(self.prttn) >= 3:
+                                    if '/\n' in self.prttn[2]:
                                         self.button3.set_sensitive(True)
                                     else:
                                         self.button3.set_sensitive(False)
                                 else:
                                     self.button3.set_sensitive(False)
-                            elif '/\n' in self.partfile[1]:
+                            elif '/\n' in self.prttn[1]:
                                 self.button3.set_sensitive(True)
                             else:
                                 self.button3.set_sensitive(False)
-                        else:
+                        elif 'UEFI' in self.prttn[0] and efi is False:
+                            if rtbt is True and "/boot\n" not in self.prttn[1]:
+                                self.button3.set_sensitive(False)
+                            elif "/boot\n" in self.prttn[1]:
+                                if len(self.prttn) >= 3:
+                                    if '/\n' in self.prttn[2]:
+                                        self.button3.set_sensitive(True)
+                                    else:
+                                        self.button3.set_sensitive(False)
+                                else:
+                                    self.button3.set_sensitive(False)
+                            elif '/\n' in self.prttn[1]:
+                                self.button3.set_sensitive(True)
+                            else:
+                                self.button3.set_sensitive(False)
+                        elif rtbt is True and "/boot\n" not in self.prttn[1]:
                             self.button3.set_sensitive(False)
-                    else:
-                        self.button3.set_sensitive(False)
-                else:
-                    if len(self.partfile) >= 1:
-                        if "/boot\n" in self.partfile[0]:
-                            if len(self.partfile) >= 2:
-                                if '/\n' in self.partfile[1]:
+                        elif "/boot\n" in self.prttn[0] and efi is True:
+                            if len(self.prttn) >= 2:
+                                if '/\n' in self.prttn[1]:
                                     self.button3.set_sensitive(True)
                                 else:
                                     self.button3.set_sensitive(False)
                             else:
                                 self.button3.set_sensitive(False)
-                        elif '/\n' in self.partfile[0]:
+                        elif '/\n' in self.prttn[0] and efi is True:
+                            self.button3.set_sensitive(True)
+                        else:
+                            self.button3.set_sensitive(False)
+                    else:
+                        self.button3.set_sensitive(False)
+                else:
+                    if len(self.prttn) >= 1:
+                        if "/boot\n" in self.prttn[0]:
+                            if len(self.prttn) >= 2:
+                                if '/\n' in self.prttn[1]:
+                                    self.button3.set_sensitive(True)
+                                else:
+                                    self.button3.set_sensitive(False)
+                            else:
+                                self.button3.set_sensitive(False)
+                        elif '/\n' in self.prttn[0]:
                             self.button3.set_sensitive(True)
                         else:
                             self.button3.set_sensitive(False)
@@ -584,7 +626,7 @@ class Partitions():
             else:
                 self.button3.set_sensitive(False)
         else:
-                self.button3.set_sensitive(False)
+            self.button3.set_sensitive(False)
 
     def __init__(self, button3):
         self.button3 = button3
@@ -687,4 +729,4 @@ class Partitions():
 
     def get_model(self):
         self.tree_selection.select_path(0)
-        return self.vbox1
+        return self.box1

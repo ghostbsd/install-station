@@ -34,34 +34,26 @@ from subprocess import Popen, PIPE, STDOUT, call
 import pickle
 from time import sleep
 
-tmp = "/tmp/.gbinstall/"
+tmp = "/tmp/.gbi/"
 if not os.path.exists(tmp):
     os.makedirs(tmp)
-installer = "/usr/local/lib/gbinstall/"
-pc_sysinstall = "/usr/local/sbin/pc-sysinstall"
-partitiondb = f"{tmp}partitiondb/"
-diskdb = f"{partitiondb}disk"
-
-query = f'{installer}backend-query'
-
-query_disk = f'sh {query}/disk-list.sh'
-detect_sheme = f'sh {query}/detect-sheme.sh'
-query_partition = f'sh {query}/disk-part.sh'
-query_label = f'sh {query}/disk-label.sh'
-disk_info = f'sh {query}/disk-info.sh'
-
-# query_disk = f'{pc_sysinstall} disk-list'
-# detect_sheme = f'{pc_sysinstall} detect-sheme'
-# query_partition = f'{pc_sysinstall} disk-part'
-# query_label = f'{pc_sysinstall} disk-label'
-# disk_info = f'{pc_sysinstall} disk-info'
-
+installer = "/usr/local/lib/gbi/"
+sysinstall = "/usr/local/sbin/pc-sysinstall"
+partitiondb = "%spartitiondb/" % tmp
+query = "sh /usr/local/lib/gbi/backend-query/"
+query_disk = '%sdisk-list.sh' % query
+detect_sheme = '%sdetect-sheme.sh' % query
+diskdb = "%sdisk" % partitiondb
+query_partition = '%sdisk-part.sh' % query
+query_label = '%sdisk-label.sh' % query
+disk_info = '%sdisk-info.sh' % query
+nl = "\n"
 memory = 'sysctl hw.physmem'
-disk_file = f'{tmp}disk'
-dslice = f'{tmp}slice'
-Part_label = f'{tmp}partlabel'
-part_schem = f'{tmp}scheme'
-boot_file = f'{tmp}boot'
+disk_file = '%sdisk' % tmp
+dslice = '%sslice' % tmp
+Part_label = '%spartlabel' % tmp
+part_schem = '%sscheme' % tmp
+boot_file = '%sboot' % tmp
 
 
 def disk_query():
@@ -71,13 +63,13 @@ def disk_query():
 
 
 def zfs_disk_query():
-    disk_output = Popen(pc_sysinstall + " disk-list", shell=True, stdin=PIPE,
+    disk_output = Popen(sysinstall + " disk-list", shell=True, stdin=PIPE,
                         stdout=PIPE, universal_newlines=True, close_fds=True)
     return disk_output.stdout.readlines()
 
 
 def zfs_disk_size_query(disk):
-    disk_info_output = Popen(pc_sysinstall + " disk-info " + disk, shell=True,
+    disk_info_output = Popen(sysinstall + " disk-info " + disk, shell=True,
                              stdin=PIPE, stdout=PIPE, universal_newlines=True,
                              close_fds=True)
     return disk_info_output.stdout.readlines()[3].partition('=')[2]
@@ -87,7 +79,6 @@ def how_partition(path):
     disk = disk_query()[path[0]][0]
     if os.path.exists(partitiondb + disk):
         part = partition_query(disk)
-        print(part)
         return len(part)
     else:
         return 0
@@ -202,7 +193,7 @@ class partition_repos():
 
     def disk_list(self):
         disk_output = Popen(query_disk, shell=True, stdin=PIPE, stdout=PIPE,
-                            universal_newlines=True, close_fds=True)
+                            universal_newlines=True,  close_fds=True)
         dlist = []
         for disk in disk_output.stdout:
             dlist.append(disk.split())
@@ -394,12 +385,16 @@ class Delete_partition():
                 sl[snum] = ['freespace', free, '', '']
         else:
             free = int_size(sl[snum][1])
-            if sl[snum + 1][0] == 'freespace' and sl[snum - 1][0] == 'freespace':
-                free = free + int_size(sl[snum + 1][1]) + int_size(sl[snum - 1][1])
+            slice_after = sl[snum + 1][0]
+            slice_before = sl[snum - 1][0]
+            size_after = sl[snum + 1]
+            size_before = sl[snum - 1]
+            if slice_after == 'freespace' and slice_before == 'freespace':
+                free = free + int_size(size_after) + int_size(size_before)
                 sl[snum] = ['freespace', free, '', '']
                 sl.remove(sl[snum + 1])
                 sl.remove(sl[snum - 1])
-            elif sl[snum + 1][0] == 'freespace':
+            elif slice_after == 'freespace':
                 free = free + int_size(sl[snum + 1][1])
                 sl[snum] = ['freespace', free, '', '']
                 sl.remove(sl[snum + 1])
@@ -413,7 +408,7 @@ class Delete_partition():
         dl = []
         mdl = []
         data = True
-        # if delete exist chek if slice is in delete.
+        # if delete exist check if slice is in delete.
         if os.path.exists(tmp + 'delete'):
             df = open(tmp + 'delete', 'rb')
             mdl = pickle.load(df)
@@ -436,8 +431,8 @@ class Delete_partition():
             pfile = open(Part_label, 'w')
             for partlist in partition_query(drive):
                 if partlist[2] != '':
-                    pfile.writelines('%s %s %s\n' % (partlist[3], partlist[1],
-                                                     partlist[2]))
+                    partition = f'{partlist[3]} {partlist[1]} {partlist[2]}\n'
+                    pfile.writelines(partition)
             pfile.close()
 
 
@@ -511,7 +506,7 @@ class autoDiskPartition():
         slice_file.writelines('%s\n' % number)
         slice_file.close()
         ram = Popen(memory, shell=True, stdin=PIPE, stdout=PIPE,
-                    universal_newlines=True, close_fds=True)
+                    universal_newlines=True,  close_fds=True)
         mem = ram.stdout.read()
         swap = int(int(mem.partition(':')[2].strip()) / (1024 * 1024))
         if bios_or_uefi() == "UEFI":
@@ -523,13 +518,8 @@ class autoDiskPartition():
         plist = []
         mplist = []
         plf = open(partitiondb + disk, 'wb')
-        read = open(boot_file, 'r')
-        line = read.readlines()
-        boot = line[0].strip()
         if bios_or_uefi() == "UEFI":
             plist.extend(([disk + 'p1', bnum, 'none', 'UEFI']))
-        elif boot == "grub":
-            plist.extend(([disk + 'p1', bnum, 'none', 'BIOS']))
         else:
             plist.extend(([disk + 'p1', bnum, 'none', 'BOOT']))
         mplist.append(plist)
@@ -544,8 +534,6 @@ class autoDiskPartition():
         pfile = open(Part_label, 'w')
         if bios_or_uefi() == "UEFI":
             pfile.writelines('UEFI %s none\n' % bnum)
-        elif boot == "grub":
-            pfile.writelines('BIOS %s none\n' % bnum)
         else:
             pfile.writelines('BOOT %s none\n' % bnum)
         pfile.writelines('UFS+SUJ %s /\n' % rnum)
@@ -623,10 +611,6 @@ class autoFreeSpace():
         sfile.close()
         number = int(size.partition('M')[0])
         number = number - 512
-        slice_file = open(dslice, 'w')
-        slice_file.writelines('p%s\n' % sl)
-        slice_file.writelines('%s\n' % number)
-        slice_file.close()
         ram = Popen(memory, shell=True, stdin=PIPE, stdout=PIPE,
                     universal_newlines=True, close_fds=True)
         mem = ram.stdout.read()
@@ -640,29 +624,38 @@ class autoFreeSpace():
         plist = []
         mplist = partition_query(disk)
         plf = open(partitiondb + disk, 'wb')
-        read = open(boot_file, 'r')
-        line = read.readlines()
-        boot = line[0].strip()
-        if bios_or_uefi() == "UEFI":
+        done = False
+        if bios_or_uefi() == "UEFI" and efi_exist(disk) is False:
             plist.extend(([disk + 'p%s' % sl, bs, 'none', 'UEFI']))
-        elif boot == "grub":
-            plist.extend(([disk + 'p%s' % sl, bs, 'none', 'BIOS']))
+            rsl = int(sl + 1)
+            swsl = int(rsl + 1)
+        elif bios_or_uefi() == "UEFI" and efi_exist(disk) is True:
+            rsl = int(sl)
+            swsl = int(rsl + 1)
         else:
             plist.extend(([disk + 'p%s' % sl, bs, 'none', 'BOOT']))
-        mplist[path] = plist
+            rsl = int(sl + 1)
+            swsl = (rsl + 1)
+        if len(plist) != 0:
+            done = True
+            mplist[path] = plist
+            plist = []
+        plist.extend(([disk + 'p%s' % rsl, rootNum, '/', 'UFS+SUJ']))
+        if done is False:
+            mplist[path] = plist
+        else:
+            mplist.append(plist)
         plist = []
-        plist.extend(([disk + 'p%s' % int(sl + 1), rootNum, '/', 'UFS+SUJ']))
-        mplist.append(plist)
-        plist = []
-        plist.extend(([disk + 'p%s' % int(sl + 2), swap, 'none', 'SWAP']))
+        plist.extend(([disk + 'p%s' % swsl, swap, 'none', 'SWAP']))
         mplist.append(plist)
         pickle.dump(mplist, plf)
         plf.close()
+        slice_file = open(dslice, 'w')
+        slice_file.writelines(f'p{rsl}')
+        slice_file.close()
         pfile = open(Part_label, 'w')
-        if bios_or_uefi() == "UEFI":
+        if bios_or_uefi() == "UEFI" and efi_exist(disk) is False:
             pfile.writelines('UEFI %s none\n' % bs)
-        elif boot == "grub":
-            pfile.writelines('BIOS %s none\n' % bs)
         else:
             pfile.writelines('BOOT %s none\n' % bs)
         pfile.writelines('UFS+SUJ %s /\n' % rootNum)
@@ -670,17 +663,20 @@ class autoFreeSpace():
         pfile.close()
         pl = []
         mpl = []
-        if not os.path.exists(tmp + 'create'):
-            pl.extend(([disk + "p%s" % sl, size]))
-            mpl.append(pl)
-            cf = open(tmp + 'create', 'wb')
-            pickle.dump(mpl, cf)
-            cf.close()
+        if bios_or_uefi() == "UEFI" and efi_exist(disk) is True:
+            pass
+        else:
+            if not os.path.exists(tmp + 'create'):
+                pl.extend(([disk + "p%s" % sl, size]))
+                mpl.append(pl)
+                cf = open(tmp + 'create', 'wb')
+                pickle.dump(mpl, cf)
+                cf.close()
 
 
 class createLabel():
 
-    def __init__(self, path, lnumb, cnumb, lb, fs, data):
+    def __init__(self, path, lnumb, cnumb, label, fs, data):
         disk = disk_query()[path[0]][0]
         if not os.path.exists(disk_file):
             file_disk = open(disk_file, 'w')
@@ -702,7 +698,7 @@ class createLabel():
         plf = open(partitiondb + disk + 's%s' % sl, 'wb')
         if lnumb == 0:
             cnumb -= 1
-        llist.extend(([disk + 's%s' % sl + letter, cnumb, lb, fs]))
+        llist.extend(([disk + 's%s' % sl + letter, cnumb, label, fs]))
         mllist[lv] = llist
         llist = []
         if lnumb > 0:
@@ -722,7 +718,7 @@ class createLabel():
 
 class modifyLabel():
 
-    def __init__(self, path, lnumb, cnumb, lb, fs, data):
+    def __init__(self, path, lnumb, cnumb, label, fs, data):
         disk = disk_query()[path[0]][0]
         if not os.path.exists(disk_file):
             file_disk = open(disk_file, 'w')
@@ -744,7 +740,7 @@ class modifyLabel():
         plf = open(partitiondb + disk + 's%s' % sl, 'wb')
         if lnumb == 0:
             cnumb -= 1
-        llist.extend(([disk + 's%s' % sl + letter, cnumb, lb, fs]))
+        llist.extend(([disk + 's%s' % sl + letter, cnumb, label, fs]))
         mllist[lv] = llist
         llist = []
         if lnumb > 0:
@@ -813,7 +809,7 @@ class createSlice():
 
 class createPartition():
 
-    def __init__(self, path, lnumb, inumb, cnumb, lb, fs, data):
+    def __init__(self, path, lnumb, inumb, cnumb, label, fs, create):
         disk = disk_query()[path[0]][0]
         if not os.path.exists(disk_file):
             file_disk = open(disk_file, 'w')
@@ -829,7 +825,7 @@ class createPartition():
             sfile = open(part_schem, 'w')
             sfile.writelines('partscheme=GPT')
             sfile.close()
-        if not os.path.exists(dslice):
+        if label == '/':
             slice_file = open(dslice, 'w')
             slice_file.writelines('p%s\n' % pl)
             # slice_file.writelines('%s\n' % number)
@@ -840,7 +836,7 @@ class createPartition():
         if lnumb == 0 and cnumb > 1:
                 cnumb -= 1
         pf = open(partitiondb + disk, 'wb')
-        plist.extend(([disk + 'p%s' % pl, cnumb, lb, fs]))
+        plist.extend(([disk + 'p%s' % pl, cnumb, label, fs]))
         mplist[lv] = plist
         plist = []
         if lnumb > 0:
@@ -854,7 +850,7 @@ class createPartition():
                 pfile.writelines('%s %s %s\n' % (partlist[3], partlist[1],
                                                  partlist[2]))
         pfile.close()
-        if data is True:
+        if create is True:
             plst = []
             mplst = []
             if not os.path.exists(tmp + 'create'):
@@ -867,7 +863,7 @@ class createPartition():
 
 class modifyPartition():
 
-    def __init__(self, path, lnumb, inumb, cnumb, lb, fs, data):
+    def __init__(self, path, lnumb, inumb, cnumb, label, fs, data):
         disk = disk_query()[path[0]][0]
         if not os.path.exists(disk_file):
             file_disk = open(disk_file, 'w')
@@ -883,10 +879,9 @@ class modifyPartition():
             sfile = open(part_schem, 'w')
             sfile.writelines('partscheme=GPT')
             sfile.close()
-        if not os.path.exists(dslice):
+        if label == '/':
             slice_file = open(dslice, 'w')
             slice_file.writelines('p%s\n' % pl)
-            # slice_file.writelines('%s\n' % number)
             slice_file.close()
         plist = []
         pslice = '%sp%s' % (disk, pl)
@@ -894,7 +889,7 @@ class modifyPartition():
         if lnumb == 0:
             cnumb -= 1
         pf = open(partitiondb + disk, 'wb')
-        plist.extend(([disk + 'p%s' % pl, cnumb, lb, fs]))
+        plist.extend(([disk + 'p%s' % pl, cnumb, label, fs]))
         mplist[lv] = plist
         plist = []
         if lnumb > 0:
@@ -976,7 +971,19 @@ def bios_or_uefi():
         return "BIOS"
 
 
+def efi_exist(disk):
+    cmd = f"gpart show {disk} | grep efi"
+    process = Popen(cmd, shell=True, stdout=PIPE,
+                    universal_newlines=True, close_fds=True)
+    output = process.stdout.readlines()
+    if len(output) == 0:
+        return False
+    else:
+        return True
+
+
 class makingParttion():
+
     def __init__(self):
         if os.path.exists(tmp + 'create'):
             pf = open(tmp + 'create', 'rb')
@@ -997,13 +1004,16 @@ class makingParttion():
                         call(cmd2, shell=True)
                     else:
                         if boot == "grub":
-                            cmd = 'gpart add -a 4k -s 1M -t bios-boot -i %s %s' % (sl, drive)
+                            cmd = 'gpart add -a 4k -s 1M -t bios-boot -i' \
+                                f' {sl} {drive}'
                         else:
-                            cmd = 'gpart add -a 4k -s 512 -t freebsd-boot -i %s %s' % (sl, drive)
+                            cmd = 'gpart add -a 4k -s 512 -t freebsd-boot -i' \
+                                f' {sl} {drive}'
                         call(cmd, shell=True)
                 elif slicePartition(part) == 's':
                     size = int(line[1])
                     block = int(size * 2048)
-                    cmd = 'gpart add -a 4k -s %s -t freebsd -i %s %s' % (block, sl, drive)
+                    cmd = f'gpart add -a 4k -s {block} -t freebsd -i {sl} ' \
+                        f'{drive}'
                     call(cmd, shell=True)
                 sleep(2)
