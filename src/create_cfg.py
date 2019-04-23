@@ -41,34 +41,6 @@ class gbsd_cfg():
         f.writelines('installType=GhostBSD\n')
         f.writelines('installMedium=livecd\n')
         f.writelines('packageType=livecd\n')
-        # System Language
-        if os.path.exists(language):
-            langfile = open(language, 'r')
-            lang = langfile.readlines()[0].rstrip()
-            f.writelines('\n# System Language\n')
-            f.writelines(f'localizeLang={lang}\n')
-            os.remove(language)
-        # Keyboard Setting
-        if os.path.exists(KBFile):
-            f.writelines('\n# Keyboard Setting\n')
-            rkb = open(KBFile, 'r')
-            kb = rkb.readlines()
-            kbl = kb[0].rstrip()
-            f.writelines(f'localizeKeyLayout={kbl}\n')
-            kbv = kb[1].rstrip()
-            if kbv != 'None':
-                f.writelines(f'localizeKeyVariant={kbv}\n')
-            kbm = kb[2].rstrip()
-            if kbm != 'None':
-                f.writelines(f'localizeKeyModel={kbm}\n')
-        # Timezone
-        if os.path.exists(timezone):
-            time = open(timezone, 'r')
-            t_output = time.readlines()[0].strip()
-            f.writelines('\n# Timezone\n')
-            f.writelines(f'timeZone={t_output}\n')
-            f.writelines('enableNTP=yes\n')
-            os.remove(timezone)
         if os.path.exists(zfs_config):
             # Disk Setup
             r = open(zfs_config, 'r')
@@ -147,44 +119,6 @@ class gbsd_cfg():
                     f.writelines(f'disk0-part={line.strip()}\n')
             f.writelines('commitDiskLabel\n')
             os.remove(partlabel)
-        # Network Configuration
-        f.writelines('\n# Network Configuration\n')
-        if os.path.exists(user_passwd):
-            readu = open(user_passwd, 'rb')
-            uf = pickle.load(readu)
-            net = uf[5]
-            f.writelines(f'hostname={net}\n')
-            # Set the root pass
-        if os.path.exists(f'{tmp}root'):
-            readr = open(f'{tmp}root', 'rb')
-            rf = pickle.load(readr)
-            root = rf[0]
-            f.writelines('\n# Set the root pass\n')
-            f.writelines(f'rootPass={root}\n')
-            os.remove(f'{tmp}root')
-        if os.path.exists(user_passwd):
-            # Network Configuration
-            f.writelines('\n# Network Configuration\n')
-            readu = open(user_passwd, 'rb')
-            uf = pickle.load(readu)
-            net = uf[5]
-            f.writelines(f'hostname={net}\n')
-            user = uf[0]
-            # Setup our users
-            f.writelines('\n# Setup user\n')
-            f.writelines(f'userName={user}\n')
-            name = uf[1]
-            f.writelines(f'userComment={name}\n')
-            passwd = uf[2]
-            f.writelines(f'userPass={passwd.rstrip()}\n')
-            shell = uf[3]
-            f.writelines(f'userShell={shell}\n')
-            upath = uf[4]
-            f.writelines(f'userHome={upath.rstrip()}\n')
-            f.writelines(f'defaultGroup=wheel\n')
-            f.writelines(f'userGroups=operator\n')
-            f.writelines('commitUser\n')
-            os.remove(user_passwd)
         f.writelines('runExtCommand=cat /etc/rc.conf | grep kld_list >> $FSMNT/etc/rc.conf\n')
         if os.path.exists("/etc/X11/xorg.conf"):
             f.writelines('runExtCommand=cp /etc/X11/xorg.conf $FSMNT/etc/X11/xorg.conf\n')
