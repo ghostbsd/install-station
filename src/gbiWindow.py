@@ -75,18 +75,6 @@ class MainWindow():
         """Go to the next window."""
         page = self.notebook.get_current_page()
         if page == 0:
-            self.lang.save_selection()
-            typebox = Gtk.VBox(False, 0)
-            typebox.show()
-            self.types = Types()
-            get_types = self.types.get_model()
-            typebox.pack_start(get_types, True, True, 0)
-            label = Gtk.Label("Types")
-            self.button1.set_sensitive(True)
-            self.notebook.insert_page(typebox, label, 1)
-            self.window.show_all()
-            self.notebook.next_page()
-        elif page == 1:
             if self.types.get_type() == "ufs":
                 partition_repos()
                 udbox = Gtk.VBox(False, 0)
@@ -95,7 +83,7 @@ class MainWindow():
                 get_ud = self.partition.get_model()
                 udbox.pack_start(get_ud, True, True, 0)
                 label = Gtk.Label("UFS Disk Configuration")
-                self.notebook.insert_page(udbox, label, 2)
+                self.notebook.insert_page(udbox, label, 1)
                 self.window.show_all()
                 self.notebook.next_page()
                 self.button3.set_sensitive(False)
@@ -107,7 +95,7 @@ class MainWindow():
                 get_part = self.partition.get_model()
                 Pbox.pack_start(get_part, True, True, 0)
                 label = Gtk.Label("UFS Custom Configuration")
-                self.notebook.insert_page(Pbox, label, 2)
+                self.notebook.insert_page(Pbox, label, 1)
                 self.window.show_all()
                 self.notebook.next_page()
                 self.button3.set_sensitive(False)
@@ -118,11 +106,11 @@ class MainWindow():
                 get_ZFS = self.partition.get_model()
                 Zbox.pack_start(get_ZFS, True, True, 0)
                 label = Gtk.Label("ZFS Configuration")
-                self.notebook.insert_page(Zbox, label, 2)
+                self.notebook.insert_page(Zbox, label, 1)
                 self.window.show_all()
                 self.notebook.next_page()
                 self.button3.set_sensitive(False)
-        elif page == 2:
+        elif page == 1:
             self.partition.save_selection()
             Mbox = Gtk.VBox(False, 0)
             Mbox.show()
@@ -130,11 +118,11 @@ class MainWindow():
             get_boot = self.bootmanager.get_model()
             Mbox.pack_start(get_boot, True, True, 0)
             label = Gtk.Label("Boot Option")
-            self.notebook.insert_page(Mbox, label, 3)
+            self.notebook.insert_page(Mbox, label, 2)
             self.window.show_all()
             self.notebook.next_page()
             self.button3.set_sensitive(True)
-        elif page == 3:
+        elif page == 2:
             Rbox = Gtk.VBox(False, 0)
             Rbox.show()
             self.summary = Summary(self.button3)
@@ -142,10 +130,10 @@ class MainWindow():
             Rbox.pack_start(get_summary, True, True, 0)
             label = Gtk.Label("Root Password")
             self.button3.set_label("Install")
-            self.notebook.insert_page(Rbox, label, 4)
+            self.notebook.insert_page(Rbox, label, 3)
             self.window.show_all()
             self.notebook.next_page()
-        elif page == 4:
+        elif page == 3:
             # self.adduser.save_selection()
             Ibox = Gtk.VBox(False, 0)
             Ibox.show()
@@ -153,7 +141,7 @@ class MainWindow():
             get_install = install.get_model()
             Ibox.pack_start(get_install, True, True, 0)
             label = Gtk.Label("Installation")
-            self.notebook.insert_page(Ibox, label, 5)
+            self.notebook.insert_page(Ibox, label, 4)
             self.notebook.next_page()
             instpro = installProgress()
             progressBar = instpro.getProgressBar()
@@ -221,12 +209,12 @@ class MainWindow():
         self.notebook.set_show_border(False)
         vbox = Gtk.VBox(False, 0)
         vbox.show()
-        self.lang = Language()
-        get_lang = self.lang.get_model()
+        self.types = Types()
+        get_types = self.types.get_model()
         # self.lang = Installs()
         # get_lang = self.lang.get_model()
-        vbox.pack_start(get_lang, True, True, 0)
-        label = Gtk.Label("Language")
+        vbox.pack_start(get_types, True, True, 0)
+        label = Gtk.Label("Types")
         self.notebook.insert_page(vbox, label, 0)
 
         # Set what page to start at Language
