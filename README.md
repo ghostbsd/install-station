@@ -1,6 +1,5 @@
-gbinstall
+Install Station
 ===
+It is a strip down version of gbi and it is the new installer for GhostBSD. It depend on gbi.
 
-gbinstall is a graphical interface for pc-sysinstall and it is the new installer for GhostBSD.
-
-To test this code in your environment run "python3.6 setup.py install" as root.
+Install Station only edit disk, partition and will install GhostBSD. Users and system setup will be done with at the first boot after installation with Setup Station
