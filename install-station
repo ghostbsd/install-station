@@ -42,6 +42,7 @@ class MainWindow():
         page = self.notebook.get_current_page()
         if page == 0:
             create_disk_partition_db()
+            self.button1.set_sensitive(True)
             if self.types.get_type() == "ufs":
                 udbox = Gtk.VBox(False, 0)
                 udbox.show()
