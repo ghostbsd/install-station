@@ -111,7 +111,6 @@ class MainWindow():
             self.notebook.show_all()
             self.button3.set_sensitive(True)
         elif page == 3:
-            self.adduser.save_selection()
             Ibox = Gtk.VBox(False, 0)
             Ibox.show()
             install = installSlide()
