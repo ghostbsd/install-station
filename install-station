@@ -119,7 +119,7 @@ class MainWindow():
             label = Gtk.Label("Installation")
             self.notebook.insert_page(Ibox, label, 8)
             self.notebook.next_page()
-            instpro = installProgress()
+            instpro = installProgress(self.window)
             progressBar = instpro.getProgressBar()
             box1 = Gtk.VBox(False, 0)
             box1.show()
@@ -192,7 +192,6 @@ class MainWindow():
         mainVbox.show()
         self.window.add(mainHBox)
         mainHBox.pack_start(mainVbox, True, True, 0)
-        # Create a new self.notebook
         self.notebook = Gtk.Notebook()
         mainVbox.pack_start(self.notebook, True, True, 0)
         self.notebook.show()
@@ -205,10 +204,8 @@ class MainWindow():
         welcome_box.pack_start(get_types, True, True, 0)
         label = Gtk.Label("Welcome")
         self.notebook.insert_page(welcome_box, label, 0)
-
         # Set what page to start at type of installation
         self.notebook.set_current_page(0)
-        # Create buttons
         self.table = Gtk.Table(1, 6, True)
         self.button1 = Gtk.Button(label='Back')
         self.button1.connect("clicked", self.back_page)
