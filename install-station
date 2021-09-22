@@ -132,6 +132,8 @@ class MainWindow():
     def next_setup_page(self):
         page = self.notebook.get_current_page()
         if page == 0:
+            self.next_button.show()
+            self.next_button.set_sensitive(False)
             self.window.set_title("Setup GhostBSD")
             net_setup_box = Gtk.VBox(homogeneous=False, spacing=0)
             net_setup_box.show()
@@ -142,8 +144,8 @@ class MainWindow():
             self.notebook.insert_page(net_setup_box, label, 1)
             self.notebook.next_page()
             self.notebook.show_all()
-            self.next_button.show()
-            self.next_button.set_sensitive(False)
+        if page == 1:
+            Gtk.main_quit()
 
     def back_page(self, widget):
         """Go back to the previous window."""
