@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Categories=GTK;System;
+NoDisplay=true
+Exec=install-station
+Name=Install GhostBSD
+Comment=Install GhostBSD
+Icon=/usr/local/lib/install-station/image/install-gbsd.png

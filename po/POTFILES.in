@@ -1,0 +1,17 @@
+install-station
+install_station/boot_manager.py
+install_station/common.py
+install_station/custom.py
+install_station/data.py
+install_station/end.py
+install_station/error.py
+install_station/install.py
+install_station/install_type.py
+install_station/interface_controller.py
+install_station/language.py
+install_station/network_setup.py
+install_station/partition.py
+install_station/system_calls.py
+install_station/use_zfs.py
+install_station/welcome_live.py
+install_station/window.py

@@ -1,242 +1,49 @@
 #!/usr/local/bin/python
-
-import sys
-import os
-import shutil
+"""
+Install Station executable module.
+"""
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
-installer = "/usr/local/lib/gbi/"
-sys.path.append(installer)
-from welcome_live import Welcome
-from installType import Types
-from use_ufs import use_ufs
-from partition import Partitions
-from use_zfs import ZFS
-from boot_manager import bootManager
-from partition_handler import create_disk_partition_db
-from install import installProgress, installWindow
-from network_setup import network_setup
-
-logo = "/usr/local/lib/gbi/image/logo.png"
-tmp = "/tmp/.gbi/"
-if not os.path.exists(tmp):
-    os.makedirs(tmp)
-disk = '%sdisk' % tmp
-dslice = '%sslice' % tmp
-disk_schem = '%sscheme' % tmp
-zfs_config = '%szfs_config' % tmp
-ufs_config = '%sufs_config' % tmp
-partitiondb = "%spartitiondb/" % tmp
+from install_station.welcome_live import Welcome
+from install_station.install_type import InstallTypes
+from install_station.custom import PartitionManager
+from install_station.use_zfs import ZFS
+from install_station.boot_manager import BootManager
+from install_station.network_setup import NetworkSetup
+from install_station.data import logo
+from install_station.window import Window
+from install_station.interface_controller import Interface, Button
 
 
-class MainWindow():
-    """Main window class."""
-
-    def delete(self, widget, event=None):
-        """Close the main window."""
-        if os.path.exists('/tmp/.gbi'):
-            shutil.rmtree('/tmp/.gbi')
-        Gtk.main_quit()
-        return False
-
-    def next_page(self, widget):
-        if self.welcome.get_what() == "install":
-            self.next_install_page()
-        else:
-            self.next_setup_page()
-
-    def next_install_page(self):
-        """Go to the next window."""
-        page = self.notebook.get_current_page()
-        if page == 0:
-            typebox = Gtk.VBox(homogeneous=False, spacing=0)
-            typebox.show()
-            self.types = Types()
-            get_types = self.types.get_model()
-            typebox.pack_start(get_types, True, True, 0)
-            label = Gtk.Label(label="Types")
-            self.notebook.insert_page(typebox, label, 1)
-            self.notebook.next_page()
-            self.notebook.show_all()
-            self.cancel_button.show()
-            self.next_button.show()
-        elif page == 1:
-            create_disk_partition_db()
-            self.back_button.show()
-            if self.types.get_type() == "ufs":
-                udbox = Gtk.VBox(homogeneous=False, spacing=0)
-                udbox.show()
-                self.partition = use_ufs(self.next_button)
-                get_ud = self.partition.get_model()
-                udbox.pack_start(get_ud, True, True, 0)
-                label = Gtk.Label(label="UFS Disk Configuration")
-                self.notebook.insert_page(udbox, label, 2)
-                self.notebook.next_page()
-                self.notebook.show_all()
-                self.next_button.set_sensitive(False)
-            elif self.types.get_type() == "custom":
-                Pbox = Gtk.VBox(homogeneous=False, spacing=0)
-                Pbox.show()
-                self.partition = Partitions(self.next_button)
-                get_part = self.partition.get_model()
-                Pbox.pack_start(get_part, True, True, 0)
-                label = Gtk.Label(label="UFS Custom Configuration")
-                self.notebook.insert_page(Pbox, label, 2)
-                self.notebook.next_page()
-                self.notebook.show_all()
-                self.next_button.set_sensitive(False)
-            elif self.types.get_type() == "zfs":
-                Zbox = Gtk.VBox(homogeneous=False, spacing=0)
-                Zbox.show()
-                self.partition = ZFS(self.next_button)
-                get_ZFS = self.partition.get_model()
-                Zbox.pack_start(get_ZFS, True, True, 0)
-                label = Gtk.Label(label="ZFS Configuration")
-                self.notebook.insert_page(Zbox, label, 2)
-                self.notebook.next_page()
-                self.notebook.show_all()
-                self.next_button.set_sensitive(False)
-        elif page == 2:
-            self.partition.save_selection()
-            Mbox = Gtk.VBox(homogeneous=False, spacing=0)
-            Mbox.show()
-            self.bootmanager = bootManager()
-            get_root = self.bootmanager.get_model()
-            Mbox.pack_start(get_root, True, True, 0)
-            label = Gtk.Label(label="Boot Option")
-            self.notebook.insert_page(Mbox, label, 3)
-            self.next_button.set_label("Install")
-            self.notebook.next_page()
-            self.notebook.show_all()
-            self.next_button.set_sensitive(True)
-        elif page == 3:
-            Ibox = Gtk.VBox(homogeneous=False, spacing=0)
-            Ibox.show()
-            install = installWindow()
-            get_install = install.get_model()
-            Ibox.pack_start(get_install, True, True, 0)
-            label = Gtk.Label(label="Installation")
-            self.notebook.insert_page(Ibox, label, 8)
-            self.notebook.next_page()
-            instpro = installProgress(self.window)
-            progressBar = instpro.getProgressBar()
-            box1 = Gtk.VBox(homogeneous=False, spacing=0)
-            box1.show()
-            label = Gtk.Label(label="Progress Bar")
-            box1.pack_end(progressBar, False, False, 0)
-            self.nbButton.insert_page(box1, label, 4)
-            self.nbButton.next_page()
-            self.window.show_all()
-
-    def next_setup_page(self):
-        page = self.notebook.get_current_page()
-        if page == 0:
-            self.next_button.show()
-            self.next_button.set_sensitive(False)
-            self.window.set_title("Setup GhostBSD")
-            net_setup_box = Gtk.VBox(homogeneous=False, spacing=0)
-            net_setup_box.show()
-            self.net_setup = network_setup(self.next_button)
-            model = self.net_setup.get_model()
-            net_setup_box.pack_start(model, True, True, 0)
-            label = Gtk.Label(label="Network Setup")
-            self.notebook.insert_page(net_setup_box, label, 1)
-            self.notebook.next_page()
-            self.notebook.show_all()
-        if page == 1:
-            xinitrc = open('/usr/home/ghostbsd/.xinitrc', 'w')
-            xinitrc.writelines('gsettings set org.mate.SettingsDaemon.plugins.housekeeping active true &\n')
-            xinitrc.writelines('gsettings set org.mate.screensaver lock-enabled false &\n')
-            xinitrc.writelines('exec ck-launch-session mate-session\n')
-            xinitrc.close()
-            Gtk.main_quit()
-
-    def back_page(self, widget):
-        """Go back to the previous window."""
-        current_page = self.notebook.get_current_page()
-        if current_page == 2:
-            self.back_button.hide()
-        elif current_page == 3:
-            self.next_button.set_label("Next")
-        self.notebook.prev_page()
-        new_page = self.notebook.get_current_page()
-        if current_page == 2 and new_page == 1:
-            if os.path.exists(partitiondb):
-                shutil.rmtree(partitiondb)
-            if os.path.exists(tmp + 'create'):
-                os.remove(tmp + 'create')
-            if os.path.exists(tmp + 'delete'):
-                os.remove(tmp + 'delete')
-            if os.path.exists(tmp + 'destroy'):
-                os.remove(tmp + 'destroy')
-            if os.path.exists(tmp + 'partlabel'):
-                os.remove(tmp + 'partlabel')
-            if os.path.exists(zfs_config):
-                os.remove(zfs_config)
-            if os.path.exists(ufs_config):
-                os.remove(ufs_config)
-            if os.path.exists(disk):
-                os.remove(disk)
-            if os.path.exists(dslice):
-                os.remove(dslice)
-            if os.path.exists(disk_schem):
-                os.remove(disk_schem)
-        self.next_button.set_sensitive(True)
+class MainWindow:
+    """
+    Install Station main window class.
+    """
 
     def __init__(self):
-        """Were the Main window start."""
-        self.window = Gtk.Window()
-        self.window.connect("delete_event", self.delete)
-        self.window.set_border_width(0)
-        self.window.set_default_size(800, 500)
-        self.window.set_size_request(800, 500)
-        self.window.set_title("Install GhostBSD")
-        self.window.set_border_width(0)
-        self.window.set_icon_from_file(logo)
-        mainHBox = Gtk.HBox(homogeneous=False, spacing=0)
-        mainHBox.show()
-        mainVbox = Gtk.VBox(homogeneous=False, spacing=0)
-        mainVbox.show()
-        self.window.add(mainHBox)
-        mainHBox.pack_start(mainVbox, True, True, 0)
-        self.notebook = Gtk.Notebook()
-        mainVbox.pack_start(self.notebook, True, True, 0)
-        self.notebook.show()
-        self.notebook.set_show_tabs(False)
-        self.notebook.set_show_border(False)
-        welcome_box = Gtk.VBox(homogeneous=False, spacing=0)
-        welcome_box.show()
-        self.welcome = Welcome(self.next_install_page, self.next_setup_page)
-        get_types = self.welcome.get_model()
-        welcome_box.pack_start(get_types, True, True, 0)
-        label = Gtk.Label(label="Welcome")
-        self.notebook.insert_page(welcome_box, label, 0)
-        # Set what page to start at type of installation
-        self.notebook.set_current_page(0)
-        self.table = Gtk.Table(n_rows=1, n_columns=6, homogeneous=True)
-        self.back_button = Gtk.Button(label='Back')
-        self.back_button.connect("clicked", self.back_page)
-        self.table.attach(self.back_button, 3, 4, 0, 1)
-        self.cancel_button = Gtk.Button(label='Cancel')
-        self.cancel_button.connect("clicked", self.delete)
-        self.table.attach(self.cancel_button, 4, 5, 0, 1)
-        self.next_button = Gtk.Button(label='Next')
-        self.next_button.connect("clicked", self.next_page)
-        self.table.attach(self.next_button, 5, 6, 0, 1)
-        self.table.set_col_spacings(5)
-        self.table.show()
-        self.nbButton = Gtk.Notebook()
-        mainVbox.pack_end(self.nbButton, False, False, 5)
-        self.nbButton.show()
-        self.nbButton.set_show_tabs(False)
-        self.nbButton.set_show_border(False)
-        label = Gtk.Label(label="Button")
-        self.nbButton.insert_page(self.table, label, 0)
-        self.window.show_all()
-        self.back_button.hide()
-        self.cancel_button.hide()
-        self.next_button.hide()
+        """
+        Install Station main window class initiation.
+        """
+        Interface.welcome = Welcome
+        Interface.installation_type = InstallTypes
+        Interface.custom_partition = PartitionManager
+        Interface.full_zfs = ZFS
+        Interface.boot_manager = BootManager
+        Interface.net_setup = NetworkSetup
+        Window.connect("delete_event", Interface.delete)
+        Window.set_border_width(0)
+        Window.set_default_size(800, 500)
+        Window.set_size_request(800, 500)
+        Window.set_title("Install GhostBSD")
+        Window.set_border_width(0)
+        Window.set_icon_from_file(logo)
+        main_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, homogeneous=False, spacing=0)
+        main_box.show()
+        Window.add(main_box)
+        main_box.pack_start(Interface.get_interface(), True, True, 0)
+        Window.show_all()
+        Button.hide_all()  # Initially hide all buttons
 
 
 MainWindow()
