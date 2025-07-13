@@ -4,10 +4,7 @@ Module to create the inner window for select what type of installation.
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
-from install_station.data import InstallationData
-import gettext
-
-_ = gettext.gettext
+from install_station.data import InstallationData, get_text
 
 cssProvider = Gtk.CssProvider()
 cssProvider.load_from_path('/usr/local/lib/install-station/ghostbsd-style.css')
@@ -52,12 +49,15 @@ class InstallTypes:
         InstallationData.filesystem_type = cls.ne
         cls.vbox1.pack_start(hbox1, True, False, 0)
         hbox1.set_halign(Gtk.Align.CENTER)
-        label = Gtk.Label(label=_("How do you want to install GhostBSD?"))
+        label = Gtk.Label(label=get_text("How do you want to install GhostBSD?"))
         label.set_alignment(0, 0.5)
         vbox2.pack_start(label, False, False, 10)
         # Create radio button group
         cls.full_zfs_button = Gtk.RadioButton(
-            label=_("<b>Disks Configuration</b>\nInstall GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 configurations.")
+            label=get_text(
+                "<b>Disks Configuration</b>"
+                "\nInstall GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 configurations."
+            )
         )
         cls.full_zfs_button.get_child().set_use_markup(True)
         cls.full_zfs_button.get_child().set_line_wrap(True)
@@ -67,7 +67,10 @@ class InstallTypes:
 
         cls.custom_button = Gtk.RadioButton.new_with_label_from_widget(
             cls.full_zfs_button,
-            _("<b>Multi-Boot Configuration</b>\nInstall GhostBSD with ZFS alongside other operating systems.")
+            get_text(
+                "<b>Multi-Boot Configuration</b>\n"
+                "Install GhostBSD with ZFS alongside other operating systems."
+            )
         )
         cls.custom_button.get_child().set_use_markup(True)
         cls.custom_button.get_child().set_line_wrap(True)

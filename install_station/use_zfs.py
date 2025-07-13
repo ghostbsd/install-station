@@ -1,7 +1,6 @@
 from gi.repository import Gtk, Gdk
-import gettext
 from install_station.common import password_strength
-from install_station.data import InstallationData, zfs_datasets, be_name, logo
+from install_station.data import InstallationData, zfs_datasets, be_name, logo, get_text
 from install_station.partition import bios_or_uefi
 from install_station.system_calls import (
     zfs_disk_query,
@@ -9,9 +8,6 @@ from install_station.system_calls import (
 )
 from install_station.interface_controller import Button
 
-gettext.bindtextdomain('install-station', '/usr/local/share/locale')
-gettext.textdomain('install-station')
-_ = gettext.gettext
 
 cssProvider = Gtk.CssProvider()
 cssProvider.load_from_path('/usr/local/lib/install-station/ghostbsd-style.css')
@@ -161,14 +157,14 @@ class ZFS:
         if cls.mirror == "1+ disks Stripe":
             cls.pool_type = 'stripe'
             cls.mirrorTips.set_text(
-                _("Please select 1 or more drive for stripe (select the smallest disk first)"))
+                get_text("Please select 1 or more drive for stripe (select the smallest disk first)"))
             if len(cls.zfs_disk_list) >= 1:
                 Button.next_button.set_sensitive(True)
             else:
                 Button.next_button.set_sensitive(False)
         elif cls.mirror == "2+ disks Mirror":
             cls.pool_type = 'mirror'
-            mir_msg1 = _("Please select 2 drive for mirroring (select the smallest disk first)")
+            mir_msg1 = get_text("Please select 2 drive for mirroring (select the smallest disk first)")
             cls.mirrorTips.set_text(mir_msg1)
             if len(cls.zfs_disk_list) >= 2:
                 Button.next_button.set_sensitive(True)
@@ -176,21 +172,21 @@ class ZFS:
                 Button.next_button.set_sensitive(False)
         elif cls.mirror == "3 disks RAIDZ1":
             cls.pool_type = 'raidz1'
-            cls.mirrorTips.set_text(_("Please select 3 drive for RAIDZ1 (select the smallest disk first)"))
+            cls.mirrorTips.set_text(get_text("Please select 3 drive for RAIDZ1 (select the smallest disk first)"))
             if len(cls.zfs_disk_list) == 3:
                 Button.next_button.set_sensitive(True)
             else:
                 Button.next_button.set_sensitive(False)
         elif cls.mirror == "4 disks RAIDZ2":
             cls.pool_type = 'raidz2'
-            cls.mirrorTips.set_text(_("Please select 4 drive for RAIDZ2 (select the smallest disk first)"))
+            cls.mirrorTips.set_text(get_text("Please select 4 drive for RAIDZ2 (select the smallest disk first)"))
             if len(cls.zfs_disk_list) == 4:
                 Button.next_button.set_sensitive(True)
             else:
                 Button.next_button.set_sensitive(False)
         elif cls.mirror == "5 disks RAIDZ3":
             cls.pool_type = 'raidz3'
-            cls.mirrorTips.set_text(_("Please select 5 drive for RAIDZ3 (select the smallest disk first)"))
+            cls.mirrorTips.set_text(get_text("Please select 5 drive for RAIDZ3 (select the smallest disk first)"))
             if len(cls.zfs_disk_list) == 5:
                 Button.next_button.set_sensitive(True)
             else:
@@ -293,24 +289,24 @@ class ZFS:
         cls.check_cell.connect('toggled', cls.col1_toggled_cb, cls.store)
         cell = Gtk.CellRendererText()
         column = Gtk.TreeViewColumn(None, cell, text=0)
-        column_header = Gtk.Label(label=_('Disk'))
+        column_header = Gtk.Label(label=get_text('Disk'))
         column_header.set_use_markup(True)
         column_header.show()
         column.set_widget(column_header)
         column.set_sort_column_id(0)
         cell2 = Gtk.CellRendererText()
         column2 = Gtk.TreeViewColumn(None, cell2, text=0)
-        column_header2 = Gtk.Label(label=_('Size(MB)'))
+        column_header2 = Gtk.Label(label=get_text('Size(MB)'))
         column_header2.set_use_markup(True)
         column_header2.show()
         column2.set_widget(column_header2)
         cell3 = Gtk.CellRendererText()
         column3 = Gtk.TreeViewColumn(None, cell3, text=0)
-        column_header3 = Gtk.Label(label=_('Name'))
+        column_header3 = Gtk.Label(label=get_text('Name'))
         column_header3.set_use_markup(True)
         column_header3.show()
         column3.set_widget(column_header3)
-        column1 = Gtk.TreeViewColumn(_("Check"), cls.check_cell)
+        column1 = Gtk.TreeViewColumn(get_text("Check"), cls.check_cell)
         column1.add_attribute(cls.check_cell, "active", 3)
         column.set_attributes(cell, text=0)
         column2.set_attributes(cell2, text=1)
@@ -323,20 +319,20 @@ class ZFS:
         tree_selection.set_mode(Gtk.SelectionMode.SINGLE)
         sw.add(treeview)
         sw.show()
-        cls.mirrorTips = Gtk.Label(label=_('Please select one drive'))
+        cls.mirrorTips = Gtk.Label(label=get_text('Please select one drive'))
         cls.mirrorTips.set_justify(Gtk.Justification.LEFT)
         cls.mirrorTips.set_alignment(0.01, 0.5)
         # Mirror, raidz and stripe
         cls.mirror = 'none'
-        mirror_label = Gtk.Label(label=_('<b>Pool Type</b>'))
+        mirror_label = Gtk.Label(label=get_text('<b>Pool Type</b>'))
         mirror_label.set_use_markup(True)
         mirror_box = Gtk.ComboBox()
         mirror_store = Gtk.ListStore(str, str)  # value, display_text
-        mirror_store.append(["1+ disks Stripe", _("1+ disks Stripe")])
-        mirror_store.append(["2+ disks Mirror", _("2+ disks Mirror")])
-        mirror_store.append(["3 disks RAIDZ1", _("3 disks RAIDZ1")])
-        mirror_store.append(["4 disks RAIDZ2", _("4 disks RAIDZ2")])
-        mirror_store.append(["5 disks RAIDZ3", _("5 disks RAIDZ3")])
+        mirror_store.append(["1+ disks Stripe", get_text("1+ disks Stripe")])
+        mirror_store.append(["2+ disks Mirror", get_text("2+ disks Mirror")])
+        mirror_store.append(["3 disks RAIDZ1", get_text("3 disks RAIDZ1")])
+        mirror_store.append(["4 disks RAIDZ2", get_text("4 disks RAIDZ2")])
+        mirror_store.append(["5 disks RAIDZ3", get_text("5 disks RAIDZ3")])
         mirror_box.set_model(mirror_store)
         renderer = Gtk.CellRendererText()
         mirror_box.pack_start(renderer, True)
@@ -346,7 +342,7 @@ class ZFS:
 
         # Pool Name
         cls.zpool = False
-        pool_name_label = Gtk.Label(label=_('<b>Pool Name</b>'))
+        pool_name_label = Gtk.Label(label=get_text('<b>Pool Name</b>'))
         pool_name_label.set_use_markup(True)
         cls.pool = Gtk.Entry()
         cls.pool.set_text('zroot')
@@ -366,18 +362,18 @@ class ZFS:
             shemebox.set_sensitive(True)
         # GELI Disk encryption
         cls.disk_encrypt = False
-        encrypt_check = Gtk.CheckButton(label=_("Encrypt Disk"))
+        encrypt_check = Gtk.CheckButton(label=get_text("Encrypt Disk"))
         encrypt_check.connect("toggled", cls.on_check_encrypt)
         encrypt_check.set_sensitive(True)
         # password
-        cls.passwd_label = Gtk.Label(label=_("Password"))
+        cls.passwd_label = Gtk.Label(label=get_text("Password"))
         cls.password = Gtk.Entry()
         cls.password.set_sensitive(False)
         cls.password.set_visibility(False)
         cls.password.connect("changed", password_strength)
         cls.strenght_label = Gtk.Label()
         cls.strenght_label.set_alignment(0.1, 0.5)
-        cls.vpasswd_label = Gtk.Label(label=_("Verify it"))
+        cls.vpasswd_label = Gtk.Label(label=get_text("Verify it"))
         cls.repassword = Gtk.Entry()
         cls.repassword.set_sensitive(False)
         cls.repassword.set_visibility(False)
@@ -538,7 +534,7 @@ class ZFS:
         selected first and offers to reset all selections.
         """
         window = Gtk.Window()
-        window.set_title(_("Warning"))
+        window.set_title(get_text("Warning"))
         window.set_border_width(0)
         # window.set_size_request(480, 200)
         window.set_icon_from_file(logo)
@@ -549,8 +545,8 @@ class ZFS:
         box2.set_border_width(10)
         box1.pack_start(box2, True, True, 0)
         box2.show()
-        warning_text = _("Smallest disk need to be SELECTED first!\n")
-        warning_text += _("All the disk selected will reset.")
+        warning_text = get_text("Smallest disk need to be SELECTED first!\n")
+        warning_text += get_text("All the disk selected will reset.")
         label = Gtk.Label(label=warning_text)
         # Add button
         box2.pack_start(label, True, True, 0)

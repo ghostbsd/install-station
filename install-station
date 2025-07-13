@@ -5,12 +5,14 @@ Install Station executable module.
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
-from install_station.welcome_live import Welcome
+from install_station.language import Language
+from install_station.keyboard import Keyboard
+from install_station.network_setup import NetworkSetup
+from install_station.try_install import TryOrInstall
 from install_station.install_type import InstallTypes
 from install_station.custom import PartitionManager
 from install_station.use_zfs import ZFS
 from install_station.boot_manager import BootManager
-from install_station.network_setup import NetworkSetup
 from install_station.data import logo
 from install_station.window import Window
 from install_station.interface_controller import Interface, Button
@@ -25,12 +27,14 @@ class MainWindow:
         """
         Install Station main window class initiation.
         """
-        Interface.welcome = Welcome
+        Interface.welcome = Language
+        Interface.keyboard = Keyboard
+        Interface.network_setup = NetworkSetup
+        Interface.try_isntall = TryOrInstall
         Interface.installation_type = InstallTypes
         Interface.custom_partition = PartitionManager
         Interface.full_zfs = ZFS
         Interface.boot_manager = BootManager
-        Interface.net_setup = NetworkSetup
         Window.connect("delete_event", Interface.delete)
         Window.set_border_width(0)
         Window.set_default_size(800, 500)
@@ -43,7 +47,7 @@ class MainWindow:
         Window.add(main_box)
         main_box.pack_start(Interface.get_interface(), True, True, 0)
         Window.show_all()
-        Button.hide_all()  # Initially hide all buttons
+        Button.show_initial()
 
 
 MainWindow()

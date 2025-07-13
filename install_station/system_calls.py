@@ -58,7 +58,9 @@ def keyboard_dictionary():
         kb_name = keyboard_list[1].strip()
         kb_layouts = keyboard_list[0].strip()
         kb_variant = None
-        dictionary[kb_name] = {'layout': kb_layouts, 'variant': kb_variant}
+        # Skip the "custom" layout as it's not a real keyboard layout
+        if kb_layouts != 'custom':
+            dictionary[kb_name] = {'layout': kb_layouts, 'variant': kb_variant}
 
     xkeyboard_variants = Popen(f'{pc_sysinstall} xkeyboard-variants',
                                shell=True, stdout=PIPE,

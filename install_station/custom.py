@@ -11,13 +11,9 @@ from install_station.partition import (
     CreatePartition,
     CreateLabel
 )
-from install_station.data import InstallationData, logo
+from install_station.data import InstallationData, logo, get_text
 from install_station.interface_controller import Button
-import gettext
 
-gettext.bindtextdomain('install-station', '/usr/local/share/locale')
-gettext.textdomain('install-station')
-_ = gettext.gettext
 
 bios_type = bios_or_uefi()
 
@@ -249,19 +245,19 @@ class PartitionManager:
         bbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, homogeneous=True, spacing=10)
         bbox.set_border_width(5)
         bbox.set_spacing(10)
-        cls.create_bt = Gtk.Button(label="Create")
+        cls.create_bt = Gtk.Button(label=get_text("Create"))
         cls.create_bt.connect("clicked", cls.create_partition)
         cls.create_bt.set_sensitive(False)
         bbox.pack_start(cls.create_bt, True, True, 0)
-        cls.delete_bt = Gtk.Button(label="Delete")
+        cls.delete_bt = Gtk.Button(label=get_text("Delete"))
         cls.delete_bt.connect("clicked", cls.delete_partition)
         cls.delete_bt.set_sensitive(False)
         bbox.pack_start(cls.delete_bt, True, True, 0)
-        cls.revert_bt = Gtk.Button(label="Revert")
+        cls.revert_bt = Gtk.Button(label=get_text("Revert"))
         cls.revert_bt.connect("clicked", cls.revert_change)
         cls.revert_bt.set_sensitive(False)
         bbox.pack_start(cls.revert_bt, True, True, 0)
-        cls.auto_bt = Gtk.Button(label="Auto")
+        cls.auto_bt = Gtk.Button(label=get_text("Auto"))
         cls.auto_bt.connect("clicked", cls.auto_partition)
         cls.auto_bt.set_sensitive(False)
         bbox.pack_start(cls.auto_bt, True, True, 0)
@@ -329,7 +325,7 @@ class PartitionManager:
         """
         free_space = int(size)
         cls.window = Gtk.Window()
-        cls.window.set_title(title="Add Partition")
+        cls.window.set_title(title=get_text("Add Partition"))
         cls.window.set_border_width(0)
         cls.window.set_size_request(480, 200)
         cls.window.set_icon_from_file(logo)
@@ -343,9 +339,9 @@ class PartitionManager:
         
         # Create partition configuration table
         table = Gtk.Table(1, 2, True)
-        label1 = Gtk.Label(label="Type:")
-        label2 = Gtk.Label(label="Size(MB):")
-        label3 = Gtk.Label(label="Mount point:")
+        label1 = Gtk.Label(label=get_text("Type:"))
+        label2 = Gtk.Label(label=get_text("Size(MB):"))
+        label3 = Gtk.Label(label=get_text("Mount point:"))
         cls.fs_type = Gtk.ComboBoxText()
         cls.fs_type.append_text('ZFS')
         cls.fs_type.append_text('SWAP')
@@ -497,7 +493,7 @@ class PartitionManager:
         partition schemes for the selected disk.
         """
         cls.window = Gtk.Window()
-        cls.window.set_title("Partition Scheme")
+        cls.window.set_title(get_text("Partition Scheme"))
         cls.window.set_border_width(0)
         cls.window.set_size_request(400, 150)
         cls.window.set_icon_from_file(logo)
@@ -516,8 +512,8 @@ class PartitionManager:
         # Adding a combo box to selecting MBR or GPT scheme.
         cls.scheme = 'GPT'
         scheme_box = Gtk.ComboBoxText()
-        scheme_box.append_text("GPT: GUID Partition Table")
-        scheme_box.append_text("MBR: DOS Partition")
+        scheme_box.append_text(get_text("GPT: GUID Partition Table"))
+        scheme_box.append_text(get_text("MBR: DOS Partition"))
         scheme_box.connect('changed', cls.scheme_selection)
         scheme_box.set_active(0)
         table = Gtk.Table(1, 2, True)
@@ -567,7 +563,7 @@ class PartitionManager:
         """
         free_space = int(cls.size)
         cls.window = Gtk.Window()
-        cls.window.set_title("Add Partition")
+        cls.window.set_title(get_text("Add Partition"))
         cls.window.set_border_width(0)
         cls.window.set_size_request(400, 150)
         cls.window.set_icon_from_file(logo)
@@ -581,7 +577,7 @@ class PartitionManager:
         
         # Create Partition slice
         table = Gtk.Table(1, 2, True)
-        label1 = Gtk.Label(label="Size(MB):")
+        label1 = Gtk.Label(label=get_text("Size(MB):"))
         adj = Gtk.Adjustment(free_space, 0, free_space, 1, 100, 0)
         cls.entry = Gtk.SpinButton(adjustment=adj, numeric=True)
         cls.entry.set_numeric(True)

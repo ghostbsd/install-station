@@ -1015,7 +1015,7 @@ class CreateLabel:
 
 # class modifyLabel():
 
-#     def __init__(self, path, size_left, create_size, mount_point, fs,
+#     def __init_get_text(self, path, size_left, create_size, mount_point, fs,
 #                  data, disk):
 #         if not os.path.exists(disk_file):
 #             file_disk = open(disk_file, 'w')

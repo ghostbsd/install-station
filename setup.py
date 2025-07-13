@@ -39,9 +39,25 @@ class UpdateTranslationsCommand(Command):
         # Define paths
         pot_file = 'po/install-station.pot'
         po_files = glob.glob('po/*.po')
-        # Step 1: Extract messages to .pot file
+        
+        # Check if .pot file exists, create it if it doesn't
+        if not os.path.exists(pot_file):
+            print(f"POT file {pot_file} does not exist. Creating it...")
+        else:
+            print("Updating existing .pot file...")
+        
+        # Step 1: Extract messages to .pot file (create or update)
         print("Extracting messages to .pot file...")
-        os.system(f'xgettext --from-code=UTF-8 -L Python -o {pot_file} install_station/*.py install-station')
+        os.system(
+            f'xgettext --from-code=UTF-8 -L Python --keyword=get_text -o {pot_file}'
+            ' install_station/*.py install-station'
+        )
+        
+        # Verify .pot file was created successfully
+        if not os.path.exists(pot_file):
+            print(f"Error: Failed to create {pot_file}")
+            return
+        
         # Step 2: Update .po files with the new .pot file
         print("Updating .po files with new translations...")
         for po_file in po_files:
@@ -73,7 +89,10 @@ class CreateTranslationCommand(Command):
         # Check if the .pot file exists
         if not os.path.exists(pot_file):
             print("Extracting messages to .pot file...")
-            os.system(f'xgettext --from-code=UTF-8 -L Python -o {pot_file} install_station/*.py install-station')
+            os.system(
+                f'xgettext --from-code=UTF-8 -L Python --keyword=get_text -o {pot_file}'
+                ' install_station/*.py install-station'
+            )
         # Create the new .po file
         if not os.path.exists(po_file):
             print(f"Creating new {po_file} for locale '{self.locale}'...")
@@ -119,6 +138,7 @@ lib_install_station_backend_query = [
 ]
 
 data_files = [
+    (f'{prefix}/lib/install-station', ['src/ghostbsd-style.css']),
     (f'{prefix}/lib/install-station/backend-query', lib_install_station_backend_query),
     (f'{prefix}/lib/install-station/image', lib_install_station_image)
 ]

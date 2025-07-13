@@ -8,6 +8,7 @@ install_station/error.py
 install_station/install.py
 install_station/install_type.py
 install_station/interface_controller.py
+install_station/keyboard.py
 install_station/language.py
 install_station/network_setup.py
 install_station/partition.py

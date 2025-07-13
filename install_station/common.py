@@ -1,5 +1,6 @@
 import re
 import warnings
+from install_station.data import get_text
 
 
 def lower_case(text: str) -> bool:
@@ -104,53 +105,53 @@ def password_strength(password, label3):
         ]
     )
     if ' ' in password or '\t' in password:
-        label3.set_text("Space not allowed")
+        label3.set_text(get_text("Space not allowed"))
     elif len(password) <= 4:
-        label3.set_text("Super Weak")
+        label3.set_text(get_text("Super Weak"))
     elif len(password) <= 8 and same_character_type:
-        label3.set_text("Super Weak")
+        label3.set_text(get_text("Super Weak"))
     elif len(password) <= 8 and mix_character:
-        label3.set_text("Very Weak")
+        label3.set_text(get_text("Very Weak"))
     elif len(password) <= 8 and lower_upper_number(password):
-        label3.set_text("Fairly Weak")
+        label3.set_text(get_text("Fairly Weak"))
     elif len(password) <= 8 and all_character(password):
-        label3.set_text("Weak")
+        label3.set_text(get_text("Weak"))
     elif len(password) <= 12 and same_character_type:
-        label3.set_text("Very Weak")
+        label3.set_text(get_text("Very Weak"))
     elif len(password) <= 12 and mix_character:
-        label3.set_text("Fairly Weak")
+        label3.set_text(get_text("Fairly Weak"))
     elif len(password) <= 12 and lower_upper_number(password):
-        label3.set_text("Weak")
+        label3.set_text(get_text("Weak"))
     elif len(password) <= 12 and all_character(password):
-        label3.set_text("Strong")
+        label3.set_text(get_text("Strong"))
     elif len(password) <= 16 and same_character_type:
-        label3.set_text("Fairly Weak")
+        label3.set_text(get_text("Fairly Weak"))
     elif len(password) <= 16 and mix_character:
-        label3.set_text("Weak")
+        label3.set_text(get_text("Weak"))
     elif len(password) <= 16 and lower_upper_number(password):
-        label3.set_text("Strong")
+        label3.set_text(get_text("Strong"))
     elif len(password) <= 16 and all_character(password):
-        label3.set_text("Fairly Strong")
+        label3.set_text(get_text("Fairly Strong"))
     elif len(password) <= 20 and same_character_type:
-        label3.set_text("Weak")
+        label3.set_text(get_text("Weak"))
     elif len(password) <= 20 and mix_character:
-        label3.set_text("Strong")
+        label3.set_text(get_text("Strong"))
     elif len(password) <= 20 and lower_upper_number(password):
-        label3.set_text("Fairly Strong")
+        label3.set_text(get_text("Fairly Strong"))
     elif len(password) <= 20 and all_character(password):
-        label3.set_text("Very Strong")
+        label3.set_text(get_text("Very Strong"))
     elif len(password) <= 24 and same_character_type:
-        label3.set_text("Strong")
+        label3.set_text(get_text("Strong"))
     elif len(password) <= 24 and mix_character:
-        label3.set_text("Fairly Strong")
+        label3.set_text(get_text("Fairly Strong"))
     elif len(password) <= 24 and lower_upper_number(password):
-        label3.set_text("Very Strong")
+        label3.set_text(get_text("Very Strong"))
     elif len(password) <= 24 and all_character(password):
-        label3.set_text("Super Strong")
+        label3.set_text(get_text("Super Strong"))
     elif same_character_type:
-        label3.set_text("Fairly Strong")
+        label3.set_text(get_text("Fairly Strong"))
     else:
-        label3.set_text("Super Strong")
+        label3.set_text(get_text("Super Strong"))
 
 
 def deprecated(*, version: str, reason: str):

@@ -2,12 +2,8 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
 from install_station.partition import bios_or_uefi
-from install_station.data import InstallationData
-import gettext
+from install_station.data import InstallationData, get_text
 
-gettext.bindtextdomain('install-station', '/usr/local/share/locale')
-gettext.textdomain('install-station')
-_ = gettext.gettext
 
 cssProvider = Gtk.CssProvider()
 cssProvider.load_from_path('/usr/local/lib/install-station/ghostbsd-style.css')
@@ -122,7 +118,7 @@ class BootManager:
         scheme = cls._get_partition_scheme()
         
         # Create title header
-        title = Gtk.Label(label=_('Boot Option'), name="Header")
+        title = Gtk.Label(label=get_text('Boot Option'), name="Header")
         title.set_property("height-request", 50)
         cls.vbox1.pack_start(title, False, False, 0)
         
@@ -136,7 +132,7 @@ class BootManager:
         bbox1.show()
         
         # rEFInd boot manager option
-        cls.refind = Gtk.RadioButton(label=_("Setup rEFInd boot manager"))
+        cls.refind = Gtk.RadioButton(label=get_text("Setup rEFInd boot manager"))
         bbox1.pack_start(cls.refind, False, True, 10)
         cls.refind.connect("toggled", cls.boot_manager_selection, "refind")
         cls.refind.show()
@@ -150,7 +146,7 @@ class BootManager:
         # FreeBSD boot manager option
         cls.bsd = Gtk.RadioButton.new_with_label_from_widget(
             cls.refind,
-            _("Setup FreeBSD boot manager")
+            get_text("Setup FreeBSD boot manager")
         )
         bbox1.pack_start(cls.bsd, False, True, 10)
         cls.bsd.connect("toggled", cls.boot_manager_selection, "bsd")
@@ -165,7 +161,7 @@ class BootManager:
         # Native loader option (always available)
         cls.none = Gtk.RadioButton.new_with_label_from_widget(
             cls.bsd,
-            _("FreeBSD {loader} loader only").format(loader=loader)
+            get_text("FreeBSD {loader} loader only").format(loader=loader)
         )
         bbox1.pack_start(cls.none, False, True, 10)
         cls.none.connect("toggled", cls.boot_manager_selection, "none")
