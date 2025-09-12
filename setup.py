@@ -1,7 +1,14 @@
 #!/usr/bin/env python
+"""
+Setup script for Install Station.
+
+Install Station is a streamlined installer for GhostBSD, providing
+a GTK+ interface for disk partitioning and OS installation.
+"""
 import os
 import sys
-from setuptools import setup, Command, glob
+from setuptools import setup, Command
+import glob
 from DistUtilsExtra.command.build_extra import build_extra
 from DistUtilsExtra.command.build_i18n import build_i18n
 from DistUtilsExtra.command.clean_i18n import clean_i18n
@@ -12,6 +19,16 @@ PROGRAM_VERSION = __VERSION__
 
 
 def data_file_list(install_base, source_base):
+    """
+    Generate list of data files for installation.
+    
+    Args:
+        install_base: Base installation path
+        source_base: Source directory to scan
+        
+    Returns:
+        List of (install_path, files) tuples for setuptools
+    """
     data = []
     for root, subFolders, files in os.walk(source_base):
         file_list = []
@@ -114,7 +131,7 @@ lib_install_station_image = [
 lib_install_station_backend_query = [
     'src/backend-query/detect-laptop.sh',
     'src/backend-query/detect-nics.sh',
-    'src/backend-query/detect-sheme.sh',
+    'src/backend-query/detect-scheme.sh',
     'src/backend-query/detect-vmware.sh',
     'src/backend-query/detect-wifi.sh',
     'src/backend-query/disk-info.sh',
@@ -148,7 +165,7 @@ data_files.extend(data_file_list(f'{prefix}/share/locale', 'build/mo'))
 setup(
     name="install-station",
     version=PROGRAM_VERSION,
-    description="Install Station is a strip down version of gbi",
+    description="Install Station - Streamlined GhostBSD installer",
     license='BSD',
     author='Eric Turgeon',
     url='https://github/GhostBSD/install-station/',

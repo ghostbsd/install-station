@@ -18,30 +18,72 @@ styleContext.add_provider_for_screen(
 
 
 class InstallTypes:
+    """Utility class for filesystem type selection following the utility class pattern.
+    
+    This class provides a GTK+ interface for installation type selection including:
+    - Filesystem type selection between ZFS disk configuration and multi-boot
+    - Radio button interface for user selection
+    - Integration with InstallationData for persistent configuration
+    
+    The class follows a utility pattern with class methods and variables for state management,
+    designed to integrate with the Interface controller for navigation flow.
+    """
     # Class variables instead of instance variables
-    ne = 'zfs'
-    vbox1 = None
+    ne: str = 'zfs'
+    vbox1: Gtk.Box | None = None
+    full_zfs_button: Gtk.RadioButton | None = None
+    custom_button: Gtk.RadioButton | None = None
 
     @classmethod
-    def filesystem_type(cls, widget, val):
+    def filesystem_type(cls, widget: Gtk.RadioButton, val: str) -> None:
+        """Handle filesystem type selection from radio buttons.
+        
+        Only responds to activation, not deactivation. Updates both
+        class variables and InstallationData with the selected filesystem type.
+        
+        Args:
+            widget: RadioButton widget that triggered the action
+            val: Filesystem type value ('zfs' or 'custom')
+        """
         # Only respond to activation, not deactivation
         if widget.get_active():
             cls.ne = val
             InstallationData.filesystem_type = val
-        return
+            print(f"Filesystem type selected: {val}")
 
     @classmethod
-    def get_type(cls):
+    def get_type(cls) -> str:
+        """Get the current filesystem type selection.
+        
+        Returns:
+            str: Current filesystem type ('zfs' or 'custom')
+        """
         return InstallationData.filesystem_type or cls.ne
 
     @classmethod
-    def get_model(cls):
+    def get_model(cls) -> Gtk.Box:
+        """Return the GTK widget model for the installation type interface.
+        
+        Returns the main container widget that was created during initialization.
+        
+        Returns:
+            Gtk.Box: The main container widget for the installation type interface
+        """
         if cls.vbox1 is None:
             cls.initialize()
         return cls.vbox1
 
     @classmethod
-    def initialize(cls):
+    def initialize(cls) -> None:
+        """Initialize the installation type selection UI following the utility class pattern.
+        
+        Creates the main interface including:
+        - Radio buttons for ZFS disk configuration and multi-boot setup
+        - Descriptive text for each option
+        - Centered layout with proper spacing
+        
+        This method is called automatically by get_model() when the interface is first accessed.
+        """
         cls.vbox1 = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, homogeneous=False, spacing=0)
         cls.vbox1.show()
         vbox2 = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, homogeneous=False, spacing=0)

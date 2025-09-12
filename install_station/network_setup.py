@@ -39,19 +39,19 @@ class NetworkSetup:
     designed to integrate with the Interface controller for navigation flow.
     """
     # Class variables instead of instance variables
-    vbox1 = None
-    network_info = None
-    wire_connection_label = None
-    wire_connection_image = None
-    wifi_connection_label = None
-    wifi_connection_image = None
-    connection_box = None
-    store = None
-    window = None
-    password = None
+    vbox1: Gtk.Box | None = None
+    network_info: dict | None = None
+    wire_connection_label: Gtk.Label | None = None
+    wire_connection_image: Gtk.Image | None = None
+    wifi_connection_label: Gtk.Label | None = None
+    wifi_connection_image: Gtk.Image | None = None
+    connection_box: Gtk.Box | None = None
+    store: Gtk.ListStore | None = None
+    window: Gtk.Window | None = None
+    password: Gtk.Entry | None = None
 
     @classmethod
-    def get_model(cls):
+    def get_model(cls) -> Gtk.Box:
         """
         Return the GTK widget model for the network setup interface.
         
@@ -65,7 +65,7 @@ class NetworkSetup:
         return cls.vbox1
 
     @staticmethod
-    def wifi_stat(bar):
+    def wifi_stat(bar: int) -> str:
         """
         Get WiFi signal strength icon name based on signal bar percentage.
         
@@ -87,7 +87,7 @@ class NetworkSetup:
             return 'nm-signal-00'
 
     @classmethod
-    def update_network_detection(cls):
+    def update_network_detection(cls) -> None:
         """
         Update network detection status and UI elements.
         
@@ -135,7 +135,7 @@ class NetworkSetup:
         cls.wifi_connection_label.set_label(wifi_text)
 
     @classmethod
-    def update_ui_text(cls):
+    def update_ui_text(cls) -> None:
         """
         Update all UI text elements with new translations after language change.
         """
@@ -147,7 +147,7 @@ class NetworkSetup:
             cls.update_network_detection()
 
     @classmethod
-    def initialize(cls):
+    def initialize(cls) -> None:
         """
         Initialize the network setup UI following the utility class pattern.
         
@@ -257,7 +257,7 @@ class NetworkSetup:
         main_grid.attach(cls.connection_box, 1, 4, 10, 5)
 
     @classmethod
-    def wifi_setup(cls, tree_selection, wifi_card):
+    def wifi_setup(cls, tree_selection: Gtk.TreeSelection, wifi_card: str) -> None:
         """
         Handle WiFi access point selection and connection setup.
         
@@ -285,7 +285,7 @@ class NetworkSetup:
                     cls.authentication(ssid_info, wifi_card, False)
 
     @classmethod
-    def add_to_wpa_supplicant(cls, _widget, ssid_info, card):
+    def add_to_wpa_supplicant(cls, _widget: Gtk.Button, ssid_info: list, card: str) -> None:
         """
         Add WiFi credentials to wpa_supplicant configuration and connect.
         
@@ -303,7 +303,7 @@ class NetworkSetup:
         cls.window.hide()
 
     @classmethod
-    def try_to_connect_to_ssid(cls, ssid, ssid_info, card):
+    def try_to_connect_to_ssid(cls, ssid: str, ssid_info: list, card: str) -> None:
         """
         Attempt to connect to the specified WiFi network.
         
@@ -329,7 +329,7 @@ class NetworkSetup:
         return
 
     @classmethod
-    def restart_authentication(cls, ssid_info, card):
+    def restart_authentication(cls, ssid_info: list, card: str) -> None:
         """
         Restart WiFi authentication after a failed connection attempt.
         
@@ -340,7 +340,7 @@ class NetworkSetup:
         cls.authentication(ssid_info, card, True)
 
     @classmethod
-    def on_check(cls, widget):
+    def on_check(cls, widget: Gtk.CheckButton) -> None:
         """
         Toggle password visibility in authentication dialog.
         
@@ -353,7 +353,7 @@ class NetworkSetup:
             cls.password.set_visibility(False)
 
     @classmethod
-    def authentication(cls, ssid_info, card, failed):
+    def authentication(cls, ssid_info: list, card: str, failed: bool) -> str:
         """
         Show WiFi authentication dialog.
         
@@ -411,7 +411,7 @@ class NetworkSetup:
         return 'Done'
 
     @classmethod
-    def close(cls, _widget):
+    def close(cls, _widget: Gtk.Button) -> None:
         """
         Close the authentication dialog.
         
@@ -421,7 +421,7 @@ class NetworkSetup:
         cls.window.hide()
 
     @staticmethod
-    def setup_wpa_supplicant(ssid, ssid_info, pwd):
+    def setup_wpa_supplicant(ssid: str, ssid_info: list, pwd: str) -> None:
         """
         Setup wpa_supplicant configuration for WiFi network.
         
@@ -456,7 +456,7 @@ class NetworkSetup:
         wsf.close()
 
     @staticmethod
-    def open_wpa_supplicant(ssid):
+    def open_wpa_supplicant(ssid: str) -> None:
         """
         Add open network entry to wpa_supplicant configuration.
         

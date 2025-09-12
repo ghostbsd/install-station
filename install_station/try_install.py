@@ -27,14 +27,14 @@ class TryOrInstall:
     designed to integrate with the Interface controller for navigation flow.
     """
     # Class variables instead of instance variables
-    what = None
-    install_button = None
-    try_button = None
-    instruction_label = None
-    vbox1 = None
+    what: str | None = None
+    install_button: Gtk.RadioButton | None = None
+    try_button: Gtk.RadioButton | None = None
+    instruction_label: Gtk.Label | None = None
+    vbox1: Gtk.Box | None = None
 
     @classmethod
-    def mode_selection(cls, widget, val):
+    def mode_selection(cls, widget: Gtk.RadioButton, val: str) -> None:
         """
         Handle mode selection from radio buttons.
         
@@ -52,7 +52,7 @@ class TryOrInstall:
             print(f"Mode selected: {val}")
 
     @classmethod
-    def get_what(cls):
+    def get_what(cls) -> str | None:
         """
         Get the current installation mode.
         
@@ -65,7 +65,7 @@ class TryOrInstall:
         return InstallationData.install_mode or cls.what
 
     @classmethod
-    def initialize(cls):
+    def initialize(cls) -> None:
         """
         Initialize the welcome screen UI following the utility class pattern.
         
@@ -147,7 +147,7 @@ class TryOrInstall:
         cls.install_button.set_active(True)
 
     @classmethod
-    def get_model(cls):
+    def get_model(cls) -> Gtk.Box:
         """
         Return the GTK widget model for the welcome screen interface.
         

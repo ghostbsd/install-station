@@ -40,14 +40,14 @@ class Language:
     designed to integrate with the Interface controller for navigation flow.
     """
     # Class variables instead of instance variables
-    vbox1 = None
-    language = None
-    treeview = None
-    welcome_text = None
-    language_column_header = None
+    vbox1: Gtk.Box | None = None
+    language: str | None = None
+    treeview: Gtk.TreeView | None = None
+    welcome_text: Gtk.Label | None = None
+    language_column_header: Gtk.Label | None = None
 
     @classmethod
-    def language_selection(cls, tree_selection):
+    def language_selection(cls, tree_selection: Gtk.TreeSelection) -> None:
         """
         Handle language selection from the treeview.
         
@@ -77,7 +77,7 @@ class Language:
             cls.update_ui_text()
 
     @classmethod
-    def update_ui_text(cls):
+    def update_ui_text(cls) -> None:
         """
         Update all UI text elements with new translations after language change.
         """
@@ -101,7 +101,7 @@ class Language:
         Window.set_title(get_text("Welcome to GhostBSD"))
 
     @classmethod
-    def setup_language_columns(cls, treeview):
+    def setup_language_columns(cls, treeview: Gtk.TreeView) -> None:
         """
         Configure the language selection treeview with appropriate columns.
         
@@ -123,7 +123,7 @@ class Language:
         treeview.append_column(column)
 
     @classmethod
-    def save_selection(cls):
+    def save_selection(cls) -> None:
         """
         Save the current language selection.
         
@@ -134,7 +134,7 @@ class Language:
         pass
 
     @classmethod
-    def save_language(cls):
+    def save_language(cls) -> None:
         """
         Apply the language configuration to the system.
         
@@ -146,7 +146,7 @@ class Language:
             localize_system(language_code)
 
     @classmethod
-    def initialize(cls):
+    def initialize(cls) -> None:
         """
         Initialize the language selection UI following the utility class pattern.
         
@@ -225,7 +225,7 @@ class Language:
         main_grid.show()
 
     @classmethod
-    def get_model(cls):
+    def get_model(cls) -> Gtk.Box:
         """
         Return the GTK widget model for the language selection interface.
         
@@ -239,7 +239,7 @@ class Language:
         return cls.vbox1
 
     @classmethod
-    def get_language(cls):
+    def get_language(cls) -> str | None:
         """
         Get the selected language code.
         
@@ -249,7 +249,7 @@ class Language:
         return InstallationData.language_code or cls.language
 
     @classmethod
-    def get_language_info(cls):
+    def get_language_info(cls) -> dict[str, str]:
         """
         Get the current language configuration information.
         

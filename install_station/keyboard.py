@@ -32,10 +32,15 @@ styleContext.add_provider_for_screen(
 )
 
 
-# This class is for placeholder for entry.
 class PlaceHolderEntry(Gtk.Entry):
+    """
+    GTK Entry widget with placeholder text functionality.
+    
+    This class extends Gtk.Entry to provide placeholder text that disappears
+    when the widget gains focus and returns when focus is lost if empty.
+    """
 
-    def __init__(self, *args, **kwds):
+    def __init__(self, *args, **kwds) -> None:
         Gtk.Entry.__init__(self, *args, **kwds)
         self.placeholder = get_text('Type here to test your keyboard')
         self.set_text(self.placeholder)
@@ -43,18 +48,18 @@ class PlaceHolderEntry(Gtk.Entry):
         self.connect('focus-in-event', self._focus_in_event)
         self.connect('focus-out-event', self._focus_out_event)
 
-    def _focus_in_event(self, _widget, _event):
+    def _focus_in_event(self, _widget: Gtk.Widget, _event) -> None:
         if self._default:
             self.set_text('')
 
-    def _focus_out_event(self, _widget, _event):
+    def _focus_out_event(self, _widget: Gtk.Widget, _event) -> None:
         if Gtk.Entry.get_text(self) == '':
             self.set_text(self.placeholder)
             self._default = True
         else:
             self._default = False
 
-    def get_text(self):
+    def get_text(self) -> str:
         if self._default:
             return ''
         return Gtk.Entry.get_text(self)
@@ -74,15 +79,15 @@ class Keyboard:
     designed to integrate with the Interface controller for navigation flow.
     """
     # Class variables instead of instance variables
-    kb_layout = None
-    kb_variant = None
-    kb_model = None
-    vbox1 = None
-    treeView = None
-    test_entry = None
+    kb_layout: str | None = None
+    kb_variant: str | None = None
+    kb_model: str | None = None
+    vbox1: Gtk.Box | None = None
+    treeView: Gtk.TreeView | None = None
+    test_entry: PlaceHolderEntry | None = None
 
     @classmethod
-    def layout_columns(cls, treeview):
+    def layout_columns(cls, treeview: Gtk.TreeView) -> None:
         """
         Configure the keyboard layout treeview with appropriate columns.
         
@@ -102,7 +107,7 @@ class Keyboard:
         treeview.append_column(column)
 
     @classmethod
-    def variant_columns(cls, treeview):
+    def variant_columns(cls, treeview: Gtk.TreeView) -> None:
         """
         Configure the keyboard model treeview with appropriate columns.
         
@@ -122,7 +127,7 @@ class Keyboard:
         treeview.append_column(column)
 
     @classmethod
-    def layout_selection(cls, tree_selection):
+    def layout_selection(cls, tree_selection: Gtk.TreeSelection) -> None:
         """
         Handle keyboard layout selection from the treeview.
         
@@ -147,7 +152,7 @@ class Keyboard:
             print(f"Keyboard layout selected: {value} ({cls.kb_layout}/{cls.kb_variant})")
 
     @classmethod
-    def model_selection(cls, tree_selection):
+    def model_selection(cls, tree_selection: Gtk.TreeSelection) -> None:
         """
         Handle keyboard model selection from the treeview.
         
@@ -170,7 +175,7 @@ class Keyboard:
             print(f"Keyboard model selected: {value} ({cls.kb_model})")
 
     @classmethod
-    def save_selection(cls):
+    def save_selection(cls) -> None:
         """
         Save the current keyboard selection.
         
@@ -186,7 +191,7 @@ class Keyboard:
                 file.write(f"{cls.kb_model}\\n")
 
     @classmethod
-    def save_keyboard(cls):
+    def save_keyboard(cls) -> None:
         """
         Apply the keyboard configuration to the system.
         
@@ -197,7 +202,7 @@ class Keyboard:
             set_keyboard(cls.kb_layout, cls.kb_variant, cls.kb_model)
 
     @classmethod
-    def initialize(cls):
+    def initialize(cls) -> None:
         """
         Initialize the keyboard configuration UI following the utility class pattern.
         
@@ -278,7 +283,7 @@ class Keyboard:
         cls.treeView.set_cursor(0)
 
     @classmethod
-    def get_model(cls):
+    def get_model(cls) -> Gtk.Box:
         """
         Return the GTK widget model for the keyboard configuration interface.
         
@@ -292,7 +297,7 @@ class Keyboard:
         return cls.vbox1
 
     @classmethod
-    def get_keyboard_info(cls):
+    def get_keyboard_info(cls) -> dict[str, str | None]:
         """
         Get the current keyboard configuration information.
         

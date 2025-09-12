@@ -1,10 +1,16 @@
 #!/usr/local/bin/python
 """
 Install Station executable module.
+
+This is the main entry point for the Install Station GTK+ application.
+It initializes all page components and sets up the main window interface.
 """
+from __future__ import annotations
+
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+
 from install_station.language import Language
 from install_station.keyboard import Keyboard
 from install_station.network_setup import NetworkSetup
@@ -21,16 +27,22 @@ from install_station.interface_controller import Interface, Button
 class MainWindow:
     """
     Install Station main window class.
+    
+    This class initializes the main GTK window and sets up all page components
+    for the installation wizard interface.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
-        Install Station main window class initiation.
+        Initialize the Install Station main window.
+        
+        Sets up page assignments to Interface class, configures the main window
+        properties, and creates the main interface layout.
         """
         Interface.welcome = Language
         Interface.keyboard = Keyboard
         Interface.network_setup = NetworkSetup
-        Interface.try_isntall = TryOrInstall
+        Interface.try_install = TryOrInstall
         Interface.installation_type = InstallTypes
         Interface.custom_partition = PartitionManager
         Interface.full_zfs = ZFS

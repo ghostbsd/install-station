@@ -1,3 +1,9 @@
+"""
+Common utility functions for Install Station.
+
+This module provides various utility functions including password strength
+checking, text validation, and deprecation decorators.
+"""
 import re
 import warnings
 from install_station.data import get_text
@@ -62,13 +68,15 @@ def lower_upper(text: str) -> bool:
     return not bool(search(text))
 
 
-# Find if password contain only lower and upper case and
-def lower_upper_number(text) -> bool:
+def lower_upper_number(text: str) -> bool:
     """
-    Find if password contain only lower and upper case and
-    :param text: password
-
-    :return: True if password contain only lower and upper case and
+    Find if password contains only lowercase, uppercase letters and numbers.
+    
+    Args:
+        text: password to check
+        
+    Returns:
+        True if password contains only lowercase, uppercase letters and numbers
     """
     search = re.compile(r'[^a-zA-Z0-9]').search
     return not bool(search(text))
@@ -76,7 +84,7 @@ def lower_upper_number(text) -> bool:
 
 # Find if password contain only lowercase, uppercase numbers
 # and some special character.
-def all_character(text):
+def all_character(text: str) -> bool:
     """
     Find if password contain only lowercase, uppercase numbers
     and some special character.
@@ -89,7 +97,14 @@ def all_character(text):
     return not bool(search(text))
 
 
-def password_strength(password, label3):
+def password_strength(password: str, label3) -> None:
+    """
+    Evaluate and display password strength.
+    
+    Args:
+        password: The password to evaluate
+        label3: GTK Label widget to display strength result
+    """
     same_character_type = any(
         [
             lower_case(password),
@@ -155,6 +170,16 @@ def password_strength(password, label3):
 
 
 def deprecated(*, version: str, reason: str):
+    """
+    Decorator to mark functions as deprecated.
+    
+    Args:
+        version: Version when function was deprecated
+        reason: Reason for deprecation
+        
+    Returns:
+        Decorator function that adds deprecation warnings
+    """
     def decorator(func):
         def wrapper(*args, **kwargs):
             warnings.warn(

@@ -4,14 +4,14 @@ Contains the data class and some commonly use variables
 import os
 import gettext
 
-be_name = "default"
-logo = "/usr/local/lib/install-station/image/logo.png"
-gif_logo = "/usr/local/lib/install-station/image/G_logo.gif"
-pc_sysinstall = "/usr/local/sbin/pc-sysinstall"
-query = "sh /usr/local/lib/install-station/backend-query"
-tmp = "/tmp"
-installation_config = f'{tmp}/ghostbsd_installation.cfg'
-zfs_datasets = "/," \
+be_name: str = "default"
+logo: str = "/usr/local/lib/install-station/image/logo.png"
+gif_logo: str = "/usr/local/lib/install-station/image/G_logo.gif"
+pc_sysinstall: str = "/usr/local/sbin/pc-sysinstall"
+query: str = "sh /usr/local/lib/install-station/backend-query"
+tmp: str = "/tmp"
+installation_config: str = f'{tmp}/ghostbsd_installation.cfg'
+zfs_datasets: str = "/," \
     "/home(mountpoint=/home)," \
     "/tmp(mountpoint=/tmp|exec=on|setuid=off)," \
     "/usr(mountpoint=/usr|canmount=off)," \
@@ -67,7 +67,7 @@ class InstallationData:
     network_config: dict = {}
     
     @classmethod
-    def reset(cls):
+    def reset(cls) -> None:
         """Reset all installation data"""
         cls.destroy = {}
         cls.delete = []
@@ -92,7 +92,7 @@ class InstallationData:
         cls.network_config = {}
 
 
-def get_text(text):
+def get_text(text: str) -> str:
     """
     Global translation function that always returns current language translation.
     

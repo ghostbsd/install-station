@@ -1,28 +1,43 @@
+"""
+Interface Controller Module.
+
+This module provides the main navigation interface and button controls
+for the Install Station GTK application wizard.
+"""
+import gi
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from install_station.install import InstallProgress, InstallWindow
 from install_station.partition import DiskPartition
 from install_station.window import Window
 from install_station.data import InstallationData, get_text
+from install_station.system_calls import localize_system, set_keyboard
 
 
 class Button:
-    back_button = Gtk.Button(label=get_text('Back'))
+    """
+    Button management class for navigation controls.
+    
+    Manages the Back, Cancel, and Next buttons used throughout
+    the installation wizard interface.
+    """
+    back_button: Gtk.Button = Gtk.Button(label=get_text('Back'))
     """This button is used to go back to the previous page."""
-    cancel_button = Gtk.Button(label=get_text('Cancel'))
+    cancel_button: Gtk.Button = Gtk.Button(label=get_text('Cancel'))
     """This button is used to quit and clean up."""
-    next_button = Gtk.Button(label=get_text('Next'))
+    next_button: Gtk.Button = Gtk.Button(label=get_text('Next'))
     """This button is used to go to the next page."""
-    _box = None
+    _box: Gtk.Box | None = None
 
     @classmethod
-    def update_button_labels(cls):
+    def update_button_labels(cls) -> None:
         """Update button labels with current language translations."""
         cls.back_button.set_label(get_text('Back'))
         cls.cancel_button.set_label(get_text('Cancel'))
         cls.next_button.set_label(get_text('Next'))
 
     @classmethod
-    def hide_all(cls):
+    def hide_all(cls) -> None:
         """
         This method hides all buttons.
         """
@@ -31,7 +46,7 @@ class Button:
         cls.next_button.hide()
 
     @classmethod
-    def show_initial(cls):
+    def show_initial(cls) -> None:
         """
         This method shows the initial buttons. Cancel and Next.
         """
@@ -40,21 +55,21 @@ class Button:
         cls.next_button.show()
 
     @classmethod
-    def show_back(cls):
+    def show_back(cls) -> None:
         """
         This method shows the back button.
         """
         cls.back_button.show()
 
     @classmethod
-    def hide_back(cls):
+    def hide_back(cls) -> None:
         """
         This method hides the back button.
         """
         cls.back_button.hide()
 
     @classmethod
-    def box(cls):
+    def box(cls) -> Gtk.Box:
         """
         This method creates a box container of buttons aligned to the right.
 
@@ -80,18 +95,26 @@ class Button:
 
 
 class Interface:
+    """
+    Main interface controller for the installation wizard.
+    
+    Manages the GTK Notebook pages and navigation between different
+    screens in the installation process including language, keyboard,
+    network setup, installation type, and configuration screens.
+    """
     welcome = None
     keyboard = None
     network_setup = None
-    try_isntall = None
+    try_install = None
     installation_type = None
     custom_partition = None
     full_zfs = None
     boot_manager = None
-    page = Gtk.Notebook()
+    page: Gtk.Notebook = Gtk.Notebook()
+    nbButton: Gtk.Notebook | None = None
 
     @classmethod
-    def get_interface(cls):
+    def get_interface(cls) -> Gtk.Box:
         interface_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, homogeneous=False, spacing=0)
         interface_box.show()
         interface_box.pack_start(cls.page, True, True, 0)
@@ -118,13 +141,13 @@ class Interface:
         return interface_box
 
     @classmethod
-    def delete(cls, _widget, _event=None):
+    def delete(cls, _widget: Gtk.Widget, _event=None) -> None:
         """Close the main window."""
         InstallationData.reset()
         Gtk.main_quit()
 
     @classmethod
-    def next_page(cls, _widget):
+    def next_page(cls, _widget: Gtk.Button) -> None:
         """Go to the next window."""
         page = cls.page.get_current_page()
         if page == 0:
@@ -155,22 +178,39 @@ class Interface:
             if cls.page.get_n_pages() <= 3:
                 try_install_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, homogeneous=False, spacing=0)
                 try_install_box.show()
-                get_try_install = cls.try_isntall.get_model()
+                get_try_install = cls.try_install.get_model()
                 try_install_box.pack_start(get_try_install, True, True, 0)
                 label = Gtk.Label(label=get_text("Try Or Install GhostBSD"))
                 cls.page.insert_page(try_install_box, label, 3)
             cls.page.next_page()
             cls.page.show_all()
         elif page == 3:
-            if cls.page.get_n_pages() <= 4:
-                type_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, homogeneous=False, spacing=0)
-                type_box.show()
-                get_types = cls.installation_type.get_model()
-                type_box.pack_start(get_types, True, True, 0)
-                label = Gtk.Label(label=get_text("Installation Types"))
-                cls.page.insert_page(type_box, label, 4)
-            cls.page.next_page()
-            cls.page.show_all()
+            if cls.try_install.get_what() == 'install':
+                if cls.page.get_n_pages() <= 4:
+                    type_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, homogeneous=False, spacing=0)
+                    type_box.show()
+                    get_types = cls.installation_type.get_model()
+                    type_box.pack_start(get_types, True, True, 0)
+                    label = Gtk.Label(label=get_text("Installation Types"))
+                    cls.page.insert_page(type_box, label, 4)
+                cls.page.next_page()
+                cls.page.show_all()
+            else:
+                # Apply localization and keyboard layout for live session
+                # Apply system localization if language was selected
+                if InstallationData.language_code:
+                    localize_system(InstallationData.language_code)
+                
+                # Apply keyboard layout if selected
+                if InstallationData.keyboard_layout_code:
+                    set_keyboard(
+                        InstallationData.keyboard_layout_code,
+                        InstallationData.keyboard_variant,
+                        InstallationData.keyboard_model_code
+                    )
+                
+                # Continue to network setup for live session
+                cls.next_setup_page()
         elif page == 4:
             Button.show_back()
             if InstallationData.filesystem_type == "custom":
@@ -226,7 +266,7 @@ class Interface:
         Window.set_title(title_text)
 
     @classmethod
-    def next_setup_page(cls):
+    def next_setup_page(cls) -> None:
         page = cls.page.get_current_page()
         if page == 0:
             Button.next_button.show()
@@ -248,7 +288,7 @@ class Interface:
             Gtk.main_quit()
 
     @classmethod
-    def back_page(cls, _widget):
+    def back_page(cls, _widget: Gtk.Button) -> None:
         """Go back to the previous window."""
         current_page = cls.page.get_current_page()
         if current_page == 1:

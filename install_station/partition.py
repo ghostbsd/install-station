@@ -11,7 +11,7 @@ from install_station.data import query, zfs_datasets, InstallationData
 # Define required file paths
 
 
-def get_disk_from_partition(part):
+def get_disk_from_partition(part: str) -> str:
     """Extract the disk name from a partition identifier.
     
     Args:
@@ -26,7 +26,7 @@ def get_disk_from_partition(part):
         return part.partition('s')[0]
 
 
-def slice_number(part):
+def slice_number(part: str) -> int:
     """Extract the slice/partition number from a partition identifier.
     
     Args:
@@ -41,7 +41,7 @@ def slice_number(part):
         return int(part.partition('s')[2])
 
 
-def find_next_partition(partition_name, partition_list):
+def find_next_partition(partition_name: str, partition_list: list[str]) -> str:
     """Find the next available partition name with sequential numbering.
     
     Args:
@@ -56,7 +56,7 @@ def find_next_partition(partition_name, partition_list):
             return f'{partition_name}{num}'
 
 
-def disk_list():
+def disk_list() -> list[str]:
     """Get a list of available disk devices on the system.
     
     Queries the FreeBSD kernel for available disks and filters out
@@ -78,7 +78,7 @@ def disk_list():
     return sorted(cleaned_disk.split())
 
 
-def device_model(disk):
+def device_model(disk: str) -> str:
     """Get the model description of a disk device.
     
     Args:
@@ -98,7 +98,7 @@ def device_model(disk):
     return device_popen.stdout.read().strip()
 
 
-def disk_size(disk):
+def disk_size(disk: str) -> str:
     """Get the size of a disk device.
     
     Args:
@@ -119,7 +119,7 @@ def disk_size(disk):
     return disk_size_output.stdout.readlines()[0].rstrip()
 
 
-def get_scheme(disk):
+def get_scheme(disk: str) -> str:
     """Detect the partition scheme of a disk device.
     
     Args:
@@ -1206,7 +1206,7 @@ class CreatePartition():
         InstallationData.new_partition = new_partitions
 
 
-def delete_partition():
+def delete_partition() -> None:
     """Execute physical deletion of partitions marked for deletion.
     
     Iterates through partitions marked for deletion in InstallationData
@@ -1227,7 +1227,7 @@ def delete_partition():
         raise RuntimeError('No partitions to delete')
 
 
-def destroy_partition():
+def destroy_partition() -> None:
     """Destroy and recreate partition tables on disks.
     
     Completely destroys existing partition tables and creates new ones
@@ -1251,7 +1251,7 @@ def destroy_partition():
         raise RuntimeError('No disks to destroy')
 
 
-def bios_or_uefi():
+def bios_or_uefi() -> str:
     """Detect the system boot method (BIOS or UEFI).
     
     Returns:
@@ -1263,7 +1263,7 @@ def bios_or_uefi():
     return output1.stdout.readlines()[0].rstrip()
 
 
-def add_partition():
+def add_partition() -> None:
     """Execute physical creation of partitions marked for creation.
     
     Creates actual partitions on disk using FreeBSD gpart commands
