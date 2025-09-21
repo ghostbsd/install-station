@@ -5,8 +5,6 @@ Install Station executable module.
 This is the main entry point for the Install Station GTK+ application.
 It initializes all page components and sets up the main window interface.
 """
-from __future__ import annotations
-
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
