@@ -1,0 +1,517 @@
+# French translations for PACKAGE package.
+# Copyright (C) 2025 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Eric Turgeon <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-12 21:21-0300\n"
+"PO-Revision-Date: 2025-07-09 20:35-0300\n"
+"Last-Translator: Eric Turgeon <EMAIL@ADDRESS>\n"
+"Language-Team: French <traduc@traduc.org>\n"
+"Language: fr_CA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: install_station/boot_manager.py:121
+#: install_station/interface_controller.py:201
+msgid "Boot Option"
+msgstr "Option de démarrage"
+
+#: install_station/boot_manager.py:135
+msgid "Setup rEFInd boot manager"
+msgstr "Configurer le gestionnaire de démarrage rEFInd"
+
+#: install_station/boot_manager.py:149
+msgid "Setup FreeBSD boot manager"
+msgstr "Configurer le gestionnaire de démarrage FreeBSD"
+
+#: install_station/boot_manager.py:164
+#, python-brace-format
+msgid "FreeBSD {loader} loader only"
+msgstr "Chargeur FreeBSD {loader} uniquement"
+
+#: install_station/common.py:108
+msgid "Space not allowed"
+msgstr "Espace non autorisé"
+
+#: install_station/common.py:110 install_station/common.py:112
+msgid "Super Weak"
+msgstr "Très faible"
+
+#: install_station/common.py:114 install_station/common.py:120
+msgid "Very Weak"
+msgstr "Très faible"
+
+#: install_station/common.py:116 install_station/common.py:122
+#: install_station/common.py:128
+msgid "Fairly Weak"
+msgstr "Plutôt faible"
+
+#: install_station/common.py:118 install_station/common.py:124
+#: install_station/common.py:130 install_station/common.py:136
+msgid "Weak"
+msgstr "Faible"
+
+#: install_station/common.py:126 install_station/common.py:132
+#: install_station/common.py:138 install_station/common.py:144
+msgid "Strong"
+msgstr "Fort"
+
+#: install_station/common.py:134 install_station/common.py:140
+#: install_station/common.py:146 install_station/common.py:152
+msgid "Fairly Strong"
+msgstr "Plutôt fort"
+
+#: install_station/common.py:142 install_station/common.py:148
+msgid "Very Strong"
+msgstr "Très fort"
+
+#: install_station/common.py:150 install_station/common.py:154
+msgid "Super Strong"
+msgstr "Très fort"
+
+#: install_station/custom.py:248
+msgid "Create"
+msgstr "Créer"
+
+#: install_station/custom.py:252
+msgid "Delete"
+msgstr "Supprimer"
+
+#: install_station/custom.py:256
+msgid "Revert"
+msgstr "Annuler"
+
+#: install_station/custom.py:260
+msgid "Auto"
+msgstr "Automatique"
+
+#: install_station/custom.py:328 install_station/custom.py:566
+msgid "Add Partition"
+msgstr "Ajouter une partition"
+
+#: install_station/custom.py:342
+msgid "Type:"
+msgstr "Type :"
+
+#: install_station/custom.py:343 install_station/custom.py:580
+msgid "Size(MB):"
+msgstr "Taille (Mo) :"
+
+#: install_station/custom.py:344
+msgid "Mount point:"
+msgstr "Point de montage :"
+
+#: install_station/custom.py:496
+msgid "Partition Scheme"
+msgstr "Schéma de partition"
+
+#: install_station/custom.py:515
+msgid "GPT: GUID Partition Table"
+msgstr "GPT : Table de partition GUID"
+
+#: install_station/custom.py:516
+msgid "MBR: DOS Partition"
+msgstr "MBR : Partition DOS"
+
+#: install_station/end.py:10
+msgid ""
+"Installation is complete. You need to restart the\n"
+"computer in order to use the new installation.\n"
+"You can continue to use this live media, although\n"
+"any changes you make or documents you save will\n"
+"not be preserved on reboot."
+msgstr ""
+"L'installation est complète. Vous devez redémarrer\n"
+"l'ordinateur pour utiliser la nouvelle installation.\n"
+"Vous pouvez continuer à utiliser ce support live, bien que\n"
+"tous les changements que vous apportez ou les documents\n"
+"que vous sauvegardez ne seront pas préservés au redémarrage."
+
+#: install_station/end.py:31
+msgid "Installation Completed"
+msgstr "Installation complétée"
+
+#: install_station/end.py:47
+msgid "Restart"
+msgstr "Redémarrer"
+
+#: install_station/end.py:49
+msgid "Continue"
+msgstr "Continuer"
+
+#: install_station/error.py:17
+msgid "Installation Error"
+msgstr "Erreur d'installation"
+
+#: install_station/error.py:28
+msgid "Installation has failed!"
+msgstr "L'installation a échoué !"
+
+#: install_station/error.py:33
+msgid "GhostBSD issue system"
+msgstr "Système de signalement GhostBSD"
+
+#: install_station/error.py:35
+#, python-brace-format
+msgid ""
+"Please report the issue to {anchor}, and \n"
+"be sure to provide /tmp/.pc-sysinstall/pc-sysinstall.log."
+msgstr ""
+"Veuillez signaler le problème à {anchor}, et \n"
+"assurez-vous de fournir /tmp/.pc-sysinstall/pc-sysinstall.log."
+
+#: install_station/error.py:45
+msgid "Ok"
+msgstr "OK"
+
+#: install_station/install_type.py:52
+msgid "How do you want to install GhostBSD?"
+msgstr "Comment voulez-vous installer GhostBSD ?"
+
+#: install_station/install_type.py:58
+msgid ""
+"<b>Disks Configuration</b>\n"
+"Install GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 "
+"configurations."
+msgstr ""
+"<b>Configuration des disques</b>\n"
+"Installer GhostBSD en utilisant les configurations Stripe, Mirror, RAIDZ1, "
+"RAIDZ2, ou RAIDZ3."
+
+#: install_station/install_type.py:71
+msgid ""
+"<b>Multi-Boot Configuration</b>\n"
+"Install GhostBSD with ZFS alongside other operating systems."
+msgstr ""
+"<b>Configuration multi-démarrage</b>\n"
+"Installer GhostBSD avec ZFS aux côtés d'autres systèmes d'exploitation."
+
+#: install_station/install.py:46
+msgid "Creating ghostbsd_installation.cfg"
+msgstr "Création de ghostbsd_installation.cfg"
+
+#: install_station/install.py:50
+msgid "Deleting partition"
+msgstr "Suppression de la partition"
+
+#: install_station/install.py:55
+msgid "Creating disk partition"
+msgstr "Création de la partition de disque"
+
+#: install_station/install.py:60
+msgid "Creating new partitions"
+msgstr "Création de nouvelles partitions"
+
+#: install_station/install.py:90
+msgid "Installation in progress"
+msgstr "Installation en cours"
+
+#: install_station/install.py:102
+msgid ""
+"Thank you for choosing GhostBSD!\n"
+"\n"
+"We believe every computer operating system should be simple, elegant, secure "
+"and protect your privacy while being easy to use. GhostBSD is simplifying "
+"FreeBSD for those who lack the technical expertise required to use it and "
+"lower the entry-level of using BSD. \n"
+"\n"
+"We hope you'll enjoy our BSD operating system."
+msgstr ""
+"Merci d'avoir choisi GhostBSD !\n"
+"\n"
+"Nous croyons que chaque système d'exploitation devrait être simple, élégant, "
+"sécurisé et protéger votre vie privée tout en étant facile à utiliser. "
+"GhostBSD simplifie FreeBSD pour ceux qui manquent de l'expertise technique "
+"nécessaire pour l'utiliser et abaisse le niveau d'entrée d'utilisation de "
+"BSD. \n"
+"\n"
+"Nous espérons que vous apprécierez notre système d'exploitation BSD."
+
+#: install_station/interface_controller.py:9
+#: install_station/interface_controller.py:20
+msgid "Back"
+msgstr "Retour"
+
+#: install_station/interface_controller.py:11
+#: install_station/interface_controller.py:21
+msgid "Cancel"
+msgstr "Annuler"
+
+#: install_station/interface_controller.py:13
+#: install_station/interface_controller.py:22
+#: install_station/interface_controller.py:257
+msgid "Next"
+msgstr "Suivant"
+
+#: install_station/interface_controller.py:106
+#: install_station/interface_controller.py:107 install_station/language.py:101
+msgid "Welcome to GhostBSD"
+msgstr "Bienvenue dans GhostBSD"
+
+#: install_station/interface_controller.py:116
+msgid "Button"
+msgstr "Bouton"
+
+#: install_station/interface_controller.py:137
+#, fuzzy
+msgid "Keyboard Setup"
+msgstr "Disposition du clavier"
+
+#: install_station/interface_controller.py:149
+#: install_station/interface_controller.py:234
+#: install_station/interface_controller.py:239
+msgid "Network Setup"
+msgstr "Configuration réseau"
+
+#: install_station/interface_controller.py:160
+#, fuzzy
+msgid "Try Or Install GhostBSD"
+msgstr "Installer GhostBSD"
+
+#: install_station/interface_controller.py:170
+msgid "Installation Types"
+msgstr "Types d'installation"
+
+#: install_station/interface_controller.py:181
+msgid "Custom Configuration"
+msgstr "Configuration personnalisée"
+
+#: install_station/interface_controller.py:191
+msgid "ZFS Configuration"
+msgstr "Configuration ZFS"
+
+#: install_station/interface_controller.py:203
+msgid "Install"
+msgstr "Installer"
+
+#: install_station/interface_controller.py:213
+msgid "Installation Progress"
+msgstr "Progrès de l'installation"
+
+#: install_station/interface_controller.py:220
+msgid "Progress Bar"
+msgstr "Barre de progrès"
+
+#: install_station/keyboard.py:40
+msgid "Type here to test your keyboard"
+msgstr "Tapez ici pour tester votre clavier"
+
+#: install_station/keyboard.py:97
+msgid "Keyboard Layout"
+msgstr "Disposition du clavier"
+
+#: install_station/keyboard.py:117
+msgid "Keyboard Models"
+msgstr "Modèles de clavier"
+
+#: install_station/keyboard.py:225
+msgid "English (US)"
+msgstr "Anglais (États-Unis)"
+
+#: install_station/keyboard.py:226
+msgid "English (Canada)"
+msgstr "Anglais (Canada)"
+
+#: install_station/keyboard.py:227
+msgid "French (Canada)"
+msgstr "Français (Canada)"
+
+#: install_station/language.py:93 install_station/language.py:197
+#, fuzzy
+msgid "Please select your language:"
+msgstr "Veuillez sélectionner un lecteur"
+
+#: install_station/language.py:99 install_station/language.py:116
+msgid "Language"
+msgstr "Langue"
+
+#: install_station/network_setup.py:107 install_station/network_setup.py:184
+msgid "Network card connected to the internet"
+msgstr "Carte réseau connectée à l'internet"
+
+#: install_station/network_setup.py:113 install_station/network_setup.py:190
+msgid "Network card not connected to the internet"
+msgstr "Carte réseau non connectée à l'internet"
+
+#: install_station/network_setup.py:116 install_station/network_setup.py:193
+msgid "No network card detected"
+msgstr "Aucune carte réseau détectée"
+
+#: install_station/network_setup.py:125 install_station/network_setup.py:203
+msgid "WiFi card detected and connected to an access point"
+msgstr "Carte WiFi détectée et connectée à un point d'accès"
+
+#: install_station/network_setup.py:129 install_station/network_setup.py:207
+msgid "WiFi card detected but not connected to an access point"
+msgstr "Carte WiFi détectée mais non connectée à un point d'accès"
+
+#: install_station/network_setup.py:132 install_station/network_setup.py:210
+msgid "WiFi card not detected or not supported"
+msgstr "Carte WiFi non détectée ou non supportée"
+
+#: install_station/network_setup.py:366
+msgid "Wi-Fi Network Authentication Required"
+msgstr "Authentification du réseau Wi-Fi requise"
+
+#: install_station/network_setup.py:379
+#, python-brace-format
+msgid "{ssid} Wi-Fi Network Authentication failed"
+msgstr "L'authentification du réseau Wi-Fi {ssid} a échoué"
+
+#: install_station/network_setup.py:381
+#, python-brace-format
+msgid "Authentication required by {ssid} Wi-Fi Network"
+msgstr "Authentification requise par le réseau Wi-Fi {ssid}"
+
+#: install_station/network_setup.py:384
+msgid "Password:"
+msgstr "Mot de passe :"
+
+#: install_station/network_setup.py:387
+msgid "Show password"
+msgstr "Afficher le mot de passe"
+
+#: install_station/try_install.py:102
+msgid "What would you like to do?"
+msgstr ""
+
+#: install_station/try_install.py:109
+msgid ""
+"<b>Install GhostBSD</b>\n"
+"Install GhostBSD on your computer."
+msgstr ""
+
+#: install_station/try_install.py:122
+msgid ""
+"<b>Try GhostBSD</b>\n"
+"Run GhostBSD without installing to your computer."
+msgstr ""
+
+#: install_station/use_zfs.py:160
+msgid ""
+"Please select 1 or more drive for stripe (select the smallest disk first)"
+msgstr ""
+"Veuillez sélectionner 1 ou plusieurs disques pour stripe (sélectionnez "
+"d'abord le plus petit disque)"
+
+#: install_station/use_zfs.py:167
+msgid "Please select 2 drive for mirroring (select the smallest disk first)"
+msgstr ""
+"Veuillez sélectionner 2 disques pour la mise en miroir (sélectionnez d'abord "
+"le plus petit disque)"
+
+#: install_station/use_zfs.py:175
+msgid "Please select 3 drive for RAIDZ1 (select the smallest disk first)"
+msgstr ""
+"Veuillez sélectionner 3 disques pour RAIDZ1 (sélectionnez d'abord le plus "
+"petit disque)"
+
+#: install_station/use_zfs.py:182
+msgid "Please select 4 drive for RAIDZ2 (select the smallest disk first)"
+msgstr ""
+"Veuillez sélectionner 4 disques pour RAIDZ2 (sélectionnez d'abord le plus "
+"petit disque)"
+
+#: install_station/use_zfs.py:189
+msgid "Please select 5 drive for RAIDZ3 (select the smallest disk first)"
+msgstr ""
+"Veuillez sélectionner 5 disques pour RAIDZ3 (sélectionnez d'abord le plus "
+"petit disque)"
+
+#: install_station/use_zfs.py:292
+msgid "Disk"
+msgstr "Disque"
+
+#: install_station/use_zfs.py:299
+msgid "Size(MB)"
+msgstr "Taille (Mo)"
+
+#: install_station/use_zfs.py:305
+msgid "Name"
+msgstr "Nom"
+
+#: install_station/use_zfs.py:309
+msgid "Check"
+msgstr "Vérifier"
+
+#: install_station/use_zfs.py:322
+msgid "Please select one drive"
+msgstr "Veuillez sélectionner un lecteur"
+
+#: install_station/use_zfs.py:327
+msgid "<b>Pool Type</b>"
+msgstr "<b>Type de pool</b>"
+
+#: install_station/use_zfs.py:331
+msgid "1+ disks Stripe"
+msgstr "1+ disques Stripe"
+
+#: install_station/use_zfs.py:332
+msgid "2+ disks Mirror"
+msgstr "2+ disques Miroir"
+
+#: install_station/use_zfs.py:333
+msgid "3 disks RAIDZ1"
+msgstr "3 disques RAIDZ1"
+
+#: install_station/use_zfs.py:334
+msgid "4 disks RAIDZ2"
+msgstr "4 disques RAIDZ2"
+
+#: install_station/use_zfs.py:335
+msgid "5 disks RAIDZ3"
+msgstr "5 disques RAIDZ3"
+
+#: install_station/use_zfs.py:345
+msgid "<b>Pool Name</b>"
+msgstr "<b>Nom du pool</b>"
+
+#: install_station/use_zfs.py:365
+msgid "Encrypt Disk"
+msgstr "Chiffrer le disque"
+
+#: install_station/use_zfs.py:369
+msgid "Password"
+msgstr "Mot de passe"
+
+#: install_station/use_zfs.py:376
+msgid "Verify it"
+msgstr "Vérifiez-le"
+
+#: install_station/use_zfs.py:537
+msgid "Warning"
+msgstr "Avertissement"
+
+#: install_station/use_zfs.py:548
+msgid "Smallest disk need to be SELECTED first!\n"
+msgstr "Le plus petit disque doit être SÉLECTIONNÉ en premier !\n"
+
+#: install_station/use_zfs.py:549
+msgid "All the disk selected will reset."
+msgstr "Tous les disques sélectionnés seront remis à zéro."
+
+#~ msgid ""
+#~ "Welcome! Please select your language to continue with the GhostBSD "
+#~ "installation or live session."
+#~ msgstr ""
+#~ "Bienvenue ! Veuillez sélectionner votre langue pour continuer avec "
+#~ "l'installation ou la session live de GhostBSD."
+
+#~ msgid "Try GhostBSD"
+#~ msgstr "Essayer GhostBSD"
+
+#~ msgid ""
+#~ "To run GhostBSD without installing, select \"Try GhostBSD\".\n"
+#~ "To install GhostBSD on your computer hard disc drive, click \"Install "
+#~ "GhostBSD\"."
+#~ msgstr ""
+#~ "Pour utiliser GhostBSD sans l'installer, sélectionnez \"Essayer "
+#~ "GhostBSD\".\n"
+#~ "Pour installer GhostBSD sur le disque dur de votre ordinateur, cliquez "
+#~ "sur \"Installer GhostBSD\"."

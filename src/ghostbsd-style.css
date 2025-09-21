@@ -1,0 +1,20 @@
+#install {
+    background-image: url("/usr/local/lib/install-station/image/installation.jpg");
+    background-size: cover;
+}
+
+#sideText {
+    color: #F9F9F9;
+    font-weight:bold;
+    font-size: 14px;
+}
+
+#TransBox {
+    background-color: rgba(0, 0, 0, 0.6)
+}
+
+#Header {
+    color: #F9F9F9;
+    background-color: #282828;
+    font-size: 22px;
+}
