@@ -14,5 +14,5 @@ install_station/network_setup.py
 install_station/partition.py
 install_station/system_calls.py
 install_station/use_zfs.py
-install_station/welcome_live.py
+install_station/try_install.py
 install_station/window.py

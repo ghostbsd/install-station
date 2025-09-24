@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-12 21:21-0300\n"
+"POT-Creation-Date: 2025-09-24 18:07-0300\n"
 "PO-Revision-Date: 2025-07-09 20:26-0300\n"
 "Last-Translator: Eric Turgeon <EMAIL@ADDRESS>\n"
 "Language-Team: Bulgarian <dict@ludost.net>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: install_station/boot_manager.py:121
-#: install_station/interface_controller.py:201
+#: install_station/interface_controller.py:241
 msgid "Boot Option"
 msgstr ""
 
@@ -35,43 +35,43 @@ msgstr ""
 msgid "FreeBSD {loader} loader only"
 msgstr ""
 
-#: install_station/common.py:108
+#: install_station/common.py:123
 msgid "Space not allowed"
 msgstr ""
 
-#: install_station/common.py:110 install_station/common.py:112
+#: install_station/common.py:125 install_station/common.py:127
 msgid "Super Weak"
 msgstr ""
 
-#: install_station/common.py:114 install_station/common.py:120
+#: install_station/common.py:129 install_station/common.py:135
 msgid "Very Weak"
 msgstr ""
 
-#: install_station/common.py:116 install_station/common.py:122
-#: install_station/common.py:128
+#: install_station/common.py:131 install_station/common.py:137
+#: install_station/common.py:143
 msgid "Fairly Weak"
 msgstr ""
 
-#: install_station/common.py:118 install_station/common.py:124
-#: install_station/common.py:130 install_station/common.py:136
+#: install_station/common.py:133 install_station/common.py:139
+#: install_station/common.py:145 install_station/common.py:151
 msgid "Weak"
 msgstr ""
 
-#: install_station/common.py:126 install_station/common.py:132
-#: install_station/common.py:138 install_station/common.py:144
+#: install_station/common.py:141 install_station/common.py:147
+#: install_station/common.py:153 install_station/common.py:159
 msgid "Strong"
 msgstr ""
 
-#: install_station/common.py:134 install_station/common.py:140
-#: install_station/common.py:146 install_station/common.py:152
+#: install_station/common.py:149 install_station/common.py:155
+#: install_station/common.py:161 install_station/common.py:167
 msgid "Fairly Strong"
 msgstr ""
 
-#: install_station/common.py:142 install_station/common.py:148
+#: install_station/common.py:157 install_station/common.py:163
 msgid "Very Strong"
 msgstr ""
 
-#: install_station/common.py:150 install_station/common.py:154
+#: install_station/common.py:165 install_station/common.py:169
 msgid "Super Strong"
 msgstr ""
 
@@ -163,18 +163,18 @@ msgstr ""
 msgid "Ok"
 msgstr ""
 
-#: install_station/install_type.py:52
+#: install_station/install_type.py:94
 msgid "How do you want to install GhostBSD?"
 msgstr ""
 
-#: install_station/install_type.py:58
+#: install_station/install_type.py:100
 msgid ""
 "<b>Disks Configuration</b>\n"
 "Install GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 "
 "configurations."
 msgstr ""
 
-#: install_station/install_type.py:71
+#: install_station/install_type.py:113
 msgid ""
 "<b>Multi-Boot Configuration</b>\n"
 "Install GhostBSD with ZFS alongside other operating systems."
@@ -212,90 +212,90 @@ msgid ""
 "We hope you'll enjoy our BSD operating system."
 msgstr ""
 
-#: install_station/interface_controller.py:9
-#: install_station/interface_controller.py:20
+#: install_station/interface_controller.py:24
+#: install_station/interface_controller.py:35
 msgid "Back"
 msgstr ""
 
-#: install_station/interface_controller.py:11
-#: install_station/interface_controller.py:21
+#: install_station/interface_controller.py:26
+#: install_station/interface_controller.py:36
 msgid "Cancel"
 msgstr ""
 
-#: install_station/interface_controller.py:13
-#: install_station/interface_controller.py:22
-#: install_station/interface_controller.py:257
+#: install_station/interface_controller.py:28
+#: install_station/interface_controller.py:37
+#: install_station/interface_controller.py:297
 msgid "Next"
 msgstr ""
 
-#: install_station/interface_controller.py:106
-#: install_station/interface_controller.py:107 install_station/language.py:101
+#: install_station/interface_controller.py:129
+#: install_station/interface_controller.py:130 install_station/language.py:101
 msgid "Welcome to GhostBSD"
 msgstr ""
 
-#: install_station/interface_controller.py:116
+#: install_station/interface_controller.py:139
 msgid "Button"
 msgstr ""
 
-#: install_station/interface_controller.py:137
+#: install_station/interface_controller.py:160
 msgid "Keyboard Setup"
 msgstr ""
 
-#: install_station/interface_controller.py:149
-#: install_station/interface_controller.py:234
-#: install_station/interface_controller.py:239
+#: install_station/interface_controller.py:172
+#: install_station/interface_controller.py:274
+#: install_station/interface_controller.py:279
 msgid "Network Setup"
 msgstr ""
 
-#: install_station/interface_controller.py:160
+#: install_station/interface_controller.py:183
 msgid "Try Or Install GhostBSD"
 msgstr ""
 
-#: install_station/interface_controller.py:170
+#: install_station/interface_controller.py:194
 msgid "Installation Types"
 msgstr ""
 
-#: install_station/interface_controller.py:181
+#: install_station/interface_controller.py:221
 msgid "Custom Configuration"
 msgstr ""
 
-#: install_station/interface_controller.py:191
+#: install_station/interface_controller.py:231
 msgid "ZFS Configuration"
 msgstr ""
 
-#: install_station/interface_controller.py:203
+#: install_station/interface_controller.py:243
 msgid "Install"
 msgstr ""
 
-#: install_station/interface_controller.py:213
+#: install_station/interface_controller.py:253
 msgid "Installation Progress"
 msgstr ""
 
-#: install_station/interface_controller.py:220
+#: install_station/interface_controller.py:260
 msgid "Progress Bar"
 msgstr ""
 
-#: install_station/keyboard.py:40
+#: install_station/keyboard.py:45
 msgid "Type here to test your keyboard"
 msgstr ""
 
-#: install_station/keyboard.py:97
+#: install_station/keyboard.py:102
 msgid "Keyboard Layout"
 msgstr ""
 
-#: install_station/keyboard.py:117
+#: install_station/keyboard.py:122
 msgid "Keyboard Models"
 msgstr ""
 
-#: install_station/keyboard.py:225
+#: install_station/keyboard.py:230
 msgid "English (US)"
 msgstr ""
 
-#: install_station/keyboard.py:226
+#: install_station/keyboard.py:231
 msgid "English (Canada)"
 msgstr ""
 
-#: install_station/keyboard.py:227
+#: install_station/keyboard.py:232
 msgid "French (Canada)"
 msgstr ""
 
