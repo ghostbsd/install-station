@@ -31,9 +31,9 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-# /usr/local/etc/install-station/detect-sheme.sh v 0.1 Wed May  1 20:31:52 ADT 2013 Eric Turgeon
+# /usr/local/etc/install-station/detect-scheme.sh v 0.1 Wed May  1 20:31:52 ADT 2013 Eric Turgeon
 #
-# Detect a disk sheme and display them.
+# Detect a disk scheme and display them.
 #
 
 

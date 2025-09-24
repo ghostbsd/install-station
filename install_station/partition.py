@@ -129,7 +129,7 @@ def get_scheme(disk: str) -> str:
         str: Partition scheme ('GPT', 'MBR', or empty if none)
     """
     scheme_output = Popen(
-        f"{query}/detect-sheme.sh {disk}",
+        f"{query}/detect-scheme.sh {disk}",
         shell=True,
         stdin=PIPE,
         stdout=PIPE,
