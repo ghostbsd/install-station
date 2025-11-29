@@ -27,13 +27,13 @@ class Configuration:
                 list_of_errors: List of error messages describing validation failures
         """
         errors = []
-        
+
         # Check basic installation data
         if not hasattr(InstallationData, 'boot') or not InstallationData.boot:
             errors.append("Boot manager not specified")
         elif InstallationData.boot not in ['refind', 'grub', 'none']:
             errors.append(f"Invalid boot manager: {InstallationData.boot}")
-        
+
         # Check ZFS configuration path
         if InstallationData.zfs_config_data:
             if not isinstance(InstallationData.zfs_config_data, list):
@@ -43,7 +43,7 @@ class Configuration:
                 has_partscheme = any('partscheme' in str(line) for line in InstallationData.zfs_config_data)
                 if not has_partscheme:
                     errors.append("ZFS config missing partition scheme")
-                
+
                 has_disk = any('disk0=' in str(line) for line in InstallationData.zfs_config_data)
                 if not has_disk:
                     errors.append("ZFS config missing disk specification")
@@ -51,25 +51,25 @@ class Configuration:
             # Check custom partition configuration path
             if not hasattr(InstallationData, 'disk') or not InstallationData.disk:
                 errors.append("Disk not specified for custom partitioning")
-            
+
             if not hasattr(InstallationData, 'slice') or not InstallationData.slice:
                 errors.append("Partition slice not specified")
-            
+
             if not hasattr(InstallationData, 'scheme') or not InstallationData.scheme:
                 errors.append("Partition scheme not specified")
             elif InstallationData.scheme not in ['partscheme=GPT', 'partscheme=MBR']:
                 errors.append(f"Invalid partition scheme: {InstallationData.scheme}")
-            
+
             if not hasattr(InstallationData, 'new_partition') or not InstallationData.new_partition:
                 errors.append("No partitions defined for custom partitioning")
             elif not isinstance(InstallationData.new_partition, list):
                 errors.append("Partition data is not a list")
-        
+
         # Check installation config file path
         if not installation_config:
             errors.append("Installation config file path not defined")
-        
-        return len(errors) == 0, errors
+
+        return not errors, errors
 
     @classmethod
     def create_cfg(cls):
@@ -96,7 +96,7 @@ class Configuration:
         if not is_valid:
             error_msg = "Configuration validation failed:\n" + "\n".join(f"- {error}" for error in errors)
             raise ValueError(error_msg)
-        
+
         try:
             with open(installation_config, 'w') as f:
                 # Installation Mode
@@ -106,7 +106,7 @@ class Configuration:
                 f.write('installType=GhostBSD\n')
                 f.write('installMedium=livezfs\n')
                 f.write('packageType=livezfs\n')
-                
+
                 if InstallationData.zfs_config_data:
                     # ZFS Configuration Path
                     for line in InstallationData.zfs_config_data:
@@ -142,26 +142,19 @@ class Configuration:
                     # Partition Setup
                     f.write('\n# Partition Setup\n')
                     for line in InstallationData.new_partition:
-                        if 'BOOT' in line or 'BIOS' in line or 'UEFI' in line:
-                            pass
-                        else:
+                        if 'BOOT' not in line and 'BIOS' not in line and 'UEFI' not in line:
                             f.write(f'disk0-part={line.strip()}\n')
                     f.write('commitDiskLabel\n')
 
                 # Network Configuration
                 f.write('\n# Network Configuration\n')
                 f.write('hostname=installed\n')
-                
+
                 # First Boot Preparation Commands
                 f.write('\n# command to prepare first boot\n')
                 f.write("runCommand=sysrc hostname='installed'\n")
                 f.write("runCommand=pw userdel -n ghostbsd -r\n")
                 f.write("runCommand=sed -i '' 's/ghostbsd/root/g' /etc/gettytab\n")
                 f.write("runCommand=sed -i '' 's/ghostbsd/root/g' /etc/ttys\n")
-                f.write("runCommand=mv /usr/local/etc/devd/automount_devd"
-                        ".conf.skip /usr/local/etc/devd/automount_devd.conf\n")
-                f.write("runCommand=mv /usr/local/etc/devd/automount_devd"
-                        "_localdisks.conf.skip /usr/local/etc/devd/"
-                        "automount_devd_localdisks.conf\n")
         except IOError as e:
-            raise IOError(f"Failed to write configuration file: {e}")
+            raise IOError(f"Failed to write configuration file: {e}") from e
