@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-24 18:07-0300\n"
 "PO-Revision-Date: 2025-07-09 20:20-0300\n"
-"Last-Translator: Eric Turgeon <EMAIL@ADDRESS>\n"
+"Last-Translator: Boyarshinov Nikita <boyarshinovn@gmail.com>\n"
 "Language-Team: Russian <gnu@d07.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -21,104 +21,104 @@ msgstr ""
 #: install_station/boot_manager.py:121
 #: install_station/interface_controller.py:241
 msgid "Boot Option"
-msgstr ""
+msgstr "Вариант загрузки"
 
 #: install_station/boot_manager.py:135
 msgid "Setup rEFInd boot manager"
-msgstr ""
+msgstr "Настроить менеджер загрузки rEFInd"
 
 #: install_station/boot_manager.py:149
 msgid "Setup FreeBSD boot manager"
-msgstr ""
+msgstr "Настроить менеджер загрузки FreeBSD"
 
 #: install_station/boot_manager.py:164
 #, python-brace-format
 msgid "FreeBSD {loader} loader only"
-msgstr ""
+msgstr "Только загрузчик FreeBSD {loader}"
 
 #: install_station/common.py:123
 msgid "Space not allowed"
-msgstr ""
+msgstr "Пробелы не разрешены"
 
 #: install_station/common.py:125 install_station/common.py:127
 msgid "Super Weak"
-msgstr ""
+msgstr "Очень слабый"
 
 #: install_station/common.py:129 install_station/common.py:135
 msgid "Very Weak"
-msgstr ""
+msgstr "Очень слабый"
 
 #: install_station/common.py:131 install_station/common.py:137
 #: install_station/common.py:143
 msgid "Fairly Weak"
-msgstr ""
+msgstr "Довольно слабый"
 
 #: install_station/common.py:133 install_station/common.py:139
 #: install_station/common.py:145 install_station/common.py:151
 msgid "Weak"
-msgstr ""
+msgstr "Слабый"
 
 #: install_station/common.py:141 install_station/common.py:147
 #: install_station/common.py:153 install_station/common.py:159
 msgid "Strong"
-msgstr ""
+msgstr "Надёжный"
 
 #: install_station/common.py:149 install_station/common.py:155
 #: install_station/common.py:161 install_station/common.py:167
 msgid "Fairly Strong"
-msgstr ""
+msgstr "Довольно надёжный"
 
 #: install_station/common.py:157 install_station/common.py:163
 msgid "Very Strong"
-msgstr ""
+msgstr "Очень надёжный"
 
 #: install_station/common.py:165 install_station/common.py:169
 msgid "Super Strong"
-msgstr ""
+msgstr "Исключительно надёжный"
 
 #: install_station/custom.py:248
 msgid "Create"
-msgstr ""
+msgstr "Создать"
 
 #: install_station/custom.py:252
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
 #: install_station/custom.py:256
 msgid "Revert"
-msgstr ""
+msgstr "Отменить"
 
 #: install_station/custom.py:260
 msgid "Auto"
-msgstr ""
+msgstr "Авто"
 
 #: install_station/custom.py:328 install_station/custom.py:566
 msgid "Add Partition"
-msgstr ""
+msgstr "Добавить раздел"
 
 #: install_station/custom.py:342
 msgid "Type:"
-msgstr ""
+msgstr "Тип:"
 
 #: install_station/custom.py:343 install_station/custom.py:580
 msgid "Size(MB):"
-msgstr ""
+msgstr "Размер (МБ):"
 
 #: install_station/custom.py:344
 msgid "Mount point:"
-msgstr ""
+msgstr "Точка монтирования:"
 
 #: install_station/custom.py:496
 msgid "Partition Scheme"
-msgstr ""
+msgstr "Схема разделов"
 
 #: install_station/custom.py:515
 msgid "GPT: GUID Partition Table"
-msgstr ""
+msgstr "GPT: Таблица разделов GUID"
 
 #: install_station/custom.py:516
 msgid "MBR: DOS Partition"
-msgstr ""
+msgstr "MBR: Раздел DOS"
 
 #: install_station/end.py:10
 msgid ""
@@ -128,30 +128,35 @@ msgid ""
 "any changes you make or documents you save will\n"
 "not be preserved on reboot."
 msgstr ""
+"Установка завершена. Вам необходимо перезагрузить\n"
+"компьютер, чтобы использовать новую систему.\n"
+"Вы можете продолжить использование live-носителя,\n"
+"однако любые внесённые изменения или сохранённые\n"
+"документы не сохранятся после перезагрузки."
 
 #: install_station/end.py:31
 msgid "Installation Completed"
-msgstr ""
+msgstr "Установка завершена"
 
 #: install_station/end.py:47
 msgid "Restart"
-msgstr ""
+msgstr "Перезагрузить"
 
 #: install_station/end.py:49
 msgid "Continue"
-msgstr ""
+msgstr "Продолжить"
 
 #: install_station/error.py:17
 msgid "Installation Error"
-msgstr ""
+msgstr "Ошибка установки"
 
 #: install_station/error.py:28
 msgid "Installation has failed!"
-msgstr ""
+msgstr "Установка не удалась!"
 
 #: install_station/error.py:33
 msgid "GhostBSD issue system"
-msgstr ""
+msgstr "Система отслеживания ошибок GhostBSD"
 
 #: install_station/error.py:35
 #, python-brace-format
@@ -159,14 +164,16 @@ msgid ""
 "Please report the issue to {anchor}, and \n"
 "be sure to provide /tmp/.pc-sysinstall/pc-sysinstall.log."
 msgstr ""
+"Пожалуйста, сообщите об ошибке в {anchor} и\n"
+"не забудьте приложить файл /tmp/.pc-sysinstall/pc-sysinstall.log."
 
 #: install_station/error.py:45
 msgid "Ok"
-msgstr ""
+msgstr "ОК"
 
 #: install_station/install_type.py:94
 msgid "How do you want to install GhostBSD?"
-msgstr ""
+msgstr "Как вы хотите установить GhostBSD?"
 
 #: install_station/install_type.py:100
 msgid ""
@@ -174,32 +181,37 @@ msgid ""
 "Install GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 "
 "configurations."
 msgstr ""
+"<b>Конфигурация дисков</b>\n"
+"Установите GhostBSD, используя конфигурации Stripe, Mirror, RAIDZ1, RAIDZ2 "
+"или RAIDZ3."
 
 #: install_station/install_type.py:113
 msgid ""
 "<b>Multi-Boot Configuration</b>\n"
 "Install GhostBSD with ZFS alongside other operating systems."
 msgstr ""
+"<b>Конфигурация Multi-Boot</b>\n"
+"Установите GhostBSD с ZFS вместе с другими операционными системами."
 
 #: install_station/install.py:46
 msgid "Creating ghostbsd_installation.cfg"
-msgstr ""
+msgstr "Создание ghostbsd_installation.cfg"
 
 #: install_station/install.py:50
 msgid "Deleting partition"
-msgstr ""
+msgstr "Удаление раздела"
 
 #: install_station/install.py:55
 msgid "Creating disk partition"
-msgstr ""
+msgstr "Создание раздела диска"
 
 #: install_station/install.py:60
 msgid "Creating new partitions"
-msgstr ""
+msgstr "Создание новых разделов"
 
 #: install_station/install.py:90
 msgid "Installation in progress"
-msgstr ""
+msgstr "Идёт установка"
 
 #: install_station/install.py:102
 msgid ""
@@ -212,253 +224,265 @@ msgid ""
 "\n"
 "We hope you'll enjoy our BSD operating system."
 msgstr ""
+"Благодарим за выбор GhostBSD!\n"
+"\n"
+"Мы считаем, что каждая операционная система должна быть простой, элегантной, "
+"безопасной и защищать вашу приватность, оставаясь при этом простой в "
+"использовании. GhostBSD упрощает FreeBSD для тех, кому не хватает технической "
+"экспертизы для его использования, и снижает порог входа для использования BSD.\n"
+"\n"
+"Мы надеемся, что вам понравится наша операционная система BSD."
 
 #: install_station/interface_controller.py:24
 #: install_station/interface_controller.py:35
 msgid "Back"
-msgstr ""
+msgstr "Назад"
 
 #: install_station/interface_controller.py:26
 #: install_station/interface_controller.py:36
 msgid "Cancel"
-msgstr ""
+msgstr "Отмена"
 
 #: install_station/interface_controller.py:28
 #: install_station/interface_controller.py:37
 #: install_station/interface_controller.py:297
 msgid "Next"
-msgstr ""
+msgstr "Далее"
 
 #: install_station/interface_controller.py:129
 #: install_station/interface_controller.py:130 install_station/language.py:101
 msgid "Welcome to GhostBSD"
-msgstr ""
+msgstr "Добро пожаловать в GhostBSD"
 
 #: install_station/interface_controller.py:139
 msgid "Button"
-msgstr ""
+msgstr "Кнопка"
 
 #: install_station/interface_controller.py:160
 msgid "Keyboard Setup"
-msgstr ""
+msgstr "Настройка клавиатуры"
 
 #: install_station/interface_controller.py:172
 #: install_station/interface_controller.py:274
 #: install_station/interface_controller.py:279
 msgid "Network Setup"
-msgstr ""
+msgstr "Настройка сети"
 
 #: install_station/interface_controller.py:183
 msgid "Try Or Install GhostBSD"
-msgstr ""
+msgstr "Попробовать или Установить GhostBSD"
 
 #: install_station/interface_controller.py:194
 msgid "Installation Types"
-msgstr ""
+msgstr "Типы установки"
 
 #: install_station/interface_controller.py:221
 msgid "Custom Configuration"
-msgstr ""
+msgstr "Пользовательская конфигурация"
 
 #: install_station/interface_controller.py:231
 msgid "ZFS Configuration"
-msgstr ""
+msgstr "Конфигурация ZFS"
 
 #: install_station/interface_controller.py:243
 msgid "Install"
-msgstr ""
+msgstr "Установить"
 
 #: install_station/interface_controller.py:253
 msgid "Installation Progress"
-msgstr ""
+msgstr "Ход установки"
 
 #: install_station/interface_controller.py:260
 msgid "Progress Bar"
-msgstr ""
+msgstr "Индикатор выполнения"
 
 #: install_station/keyboard.py:45
 msgid "Type here to test your keyboard"
-msgstr ""
+msgstr "Печатайте здесь для проверки клавиатуры"
 
 #: install_station/keyboard.py:102
 msgid "Keyboard Layout"
-msgstr ""
+msgstr "Раскладка клавиатуры"
 
 #: install_station/keyboard.py:122
 msgid "Keyboard Models"
-msgstr ""
+msgstr "Модели клавиатур"
 
 #: install_station/keyboard.py:230
 msgid "English (US)"
-msgstr ""
+msgstr "Английский (США)"
 
 #: install_station/keyboard.py:231
 msgid "English (Canada)"
-msgstr ""
+msgstr "Английский (Канада)"
 
 #: install_station/keyboard.py:232
 msgid "French (Canada)"
-msgstr ""
+msgstr "Французский (Канада)"
 
 #: install_station/language.py:93 install_station/language.py:197
 msgid "Please select your language:"
-msgstr ""
+msgstr "Пожалуйста, выберите ваш язык:"
 
 #: install_station/language.py:99 install_station/language.py:116
 msgid "Language"
-msgstr ""
+msgstr "Язык"
 
 #: install_station/network_setup.py:107 install_station/network_setup.py:184
 msgid "Network card connected to the internet"
-msgstr ""
+msgstr "Сетевая карта подключена к интернету"
 
 #: install_station/network_setup.py:113 install_station/network_setup.py:190
 msgid "Network card not connected to the internet"
-msgstr ""
+msgstr "Сетевая карта не подключена к интернету"
 
 #: install_station/network_setup.py:116 install_station/network_setup.py:193
 msgid "No network card detected"
-msgstr ""
+msgstr "Сетевая карта не обнаружена"
 
 #: install_station/network_setup.py:125 install_station/network_setup.py:203
 msgid "WiFi card detected and connected to an access point"
-msgstr ""
+msgstr "Wi-Fi карта обнаружена и подключена к точке доступа"
 
 #: install_station/network_setup.py:129 install_station/network_setup.py:207
 msgid "WiFi card detected but not connected to an access point"
-msgstr ""
+msgstr "Wi-Fi карта обнаружена, но не подключена к точке доступа"
 
 #: install_station/network_setup.py:132 install_station/network_setup.py:210
 msgid "WiFi card not detected or not supported"
-msgstr ""
+msgstr "Wi-Fi карта не обнаружена или не поддерживается"
 
 #: install_station/network_setup.py:366
 msgid "Wi-Fi Network Authentication Required"
-msgstr ""
+msgstr "Требуется аутентификация в Wi-Fi сети"
 
 #: install_station/network_setup.py:379
 #, python-brace-format
 msgid "{ssid} Wi-Fi Network Authentication failed"
-msgstr ""
+msgstr "Аутентификация в Wi-Fi сети {ssid} не удалась"
 
 #: install_station/network_setup.py:381
 #, python-brace-format
 msgid "Authentication required by {ssid} Wi-Fi Network"
-msgstr ""
+msgstr "Аутентификация, требуемая Wi-Fi сетью {ssid}"
 
 #: install_station/network_setup.py:384
 msgid "Password:"
-msgstr ""
+msgstr "Пароль:"
 
 #: install_station/network_setup.py:387
 msgid "Show password"
-msgstr ""
+msgstr "Показать пароль"
 
 #: install_station/try_install.py:102
 msgid "What would you like to do?"
-msgstr ""
+msgstr "Что бы вы хотели сделать?"
 
 #: install_station/try_install.py:109
 msgid ""
 "<b>Install GhostBSD</b>\n"
 "Install GhostBSD on your computer."
 msgstr ""
+"<b>Установить GhostBSD</b>\n"
+"Установить GhostBSD на ваш компьютер."
 
 #: install_station/try_install.py:122
 msgid ""
 "<b>Try GhostBSD</b>\n"
 "Run GhostBSD without installing to your computer."
 msgstr ""
+"<b>Попробовать GhostBSD</b>\n"
+"Запустить GhostBSD без установки на ваш компьютер."
 
 #: install_station/use_zfs.py:160
 msgid ""
 "Please select 1 or more drive for stripe (select the smallest disk first)"
-msgstr ""
+msgstr "Пожалуйста, выберите 1 или более дисков для stripe (сначала выберите наименьший диск)"
 
 #: install_station/use_zfs.py:167
 msgid "Please select 2 drive for mirroring (select the smallest disk first)"
-msgstr ""
+msgstr "Пожалуйста, выберите 2 диска для зеркалирования (сначала выберите наименьший диск)"
 
 #: install_station/use_zfs.py:175
 msgid "Please select 3 drive for RAIDZ1 (select the smallest disk first)"
-msgstr ""
+msgstr "Пожалуйста, выберите 3 диска для RAIDZ1 (сначала выберите наименьший диск)"
 
 #: install_station/use_zfs.py:182
 msgid "Please select 4 drive for RAIDZ2 (select the smallest disk first)"
-msgstr ""
+msgstr "Пожалуйста, выберите 4 диска для RAIDZ2 (сначала выберите наименьший диск)"
 
 #: install_station/use_zfs.py:189
 msgid "Please select 5 drive for RAIDZ3 (select the smallest disk first)"
-msgstr ""
+msgstr "Пожалуйста, выберите 5 дисков для RAIDZ3 (сначала выберите наименьший диск)"
 
 #: install_station/use_zfs.py:292
 msgid "Disk"
-msgstr ""
+msgstr "Диск"
 
 #: install_station/use_zfs.py:299
 msgid "Size(MB)"
-msgstr ""
+msgstr "Размер (МБ)"
 
 #: install_station/use_zfs.py:305
 msgid "Name"
-msgstr ""
+msgstr "Имя"
 
 #: install_station/use_zfs.py:309
 msgid "Check"
-msgstr ""
+msgstr "Выбрать"
 
 #: install_station/use_zfs.py:322
 msgid "Please select one drive"
-msgstr ""
+msgstr "Пожалуйста, выберите один диск"
 
 #: install_station/use_zfs.py:327
 msgid "<b>Pool Type</b>"
-msgstr ""
+msgstr "<b>Тип пула</b>"
 
 #: install_station/use_zfs.py:331
 msgid "1+ disks Stripe"
-msgstr ""
+msgstr "1+ диск(ов) Stripe"
 
 #: install_station/use_zfs.py:332
 msgid "2+ disks Mirror"
-msgstr ""
+msgstr "2+ диск(а) Mirror"
 
 #: install_station/use_zfs.py:333
 msgid "3 disks RAIDZ1"
-msgstr ""
+msgstr "3 диска RAIDZ1"
 
 #: install_station/use_zfs.py:334
 msgid "4 disks RAIDZ2"
-msgstr ""
+msgstr "4 диска RAIDZ2"
 
 #: install_station/use_zfs.py:335
 msgid "5 disks RAIDZ3"
-msgstr ""
+msgstr "5 дисков RAIDZ3"
 
 #: install_station/use_zfs.py:345
 msgid "<b>Pool Name</b>"
-msgstr ""
+msgstr "<b>Имя пула</b>"
 
 #: install_station/use_zfs.py:365
 msgid "Encrypt Disk"
-msgstr ""
+msgstr "Шифровать диск"
 
 #: install_station/use_zfs.py:369
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 #: install_station/use_zfs.py:376
 msgid "Verify it"
-msgstr ""
+msgstr "Подтвердите его"
 
 #: install_station/use_zfs.py:537
 msgid "Warning"
-msgstr ""
+msgstr "Предупреждение"
 
 #: install_station/use_zfs.py:548
 msgid "Smallest disk need to be SELECTED first!\n"
-msgstr ""
+msgstr "Сначала нужно выбрать наименьший диск!\n"
 
 #: install_station/use_zfs.py:549
 msgid "All the disk selected will reset."
-msgstr ""
+msgstr "Все выбранные диски будут сброшены."
