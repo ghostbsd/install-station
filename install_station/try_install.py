@@ -48,7 +48,7 @@ class TryOrInstall:
         # Only respond to activation, not deactivation
         if widget.get_active():
             cls.what = val
-            InstallationData.install_mode = val
+            InstallationData.what_to_do = val
             print(f"Mode selected: {val}")
 
     @classmethod
@@ -62,7 +62,7 @@ class TryOrInstall:
         Returns:
             str: Current installation mode ('install' or 'try')
         """
-        return InstallationData.install_mode or cls.what
+        return InstallationData.what_to_do or cls.what
 
     @classmethod
     def initialize(cls) -> None:
@@ -78,7 +78,7 @@ class TryOrInstall:
         This method is called automatically by get_model() when the interface is first accessed.
         """
         cls.what = 'install'  # Default to install mode
-        InstallationData.install_mode = cls.what
+        InstallationData.what_to_do = cls.what
         
         cls.vbox1 = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, homogeneous=False, spacing=0)
         cls.vbox1.show()

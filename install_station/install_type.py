@@ -48,7 +48,7 @@ class InstallTypes:
         # Only respond to activation, not deactivation
         if widget.get_active():
             cls.ne = val
-            InstallationData.filesystem_type = val
+            InstallationData.install_type = val
             print(f"Filesystem type selected: {val}")
 
     @classmethod
@@ -58,7 +58,7 @@ class InstallTypes:
         Returns:
             str: Current filesystem type ('zfs' or 'custom')
         """
-        return InstallationData.filesystem_type or cls.ne
+        return InstallationData.install_type or cls.ne
 
     @classmethod
     def get_model(cls) -> Gtk.Box:
@@ -88,7 +88,7 @@ class InstallTypes:
         cls.vbox1.show()
         vbox2 = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, homogeneous=False, spacing=0)
         hbox1 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, homogeneous=False, spacing=0)
-        InstallationData.filesystem_type = cls.ne
+        InstallationData.install_type = cls.ne
         cls.vbox1.pack_start(hbox1, True, False, 0)
         hbox1.set_halign(Gtk.Align.CENTER)
         label = Gtk.Label(label=get_text("How do you want to install GhostBSD?"))

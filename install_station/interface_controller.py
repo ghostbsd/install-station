@@ -208,12 +208,14 @@ class Interface:
                         InstallationData.keyboard_variant,
                         InstallationData.keyboard_model_code
                     )
-                
-                # Continue to network setup for live session
-                cls.next_setup_page()
+                with open('/usr/home/ghostbsd/.xinitrc', 'w') as xinitrc:
+                    xinitrc.writelines('gsettings set org.mate.SettingsDaemon.plugins.housekeeping active true &\n')
+                xinitrc.writelines('gsettings set org.mate.screensaver lock-enabled false &\n')
+                xinitrc.writelines('exec ck-launch-session mate-session\n')
+                Gtk.main_quit()
         elif page == 4:
             Button.show_back()
-            if InstallationData.filesystem_type == "custom":
+            if InstallationData.install_type == "custom":
                 custom_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, homogeneous=False, spacing=0)
                 custom_box.show()
                 get_part = cls.custom_partition.get_model()
@@ -223,7 +225,7 @@ class Interface:
                 cls.page.next_page()
                 cls.page.show_all()
                 Button.next_button.set_sensitive(False)
-            elif InstallationData.filesystem_type == "zfs":
+            elif InstallationData.install_type == "zfs":
                 zfs_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, homogeneous=False, spacing=0)
                 zfs_box.show()
                 get_zfs = cls.full_zfs.get_model()
@@ -234,6 +236,11 @@ class Interface:
                 cls.page.show_all()
                 Button.next_button.set_sensitive(False)
         elif page == 5:
+            # Save ZFS configuration before proceeding
+            if InstallationData.install_type == "zfs":
+                cls.full_zfs.save_selection()
+            # For custom partitioning, data is already saved in InstallationData
+
             boot_manager_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, homogeneous=False, spacing=0)
             boot_manager_box.show()
             get_root = cls.boot_manager.get_model()
@@ -264,28 +271,6 @@ class Interface:
         current_page_widget = cls.page.get_nth_page(cls.page.get_current_page())
         title_text = cls.page.get_tab_label_text(current_page_widget)
         Window.set_title(title_text)
-
-    @classmethod
-    def next_setup_page(cls) -> None:
-        page = cls.page.get_current_page()
-        if page == 0:
-            Button.next_button.show()
-            Button.next_button.set_sensitive(False)
-            Window.set_title(get_text("Network Setup"))
-            net_setup_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, homogeneous=False, spacing=0)
-            net_setup_box.show()
-            model = cls.network_setup.get_model()
-            net_setup_box.pack_start(model, True, True, 0)
-            label = Gtk.Label(label=get_text("Network Setup"))
-            cls.page.insert_page(net_setup_box, label, 1)
-            cls.page.next_page()
-            cls.page.show_all()
-        if page == 1:
-            with open('/usr/home/ghostbsd/.xinitrc', 'w') as xinitrc:
-                xinitrc.writelines('gsettings set org.mate.SettingsDaemon.plugins.housekeeping active true &\n')
-                xinitrc.writelines('gsettings set org.mate.screensaver lock-enabled false &\n')
-                xinitrc.writelines('exec ck-launch-session mate-session\n')
-            Gtk.main_quit()
 
     @classmethod
     def back_page(cls, _widget: Gtk.Button) -> None:

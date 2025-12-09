@@ -1,7 +1,6 @@
 """
 Contains the data class and some commonly use variables
 """
-import os
 import gettext
 
 be_name: str = "default"
@@ -46,8 +45,8 @@ class InstallationData:
     ufs_config_data: list = []
     
     # Installation type and mode
-    install_mode: str = ""  # "install" or "try"
-    filesystem_type: str = ""  # "zfs", "ufs", or "custom"
+    what_to_do: str = ""  # "install" or "try"
+    install_type: str = ""  # "zfs", "ufs", or "custom"
     
     # Language and localization
     language: str = ""
@@ -79,8 +78,8 @@ class InstallationData:
         cls.boot = ""
         cls.zfs_config_data = []
         cls.ufs_config_data = []
-        cls.install_mode = ""
-        cls.filesystem_type = ""
+        cls.what_to_do = ""
+        cls.install_type = ""
         cls.language = ""
         cls.language_code = ""
         cls.keyboard_layout = ""
