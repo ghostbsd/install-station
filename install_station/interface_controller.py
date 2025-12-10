@@ -208,10 +208,10 @@ class Interface:
                         InstallationData.keyboard_variant,
                         InstallationData.keyboard_model_code
                     )
-                with open('/usr/home/ghostbsd/.xinitrc', 'w') as xinitrc:
+                with open('/home/ghostbsd/.xinitrc', 'w') as xinitrc:
                     xinitrc.writelines('gsettings set org.mate.SettingsDaemon.plugins.housekeeping active true &\n')
-                xinitrc.writelines('gsettings set org.mate.screensaver lock-enabled false &\n')
-                xinitrc.writelines('exec ck-launch-session mate-session\n')
+                    xinitrc.writelines('gsettings set org.mate.screensaver lock-enabled false &\n')
+                    xinitrc.writelines('exec ck-launch-session mate-session\n')
                 Gtk.main_quit()
         elif page == 4:
             Button.show_back()

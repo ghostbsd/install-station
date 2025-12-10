@@ -112,6 +112,7 @@ class InstallWindow:
         label2.set_line_wrap(True)
         # label2.set_max_width_chars(10)
         label2.set_alignment(0.0, 0.2)
+        label2.show()
         hbox2 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, homogeneous=False, spacing=0, name="TransBox")
         hbox2.show()
         hbox.pack_start(hbox2, True, True, 0)
