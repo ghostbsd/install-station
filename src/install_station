@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# PROVIDE: install_station
+# REQUIRE: LOGIN FILESYSTEMS
+# BEFORE: lightdm
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="install_station"
+rcvar="${name}_enable"
+start_cmd="${name}_start"
+stop_cmd=":"
+
+install_station_start()
+{
+    # Create .xinitrc for root to run installer
+    cat > /root/.xinitrc <<'EOF'
+exec marco &
+exec feh --bg-fill /usr/local/share/backgrounds/ghostbsd/blue-layered-stripes.jpg &
+exec install-station
+EOF
+    chmod 755 /root/.xinitrc
+
+    # Start X as root - this will block until install-station exits
+    su -l root -c "startx -- :0 vt09"
+
+    # Cleanup
+    rm -f /root/.xinitrc
+
+    # Disable this service for future boots
+    sysrc install_station_enable=NO
+}
+
+load_rc_config $name
+run_rc_command "$1"

@@ -157,7 +157,8 @@ lib_install_station_backend_query = [
 data_files = [
     (f'{prefix}/lib/install-station', ['src/ghostbsd-style.css']),
     (f'{prefix}/lib/install-station/backend-query', lib_install_station_backend_query),
-    (f'{prefix}/lib/install-station/image', lib_install_station_image)
+    (f'{prefix}/lib/install-station/image', lib_install_station_image),
+    (f'{prefix}/etc/rc.d', ['src/install_station'])
 ]
 
 data_files.extend(data_file_list(f'{prefix}/share/locale', 'build/mo'))
