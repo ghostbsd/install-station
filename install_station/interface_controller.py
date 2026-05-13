@@ -298,4 +298,4 @@ class Interface:
         current_page_widget = cls.page.get_nth_page(cls.page.get_current_page())
         title_text = cls.page.get_tab_label_text(current_page_widget)
         Window.set_title(title_text)
-        # Button.next_button.set_sensitive(True)
+        Button.next_button.set_sensitive(True)

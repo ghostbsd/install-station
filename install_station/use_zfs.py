@@ -40,7 +40,7 @@ class ZFS:
     pool_type = 'stripe'
     scheme = 'GPT'
     disk_encrypt = False
-    mirror = 'none'
+    mirror = 'stripe'
     vbox1 = None
 
     # UI elements as class variables
@@ -75,7 +75,7 @@ class ZFS:
             raise ValueError("Password cannot be empty when disk encryption is enabled")
 
         size = int(cls.zfs_disk_list[0].partition('-')[2].rstrip()) - 512
-        swap_size = int(cls.swap_entry.get_text() or '0')
+        swap_size = cls.swap_entry.get_value_as_int()
         zfs_num = size - swap_size
         dgeli = '.eli' if cls.disk_encrypt else ''
 
@@ -118,39 +118,32 @@ class ZFS:
         InstallationData.zfs_config_data.append('commitDiskLabel\n')
 
     @classmethod
-    def _disk_count_valid(cls):
+    def _is_ready(cls):
         """
-        Check if the number of selected disks meets the pool type requirement.
+        Check if all conditions are met to proceed to the next page.
 
         Returns:
-            bool: True if enough disks are selected for the current pool type
+            bool: True if disk count, swap entry, and encryption requirements are all satisfied.
         """
         count = len(cls.zfs_disk_list)
         if cls.mirror == "stripe":
-            return count >= 1
+            disks_ok = count >= 1
         elif cls.mirror == "mirror":
-            return count >= 2
+            disks_ok = count >= 2
         elif cls.mirror == "raidz1":
-            return count == 3
+            disks_ok = count == 3
         elif cls.mirror == "raidz2":
-            return count == 4
+            disks_ok = count == 4
         elif cls.mirror == "raidz3":
-            return count == 5
-        return False
-
-    @classmethod
-    def _update_next_button(cls):
-        """
-        Update next button sensitivity based on disk count and encryption state.
-
-        When encryption is enabled, passwords must also match.
-        """
-        if cls.disk_encrypt:
-            passwd_match = (cls.password.get_text() == cls.repassword.get_text()
-                            and len(cls.password.get_text()) > 0)
-            Button.next_button.set_sensitive(cls._disk_count_valid() and passwd_match)
+            disks_ok = count == 5
         else:
-            Button.next_button.set_sensitive(cls._disk_count_valid())
+            disks_ok = False
+        if cls.disk_encrypt:
+            encrypt_ok = (cls.password.get_text() == cls.repassword.get_text()
+                          and len(cls.password.get_text()) > 0)
+        else:
+            encrypt_ok = True
+        return disks_ok and encrypt_ok
 
     @classmethod
     def scheme_selection(cls, combobox):
@@ -201,7 +194,7 @@ class ZFS:
             cls.pool_type = 'raidz3'
             cls.mirrorTips.set_text(
                 get_text("Select 5 drives for RAIDZ3") + " " + smallest_msg)
-        cls._update_next_button()
+        Button.next_button.set_sensitive(cls._is_ready())
 
     @classmethod
     def on_check_encrypt(cls, widget):
@@ -223,7 +216,7 @@ class ZFS:
             cls.password.set_sensitive(False)
             cls.repassword.set_sensitive(False)
             cls.disk_encrypt = False
-            cls._update_next_button()
+            Button.next_button.set_sensitive(cls._is_ready())
 
     @classmethod
     def on_password_changed(cls, _widget):
@@ -237,23 +230,7 @@ class ZFS:
             _widget: Entry widget that triggered the change (unused)
         """
         password_strength(cls.password.get_text(), cls.strenght_label)
-
-    @classmethod
-    def digit_only(cls, widget, text, length, position):
-        """
-        Block non-digit characters from being inserted into the swap entry.
-
-        Connected to the swap entry 'insert-text' signal to prevent
-        non-numeric input before it enters the field.
-
-        Args:
-            widget: Entry widget receiving the input
-            text: Text being inserted
-            length: Length of the text being inserted
-            position: Cursor position at time of insertion
-        """
-        if not text.isdigit():
-            widget.stop_emission_by_name('insert-text')
+        Button.next_button.set_sensitive(cls._is_ready())
 
     @classmethod
     def initialize(cls):
@@ -326,7 +303,7 @@ class ZFS:
         cls.mirrorTips.set_alignment(0.01, 0.5)
 
         # Pool Layout
-        cls.mirror = 'none'
+        cls.mirror = 'stripe'
         mirror_label = Gtk.Label(label=get_text('Pool Layout'))
         mirror_label.set_use_markup(True)
         mirror_box = Gtk.ComboBoxText()
@@ -335,8 +312,8 @@ class ZFS:
         mirror_box.append_text("raidz1")
         mirror_box.append_text("raidz2")
         mirror_box.append_text("raidz3")
-        mirror_box.connect('changed', cls.mirror_selection)
         mirror_box.set_active(0)
+        mirror_box.connect('changed', cls.mirror_selection)
 
         # Pool Name (always editable)
         pool_label = Gtk.Label(label=get_text('Pool Name'))
@@ -347,9 +324,10 @@ class ZFS:
         # Swap Size
         swap_label = Gtk.Label(label=get_text('Swap Size(MB)'))
         swap_label.set_use_markup(True)
-        cls.swap_entry = Gtk.Entry()
-        cls.swap_entry.set_text(str(get_ram_size_mb()))
-        cls.swap_entry.connect('insert-text', cls.digit_only)
+        ram_mb = get_ram_size_mb()
+        adj = Gtk.Adjustment(ram_mb, 0, ram_mb, 1, 100, 0)
+        cls.swap_entry = Gtk.SpinButton(adjustment=adj, numeric=True)
+        cls.swap_entry.set_editable(True)
 
         # Creating MBR or GPT drive
         cls.scheme = 'GPT'
@@ -397,7 +375,7 @@ class ZFS:
         left_grid = Gtk.Grid()
         left_grid.set_row_spacing(4)
         left_grid.set_column_spacing(6)
-        left_grid.set_size_request(200, -1)
+        left_grid.set_hexpand(False)
 
         mirror_label.set_alignment(0, 0.5)
         pool_label.set_alignment(0, 0.5)
@@ -500,14 +478,21 @@ class ZFS:
         model[path][3] = not model[path][3]
         if model[path][3] is False:
             cls.zfs_disk_list.remove(model[path][0] + "-" + model[path][1])
-            cls._update_next_button()
         else:
             if cls.check_if_small_disk(model[path][1]) is False:
                 cls.zfs_disk_list.extend([model[path][0] + "-" + model[path][1]])
-                cls._update_next_button()
             else:
                 cls.check_cell.set_sensitive(False)
                 cls.small_disk_warning()
+                return True
+
+        # Update swap SpinButton upper limit based on first selected disk
+        if cls.zfs_disk_list:
+            disk_size = int(cls.zfs_disk_list[0].partition('-')[2].rstrip()) - 512
+            cls.swap_entry.get_adjustment().set_upper(disk_size)
+        else:
+            cls.swap_entry.get_adjustment().set_upper(get_ram_size_mb())
+        Button.next_button.set_sensitive(cls._is_ready())
 
         print(cls.zfs_disk_list)
         return True
@@ -577,7 +562,7 @@ class ZFS:
         """
         if cls.password.get_text() == cls.repassword.get_text():
             cls.img.set_from_icon_name("gtk-yes", Gtk.IconSize.MENU)
-            cls._update_next_button()
+            Button.next_button.set_sensitive(cls._is_ready())
         else:
             cls.img.set_from_icon_name("gtk-no", Gtk.IconSize.MENU)
             Button.next_button.set_sensitive(False)
