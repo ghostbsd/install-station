@@ -3,6 +3,7 @@ from install_station.common import password_strength
 from install_station.data import InstallationData, zfs_datasets, be_name, logo, get_text
 from install_station.partition import bios_or_uefi
 from install_station.system_calls import (
+    get_ram_size_mb,
     zfs_disk_query,
     zfs_disk_size_query,
 )
@@ -38,13 +39,13 @@ class ZFS:
     zfs_disk_list = []
     pool_type = 'stripe'
     scheme = 'GPT'
-    zpool = False
     disk_encrypt = False
-    mirror = 'single disk'
+    mirror = 'none'
     vbox1 = None
-    
+
     # UI elements as class variables
     pool = None
+    swap_entry = None
     password = None
     repassword = None
     mirrorTips = None
@@ -69,28 +70,19 @@ class ZFS:
         # Validate required fields are populated
         if not cls.zfs_disk_list:
             raise ValueError("No disks selected for ZFS configuration")
-            
-        if cls.zpool and not cls.pool.get_text().strip():
-            raise ValueError("Pool name cannot be empty when zpool is enabled")
-            
+
         if cls.disk_encrypt and not cls.password.get_text().strip():
             raise ValueError("Password cannot be empty when disk encryption is enabled")
-            
+
         size = int(cls.zfs_disk_list[0].partition('-')[2].rstrip()) - 512
-        swap = 0
-        zfs_num = size - swap
-        if cls.disk_encrypt is True:
-            dgeli = '.eli'
-        else:
-            dgeli = ''
+        swap_size = int(cls.swap_entry.get_text() or '0')
+        zfs_num = size - swap_size
+        dgeli = '.eli' if cls.disk_encrypt else ''
 
         # Store configuration data in InstallationData instead of writing to file
         InstallationData.zfs_config_data = []
-        
-        if cls.zpool is True:
-            InstallationData.zfs_config_data.append(f"zpoolName={cls.pool.get_text()}\n")
-        else:
-            InstallationData.zfs_config_data.append("#zpoolName=None\n")
+
+        InstallationData.zfs_config_data.append(f"zpoolName={cls.pool.get_text()}\n")
         InstallationData.zfs_config_data.append(f"beName={be_name}\n")
         InstallationData.zfs_config_data.append('ashift=12\n\n')
         disk = cls.zfs_disk_list[0].partition('-')[0].rstrip()
@@ -98,18 +90,13 @@ class ZFS:
         InstallationData.zfs_config_data.append('partition=ALL\n')
         InstallationData.zfs_config_data.append(f'partscheme={cls.scheme}\n')
         InstallationData.zfs_config_data.append('commitDiskPart\n\n')
-        if cls.pool_type == 'none':
+        if len(cls.zfs_disk_list) <= 1:
             pool_disk = '\n'
         else:
             zfs_disk = cls.zfs_disk_list
-            disk_len = len(zfs_disk) - 1
-            num = 1
             mirror_dsk = ''
-            while disk_len != 0:
-                mirror_dsk += ' ' + zfs_disk[num].partition('-')[0].rstrip()
-                print(mirror_dsk)
-                num += 1
-                disk_len -= 1
+            for i in range(1, len(zfs_disk)):
+                mirror_dsk += ' ' + zfs_disk[i].partition('-')[0].rstrip()
             pool_disk = f' ({cls.pool_type}:{mirror_dsk})\n'
         if bios_or_uefi() == "UEFI":
             zfs_num = zfs_num - 100
@@ -118,19 +105,58 @@ class ZFS:
         # adding zero to use remaining space
         zfs_part = f'disk0-part=ZFS{dgeli} {zfs_num} {zfs_datasets}{pool_disk}'
         InstallationData.zfs_config_data.append(zfs_part)
-        if swap != 0:
-            InstallationData.zfs_config_data.append('disk0-part=swap 0 none\n')
-        if cls.disk_encrypt is True:
+        # encpass must be on the line immediately after the .eli partition
+        if cls.disk_encrypt:
             InstallationData.zfs_config_data.append(f'encpass={cls.password.get_text()}\n')
         else:
             InstallationData.zfs_config_data.append('#encpass=None\n')
+        if swap_size != 0:
+            if cls.disk_encrypt:
+                InstallationData.zfs_config_data.append('disk0-part=SWAP.eli 0 none\n')
+            else:
+                InstallationData.zfs_config_data.append('disk0-part=SWAP 0 none\n')
         InstallationData.zfs_config_data.append('commitDiskLabel\n')
+
+    @classmethod
+    def _disk_count_valid(cls):
+        """
+        Check if the number of selected disks meets the pool type requirement.
+
+        Returns:
+            bool: True if enough disks are selected for the current pool type
+        """
+        count = len(cls.zfs_disk_list)
+        if cls.mirror == "stripe":
+            return count >= 1
+        elif cls.mirror == "mirror":
+            return count >= 2
+        elif cls.mirror == "raidz1":
+            return count == 3
+        elif cls.mirror == "raidz2":
+            return count == 4
+        elif cls.mirror == "raidz3":
+            return count == 5
+        return False
+
+    @classmethod
+    def _update_next_button(cls):
+        """
+        Update next button sensitivity based on disk count and encryption state.
+
+        When encryption is enabled, passwords must also match.
+        """
+        if cls.disk_encrypt:
+            passwd_match = (cls.password.get_text() == cls.repassword.get_text()
+                            and len(cls.password.get_text()) > 0)
+            Button.next_button.set_sensitive(cls._disk_count_valid() and passwd_match)
+        else:
+            Button.next_button.set_sensitive(cls._disk_count_valid())
 
     @classmethod
     def scheme_selection(cls, combobox):
         """
         Handle partition scheme selection from combo box.
-        
+
         Args:
             combobox: ComboBox widget containing scheme options (GPT/MBR)
         """
@@ -143,80 +169,48 @@ class ZFS:
     def mirror_selection(cls, combobox):
         """
         Handle pool type selection and update UI accordingly.
-        
+
         Sets the pool type (stripe, mirror, RAIDZ1/2/3) and updates the tip text
         and next button sensitivity based on the number of selected disks.
-        
+
         Args:
             combobox: ComboBox widget containing pool type options
         """
         model = combobox.get_model()
         index = combobox.get_active()
-        data = model[index][0]  # Get the internal value (English)
+        data = model[index][0]
         cls.mirror = data
-        if cls.mirror == "1+ disks Stripe":
+        smallest_msg = get_text("(select the smallest disk first)")
+        if cls.mirror == "stripe":
             cls.pool_type = 'stripe'
             cls.mirrorTips.set_text(
-                get_text("Please select 1 or more drive for stripe (select the smallest disk first)"))
-            if len(cls.zfs_disk_list) >= 1:
-                Button.next_button.set_sensitive(True)
-            else:
-                Button.next_button.set_sensitive(False)
-        elif cls.mirror == "2+ disks Mirror":
+                get_text("Select 1 or more drives, no redundancy") + " " + smallest_msg)
+        elif cls.mirror == "mirror":
             cls.pool_type = 'mirror'
-            mir_msg1 = get_text("Please select 2 drive for mirroring (select the smallest disk first)")
-            cls.mirrorTips.set_text(mir_msg1)
-            if len(cls.zfs_disk_list) >= 2:
-                Button.next_button.set_sensitive(True)
-            else:
-                Button.next_button.set_sensitive(False)
-        elif cls.mirror == "3 disks RAIDZ1":
+            cls.mirrorTips.set_text(
+                get_text("Select 2 or more drives for mirroring") + " " + smallest_msg)
+        elif cls.mirror == "raidz1":
             cls.pool_type = 'raidz1'
-            cls.mirrorTips.set_text(get_text("Please select 3 drive for RAIDZ1 (select the smallest disk first)"))
-            if len(cls.zfs_disk_list) == 3:
-                Button.next_button.set_sensitive(True)
-            else:
-                Button.next_button.set_sensitive(False)
-        elif cls.mirror == "4 disks RAIDZ2":
+            cls.mirrorTips.set_text(
+                get_text("Select 3 drives for RAIDZ1") + " " + smallest_msg)
+        elif cls.mirror == "raidz2":
             cls.pool_type = 'raidz2'
-            cls.mirrorTips.set_text(get_text("Please select 4 drive for RAIDZ2 (select the smallest disk first)"))
-            if len(cls.zfs_disk_list) == 4:
-                Button.next_button.set_sensitive(True)
-            else:
-                Button.next_button.set_sensitive(False)
-        elif cls.mirror == "5 disks RAIDZ3":
+            cls.mirrorTips.set_text(
+                get_text("Select 4 drives for RAIDZ2") + " " + smallest_msg)
+        elif cls.mirror == "raidz3":
             cls.pool_type = 'raidz3'
-            cls.mirrorTips.set_text(get_text("Please select 5 drive for RAIDZ3 (select the smallest disk first)"))
-            if len(cls.zfs_disk_list) == 5:
-                Button.next_button.set_sensitive(True)
-            else:
-                Button.next_button.set_sensitive(False)
-
-    @classmethod
-    def on_check_poll(cls, widget):
-        """
-        Handle custom pool name checkbox toggle.
-        
-        Enables or disables the pool name entry field based on checkbox state.
-        
-        Args:
-            widget: CheckButton widget for pool name enable/disable
-        """
-        if widget.get_active():
-            cls.pool.set_sensitive(True)
-            cls.zpool = True
-        else:
-            cls.pool.set_sensitive(False)
-            cls.zpool = False
+            cls.mirrorTips.set_text(
+                get_text("Select 5 drives for RAIDZ3") + " " + smallest_msg)
+        cls._update_next_button()
 
     @classmethod
     def on_check_encrypt(cls, widget):
         """
         Handle disk encryption checkbox toggle.
-        
+
         Enables or disables password fields and updates next button sensitivity
         based on encryption state and current disk selection.
-        
+
         Args:
             widget: CheckButton widget for disk encryption enable/disable
         """
@@ -229,31 +223,37 @@ class ZFS:
             cls.password.set_sensitive(False)
             cls.repassword.set_sensitive(False)
             cls.disk_encrypt = False
-            if cls.mirror == "1+ disks Stripe":
-                if len(cls.zfs_disk_list) >= 1:
-                    Button.next_button.set_sensitive(True)
-                else:
-                    Button.next_button.set_sensitive(False)
-            elif cls.mirror == "2+ disks Mirror":
-                if len(cls.zfs_disk_list) >= 2:
-                    Button.next_button.set_sensitive(True)
-                else:
-                    Button.next_button.set_sensitive(False)
-            elif cls.mirror == "3 disks RAIDZ1":
-                if len(cls.zfs_disk_list) == 3:
-                    Button.next_button.set_sensitive(True)
-                else:
-                    Button.next_button.set_sensitive(False)
-            elif cls.mirror == "4 disks RAIDZ2":
-                if len(cls.zfs_disk_list) == 4:
-                    Button.next_button.set_sensitive(True)
-                else:
-                    Button.next_button.set_sensitive(False)
-            elif cls.mirror == "5 disks RAIDZ3":
-                if len(cls.zfs_disk_list) == 5:
-                    Button.next_button.set_sensitive(True)
-                else:
-                    Button.next_button.set_sensitive(False)
+            cls._update_next_button()
+
+    @classmethod
+    def on_password_changed(cls, _widget):
+        """
+        Handle password entry changes and update strength display.
+
+        Wraps the common password_strength function to extract the text
+        from the Entry widget and pass it with the strength label.
+
+        Args:
+            _widget: Entry widget that triggered the change (unused)
+        """
+        password_strength(cls.password.get_text(), cls.strenght_label)
+
+    @classmethod
+    def digit_only(cls, widget, text, length, position):
+        """
+        Block non-digit characters from being inserted into the swap entry.
+
+        Connected to the swap entry 'insert-text' signal to prevent
+        non-numeric input before it enters the field.
+
+        Args:
+            widget: Entry widget receiving the input
+            text: Text being inserted
+            length: Length of the text being inserted
+            position: Cursor position at time of insertion
+        """
+        if not text.isdigit():
+            widget.stop_emission_by_name('insert-text')
 
     @classmethod
     def initialize(cls):
@@ -271,7 +271,8 @@ class ZFS:
         """
         cls.vbox1 = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, homogeneous=False, spacing=0)
         cls.vbox1.show()
-        # Chose disk
+
+        # Disk list in a scrolled window
         sw = Gtk.ScrolledWindow(hexpand=True, vexpand=True)
         sw.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
         sw.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
@@ -319,37 +320,38 @@ class ZFS:
         tree_selection.set_mode(Gtk.SelectionMode.SINGLE)
         sw.add(treeview)
         sw.show()
+
         cls.mirrorTips = Gtk.Label(label=get_text('Please select one drive'))
         cls.mirrorTips.set_justify(Gtk.Justification.LEFT)
         cls.mirrorTips.set_alignment(0.01, 0.5)
-        # Mirror, raidz and stripe
+
+        # Pool Layout
         cls.mirror = 'none'
-        mirror_label = Gtk.Label(label=get_text('<b>Pool Type</b>'))
+        mirror_label = Gtk.Label(label=get_text('Pool Layout'))
         mirror_label.set_use_markup(True)
-        mirror_box = Gtk.ComboBox()
-        mirror_store = Gtk.ListStore(str, str)  # value, display_text
-        mirror_store.append(["1+ disks Stripe", get_text("1+ disks Stripe")])
-        mirror_store.append(["2+ disks Mirror", get_text("2+ disks Mirror")])
-        mirror_store.append(["3 disks RAIDZ1", get_text("3 disks RAIDZ1")])
-        mirror_store.append(["4 disks RAIDZ2", get_text("4 disks RAIDZ2")])
-        mirror_store.append(["5 disks RAIDZ3", get_text("5 disks RAIDZ3")])
-        mirror_box.set_model(mirror_store)
-        renderer = Gtk.CellRendererText()
-        mirror_box.pack_start(renderer, True)
-        mirror_box.add_attribute(renderer, "text", 1)  # Display column 1 (translated text)
+        mirror_box = Gtk.ComboBoxText()
+        mirror_box.append_text("stripe")
+        mirror_box.append_text("mirror")
+        mirror_box.append_text("raidz1")
+        mirror_box.append_text("raidz2")
+        mirror_box.append_text("raidz3")
         mirror_box.connect('changed', cls.mirror_selection)
         mirror_box.set_active(0)
 
-        # Pool Name
-        cls.zpool = False
-        pool_name_label = Gtk.Label(label=get_text('<b>Pool Name</b>'))
-        pool_name_label.set_use_markup(True)
+        # Pool Name (always editable)
+        pool_label = Gtk.Label(label=get_text('Pool Name'))
+        pool_label.set_use_markup(True)
         cls.pool = Gtk.Entry()
         cls.pool.set_text('zroot')
+
+        # Swap Size
+        swap_label = Gtk.Label(label=get_text('Swap Size(MB)'))
+        swap_label.set_use_markup(True)
+        cls.swap_entry = Gtk.Entry()
+        cls.swap_entry.set_text(str(get_ram_size_mb()))
+        cls.swap_entry.connect('insert-text', cls.digit_only)
+
         # Creating MBR or GPT drive
-        scheme_label = Gtk.Label(label='<b>Partition Scheme</b>')
-        scheme_label.set_use_markup(True)
-        # Adding a combo box to selecting MBR or GPT sheme.
         cls.scheme = 'GPT'
         shemebox = Gtk.ComboBoxText()
         shemebox.append_text("GPT")
@@ -360,52 +362,85 @@ class ZFS:
             shemebox.set_sensitive(False)
         else:
             shemebox.set_sensitive(True)
+
         # GELI Disk encryption
         cls.disk_encrypt = False
-        encrypt_check = Gtk.CheckButton(label=get_text("Encrypt Disk"))
+        encrypt_check = Gtk.CheckButton(label=get_text("Encrypt Disk (GELI)"))
         encrypt_check.connect("toggled", cls.on_check_encrypt)
         encrypt_check.set_sensitive(True)
-        # password
+
+        # Password
         cls.passwd_label = Gtk.Label(label=get_text("Password"))
         cls.password = Gtk.Entry()
         cls.password.set_sensitive(False)
         cls.password.set_visibility(False)
-        cls.password.connect("changed", password_strength)
+        cls.password.connect("changed", cls.on_password_changed)
         cls.strenght_label = Gtk.Label()
         cls.strenght_label.set_alignment(0.1, 0.5)
-        cls.vpasswd_label = Gtk.Label(label=get_text("Verify it"))
+        cls.strenght_label.set_size_request(-1, 20)
+
+        # Verify password
+        cls.vpasswd_label = Gtk.Label(label=get_text("Confirm"))
         cls.repassword = Gtk.Entry()
         cls.repassword.set_sensitive(False)
         cls.repassword.set_visibility(False)
         cls.repassword.connect("changed", cls.password_verification)
-        # set image for password matching
+
+        # Password match image
         cls.img = Gtk.Image()
-        cls.img.set_alignment(0.2, 0.5)
-        # table = Gtk.Table(12, 12, True)
-        grid = Gtk.Grid()
-        grid.set_row_spacing(10)
-        # grid.set_column_homogeneous(True)
-        # grid.set_row_homogeneous(True)
-        # grid.attach(Title, 1, 1, 10, 1)
-        grid.attach(mirror_label, 1, 2, 1, 1)
-        grid.attach(mirror_box, 2, 2, 1, 1)
-        grid.attach(pool_name_label, 7, 2, 2, 1)
-        grid.attach(cls.pool, 9, 2, 2, 1)
-        grid.attach(cls.mirrorTips, 1, 3, 8, 1)
-        # grid.attach(zfs4kcheck, 9, 3, 2, 1)
-        grid.attach(sw, 1, 4, 10, 3)
-        # grid.attach(scheme_label, 1, 9, 1, 1)
-        # grid.attach(shemebox, 2, 9, 1, 1)
-        # grid.attach(cls.swap_encrypt_check, 9, 15, 11, 12)
-        # grid.attach(swap_mirror_check, 9, 15, 11, 12)
-        # grid.attach(encrypt_check, 2, 8, 2, 1)
-        # grid.attach(cls.passwd_label, 1, 9, 1, 1)
-        # grid.attach(cls.password, 2, 9, 2, 1)
-        # grid.attach(cls.strenght_label, 4, 9, 2, 1)
-        # grid.attach(cls.vpasswd_label, 1, 10, 1, 1)
-        # grid.attach(cls.repassword, 2, 10, 2, 1)
-        # grid.attach(cls.img, 4, 10, 2, 1)
-        cls.vbox1.pack_start(grid, True, True, 10)
+        cls.img.set_size_request(20, 20)
+
+        # Two-column layout: left settings, right disk list
+        hbox_main = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, homogeneous=False, spacing=10)
+
+        # Left panel: settings grid
+        left_grid = Gtk.Grid()
+        left_grid.set_row_spacing(4)
+        left_grid.set_column_spacing(6)
+        left_grid.set_size_request(200, -1)
+
+        mirror_label.set_alignment(0, 0.5)
+        pool_label.set_alignment(0, 0.5)
+        swap_label.set_alignment(0, 0.5)
+        cls.passwd_label.set_alignment(0, 0.5)
+        cls.vpasswd_label.set_alignment(0, 0.5)
+
+        # Row 0-1: Pool Layout
+        left_grid.attach(mirror_label, 0, 0, 2, 1)
+        left_grid.attach(mirror_box, 0, 1, 2, 1)
+        # Row 2-3: Pool Name
+        left_grid.attach(pool_label, 0, 2, 2, 1)
+        left_grid.attach(cls.pool, 0, 3, 2, 1)
+        # Row 4-5: Swap Size
+        left_grid.attach(swap_label, 0, 4, 2, 1)
+        left_grid.attach(cls.swap_entry, 0, 5, 2, 1)
+        # Row 6: Separator
+        sep = Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL)
+        left_grid.attach(sep, 0, 6, 2, 1)
+        # Row 7: Encrypt Disk checkbox
+        left_grid.attach(encrypt_check, 0, 7, 2, 1)
+        # Row 8: Password label + strength indicator
+        left_grid.attach(cls.passwd_label, 0, 8, 1, 1)
+        left_grid.attach(cls.strenght_label, 1, 8, 1, 1)
+        # Row 9: Password input
+        left_grid.attach(cls.password, 0, 9, 2, 1)
+        # Row 10: Confirm label + match icon
+        left_grid.attach(cls.vpasswd_label, 0, 10, 1, 1)
+        left_grid.attach(cls.img, 1, 10, 1, 1)
+        # Row 11: Confirm input
+        left_grid.attach(cls.repassword, 0, 11, 2, 1)
+
+        hbox_main.pack_start(left_grid, False, False, 10)
+
+        # Right panel: tips + disk list
+        right_panel = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, homogeneous=False, spacing=0)
+        cls.mirrorTips.set_alignment(0, 0.5)
+        right_panel.pack_start(cls.mirrorTips, False, False, 0)
+        right_panel.pack_start(sw, True, True, 0)
+
+        hbox_main.pack_start(right_panel, True, True, 10)
+
+        cls.vbox1.pack_start(hbox_main, True, True, 10)
         return
 
     @classmethod
@@ -465,59 +500,11 @@ class ZFS:
         model[path][3] = not model[path][3]
         if model[path][3] is False:
             cls.zfs_disk_list.remove(model[path][0] + "-" + model[path][1])
-            if cls.mirror == "1+ disks Stripe":
-                if len(cls.zfs_disk_list) >= 1:
-                    Button.next_button.set_sensitive(True)
-                else:
-                    Button.next_button.set_sensitive(False)
-            elif cls.mirror == "2+ disks Mirror":
-                if len(cls.zfs_disk_list) >= 2:
-                    Button.next_button.set_sensitive(True)
-                else:
-                    Button.next_button.set_sensitive(False)
-            elif cls.mirror == "3 disks RAIDZ1":
-                if len(cls.zfs_disk_list) == 3:
-                    Button.next_button.set_sensitive(True)
-                else:
-                    Button.next_button.set_sensitive(False)
-            elif cls.mirror == "4 disks RAIDZ2":
-                if len(cls.zfs_disk_list) == 4:
-                    Button.next_button.set_sensitive(True)
-                else:
-                    Button.next_button.set_sensitive(False)
-            elif cls.mirror == "5 disks RAIDZ3":
-                if len(cls.zfs_disk_list) == 5:
-                    Button.next_button.set_sensitive(True)
-                else:
-                    Button.next_button.set_sensitive(False)
+            cls._update_next_button()
         else:
             if cls.check_if_small_disk(model[path][1]) is False:
                 cls.zfs_disk_list.extend([model[path][0] + "-" + model[path][1]])
-                if cls.mirror == "1+ disks Stripe":
-                    if len(cls.zfs_disk_list) >= 1:
-                        Button.next_button.set_sensitive(True)
-                    else:
-                        Button.next_button.set_sensitive(False)
-                elif cls.mirror == "2+ disks Mirror":
-                    if len(cls.zfs_disk_list) >= 2:
-                        Button.next_button.set_sensitive(True)
-                    else:
-                        Button.next_button.set_sensitive(False)
-                elif cls.mirror == "3 disks RAIDZ1":
-                    if len(cls.zfs_disk_list) == 3:
-                        Button.next_button.set_sensitive(True)
-                    else:
-                        Button.next_button.set_sensitive(False)
-                elif cls.mirror == "4 disks RAIDZ2":
-                    if len(cls.zfs_disk_list) == 4:
-                        Button.next_button.set_sensitive(True)
-                    else:
-                        Button.next_button.set_sensitive(False)
-                elif cls.mirror == "5 disks RAIDZ3":
-                    if len(cls.zfs_disk_list) == 5:
-                        Button.next_button.set_sensitive(True)
-                    else:
-                        Button.next_button.set_sensitive(False)
+                cls._update_next_button()
             else:
                 cls.check_cell.set_sensitive(False)
                 cls.small_disk_warning()
@@ -589,32 +576,8 @@ class ZFS:
             _widget: Entry widget that triggered the verification (unused)
         """
         if cls.password.get_text() == cls.repassword.get_text():
-            cls.img.set_from_stock(Gtk.STOCK_YES, 5)
-            if cls.mirror == "1+ disks Stripe":
-                if len(cls.zfs_disk_list) >= 1:
-                    Button.next_button.set_sensitive(True)
-                else:
-                    Button.next_button.set_sensitive(False)
-            elif cls.mirror == "2+ disks Mirror":
-                if len(cls.zfs_disk_list) >= 2:
-                    Button.next_button.set_sensitive(True)
-                else:
-                    Button.next_button.set_sensitive(False)
-            elif cls.mirror == "3 disks RAIDZ1":
-                if len(cls.zfs_disk_list) == 3:
-                    Button.next_button.set_sensitive(True)
-                else:
-                    Button.next_button.set_sensitive(False)
-            elif cls.mirror == "4 disks RAIDZ2":
-                if len(cls.zfs_disk_list) == 4:
-                    Button.next_button.set_sensitive(True)
-                else:
-                    Button.next_button.set_sensitive(False)
-            elif cls.mirror == "5 disks RAIDZ3":
-                if len(cls.zfs_disk_list) == 5:
-                    Button.next_button.set_sensitive(True)
-                else:
-                    Button.next_button.set_sensitive(False)
+            cls.img.set_from_icon_name("gtk-yes", Gtk.IconSize.MENU)
+            cls._update_next_button()
         else:
-            cls.img.set_from_stock(Gtk.STOCK_NO, 5)
+            cls.img.set_from_icon_name("gtk-no", Gtk.IconSize.MENU)
             Button.next_button.set_sensitive(False)
