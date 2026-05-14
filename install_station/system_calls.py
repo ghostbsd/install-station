@@ -258,6 +258,21 @@ def timezone_dictionary() -> dict[str, list[str]]:
     return dictionary
 
 
+def get_ram_size_mb() -> int:
+    """Query the system RAM size in megabytes using sysctl.
+
+    Returns:
+        System RAM size in MB
+    """
+    output = Popen(
+        'sysctl -n hw.realmem',
+        shell=True,
+        stdout=PIPE,
+        universal_newlines=True
+    ).stdout.read().strip()
+    return int(output) // 1048576
+
+
 def zfs_disk_query() -> list[str]:
     """Query available disks for ZFS installation.
     

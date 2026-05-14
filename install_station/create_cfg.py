@@ -156,5 +156,11 @@ class Configuration:
                 f.write("runCommand=pw userdel -n ghostbsd -r\n")
                 f.write("runCommand=sed -i '' 's/ghostbsd/root/g' /etc/gettytab\n")
                 f.write("runCommand=sed -i '' 's/ghostbsd/root/g' /etc/ttys\n")
+                f.write("runCommand=echo '# WARNING: Do NOT set initial_setup_enable=YES manually!' >> /etc/rc.conf\n")
+                f.write("runCommand=echo '# This service is ONLY for first boot after installation.' >> /etc/rc.conf\n")
+                f.write("runCommand=echo '# It will automatically disable itself after running.' >> /etc/rc.conf\n")
+                f.write("runCommand=sysrc initial_setup_enable=YES\n")
+                f.write("runCommand=sed -i '' '/^autologin-user=/d' /usr/local/etc/lightdm/lightdm.conf\n")
+                f.write("runCommand=sed -i '' '/^autologin-session=/d' /usr/local/etc/lightdm/lightdm.conf\n")
         except IOError as e:
             raise IOError(f"Failed to write configuration file: {e}") from e

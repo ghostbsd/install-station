@@ -7,6 +7,7 @@ import re
 from time import sleep
 from subprocess import Popen, PIPE, STDOUT, call
 from install_station.data import query, zfs_datasets, InstallationData
+from install_station.system_calls import get_ram_size_mb
 
 # Define required file paths
 
@@ -779,7 +780,7 @@ class AutoFreeSpace:
         InstallationData.slice = main_slice.replace(drive, "")
 
         root_size = int(main_size)
-        swap_size = 2048
+        swap_size = get_ram_size_mb()
         root_size -= swap_size
 
         part_list = disk_db[drive]['partitions'][main_slice]['partition-list']
@@ -861,7 +862,7 @@ class AutoFreeSpace:
         InstallationData.disk = drive
         InstallationData.scheme = 'partscheme=GPT'
         root_size = int(main_size)
-        swap_size = 2048
+        swap_size = get_ram_size_mb()
         root_size -= int(swap_size)
         if self.bios_type == "UEFI" and efi_exist is False:
             boot_size = 256
