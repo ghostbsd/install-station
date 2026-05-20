@@ -13,111 +13,111 @@ msgstr ""
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: install_station/boot_manager.py:121
 #: install_station/interface_controller.py:241
 msgid "Boot Option"
-msgstr ""
+msgstr "Önyükleme Seçeneği"
 
 #: install_station/boot_manager.py:135
 msgid "Setup rEFInd boot manager"
-msgstr ""
+msgstr "rEFInd önyükleme yöneticisini kur"
 
 #: install_station/boot_manager.py:149
 msgid "Setup FreeBSD boot manager"
-msgstr ""
+msgstr "FreeBSD önyükleme yöneticisini kur"
 
 #: install_station/boot_manager.py:164
 #, python-brace-format
 msgid "FreeBSD {loader} loader only"
-msgstr ""
+msgstr "Yalnızca FreeBSD {loader} yükleyicisi"
 
 #: install_station/common.py:123
 msgid "Space not allowed"
-msgstr ""
+msgstr "Boşluk bırakılamaz"
 
 #: install_station/common.py:125 install_station/common.py:127
 msgid "Super Weak"
-msgstr ""
+msgstr "Aşırı Zayıf"
 
 #: install_station/common.py:129 install_station/common.py:135
 msgid "Very Weak"
-msgstr ""
+msgstr "Çok Zayıf"
 
 #: install_station/common.py:131 install_station/common.py:137
 #: install_station/common.py:143
 msgid "Fairly Weak"
-msgstr ""
+msgstr "Oldukça Zayıf"
 
 #: install_station/common.py:133 install_station/common.py:139
 #: install_station/common.py:145 install_station/common.py:151
 msgid "Weak"
-msgstr ""
+msgstr "Zayıf"
 
 #: install_station/common.py:141 install_station/common.py:147
 #: install_station/common.py:153 install_station/common.py:159
 msgid "Strong"
-msgstr ""
+msgstr "Güçlü"
 
 #: install_station/common.py:149 install_station/common.py:155
 #: install_station/common.py:161 install_station/common.py:167
 msgid "Fairly Strong"
-msgstr ""
+msgstr "Oldukça Güçlü"
 
 #: install_station/common.py:157 install_station/common.py:163
 msgid "Very Strong"
-msgstr ""
+msgstr "Çok Güçlü"
 
 #: install_station/common.py:165 install_station/common.py:169
 msgid "Super Strong"
-msgstr ""
+msgstr "Aşırı Güçlü"
 
 #: install_station/custom.py:248
 msgid "Create"
-msgstr ""
+msgstr "Oluştur"
 
 #: install_station/custom.py:252
 msgid "Delete"
-msgstr ""
+msgstr "Sil"
 
 #: install_station/custom.py:256
 msgid "Revert"
-msgstr ""
+msgstr "Geri al"
 
 #: install_station/custom.py:260
 msgid "Auto"
-msgstr ""
+msgstr "Otomatik"
 
 #: install_station/custom.py:328 install_station/custom.py:566
 msgid "Add Partition"
-msgstr ""
+msgstr "Bölüm Ekle"
 
 #: install_station/custom.py:342
 msgid "Type:"
-msgstr ""
+msgstr "Tür:"
 
 #: install_station/custom.py:343 install_station/custom.py:580
 msgid "Size(MB):"
-msgstr ""
+msgstr "Boyut(MB):"
 
 #: install_station/custom.py:344
 msgid "Mount point:"
-msgstr ""
+msgstr "Bağlama noktası:"
 
 #: install_station/custom.py:496
 msgid "Partition Scheme"
-msgstr ""
+msgstr "Bölümlendirme Şeması"
 
 #: install_station/custom.py:515
 msgid "GPT: GUID Partition Table"
-msgstr ""
+msgstr "GPT: GUID Bölümlendirme Tablosu"
 
 #: install_station/custom.py:516
 msgid "MBR: DOS Partition"
-msgstr ""
+msgstr "MBR: DOS Bölümlendirmesi"
 
 #: install_station/end.py:10
 msgid ""
@@ -127,30 +127,35 @@ msgid ""
 "any changes you make or documents you save will\n"
 "not be preserved on reboot."
 msgstr ""
+"Kurulum tamamlandı. Yeni kurulumu kullanmak için\n"
+"bilgisayarı yeniden başlatmanız gerekiyor.\n"
+"Canlı ortamı kullanmaya devam edebilirsiniz; ancak\n"
+"yaptığınız herhangi bir değişiklik veya kaydettiğiniz bir belge\n"
+"yeniden başlatmadan sonra korunmayacaktır."
 
 #: install_station/end.py:31
 msgid "Installation Completed"
-msgstr ""
+msgstr "Kurulum Tamamlandı"
 
 #: install_station/end.py:47
 msgid "Restart"
-msgstr ""
+msgstr "Yeniden Başlat"
 
 #: install_station/end.py:49
 msgid "Continue"
-msgstr ""
+msgstr "Devam Et"
 
 #: install_station/error.py:17
 msgid "Installation Error"
-msgstr ""
+msgstr "Kurulum Hatası"
 
 #: install_station/error.py:28
 msgid "Installation has failed!"
-msgstr ""
+msgstr "Kurulum başarısız oldu!"
 
 #: install_station/error.py:33
 msgid "GhostBSD issue system"
-msgstr ""
+msgstr "GhostBSD Sorun Takip Sistemi"
 
 #: install_station/error.py:35
 #, python-brace-format
@@ -158,14 +163,16 @@ msgid ""
 "Please report the issue to {anchor}, and \n"
 "be sure to provide /tmp/.pc-sysinstall/pc-sysinstall.log."
 msgstr ""
+"Lütfen sorunu {anchor} adresine bildirin ve \n"
+"/tmp/.pc-sysinstall/pc-sysinstall.log dosyasını eklediğinizden emin olun."
 
 #: install_station/error.py:45
 msgid "Ok"
-msgstr ""
+msgstr "Tamam"
 
 #: install_station/install_type.py:94
 msgid "How do you want to install GhostBSD?"
-msgstr ""
+msgstr "GhostBSD'yi nasıl yüklemek istersiniz?"
 
 #: install_station/install_type.py:100
 msgid ""
@@ -173,32 +180,37 @@ msgid ""
 "Install GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 "
 "configurations."
 msgstr ""
+"<b>Disk Yapılandırması</b>\n"
+"GhostBSD'yi Stripe, Mirror, RAIDZ1, RAIDZ2 veya RAIDZ3 yapılandırmalarını "
+"kullanarak kurun."
 
 #: install_station/install_type.py:113
 msgid ""
 "<b>Multi-Boot Configuration</b>\n"
 "Install GhostBSD with ZFS alongside other operating systems."
 msgstr ""
+"<b>Çoklu Önyükleme Yapılandırması</b>\n"
+"GhostBSD'yi ZFS ile birlikte diğer işletim sistemlerinin yanına kurun."
 
 #: install_station/install.py:46
 msgid "Creating ghostbsd_installation.cfg"
-msgstr ""
+msgstr "ghostbsd_installation.cfg Oluşturuluyor"
 
 #: install_station/install.py:50
 msgid "Deleting partition"
-msgstr ""
+msgstr "Bölümlendirme siliniyor"
 
 #: install_station/install.py:55
 msgid "Creating disk partition"
-msgstr ""
+msgstr "Disk bölümlendirmesi oluşturuluyor"
 
 #: install_station/install.py:60
 msgid "Creating new partitions"
-msgstr ""
+msgstr "Yeni bölümlendirmeler oluşturuluyor"
 
 #: install_station/install.py:90
 msgid "Installation in progress"
-msgstr ""
+msgstr "Kuruluyor"
 
 #: install_station/install.py:102
 msgid ""
@@ -211,253 +223,266 @@ msgid ""
 "\n"
 "We hope you'll enjoy our BSD operating system."
 msgstr ""
+"GhostBSD'yi seçtiğiniz için teşekkür ederiz!\n"
+"\n"
+"Her işletim sisteminin basit, zarif, güvenli olması, gizliliğinizi koruması ve "
+"aynı zamanda kullanım kolaylığı sunması gerektiğine inanıyoruz. "
+"GhostBSD, FreeBSD'yi kullanmak için gereken teknik uzmanlığa sahip olmayanlar "
+"için sistemi basitleştiriyor ve BSD'ye giriş eşiğini düşürüyor. \n"
+"\n"
+"İşletim sistemimizi keyifle kullanmanızı umuyoruz."
 
 #: install_station/interface_controller.py:24
 #: install_station/interface_controller.py:35
 msgid "Back"
-msgstr ""
+msgstr "Geri"
 
 #: install_station/interface_controller.py:26
 #: install_station/interface_controller.py:36
 msgid "Cancel"
-msgstr ""
+msgstr "İptal"
 
 #: install_station/interface_controller.py:28
 #: install_station/interface_controller.py:37
 #: install_station/interface_controller.py:297
 msgid "Next"
-msgstr ""
+msgstr "İleri"
 
 #: install_station/interface_controller.py:129
 #: install_station/interface_controller.py:130 install_station/language.py:101
 msgid "Welcome to GhostBSD"
-msgstr ""
+msgstr "GhostBSD'ye Hoş geldiniz"
 
 #: install_station/interface_controller.py:139
 msgid "Button"
-msgstr ""
+msgstr "Buton"
 
 #: install_station/interface_controller.py:160
 msgid "Keyboard Setup"
-msgstr ""
+msgstr "Klavye Yapılandırması"
 
 #: install_station/interface_controller.py:172
 #: install_station/interface_controller.py:274
 #: install_station/interface_controller.py:279
 msgid "Network Setup"
-msgstr ""
+msgstr "Ağ Yapılandırması"
 
 #: install_station/interface_controller.py:183
 msgid "Try Or Install GhostBSD"
-msgstr ""
+msgstr "GhostBSD'yi Deneyin veya Kurun"
 
 #: install_station/interface_controller.py:194
 msgid "Installation Types"
-msgstr ""
+msgstr "Kurulum Türleri"
 
 #: install_station/interface_controller.py:221
 msgid "Custom Configuration"
-msgstr ""
+msgstr "Özel Yapılandırma"
 
 #: install_station/interface_controller.py:231
 msgid "ZFS Configuration"
-msgstr ""
+msgstr "ZFS Yapılandırması"
 
 #: install_station/interface_controller.py:243
 msgid "Install"
-msgstr ""
+msgstr "Kur"
 
 #: install_station/interface_controller.py:253
 msgid "Installation Progress"
-msgstr ""
+msgstr "Kurulum İlerlemesi"
 
 #: install_station/interface_controller.py:260
 msgid "Progress Bar"
-msgstr ""
+msgstr "İlerleme Çubuğu"
 
 #: install_station/keyboard.py:45
 msgid "Type here to test your keyboard"
-msgstr ""
+msgstr "Klavyenizi test etmek için buraya yazın"
 
 #: install_station/keyboard.py:102
 msgid "Keyboard Layout"
-msgstr ""
+msgstr "Klavye Düzeni"
 
 #: install_station/keyboard.py:122
 msgid "Keyboard Models"
-msgstr ""
+msgstr "Klavye Modelleri"
 
 #: install_station/keyboard.py:230
 msgid "English (US)"
-msgstr ""
+msgstr "İngilizce (ABD)"
 
 #: install_station/keyboard.py:231
 msgid "English (Canada)"
-msgstr ""
+msgstr "İngilizce (Kanada)"
 
 #: install_station/keyboard.py:232
 msgid "French (Canada)"
-msgstr ""
+msgstr "Fransızca (Kanada)"
 
 #: install_station/language.py:93 install_station/language.py:197
 msgid "Please select your language:"
-msgstr ""
+msgstr "Lütfen dilinizi seçin:"
 
 #: install_station/language.py:99 install_station/language.py:116
 msgid "Language"
-msgstr ""
+msgstr "Dil"
 
 #: install_station/network_setup.py:107 install_station/network_setup.py:184
 msgid "Network card connected to the internet"
-msgstr ""
+msgstr "İnternete bağlı ağ kartı"
 
 #: install_station/network_setup.py:113 install_station/network_setup.py:190
 msgid "Network card not connected to the internet"
-msgstr ""
+msgstr "İnternete bağlı olmayan ağ kartı"
 
 #: install_station/network_setup.py:116 install_station/network_setup.py:193
 msgid "No network card detected"
-msgstr ""
+msgstr "Ağ kartı bulunamadı"
 
 #: install_station/network_setup.py:125 install_station/network_setup.py:203
 msgid "WiFi card detected and connected to an access point"
-msgstr ""
+msgstr "WiFi kartı algılandı ve bir erişim noktasına bağlı"
 
 #: install_station/network_setup.py:129 install_station/network_setup.py:207
 msgid "WiFi card detected but not connected to an access point"
-msgstr ""
+msgstr "WiFi kartı algılandı ancak bir erişim noktasına bağlı değil"
 
 #: install_station/network_setup.py:132 install_station/network_setup.py:210
 msgid "WiFi card not detected or not supported"
-msgstr ""
+msgstr "Wi-Fi kartı algılanmadı veya desteklenmiyor"
 
 #: install_station/network_setup.py:366
 msgid "Wi-Fi Network Authentication Required"
-msgstr ""
+msgstr "Wi-Fi Ağ Kimlik Doğrulaması Gerekli"
 
 #: install_station/network_setup.py:379
 #, python-brace-format
 msgid "{ssid} Wi-Fi Network Authentication failed"
-msgstr ""
+msgstr "{ssid} Wi-Fi ağı için kimlik doğrulaması başarısız oldu"
 
 #: install_station/network_setup.py:381
 #, python-brace-format
 msgid "Authentication required by {ssid} Wi-Fi Network"
-msgstr ""
+msgstr "{ssid} Wi-Fi ağı için kimlik doğrulaması gerekiyor"
 
 #: install_station/network_setup.py:384
 msgid "Password:"
-msgstr ""
+msgstr "Şifre:"
 
 #: install_station/network_setup.py:387
 msgid "Show password"
-msgstr ""
+msgstr "Şifreyi göster"
 
 #: install_station/try_install.py:102
 msgid "What would you like to do?"
-msgstr ""
+msgstr "Ne yapmak istersiniz?"
 
 #: install_station/try_install.py:109
 msgid ""
 "<b>Install GhostBSD</b>\n"
 "Install GhostBSD on your computer."
 msgstr ""
+"<b>GhostBSD'yi Kur</b>\n"
+"GhostBSD'yi bilgisayarınıza kurun."
 
 #: install_station/try_install.py:122
 msgid ""
 "<b>Try GhostBSD</b>\n"
 "Run GhostBSD without installing to your computer."
 msgstr ""
+"<b>GhostBSD'yi Dene</b>\n"
+"Bilgisayarınızda GhostBSD'yi kurmadan çalıştırın."
 
 #: install_station/use_zfs.py:160
 msgid ""
 "Please select 1 or more drive for stripe (select the smallest disk first)"
 msgstr ""
+"Lütfen stripe için 1 veya daha fazla sürücü seçin (öncelikle en küçük diski seçin)."
 
 #: install_station/use_zfs.py:167
 msgid "Please select 2 drive for mirroring (select the smallest disk first)"
-msgstr ""
+msgstr "Lütfen mirror için 2 sürücü seçin (öncelikle en küçük diski seçin)"
 
 #: install_station/use_zfs.py:175
 msgid "Please select 3 drive for RAIDZ1 (select the smallest disk first)"
-msgstr ""
+msgstr "Lütfen RAIDZ1 için 3 sürücü seçin (öncelikle en küçük diski seçin)"
 
 #: install_station/use_zfs.py:182
 msgid "Please select 4 drive for RAIDZ2 (select the smallest disk first)"
-msgstr ""
+msgstr "Lütfen RAIDZ2 için 4 sürücü seçin (öncelikle en küçük diski seçin)"
 
 #: install_station/use_zfs.py:189
 msgid "Please select 5 drive for RAIDZ3 (select the smallest disk first)"
-msgstr ""
+msgstr "Lütfen RAIDZ3 için 5 sürücü seçin (öncelikle en küçük diski seçin)"
 
 #: install_station/use_zfs.py:292
 msgid "Disk"
-msgstr ""
+msgstr "Disk"
 
 #: install_station/use_zfs.py:299
 msgid "Size(MB)"
-msgstr ""
+msgstr "Boyut(MB)"
 
 #: install_station/use_zfs.py:305
 msgid "Name"
-msgstr ""
+msgstr "İsim"
 
 #: install_station/use_zfs.py:309
 msgid "Check"
-msgstr ""
+msgstr "Kontrol Et"
 
 #: install_station/use_zfs.py:322
 msgid "Please select one drive"
-msgstr ""
+msgstr "Lütfen bir sürücü seçiniz"
 
 #: install_station/use_zfs.py:327
 msgid "<b>Pool Type</b>"
-msgstr ""
+msgstr "<b>Havuz Türü</b>"
 
 #: install_station/use_zfs.py:331
 msgid "1+ disks Stripe"
-msgstr ""
+msgstr "1+ diskli Stripe"
 
 #: install_station/use_zfs.py:332
 msgid "2+ disks Mirror"
-msgstr ""
+msgstr "2+ diskli Mirror"
 
 #: install_station/use_zfs.py:333
 msgid "3 disks RAIDZ1"
-msgstr ""
+msgstr "3 diskli RAIDZ1"
 
 #: install_station/use_zfs.py:334
 msgid "4 disks RAIDZ2"
-msgstr ""
+msgstr "4 diskli RAIDZ2"
 
 #: install_station/use_zfs.py:335
 msgid "5 disks RAIDZ3"
-msgstr ""
+msgstr "5 diskli RAIDZ3"
 
 #: install_station/use_zfs.py:345
 msgid "<b>Pool Name</b>"
-msgstr ""
+msgstr "<b>Havuz Adı</b>"
 
 #: install_station/use_zfs.py:365
 msgid "Encrypt Disk"
-msgstr ""
+msgstr "Diski Şifrele"
 
 #: install_station/use_zfs.py:369
 msgid "Password"
-msgstr ""
+msgstr "Şifre"
 
 #: install_station/use_zfs.py:376
 msgid "Verify it"
-msgstr ""
+msgstr "Doğrula"
 
 #: install_station/use_zfs.py:537
 msgid "Warning"
-msgstr ""
+msgstr "Uyarı"
 
 #: install_station/use_zfs.py:548
 msgid "Smallest disk need to be SELECTED first!\n"
-msgstr ""
+msgstr "Öncelikle en küçük disk SEÇİLMELİDİR!\n"
 
 #: install_station/use_zfs.py:549
 msgid "All the disk selected will reset."
-msgstr ""
+msgstr "Seçilen tüm diskler sıfırlanacaktır."
