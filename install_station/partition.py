@@ -6,7 +6,7 @@ of partitions for GPT/MBR schemes with ZFS support and manages the partition dat
 import re
 from time import sleep
 from subprocess import Popen, PIPE, STDOUT, call
-from install_station.data import query, zfs_datasets, InstallationData
+from install_station.data import pc_sysinstall, zfs_datasets, InstallationData
 from install_station.system_calls import get_ram_size_mb
 
 # Define required file paths
@@ -99,17 +99,28 @@ def device_model(disk: str) -> str:
     return device_popen.stdout.read().strip()
 
 
-def disk_size(disk: str) -> str:
-    """Get the size of a disk device.
-    
+# pc-sysinstall reports device attributes as 'name-field: value' lines, and
+# disk-info as 'field=value' lines
+ENTITY_LINE = re.compile(
+    r'^(?P<name>.+)-(?P<field>[a-z]+):\s*(?P<value>.*)$', re.MULTILINE
+)
+INFO_LINE = re.compile(
+    r'^(?P<field>[a-z]+)=(?P<value>.*)$', re.MULTILINE
+)
+
+
+def query_backend(command: str, argument: str) -> str:
+    """Run a pc-sysinstall query command and return its output.
+
     Args:
-        disk (str): Disk device name (e.g., 'ada0')
-        
+        command (str): pc-sysinstall subcommand (e.g., 'disk-part')
+        argument (str): Device the subcommand acts on (e.g., 'ada0')
+
     Returns:
-        str: Disk size information
+        str: Everything the command wrote to stdout and stderr
     """
-    disk_size_output = Popen(
-        f"{query}/disk-info.sh {disk}",
+    backend_output = Popen(
+        f"{pc_sysinstall} {command} {argument}",
         shell=True,
         stdin=PIPE,
         stdout=PIPE,
@@ -117,28 +128,71 @@ def disk_size(disk: str) -> str:
         stderr=STDOUT,
         close_fds=True
     )
-    return disk_size_output.stdout.readlines()[0].rstrip()
+    return backend_output.stdout.read()
+
+
+def parse_entities(output: str, device: str) -> tuple[dict, dict]:
+    """Split pc-sysinstall 'name-field: value' output into its entities.
+
+    pc-sysinstall reports partitions and free space as flat lines such as
+    'ada0p1-sizemb: 260' and 'ada0-freespace1-sizemb: 0'. Lines arrive in
+    on-disk order, and dictionaries keep insertion order, so the returned
+    entities preserve the physical layout of the device.
+
+    Args:
+        output (str): Output of a disk-part or part-label query
+        device (str): Device the query was run against (e.g., 'ada0')
+
+    Returns:
+        tuple: (device level fields, ordered entity name -> field dict)
+    """
+    device_fields = {}
+    entities = {}
+    for match in ENTITY_LINE.finditer(output):
+        name = match.group('name')
+        field = match.group('field')
+        value = match.group('value').strip()
+        # 'format', 'freemb' and 'freeblocks' describe the whole device
+        if name == device:
+            device_fields[field] = value
+            continue
+        # Free space is reported as '<device>-freespaceN', report it as
+        # 'freespaceN' so it reads the same as it did from the old scripts
+        if name.startswith(f'{device}-'):
+            name = name[len(device) + 1:]
+        entities.setdefault(name, {})[field] = value
+    return device_fields, entities
+
+
+def disk_size(disk: str) -> str:
+    """Get the size of a disk device.
+
+    Args:
+        disk (str): Disk device name (e.g., 'ada0')
+
+    Returns:
+        str: Disk size in megabytes
+    """
+    fields = {
+        match.group('field'): match.group('value').strip()
+        for match in INFO_LINE.finditer(query_backend('disk-info', disk))
+    }
+    return fields['size']
 
 
 def get_scheme(disk: str) -> str:
     """Detect the partition scheme of a disk device.
-    
+
     Args:
         disk (str): Disk device name (e.g., 'ada0')
-        
+
     Returns:
-        str: Partition scheme ('GPT', 'MBR', or empty if none)
+        str: Partition scheme ('GPT' or 'MBR')
     """
-    scheme_output = Popen(
-        f"{query}/detect-scheme.sh {disk}",
-        shell=True,
-        stdin=PIPE,
-        stdout=PIPE,
-        universal_newlines=True,
-        stderr=STDOUT,
-        close_fds=True
-    )
-    return scheme_output.stdout.readlines()[0].rstrip()
+    device_fields, _ = parse_entities(query_backend('disk-part', disk), disk)
+    # An unpartitioned disk makes disk-part exit before printing a format,
+    # which the scheme detection this replaces reported as MBR
+    return device_fields.get('format', 'MBR')
 
 
 class DiskPartition:
@@ -150,130 +204,85 @@ class DiskPartition:
     
     Attributes:
         disk_database (dict): In-memory database of disk and partition information
-        query_partition (str): Path to disk partition query script
     """
     disk_database: dict = {}
-
-    query_partition = f'{query}/disk-part.sh'
 
     @classmethod
     def mbr_partition_slice_db(cls, disk):
         """Create database of MBR slices and their partitions.
-        
+
         Args:
             disk (str): Disk device name (e.g., 'ada0')
-            
+
         Returns:
             dict: Database of slices with their partition information
         """
-        partition_output = Popen(
-            f'{cls.query_partition} {disk}',
-            shell=True,
-            stdin=PIPE,
-            stdout=PIPE,
-            universal_newlines=True
-        )
+        _, entities = parse_entities(query_backend('disk-part', disk), disk)
         slice_db = {}
-        free_num = 1
-        for line in partition_output.stdout:
-            info = line.strip().split()
-            slice_name = info[0]
-            if 'freespace' in line:
-                slice_name = f'freespace{free_num}'
-                free_num += 1
-            part_db = cls.mbr_partition_db(info[0])
+        for slice_name, fields in entities.items():
+            part_db = cls.mbr_partition_db(slice_name)
             part_list = [] if part_db is None else list(part_db.keys())
-            partitions = {
+            slice_db[slice_name] = {
                 'name': slice_name,
-                'size': info[1].partition('M')[0],
+                'size': fields.get('sizemb', '0'),
                 'mount-point': '',
-                'file-system': info[2],
+                'file-system': fields.get('label', 'none'),
                 'stat': None,
                 'partitions': part_db,
                 'partition-list': part_list
             }
-            slice_db[slice_name] = partitions
         return slice_db
 
     @classmethod
     def mbr_partition_db(cls, partition_slice):
         """Create database of partitions within an MBR slice.
-        
+
         Args:
             partition_slice (str): Slice identifier (e.g., 'ada0s1')
-            
+
         Returns:
             dict or None: Database of partitions within the slice, or None for freespace
         """
         if 'freespace' in partition_slice:
             return None
-        else:
-            slice_output = Popen(
-                f'{query}/disk-label.sh {partition_slice}',
-                shell=True,
-                stdin=PIPE,
-                stdout=PIPE,
-                universal_newlines=True
-            )
-            partition_db = {}
-            alph = ord('a')
-            free_num = 1
-            for line in slice_output.stdout:
-                info = line.strip().split()
-                if 'freespace' in line:
-                    partition_name = f'freespace{free_num}'
-                    free_num += 1
-                else:
-                    letter = chr(alph)
-                    partition_name = f'{partition_slice}{letter}'
-                    alph += 1
-                partitions = {
-                    'name': partition_name,
-                    'size': info[0].partition('M')[0],
-                    'mount-point': '',
-                    'file-system': info[2],
-                    'stat': None,
-                }
-                partition_db[partition_name] = partitions
-            if not partition_db:
-                return None
-            return partition_db
+        # part-label names each label itself, deriving the letter from the
+        # gpart index, so a slice missing an index still reads correctly
+        _, entities = parse_entities(
+            query_backend('part-label', partition_slice), partition_slice
+        )
+        partition_db = {}
+        for partition_name, fields in entities.items():
+            partition_db[partition_name] = {
+                'name': partition_name,
+                'size': fields.get('sizemb', '0'),
+                'mount-point': '',
+                'file-system': fields.get('label', 'none'),
+                'stat': None,
+            }
+        return partition_db or None
 
     @classmethod
     def gpt_partition_db(cls, disk):
         """Create database of GPT partitions on a disk.
-        
+
         Args:
             disk (str): Disk device name (e.g., 'ada0')
-            
+
         Returns:
             dict: Database of GPT partitions
         """
-        partition_output = Popen(
-            f'{cls.query_partition} {disk}',
-            shell=True,
-            stdin=PIPE,
-            stdout=PIPE,
-            universal_newlines=True
-        )
+        _, entities = parse_entities(query_backend('disk-part', disk), disk)
         partition_db = {}
-        free_num = 1
-        for line in partition_output.stdout:
-            info = line.strip().split()
-            slice_name = info[0]
-            if 'freespace' in line:
-                slice_name = f'freespace{free_num}'
-                free_num += 1
-            partitions = {
-                'name': info[0],
-                'size': info[1].partition('M')[0],
+        for partition_name, fields in entities.items():
+            partition_db[partition_name] = {
+                'name': partition_name,
+                'size': fields.get('sizemb', '0'),
                 'mount-point': '',
-                'file-system': info[2],
+                'file-system': fields.get('label', 'none'),
                 'stat': None,
                 'partitions': {},
                 'partition-list': []
             }
-            partition_db[slice_name] = partitions
         return partition_db
 
     @classmethod
