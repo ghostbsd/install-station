@@ -154,12 +154,17 @@ class Configuration:
                 f.write('\n# command to prepare first boot\n')
                 f.write("runCommand=sysrc hostname='installed'\n")
                 f.write("runCommand=pw userdel -n ghostbsd -r\n")
-                f.write("runCommand=sed -i '' 's/ghostbsd/root/g' /etc/gettytab\n")
-                f.write("runCommand=sed -i '' 's/ghostbsd/root/g' /etc/ttys\n")
-                f.write("runCommand=echo '# WARNING: Do NOT set initial_setup_enable=YES manually!' >> /etc/rc.conf\n")
-                f.write("runCommand=echo '# This service is ONLY for first boot after installation.' >> /etc/rc.conf\n")
-                f.write("runCommand=echo '# It will automatically disable itself after running.' >> /etc/rc.conf\n")
-                f.write("runCommand=sysrc initial_setup_enable=YES\n")
+                # The live media enables install_station, writes root's .xinitrc
+                # to launch this installer, and overrides the mate schemas to
+                # keep the live session from locking. All three are copied onto
+                # the target, so clear them or they follow us onto the installed
+                # system. The schemas need recompiling afterwards, otherwise
+                # gschemas.compiled keeps serving the overridden defaults.
+                f.write("runCommand=rm -f /etc/rc.conf.d/install_station\n")
+                f.write("runCommand=rm -f /root/.xinitrc\n")
+                f.write("runCommand=rm -f /usr/local/share/glib-2.0/schemas/99_ghostbsd_live.gschema.override\n")
+                f.write("runCommand=glib-compile-schemas /usr/local/share/glib-2.0/schemas\n")
+                f.write("runCommand=sysrc -f /etc/rc.conf.d/initial_setup initial_setup_enable=YES\n")
                 f.write("runCommand=sed -i '' '/^autologin-user=/d' /usr/local/etc/lightdm/lightdm.conf\n")
                 f.write("runCommand=sed -i '' '/^autologin-session=/d' /usr/local/etc/lightdm/lightdm.conf\n")
         except IOError as e:

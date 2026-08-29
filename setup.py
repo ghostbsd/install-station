@@ -131,7 +131,8 @@ lib_install_station_image = [
 data_files = [
     (f'{prefix}/lib/install-station', ['src/ghostbsd-style.css']),
     (f'{prefix}/lib/install-station/image', lib_install_station_image),
-    (f'{prefix}/etc/rc.d', ['src/install_station'])
+    (f'{prefix}/etc/rc.d', ['src/install_station']),
+    (f'{prefix}/share/applications', ['src/install-station.desktop'])
 ]
 
 data_files.extend(data_file_list(f'{prefix}/share/locale', 'build/mo'))
