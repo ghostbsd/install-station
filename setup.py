@@ -128,35 +128,8 @@ lib_install_station_image = [
     'src/image/installation.jpg'
 ]
 
-lib_install_station_backend_query = [
-    'src/backend-query/detect-laptop.sh',
-    'src/backend-query/detect-nics.sh',
-    'src/backend-query/detect-scheme.sh',
-    'src/backend-query/detect-vmware.sh',
-    'src/backend-query/detect-wifi.sh',
-    'src/backend-query/disk-info.sh',
-    'src/backend-query/disk-label.sh',
-    'src/backend-query/disk-list.sh',
-    'src/backend-query/disk-part.sh',
-    'src/backend-query/enable-net.sh',
-    'src/backend-query/list-components.sh',
-    'src/backend-query/list-rsync-backups.sh',
-    'src/backend-query/list-tzones.sh',
-    'src/backend-query/query-langs.sh',
-    'src/backend-query/send-logs.sh',
-    'src/backend-query/setup-ssh-keys.sh',
-    'src/backend-query/sys-mem.sh',
-    'src/backend-query/test-live.sh',
-    'src/backend-query/test-netup.sh',
-    'src/backend-query/update-part-list.sh',
-    'src/backend-query/xkeyboard-layouts.sh',
-    'src/backend-query/xkeyboard-models.sh',
-    'src/backend-query/xkeyboard-variants.sh'
-]
-
 data_files = [
     (f'{prefix}/lib/install-station', ['src/ghostbsd-style.css']),
-    (f'{prefix}/lib/install-station/backend-query', lib_install_station_backend_query),
     (f'{prefix}/lib/install-station/image', lib_install_station_image),
     (f'{prefix}/etc/rc.d', ['src/install_station'])
 ]

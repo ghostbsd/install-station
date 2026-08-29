@@ -7,7 +7,6 @@ be_name: str = "default"
 logo: str = "/usr/local/lib/install-station/image/logo.png"
 gif_logo: str = "/usr/local/lib/install-station/image/G_logo.gif"
 pc_sysinstall: str = "/usr/local/sbin/pc-sysinstall"
-query: str = "sh /usr/local/lib/install-station/backend-query"
 tmp: str = "/tmp"
 installation_config: str = f'{tmp}/ghostbsd_installation.cfg'
 zfs_datasets: str = "/," \
