@@ -208,10 +208,9 @@ class Interface:
                         InstallationData.keyboard_variant,
                         InstallationData.keyboard_model_code
                     )
-                with open('/home/ghostbsd/.xinitrc', 'w') as xinitrc:
-                    xinitrc.writelines('gsettings set org.mate.SettingsDaemon.plugins.housekeeping active true &\n')
-                    xinitrc.writelines('gsettings set org.mate.screensaver lock-enabled false &\n')
-                    xinitrc.writelines('exec ck-launch-session mate-session\n')
+                # Quitting hands the boot back to rc, which continues on to
+                # lightdm. It autologins the live user into the mate session,
+                # so there is no .xinitrc to write here.
                 Gtk.main_quit()
         elif page == 4:
             Button.show_back()
