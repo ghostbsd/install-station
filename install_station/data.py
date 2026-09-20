@@ -1,5 +1,5 @@
 """
-Contains the data class and some commonly use variables
+Contains the data class and some commonly used variables
 """
 import gettext
 

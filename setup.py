@@ -143,7 +143,7 @@ setup(
     description="Install Station - Streamlined GhostBSD installer",
     license='BSD',
     author='Eric Turgeon',
-    url='https://github/GhostBSD/install-station/',
+    url='https://github.com/GhostBSD/install-station/',
     package_dir={'': '.'},
     install_requires=['setuptools'],
     packages=['install_station'],
