@@ -11,10 +11,10 @@ from install_station.data import get_text
 
 def lower_case(text: str) -> bool:
     """
-    Find if password contain only lower case.
+    Find if password contains only lower case.
     :param text: password
 
-    :return: True if password contain only lower case
+    :return: True if password contains only lower case
     """
     search = re.compile(r'[^a-z]').search
     return not bool(search(text))
@@ -23,10 +23,10 @@ def lower_case(text: str) -> bool:
 # Find if password contain only upper case
 def upper_case(text: str) -> bool:
     """
-    Find if password contain only upper case.
+    Find if password contains only upper case.
     :param text: password
 
-    :return: True if password contain only upper case
+    :return: True if password contains only upper case
     """
     search = re.compile(r'[^A-Z]').search
     return not bool(search(text))
@@ -35,10 +35,10 @@ def upper_case(text: str) -> bool:
 # Find if password contain only lower case and number
 def lower_and_number(text: str) -> bool:
     """
-    Find if password contain only lower case and number.
+    Find if password contains only lower case and number.
     :param text: password
 
-    :return: True if password contain only lower case and number
+    :return: True if password contains only lower case and number
     """
     search = re.compile(r'[^a-z0-9]').search
     return not bool(search(text))
@@ -47,22 +47,22 @@ def lower_and_number(text: str) -> bool:
 # Find if password contain only upper case and number
 def upper_and_number(text: str) -> bool:
     """
-    Find if password contain only upper case and number.
+    Find if password contains only upper case and number.
     :param text: password
 
-    :return: True if password contain only upper case and number
+    :return: True if password contains only upper case and number
     """
     search = re.compile(r'[^A-Z0-9]').search
     return not bool(search(text))
 
 
-# Find if password contain only lower and upper case and
+# Find if password contains only lower and upper case and
 def lower_upper(text: str) -> bool:
     """
-    Find if password contain only lower and upper case and
+    Find if password contains only lower and upper case and
     :param text: password
 
-    :return: True if password contain only lower and upper case and
+    :return: True if password contains only lower and upper case and
     """
     search = re.compile(r'[^a-zA-Z]').search
     return not bool(search(text))
@@ -82,16 +82,16 @@ def lower_upper_number(text: str) -> bool:
     return not bool(search(text))
 
 
-# Find if password contain only lowercase, uppercase numbers
-# and some special character.
+# Find if password contains only lowercase, uppercase numbers
+# and some special characters.
 def all_character(text: str) -> bool:
     """
-    Find if password contain only lowercase, uppercase numbers
-    and some special character.
+    Find if password contains only lowercase, uppercase numbers
+    and some special characters.
     :param text: password
 
-    :return: True if password contain only lowercase, uppercase numbers
-    and some special character.
+    :return: True if password contains only lowercase, uppercase numbers
+    and some special characters.
     """
     search = re.compile(r'[^a-zA-Z0-9~!@#$%^&*_+":;\'-]').search
     return not bool(search(text))

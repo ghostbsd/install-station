@@ -1,5 +1,5 @@
 """
-Module to create the inner window for select what type of installation.
+Module to create the inner window for selecting what type of installation.
 """
 import gi
 gi.require_version('Gtk', '3.0')

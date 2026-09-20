@@ -70,7 +70,7 @@ def read_output(command, progressbar):
             break
         progressbar_text = line.rstrip()
         GLib.idle_add(update_progress, progressbar, progressbar_text)
-        # Those for next 4 line is for debugging only.
+        # These next 4 lines are for debugging only.
         # filer = open(f"{tmp}/tmp", "a")
         # filer.writelines(progressbar_text)
         # filer.close
