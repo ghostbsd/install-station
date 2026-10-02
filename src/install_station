@@ -14,10 +14,15 @@ stop_cmd=":"
 
 install_station_start()
 {
-    # Create .xinitrc for root to run installer
+    HOME=/root dbus-run-session -- \
+        gsettings set org.mate.session required-components-list "['windowmanager']"
+    HOME=/root dbus-run-session -- \
+        gsettings set org.mate.background show-desktop-icons false
+
+    mkdir -p /root/.install-station-autostart
+
     cat > /root/.xinitrc <<'EOF'
-exec marco &
-exec feh --bg-fill /usr/local/share/backgrounds/ghostbsd/blue-layered-stripes.jpg &
+ck-launch-session mate-session --autostart=/root/.install-station-autostart &
 exec install-station
 EOF
     chmod 755 /root/.xinitrc
@@ -25,8 +30,8 @@ EOF
     # Start X as root - this will block until install-station exits
     su -l root -c "startx -- :0 vt09"
 
-    # Cleanup
     rm -f /root/.xinitrc
+    rmdir /root/.install-station-autostart
 }
 
 load_rc_config $name
