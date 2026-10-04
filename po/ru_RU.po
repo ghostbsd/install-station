@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-24 18:07-0300\n"
+"POT-Creation-Date: 2026-10-02 18:30-0300\n"
 "PO-Revision-Date: 2025-07-09 20:20-0300\n"
 "Last-Translator: Boyarshinov Nikita <boyarshinovn@gmail.com>\n"
 "Language-Team: Russian <gnu@d07.ru>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: install_station/boot_manager.py:121
-#: install_station/interface_controller.py:241
+#: install_station/interface_controller.py:247
 msgid "Boot Option"
 msgstr "Вариант загрузки"
 
@@ -228,8 +228,9 @@ msgstr ""
 "\n"
 "Мы считаем, что каждая операционная система должна быть простой, элегантной, "
 "безопасной и защищать вашу приватность, оставаясь при этом простой в "
-"использовании. GhostBSD упрощает FreeBSD для тех, кому не хватает технической "
-"экспертизы для его использования, и снижает порог входа для использования BSD.\n"
+"использовании. GhostBSD упрощает FreeBSD для тех, кому не хватает "
+"технической экспертизы для его использования, и снижает порог входа для "
+"использования BSD.\n"
 "\n"
 "Мы надеемся, что вам понравится наша операционная система BSD."
 
@@ -245,7 +246,7 @@ msgstr "Отмена"
 
 #: install_station/interface_controller.py:28
 #: install_station/interface_controller.py:37
-#: install_station/interface_controller.py:297
+#: install_station/interface_controller.py:281
 msgid "Next"
 msgstr "Далее"
 
@@ -263,8 +264,6 @@ msgid "Keyboard Setup"
 msgstr "Настройка клавиатуры"
 
 #: install_station/interface_controller.py:172
-#: install_station/interface_controller.py:274
-#: install_station/interface_controller.py:279
 msgid "Network Setup"
 msgstr "Настройка сети"
 
@@ -276,23 +275,23 @@ msgstr "Попробовать или Установить GhostBSD"
 msgid "Installation Types"
 msgstr "Типы установки"
 
-#: install_station/interface_controller.py:221
+#: install_station/interface_controller.py:222
 msgid "Custom Configuration"
 msgstr "Пользовательская конфигурация"
 
-#: install_station/interface_controller.py:231
+#: install_station/interface_controller.py:232
 msgid "ZFS Configuration"
 msgstr "Конфигурация ZFS"
 
-#: install_station/interface_controller.py:243
+#: install_station/interface_controller.py:249
 msgid "Install"
 msgstr "Установить"
 
-#: install_station/interface_controller.py:253
+#: install_station/interface_controller.py:259
 msgid "Installation Progress"
 msgstr "Ход установки"
 
-#: install_station/interface_controller.py:260
+#: install_station/interface_controller.py:266
 msgid "Progress Bar"
 msgstr "Индикатор выполнения"
 
@@ -328,51 +327,136 @@ msgstr "Пожалуйста, выберите ваш язык:"
 msgid "Language"
 msgstr "Язык"
 
-#: install_station/network_setup.py:107 install_station/network_setup.py:184
+#: install_station/network_setup.py:143
 msgid "Network card connected to the internet"
 msgstr "Сетевая карта подключена к интернету"
 
-#: install_station/network_setup.py:113 install_station/network_setup.py:190
+#: install_station/network_setup.py:149
 msgid "Network card not connected to the internet"
 msgstr "Сетевая карта не подключена к интернету"
 
-#: install_station/network_setup.py:116 install_station/network_setup.py:193
+#: install_station/network_setup.py:152
 msgid "No network card detected"
 msgstr "Сетевая карта не обнаружена"
 
-#: install_station/network_setup.py:125 install_station/network_setup.py:203
+#: install_station/network_setup.py:161
 msgid "WiFi card detected and connected to an access point"
 msgstr "Wi-Fi карта обнаружена и подключена к точке доступа"
 
-#: install_station/network_setup.py:129 install_station/network_setup.py:207
+#: install_station/network_setup.py:165
 msgid "WiFi card detected but not connected to an access point"
 msgstr "Wi-Fi карта обнаружена, но не подключена к точке доступа"
 
-#: install_station/network_setup.py:132 install_station/network_setup.py:210
+#: install_station/network_setup.py:168
 msgid "WiFi card not detected or not supported"
 msgstr "Wi-Fi карта не обнаружена или не поддерживается"
 
-#: install_station/network_setup.py:366
+#: install_station/network_setup.py:190 install_station/network_setup.py:253
+msgid "Rescan"
+msgstr ""
+
+#: install_station/network_setup.py:425
 msgid "Wi-Fi Network Authentication Required"
 msgstr "Требуется аутентификация в Wi-Fi сети"
 
-#: install_station/network_setup.py:379
+#: install_station/network_setup.py:438
 #, python-brace-format
 msgid "{ssid} Wi-Fi Network Authentication failed"
 msgstr "Аутентификация в Wi-Fi сети {ssid} не удалась"
 
-#: install_station/network_setup.py:381
+#: install_station/network_setup.py:440
 #, python-brace-format
 msgid "Authentication required by {ssid} Wi-Fi Network"
 msgstr "Аутентификация, требуемая Wi-Fi сетью {ssid}"
 
-#: install_station/network_setup.py:384
+#: install_station/network_setup.py:443 install_station/network_setup.py:661
 msgid "Password:"
 msgstr "Пароль:"
 
-#: install_station/network_setup.py:387
+#: install_station/network_setup.py:446
 msgid "Show password"
 msgstr "Показать пароль"
+
+#: install_station/network_setup.py:601
+#, fuzzy
+msgid "Enterprise Wi-Fi Authentication"
+msgstr "Аутентификация в Wi-Fi сети {ssid} не удалась"
+
+#: install_station/network_setup.py:609
+#, fuzzy, python-brace-format
+msgid "{ssid} Enterprise Authentication Failed"
+msgstr "Аутентификация в Wi-Fi сети {ssid} не удалась"
+
+#: install_station/network_setup.py:611
+#, python-brace-format
+msgid "Enterprise Authentication for {ssid}"
+msgstr ""
+
+#: install_station/network_setup.py:617
+#, python-brace-format
+msgid "Security: {security}"
+msgstr ""
+
+#: install_station/network_setup.py:631
+msgid "EAP Method:"
+msgstr ""
+
+#: install_station/network_setup.py:640
+msgid "Inner Auth:"
+msgstr ""
+
+#: install_station/network_setup.py:645
+msgid "Username:"
+msgstr ""
+
+#: install_station/network_setup.py:649
+msgid "Optional - for privacy"
+msgstr ""
+
+#: install_station/network_setup.py:650
+msgid "Anonymous ID:"
+msgstr ""
+
+#: install_station/network_setup.py:658
+msgid "Show"
+msgstr ""
+
+#: install_station/network_setup.py:665
+msgid "Certificates (*.pem, *.crt, *.cer)"
+msgstr ""
+
+#: install_station/network_setup.py:667
+msgid "Select CA Certificate"
+msgstr ""
+
+#: install_station/network_setup.py:672
+msgid "CA Certificate:"
+msgstr ""
+
+#: install_station/network_setup.py:677
+msgid "Select Client Certificate"
+msgstr ""
+
+#: install_station/network_setup.py:680
+msgid "Client Cert:"
+msgstr ""
+
+#: install_station/network_setup.py:685
+msgid "Select Private Key"
+msgstr ""
+
+#: install_station/network_setup.py:686
+msgid "Key files (*.pem, *.key, *.p12)"
+msgstr ""
+
+#: install_station/network_setup.py:690
+msgid "Private Key:"
+msgstr ""
+
+#: install_station/network_setup.py:697
+#, fuzzy
+msgid "Key Password:"
+msgstr "Пароль:"
 
 #: install_station/try_install.py:102
 msgid "What would you like to do?"
@@ -394,95 +478,123 @@ msgstr ""
 "<b>Попробовать GhostBSD</b>\n"
 "Запустить GhostBSD без установки на ваш компьютер."
 
-#: install_station/use_zfs.py:160
-msgid ""
-"Please select 1 or more drive for stripe (select the smallest disk first)"
-msgstr "Пожалуйста, выберите 1 или более дисков для stripe (сначала выберите наименьший диск)"
+#: install_station/use_zfs.py:176
+#, fuzzy
+msgid "(select the smallest disk first)"
+msgstr ""
+"Пожалуйста, выберите 3 диска для RAIDZ1 (сначала выберите наименьший диск)"
 
-#: install_station/use_zfs.py:167
-msgid "Please select 2 drive for mirroring (select the smallest disk first)"
-msgstr "Пожалуйста, выберите 2 диска для зеркалирования (сначала выберите наименьший диск)"
+#: install_station/use_zfs.py:180
+msgid "Select 1 or more drives, no redundancy"
+msgstr ""
 
-#: install_station/use_zfs.py:175
-msgid "Please select 3 drive for RAIDZ1 (select the smallest disk first)"
-msgstr "Пожалуйста, выберите 3 диска для RAIDZ1 (сначала выберите наименьший диск)"
+#: install_station/use_zfs.py:184
+msgid "Select 2 or more drives for mirroring"
+msgstr ""
 
-#: install_station/use_zfs.py:182
-msgid "Please select 4 drive for RAIDZ2 (select the smallest disk first)"
-msgstr "Пожалуйста, выберите 4 диска для RAIDZ2 (сначала выберите наименьший диск)"
+#: install_station/use_zfs.py:188
+#, fuzzy
+msgid "Select 3 drives for RAIDZ1"
+msgstr "3 диска RAIDZ1"
 
-#: install_station/use_zfs.py:189
-msgid "Please select 5 drive for RAIDZ3 (select the smallest disk first)"
-msgstr "Пожалуйста, выберите 5 дисков для RAIDZ3 (сначала выберите наименьший диск)"
+#: install_station/use_zfs.py:192
+#, fuzzy
+msgid "Select 4 drives for RAIDZ2"
+msgstr "4 диска RAIDZ2"
 
-#: install_station/use_zfs.py:292
+#: install_station/use_zfs.py:196
+#, fuzzy
+msgid "Select 5 drives for RAIDZ3"
+msgstr "5 дисков RAIDZ3"
+
+#: install_station/use_zfs.py:270
 msgid "Disk"
 msgstr "Диск"
 
-#: install_station/use_zfs.py:299
+#: install_station/use_zfs.py:277
 msgid "Size(MB)"
 msgstr "Размер (МБ)"
 
-#: install_station/use_zfs.py:305
+#: install_station/use_zfs.py:283
 msgid "Name"
 msgstr "Имя"
 
-#: install_station/use_zfs.py:309
+#: install_station/use_zfs.py:287
 msgid "Check"
 msgstr "Выбрать"
 
-#: install_station/use_zfs.py:322
+#: install_station/use_zfs.py:301
 msgid "Please select one drive"
 msgstr "Пожалуйста, выберите один диск"
 
-#: install_station/use_zfs.py:327
-msgid "<b>Pool Type</b>"
-msgstr "<b>Тип пула</b>"
+#: install_station/use_zfs.py:307
+#, fuzzy
+msgid "Pool Layout"
+msgstr "Раскладка клавиатуры"
 
-#: install_station/use_zfs.py:331
-msgid "1+ disks Stripe"
-msgstr "1+ диск(ов) Stripe"
-
-#: install_station/use_zfs.py:332
-msgid "2+ disks Mirror"
-msgstr "2+ диск(а) Mirror"
-
-#: install_station/use_zfs.py:333
-msgid "3 disks RAIDZ1"
-msgstr "3 диска RAIDZ1"
-
-#: install_station/use_zfs.py:334
-msgid "4 disks RAIDZ2"
-msgstr "4 диска RAIDZ2"
-
-#: install_station/use_zfs.py:335
-msgid "5 disks RAIDZ3"
-msgstr "5 дисков RAIDZ3"
-
-#: install_station/use_zfs.py:345
-msgid "<b>Pool Name</b>"
+#: install_station/use_zfs.py:319
+#, fuzzy
+msgid "Pool Name"
 msgstr "<b>Имя пула</b>"
 
-#: install_station/use_zfs.py:365
-msgid "Encrypt Disk"
+#: install_station/use_zfs.py:325
+#, fuzzy
+msgid "Swap Size(MB)"
+msgstr "Размер (МБ)"
+
+#: install_station/use_zfs.py:346
+#, fuzzy
+msgid "Encrypt Disk (GELI)"
 msgstr "Шифровать диск"
 
-#: install_station/use_zfs.py:369
+#: install_station/use_zfs.py:351
 msgid "Password"
 msgstr "Пароль"
 
-#: install_station/use_zfs.py:376
-msgid "Verify it"
-msgstr "Подтвердите его"
+#: install_station/use_zfs.py:361
+msgid "Confirm"
+msgstr ""
 
-#: install_station/use_zfs.py:537
+#: install_station/use_zfs.py:509
 msgid "Warning"
 msgstr "Предупреждение"
 
-#: install_station/use_zfs.py:548
+#: install_station/use_zfs.py:520
 msgid "Smallest disk need to be SELECTED first!\n"
 msgstr "Сначала нужно выбрать наименьший диск!\n"
 
-#: install_station/use_zfs.py:549
+#: install_station/use_zfs.py:521
 msgid "All the disk selected will reset."
 msgstr "Все выбранные диски будут сброшены."
+
+#~ msgid ""
+#~ "Please select 1 or more drive for stripe (select the smallest disk first)"
+#~ msgstr ""
+#~ "Пожалуйста, выберите 1 или более дисков для stripe (сначала выберите "
+#~ "наименьший диск)"
+
+#~ msgid "Please select 2 drive for mirroring (select the smallest disk first)"
+#~ msgstr ""
+#~ "Пожалуйста, выберите 2 диска для зеркалирования (сначала выберите "
+#~ "наименьший диск)"
+
+#~ msgid "Please select 4 drive for RAIDZ2 (select the smallest disk first)"
+#~ msgstr ""
+#~ "Пожалуйста, выберите 4 диска для RAIDZ2 (сначала выберите наименьший диск)"
+
+#~ msgid "Please select 5 drive for RAIDZ3 (select the smallest disk first)"
+#~ msgstr ""
+#~ "Пожалуйста, выберите 5 дисков для RAIDZ3 (сначала выберите наименьший "
+#~ "диск)"
+
+#~ msgid "<b>Pool Type</b>"
+#~ msgstr "<b>Тип пула</b>"
+
+#~ msgid "1+ disks Stripe"
+#~ msgstr "1+ диск(ов) Stripe"
+
+#~ msgid "2+ disks Mirror"
+#~ msgstr "2+ диск(а) Mirror"
+
+#~ msgid "Verify it"
+#~ msgstr "Подтвердите его"
