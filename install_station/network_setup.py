@@ -288,8 +288,11 @@ class NetworkSetup:
     @classmethod
     def scan_networks(cls) -> None:
         """Scan the WiFi card and hand the results to the UI thread."""
-        enableWifi(cls.wlan_card)
-        GLib.idle_add(cls.refresh_networks, networkdictionary())
+        try:
+            enableWifi(cls.wlan_card)
+            GLib.idle_add(cls.refresh_networks, networkdictionary())
+        finally:
+            GLib.idle_add(cls.rescan_button.set_sensitive, True)
 
     @classmethod
     def refresh_networks(cls, network_info: dict) -> None:
@@ -301,8 +304,8 @@ class NetworkSetup:
         """
         cls.network_info = network_info
         cls.update_network_detection()
-        cls.populate_ssid_list()
-        cls.rescan_button.set_sensitive(True)
+        if cls.wlan_card in network_info['cards']:
+            cls.populate_ssid_list()
 
     @staticmethod
     def ssid_configured(ssid: str) -> bool:
