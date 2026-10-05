@@ -144,7 +144,6 @@ setup(
     license='BSD',
     author='Eric Turgeon',
     url='https://github.com/GhostBSD/install-station/',
-    package_dir={'': '.'},
     install_requires=['setuptools'],
     packages=['install_station'],
     scripts=['install-station'],
