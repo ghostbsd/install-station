@@ -56,9 +56,12 @@ class NetworkSetup:
     wire_connection_image: Gtk.Image | None = None
     wifi_connection_label: Gtk.Label | None = None
     wifi_connection_image: Gtk.Image | None = None
+    wifi_spinner: Gtk.Spinner | None = None
+    wifi_status_stack: Gtk.Stack | None = None
     rescan_button: Gtk.Button | None = None
     connection_box: Gtk.Box | None = None
     store: Gtk.ListStore | None = None
+    treeview: Gtk.TreeView | None = None
     window: Gtk.Window | None = None
     password: Gtk.Entry | None = None
     eap_window: Gtk.Window | None = None
@@ -221,6 +224,10 @@ class NetworkSetup:
         cls.wifi_connection_label = Gtk.Label()
         cls.wifi_connection_label.set_xalign(0.01)
         cls.wifi_connection_image = Gtk.Image()
+        cls.wifi_spinner = Gtk.Spinner()
+        cls.wifi_status_stack = Gtk.Stack()
+        cls.wifi_status_stack.add(cls.wifi_connection_image)
+        cls.wifi_status_stack.add(cls.wifi_spinner)
         cls.update_network_detection()
 
         cls.connection_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, homogeneous=True, spacing=20)
@@ -231,23 +238,23 @@ class NetworkSetup:
             sw.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
             cls.store = Gtk.ListStore(str, str, str)
             cls.populate_ssid_list()
-            treeview = Gtk.TreeView()
-            treeview.set_model(cls.store)
-            treeview.set_rules_hint(True)
+            cls.treeview = Gtk.TreeView()
+            cls.treeview.set_model(cls.store)
+            cls.treeview.set_rules_hint(True)
             pixbuf_cell = Gtk.CellRendererPixbuf()
             pixbuf_cell.set_property('stock-size', Gtk.IconSize.DND)
             pixbuf_column = Gtk.TreeViewColumn('Stat', pixbuf_cell)
             pixbuf_column.add_attribute(pixbuf_cell, "icon-name", 0)
             pixbuf_column.set_resizable(True)
-            treeview.append_column(pixbuf_column)
+            cls.treeview.append_column(pixbuf_column)
             cell = Gtk.CellRendererText()
             column = Gtk.TreeViewColumn('SSID', cell, text=1)
             column.set_sort_column_id(1)
-            treeview.append_column(column)
-            tree_selection = treeview.get_selection()
-            tree_selection.set_mode(Gtk.SelectionMode.SINGLE)
-            tree_selection.connect("changed", cls.wifi_setup, cls.wlan_card)
-            sw.add(treeview)
+            cls.treeview.append_column(column)
+            cls.treeview.get_selection().set_mode(Gtk.SelectionMode.NONE)
+            cls.treeview.set_activate_on_single_click(True)
+            cls.treeview.connect("row-activated", cls.wifi_setup, cls.wlan_card)
+            sw.add(cls.treeview)
             cls.connection_box.pack_start(sw, True, True, 50)
 
             cls.rescan_button = Gtk.Button(label=get_text("Rescan"))
@@ -270,7 +277,7 @@ class NetworkSetup:
         main_grid.attach(cls.wire_connection_label, 3, 1, 6, 1)
         if cls.rescan_button:
             main_grid.attach(cls.rescan_button, 9, 1, 2, 1)
-        main_grid.attach(cls.wifi_connection_image, 2, 2, 1, 1)
+        main_grid.attach(cls.wifi_status_stack, 2, 2, 1, 1)
         main_grid.attach(cls.wifi_connection_label, 3, 2, 8, 1)
         main_grid.attach(cls.connection_box, 1, 4, 10, 5)
 
@@ -283,6 +290,7 @@ class NetworkSetup:
             _widget: Button widget that triggered the action (unused)
         """
         cls.rescan_button.set_sensitive(False)
+        cls.treeview.set_sensitive(False)
         _thread.start_new_thread(cls.scan_networks, ())
 
     @classmethod
@@ -293,6 +301,7 @@ class NetworkSetup:
             GLib.idle_add(cls.refresh_networks, networkdictionary())
         finally:
             GLib.idle_add(cls.rescan_button.set_sensitive, True)
+            GLib.idle_add(cls.treeview.set_sensitive, True)
 
     @classmethod
     def refresh_networks(cls, network_info: dict) -> None:
@@ -325,24 +334,24 @@ class NetworkSetup:
             return False
 
     @classmethod
-    def wifi_setup(cls, tree_selection: Gtk.TreeSelection, wifi_card: str) -> None:
+    def wifi_setup(cls, _treeview: Gtk.TreeView, path: Gtk.TreePath,
+                   _column: Gtk.TreeViewColumn, wifi_card: str) -> None:
         """
-        Handle WiFi access point selection and connection setup.
+        Handle WiFi access point activation and connection setup.
 
         Args:
-            tree_selection: TreeSelection widget containing the selected access point
+            _treeview: TreeView holding the access point list (unused)
+            path: Path of the activated access point row
+            _column: Column that was activated (unused)
             wifi_card: WiFi card interface name
         """
-        model, treeiter = tree_selection.get_selected()
-        if treeiter is None:
-            return
-        ssid = model[treeiter][1]
+        ssid = cls.store[path][1]
         ssid_info = cls.network_info['cards'][wifi_card]['info'][ssid]
         if cls.ssid_configured(ssid):
-            _thread.start_new_thread(cls.try_to_connect_to_ssid, (ssid, ssid_info, wifi_card))
+            cls.connect_in_background(ssid_info, wifi_card)
         elif ssid_info[6] in ('E', 'ES'):
             cls.open_wpa_supplicant(ssid)
-            _thread.start_new_thread(cls.try_to_connect_to_ssid, (ssid, ssid_info, wifi_card))
+            cls.connect_in_background(ssid_info, wifi_card)
         elif ssid_info[9]:
             cls.enterprise_authentication(ssid_info, wifi_card, False)
         else:
@@ -360,11 +369,45 @@ class NetworkSetup:
         """
         pwd = cls.password.get_text()
         NetworkSetup.setup_wpa_supplicant(ssid_info[0], ssid_info, pwd)
-        _thread.start_new_thread(
-            cls.try_to_connect_to_ssid,
-            (ssid_info[0], ssid_info, card)
-        )
         cls.window.hide()
+        cls.connect_in_background(ssid_info, card)
+
+    @classmethod
+    def connect_in_background(cls, ssid_info: list, card: str) -> None:
+        """
+        Show the connection attempt in the WiFi status line and run it in a thread.
+
+        Args:
+            ssid_info: WiFi network information
+            card: WiFi card interface name
+        """
+        connecting = get_text("Connecting to {ssid}...").format(ssid=ssid_info[0])
+        cls.wifi_connection_label.set_label(connecting)
+        cls.wifi_spinner.start()
+        cls.wifi_status_stack.set_visible_child(cls.wifi_spinner)
+        cls.treeview.set_sensitive(False)
+        cls.rescan_button.set_sensitive(False)
+        _thread.start_new_thread(cls.try_to_connect_to_ssid, (ssid_info[0], ssid_info, card))
+
+    @classmethod
+    def end_connection_attempt(cls) -> None:
+        """Put the WiFi status line back and unlock the access point list."""
+        cls.wifi_spinner.stop()
+        cls.wifi_status_stack.set_visible_child(cls.wifi_connection_image)
+        cls.treeview.set_sensitive(True)
+        cls.rescan_button.set_sensitive(True)
+        cls.update_network_detection()
+
+    @classmethod
+    def connection_finished(cls, network_info: dict) -> None:
+        """
+        Show the new connection state once the card is associated.
+
+        Args:
+            network_info: Dictionary returned by networkdictionary()
+        """
+        cls.refresh_networks(network_info)
+        cls.end_connection_attempt()
 
     @classmethod
     def try_to_connect_to_ssid(cls, ssid: str, ssid_info: list, card: str) -> None:
@@ -382,7 +425,7 @@ class NetworkSetup:
         else:
             for _ in list(range(60)):
                 if nic_status(card) == 'associated':
-                    GLib.idle_add(cls.refresh_networks, networkdictionary())
+                    GLib.idle_add(cls.connection_finished, networkdictionary())
                     break
                 sleep(1)
             else:
@@ -399,6 +442,7 @@ class NetworkSetup:
             ssid_info: WiFi network information
             card: WiFi card interface name
         """
+        cls.end_connection_attempt()
         if ssid_info[9]:
             cls.enterprise_authentication(ssid_info, card, True)
         else:
@@ -512,11 +556,8 @@ class NetworkSetup:
             eap_config['private_key_passwd'] = cls.private_key_passwd.get_text()
 
         write_eap_config(ssid_info[0], eap_config)
-        _thread.start_new_thread(
-            cls.try_to_connect_to_ssid,
-            (ssid_info[0], ssid_info, card)
-        )
         cls.eap_window.hide()
+        cls.connect_in_background(ssid_info, card)
 
     @classmethod
     def on_eap_method_changed(cls, combo: Gtk.ComboBoxText) -> None:
