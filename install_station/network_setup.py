@@ -290,6 +290,7 @@ class NetworkSetup:
             _widget: Button widget that triggered the action (unused)
         """
         cls.rescan_button.set_sensitive(False)
+        cls.treeview.set_sensitive(False)
         _thread.start_new_thread(cls.scan_networks, ())
 
     @classmethod
@@ -300,6 +301,7 @@ class NetworkSetup:
             GLib.idle_add(cls.refresh_networks, networkdictionary())
         finally:
             GLib.idle_add(cls.rescan_button.set_sensitive, True)
+            GLib.idle_add(cls.treeview.set_sensitive, True)
 
     @classmethod
     def refresh_networks(cls, network_info: dict) -> None:
