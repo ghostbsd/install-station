@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-04 21:37-0300\n"
+"POT-Creation-Date: 2026-10-16 18:03-0300\n"
 "PO-Revision-Date: 2025-07-09 20:20-0300\n"
 "Last-Translator: Boyarshinov Nikita <boyarshinovn@gmail.com>\n"
 "Language-Team: Russian <gnu@d07.ru>\n"
@@ -327,138 +327,139 @@ msgstr "Пожалуйста, выберите ваш язык:"
 msgid "Language"
 msgstr "Язык"
 
-#: install_station/network_setup.py:146
+#: install_station/network_setup.py:155
 msgid "Network card connected to the internet"
 msgstr "Сетевая карта подключена к интернету"
 
-#: install_station/network_setup.py:152
+#: install_station/network_setup.py:161
 msgid "Network card not connected to the internet"
 msgstr "Сетевая карта не подключена к интернету"
 
-#: install_station/network_setup.py:155
+#: install_station/network_setup.py:164
 msgid "No network card detected"
 msgstr "Сетевая карта не обнаружена"
 
-#: install_station/network_setup.py:164
+#: install_station/network_setup.py:173
 msgid "WiFi card detected and connected to an access point"
 msgstr "Wi-Fi карта обнаружена и подключена к точке доступа"
 
-#: install_station/network_setup.py:168
+#: install_station/network_setup.py:177
 msgid "WiFi card detected but not connected to an access point"
 msgstr "Wi-Fi карта обнаружена, но не подключена к точке доступа"
 
-#: install_station/network_setup.py:171
+#: install_station/network_setup.py:180
 msgid "WiFi card not detected or not supported"
 msgstr "Wi-Fi карта не обнаружена или не поддерживается"
 
-#: install_station/network_setup.py:193 install_station/network_setup.py:260
+#: install_station/network_setup.py:202 install_station/network_setup.py:271
 msgid "Rescan"
 msgstr ""
 
-#: install_station/network_setup.py:382
+#: install_station/network_setup.py:359 install_station/network_setup.py:507
+#: install_station/network_setup.py:678
+#, python-brace-format
+msgid "Could not connect to {ssid}"
+msgstr ""
+
+#: install_station/network_setup.py:401
 #, python-brace-format
 msgid "Connecting to {ssid}..."
 msgstr ""
 
-#: install_station/network_setup.py:470
+#: install_station/network_setup.py:433
+#, python-brace-format
+msgid "Connected to {ssid}, but it could not be saved"
+msgstr ""
+
+#: install_station/network_setup.py:494
 msgid "Wi-Fi Network Authentication Required"
 msgstr "Требуется аутентификация в Wi-Fi сети"
 
-#: install_station/network_setup.py:483
-#, python-brace-format
-msgid "{ssid} Wi-Fi Network Authentication failed"
-msgstr "Аутентификация в Wi-Fi сети {ssid} не удалась"
-
-#: install_station/network_setup.py:485
+#: install_station/network_setup.py:509
 #, python-brace-format
 msgid "Authentication required by {ssid} Wi-Fi Network"
 msgstr "Аутентификация, требуемая Wi-Fi сетью {ssid}"
 
-#: install_station/network_setup.py:488 install_station/network_setup.py:703
+#: install_station/network_setup.py:512 install_station/network_setup.py:730
 msgid "Password:"
 msgstr "Пароль:"
 
-#: install_station/network_setup.py:491
+#: install_station/network_setup.py:515
 msgid "Show password"
 msgstr "Показать пароль"
 
-#: install_station/network_setup.py:643
+#: install_station/network_setup.py:670
 #, fuzzy
 msgid "Enterprise Wi-Fi Authentication"
 msgstr "Аутентификация в Wi-Fi сети {ssid} не удалась"
 
-#: install_station/network_setup.py:651
-#, fuzzy, python-brace-format
-msgid "{ssid} Enterprise Authentication Failed"
-msgstr "Аутентификация в Wi-Fi сети {ssid} не удалась"
-
-#: install_station/network_setup.py:653
+#: install_station/network_setup.py:680
 #, python-brace-format
 msgid "Enterprise Authentication for {ssid}"
 msgstr ""
 
-#: install_station/network_setup.py:659
+#: install_station/network_setup.py:686
 #, python-brace-format
 msgid "Security: {security}"
 msgstr ""
 
-#: install_station/network_setup.py:673
+#: install_station/network_setup.py:700
 msgid "EAP Method:"
 msgstr ""
 
-#: install_station/network_setup.py:682
+#: install_station/network_setup.py:709
 msgid "Inner Auth:"
 msgstr ""
 
-#: install_station/network_setup.py:687
+#: install_station/network_setup.py:714
 msgid "Username:"
 msgstr ""
 
-#: install_station/network_setup.py:691
+#: install_station/network_setup.py:718
 msgid "Optional - for privacy"
 msgstr ""
 
-#: install_station/network_setup.py:692
+#: install_station/network_setup.py:719
 msgid "Anonymous ID:"
 msgstr ""
 
-#: install_station/network_setup.py:700
+#: install_station/network_setup.py:727
 msgid "Show"
 msgstr ""
 
-#: install_station/network_setup.py:707
+#: install_station/network_setup.py:734
 msgid "Certificates (*.pem, *.crt, *.cer)"
 msgstr ""
 
-#: install_station/network_setup.py:709
+#: install_station/network_setup.py:736
 msgid "Select CA Certificate"
 msgstr ""
 
-#: install_station/network_setup.py:714
+#: install_station/network_setup.py:741
 msgid "CA Certificate:"
 msgstr ""
 
-#: install_station/network_setup.py:719
+#: install_station/network_setup.py:746
 msgid "Select Client Certificate"
 msgstr ""
 
-#: install_station/network_setup.py:722
+#: install_station/network_setup.py:749
 msgid "Client Cert:"
 msgstr ""
 
-#: install_station/network_setup.py:727
+#: install_station/network_setup.py:754
 msgid "Select Private Key"
 msgstr ""
 
-#: install_station/network_setup.py:728
+#: install_station/network_setup.py:755
 msgid "Key files (*.pem, *.key, *.p12)"
 msgstr ""
 
-#: install_station/network_setup.py:732
+#: install_station/network_setup.py:759
 msgid "Private Key:"
 msgstr ""
 
-#: install_station/network_setup.py:739
+#: install_station/network_setup.py:766
 #, fuzzy
 msgid "Key Password:"
 msgstr "Пароль:"
@@ -571,6 +572,14 @@ msgstr "Сначала нужно выбрать наименьший диск!\
 #: install_station/use_zfs.py:521
 msgid "All the disk selected will reset."
 msgstr "Все выбранные диски будут сброшены."
+
+#, python-brace-format
+#~ msgid "{ssid} Wi-Fi Network Authentication failed"
+#~ msgstr "Аутентификация в Wi-Fi сети {ssid} не удалась"
+
+#, fuzzy, python-brace-format
+#~ msgid "{ssid} Enterprise Authentication Failed"
+#~ msgstr "Аутентификация в Wi-Fi сети {ssid} не удалась"
 
 #~ msgid ""
 #~ "Please select 1 or more drive for stripe (select the smallest disk first)"
