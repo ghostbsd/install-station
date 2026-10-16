@@ -355,7 +355,10 @@ class NetworkSetup:
             cls.connect_in_background(network, wifi_card)
         elif network['security'] == 'OPEN':
             if save_open_network(ssid, wifi_card) is None:
-                cls.update_network_detection()
+                cls.wifi_connection_label.set_label(
+                    get_text("Could not connect to {ssid}").format(ssid=ssid)
+                )
+                cls.wifi_connection_image.set_from_stock(Gtk.STOCK_NO, 5)
             else:
                 cls.connect_in_background(network, wifi_card)
         elif network['enterprise']:
@@ -413,16 +416,22 @@ class NetworkSetup:
         cls.update_network_detection()
 
     @classmethod
-    def connection_finished(cls, network_info: dict, networks: dict) -> None:
+    def connection_finished(cls, network_info: dict, networks: dict, ssid: str, saved: bool) -> None:
         """
         Show the new connection state once the card is connected.
 
         Args:
             network_info: Dictionary returned by network_dictionary()
             networks: Access points returned by scan_networks()
+            ssid: WiFi network SSID
+            saved: False when wpa_supplicant.conf could not be written
         """
         cls.refresh_networks(network_info, networks)
         cls.end_connection_attempt()
+        if not saved:
+            cls.wifi_connection_label.set_label(
+                get_text("Connected to {ssid}, but it could not be saved").format(ssid=ssid)
+            )
 
     @classmethod
     def try_to_connect_to_ssid(cls, network: dict, card: str) -> None:
@@ -434,18 +443,17 @@ class NetworkSetup:
             card: WiFi card interface name
         """
         ssid = network['ssid']
-        try:
-            if connect_to_ssid(ssid, card) and wait_for_connection(card, ssid):
-                # Only now is the network worth writing to wpa_supplicant.conf.
-                wpa_save_config(card)
-                GLib.idle_add(cls.connection_finished, network_dictionary(),
-                              scan_networks(card))
-            else:
-                wpa_reconfigure(card)
-                GLib.idle_add(cls.restart_authentication, network, card)
-        finally:
-            # select_network disabled every other saved network.
-            enable_all_networks(card)
+        connected = connect_to_ssid(ssid, card) and wait_for_connection(card, ssid)
+        # select_network disabled every other saved network. Re-enable them
+        # before saving, or the file keeps them disabled for good.
+        enable_all_networks(card)
+        if connected:
+            saved = wpa_save_config(card)
+            GLib.idle_add(cls.connection_finished, network_dictionary(),
+                          scan_networks(card), ssid, saved)
+        else:
+            wpa_reconfigure(card)
+            GLib.idle_add(cls.restart_authentication, network, card)
 
     @classmethod
     def restart_authentication(cls, network: dict, card: str) -> None:
@@ -496,7 +504,7 @@ class NetworkSetup:
 
         # Set dialog title based on authentication status
         if failed:
-            title = get_text("{ssid} Wi-Fi Network Authentication failed").format(ssid=network['ssid'])
+            title = get_text("Could not connect to {ssid}").format(ssid=network['ssid'])
         else:
             title = get_text("Authentication required by {ssid} Wi-Fi Network").format(ssid=network['ssid'])
         label = Gtk.Label(label=f"<b><span size='large'>{title}</span></b>")
@@ -667,7 +675,7 @@ class NetworkSetup:
         cls.eap_window.add(main_box)
 
         if failed:
-            title = get_text("{ssid} Enterprise Authentication Failed").format(ssid=network['ssid'])
+            title = get_text("Could not connect to {ssid}").format(ssid=network['ssid'])
         else:
             title = get_text("Enterprise Authentication for {ssid}").format(ssid=network['ssid'])
         title_label = Gtk.Label()
