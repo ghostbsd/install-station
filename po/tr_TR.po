@@ -177,12 +177,10 @@ msgstr "GhostBSD'yi nasıl yüklemek istersiniz?"
 #: install_station/install_type.py:100
 msgid ""
 "<b>Disks Configuration</b>\n"
-"Install GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 "
-"configurations."
+"Install GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 configurations."
 msgstr ""
 "<b>Disk Yapılandırması</b>\n"
-"GhostBSD'yi Stripe, Mirror, RAIDZ1, RAIDZ2 veya RAIDZ3 yapılandırmalarını "
-"kullanarak kurun."
+"GhostBSD'yi Stripe, Mirror, RAIDZ1, RAIDZ2 veya RAIDZ3 yapılandırmalarını kullanarak kurun."
 
 #: install_station/install_type.py:113
 msgid ""
@@ -216,19 +214,13 @@ msgstr "Kuruluyor"
 msgid ""
 "Thank you for choosing GhostBSD!\n"
 "\n"
-"We believe every computer operating system should be simple, elegant, secure "
-"and protect your privacy while being easy to use. GhostBSD is simplifying "
-"FreeBSD for those who lack the technical expertise required to use it and "
-"lower the entry-level of using BSD. \n"
+"We believe every computer operating system should be simple, elegant, secure and protect your privacy while being easy to use. GhostBSD is simplifying FreeBSD for those who lack the technical expertise required to use it and lower the entry-level of using BSD. \n"
 "\n"
 "We hope you'll enjoy our BSD operating system."
 msgstr ""
 "GhostBSD'yi seçtiğiniz için teşekkür ederiz!\n"
 "\n"
-"Her işletim sisteminin basit, zarif, güvenli olması, gizliliğinizi koruması "
-"ve aynı zamanda kullanım kolaylığı sunması gerektiğine inanıyoruz. GhostBSD, "
-"FreeBSD'yi kullanmak için gereken teknik uzmanlığa sahip olmayanlar için "
-"sistemi basitleştiriyor ve BSD'ye giriş eşiğini düşürüyor. \n"
+"Her işletim sisteminin basit, zarif, güvenli olması, gizliliğinizi koruması ve aynı zamanda kullanım kolaylığı sunması gerektiğine inanıyoruz. GhostBSD, FreeBSD'yi kullanmak için gereken teknik uzmanlığa sahip olmayanlar için sistemi basitleştiriyor ve BSD'ye giriş eşiğini düşürüyor. \n"
 "\n"
 "İşletim sistemimizi keyifle kullanmanızı umuyoruz."
 
@@ -351,23 +343,23 @@ msgstr "Wi-Fi kartı algılanmadı veya desteklenmiyor"
 
 #: install_station/network_setup.py:202 install_station/network_setup.py:271
 msgid "Rescan"
-msgstr ""
+msgstr "Yeniden tara"
 
 #: install_station/network_setup.py:359 install_station/network_setup.py:507
 #: install_station/network_setup.py:678
 #, python-brace-format
 msgid "Could not connect to {ssid}"
-msgstr ""
+msgstr "{ssid} ağına bağlanılamadı"
 
 #: install_station/network_setup.py:401
 #, python-brace-format
 msgid "Connecting to {ssid}..."
-msgstr ""
+msgstr "{ssid} ağına bağlanılıyor..."
 
 #: install_station/network_setup.py:433
 #, python-brace-format
 msgid "Connected to {ssid}, but it could not be saved"
-msgstr ""
+msgstr "{ssid} ağına bağlanıldı, ancak ağ kaydedilemedi"
 
 #: install_station/network_setup.py:494
 msgid "Wi-Fi Network Authentication Required"
@@ -387,80 +379,78 @@ msgid "Show password"
 msgstr "Şifreyi göster"
 
 #: install_station/network_setup.py:670
-#, fuzzy
 msgid "Enterprise Wi-Fi Authentication"
-msgstr "{ssid} Wi-Fi ağı için kimlik doğrulaması başarısız oldu"
+msgstr "Kurumsal Wi-Fi kimlik doğrulaması"
 
 #: install_station/network_setup.py:680
 #, python-brace-format
 msgid "Enterprise Authentication for {ssid}"
-msgstr ""
+msgstr "{ssid} için kurumsal kimlik doğrulama"
 
 #: install_station/network_setup.py:686
 #, python-brace-format
 msgid "Security: {security}"
-msgstr ""
+msgstr "Güvenlik: {security}"
 
 #: install_station/network_setup.py:700
 msgid "EAP Method:"
-msgstr ""
+msgstr "EAP yöntemi:"
 
 #: install_station/network_setup.py:709
 msgid "Inner Auth:"
-msgstr ""
+msgstr "İç kimlik doğrulama:"
 
 #: install_station/network_setup.py:714
 msgid "Username:"
-msgstr ""
+msgstr "Kullanıcı adı:"
 
 #: install_station/network_setup.py:718
 msgid "Optional - for privacy"
-msgstr ""
+msgstr "İsteğe bağlı, gizlilik için"
 
 #: install_station/network_setup.py:719
 msgid "Anonymous ID:"
-msgstr ""
+msgstr "Anonim kimlik:"
 
 #: install_station/network_setup.py:727
 msgid "Show"
-msgstr ""
+msgstr "Göster"
 
 #: install_station/network_setup.py:734
 msgid "Certificates (*.pem, *.crt, *.cer)"
-msgstr ""
+msgstr "Sertifikalar (*.pem, *.crt, *.cer)"
 
 #: install_station/network_setup.py:736
 msgid "Select CA Certificate"
-msgstr ""
+msgstr "CA sertifikasını seçin"
 
 #: install_station/network_setup.py:741
 msgid "CA Certificate:"
-msgstr ""
+msgstr "CA sertifikası:"
 
 #: install_station/network_setup.py:746
 msgid "Select Client Certificate"
-msgstr ""
+msgstr "İstemci sertifikasını seçin"
 
 #: install_station/network_setup.py:749
 msgid "Client Cert:"
-msgstr ""
+msgstr "İstemci sert.:"
 
 #: install_station/network_setup.py:754
 msgid "Select Private Key"
-msgstr ""
+msgstr "Özel anahtarı seçin"
 
 #: install_station/network_setup.py:755
 msgid "Key files (*.pem, *.key, *.p12)"
-msgstr ""
+msgstr "Anahtar dosyaları (*.pem, *.key, *.p12)"
 
 #: install_station/network_setup.py:759
 msgid "Private Key:"
-msgstr ""
+msgstr "Özel anahtar:"
 
 #: install_station/network_setup.py:766
-#, fuzzy
 msgid "Key Password:"
-msgstr "Şifre:"
+msgstr "Anahtar parolası:"
 
 #: install_station/try_install.py:102
 msgid "What would you like to do?"
@@ -483,32 +473,28 @@ msgstr ""
 "Bilgisayarınızda GhostBSD'yi kurmadan çalıştırın."
 
 #: install_station/use_zfs.py:176
-#, fuzzy
 msgid "(select the smallest disk first)"
-msgstr "Lütfen RAIDZ1 için 3 sürücü seçin (öncelikle en küçük diski seçin)"
+msgstr "(önce en küçük diski seçin)"
 
 #: install_station/use_zfs.py:180
 msgid "Select 1 or more drives, no redundancy"
-msgstr ""
+msgstr "1 veya daha fazla sürücü seçin, yedeklilik yok"
 
 #: install_station/use_zfs.py:184
 msgid "Select 2 or more drives for mirroring"
-msgstr ""
+msgstr "Yansıtma için 2 veya daha fazla sürücü seçin"
 
 #: install_station/use_zfs.py:188
-#, fuzzy
 msgid "Select 3 drives for RAIDZ1"
-msgstr "3 diskli RAIDZ1"
+msgstr "RAIDZ1 için 3 sürücü seçin"
 
 #: install_station/use_zfs.py:192
-#, fuzzy
 msgid "Select 4 drives for RAIDZ2"
-msgstr "4 diskli RAIDZ2"
+msgstr "RAIDZ2 için 4 sürücü seçin"
 
 #: install_station/use_zfs.py:196
-#, fuzzy
 msgid "Select 5 drives for RAIDZ3"
-msgstr "5 diskli RAIDZ3"
+msgstr "RAIDZ3 için 5 sürücü seçin"
 
 #: install_station/use_zfs.py:270
 msgid "Disk"
@@ -531,24 +517,20 @@ msgid "Please select one drive"
 msgstr "Lütfen bir sürücü seçiniz"
 
 #: install_station/use_zfs.py:307
-#, fuzzy
 msgid "Pool Layout"
-msgstr "Klavye Düzeni"
+msgstr "Havuz düzeni"
 
 #: install_station/use_zfs.py:319
-#, fuzzy
 msgid "Pool Name"
-msgstr "<b>Havuz Adı</b>"
+msgstr "Havuz adı"
 
 #: install_station/use_zfs.py:325
-#, fuzzy
 msgid "Swap Size(MB)"
-msgstr "Boyut(MB)"
+msgstr "Takas boyutu (MB)"
 
 #: install_station/use_zfs.py:346
-#, fuzzy
 msgid "Encrypt Disk (GELI)"
-msgstr "Diski Şifrele"
+msgstr "Diski şifrele (GELI)"
 
 #: install_station/use_zfs.py:351
 msgid "Password"
@@ -556,7 +538,7 @@ msgstr "Şifre"
 
 #: install_station/use_zfs.py:361
 msgid "Confirm"
-msgstr ""
+msgstr "Onayla"
 
 #: install_station/use_zfs.py:509
 msgid "Warning"
@@ -581,8 +563,8 @@ msgstr "Seçilen tüm diskler sıfırlanacaktır."
 #~ msgid ""
 #~ "Please select 1 or more drive for stripe (select the smallest disk first)"
 #~ msgstr ""
-#~ "Lütfen stripe için 1 veya daha fazla sürücü seçin (öncelikle en küçük "
-#~ "diski seçin)."
+#~ "Lütfen stripe için 1 veya daha fazla sürücü seçin (öncelikle en küçük diski "
+#~ "seçin)."
 
 #~ msgid "Please select 2 drive for mirroring (select the smallest disk first)"
 #~ msgstr "Lütfen mirror için 2 sürücü seçin (öncelikle en küçük diski seçin)"

@@ -13,110 +13,110 @@ msgstr ""
 "Language-Team: Thai <(nothing)>\n"
 "Language: th\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: install_station/boot_manager.py:121
 #: install_station/interface_controller.py:247
 msgid "Boot Option"
-msgstr ""
+msgstr "ตัวเลือกการบูต"
 
 #: install_station/boot_manager.py:135
 msgid "Setup rEFInd boot manager"
-msgstr ""
+msgstr "ตั้งค่าตัวจัดการบูต rEFInd"
 
 #: install_station/boot_manager.py:149
 msgid "Setup FreeBSD boot manager"
-msgstr ""
+msgstr "ตั้งค่าตัวจัดการบูตของ FreeBSD"
 
 #: install_station/boot_manager.py:164
 #, python-brace-format
 msgid "FreeBSD {loader} loader only"
-msgstr ""
+msgstr "เฉพาะตัวโหลด {loader} ของ FreeBSD"
 
 #: install_station/common.py:123
 msgid "Space not allowed"
-msgstr ""
+msgstr "ไม่อนุญาตให้ใช้ช่องว่าง"
 
 #: install_station/common.py:125 install_station/common.py:127
 msgid "Super Weak"
-msgstr ""
+msgstr "อ่อนมากที่สุด"
 
 #: install_station/common.py:129 install_station/common.py:135
 msgid "Very Weak"
-msgstr ""
+msgstr "อ่อนมาก"
 
 #: install_station/common.py:131 install_station/common.py:137
 #: install_station/common.py:143
 msgid "Fairly Weak"
-msgstr ""
+msgstr "ค่อนข้างอ่อน"
 
 #: install_station/common.py:133 install_station/common.py:139
 #: install_station/common.py:145 install_station/common.py:151
 msgid "Weak"
-msgstr ""
+msgstr "อ่อน"
 
 #: install_station/common.py:141 install_station/common.py:147
 #: install_station/common.py:153 install_station/common.py:159
 msgid "Strong"
-msgstr ""
+msgstr "แข็งแรง"
 
 #: install_station/common.py:149 install_station/common.py:155
 #: install_station/common.py:161 install_station/common.py:167
 msgid "Fairly Strong"
-msgstr ""
+msgstr "ค่อนข้างแข็งแรง"
 
 #: install_station/common.py:157 install_station/common.py:163
 msgid "Very Strong"
-msgstr ""
+msgstr "แข็งแรงมาก"
 
 #: install_station/common.py:165 install_station/common.py:169
 msgid "Super Strong"
-msgstr ""
+msgstr "แข็งแรงมากที่สุด"
 
 #: install_station/custom.py:248
 msgid "Create"
-msgstr ""
+msgstr "สร้าง"
 
 #: install_station/custom.py:252
 msgid "Delete"
-msgstr ""
+msgstr "ลบ"
 
 #: install_station/custom.py:256
 msgid "Revert"
-msgstr ""
+msgstr "ย้อนกลับ"
 
 #: install_station/custom.py:260
 msgid "Auto"
-msgstr ""
+msgstr "อัตโนมัติ"
 
 #: install_station/custom.py:328 install_station/custom.py:566
 msgid "Add Partition"
-msgstr ""
+msgstr "เพิ่มพาร์ทิชัน"
 
 #: install_station/custom.py:342
 msgid "Type:"
-msgstr ""
+msgstr "ชนิด:"
 
 #: install_station/custom.py:343 install_station/custom.py:580
 msgid "Size(MB):"
-msgstr ""
+msgstr "ขนาด (MB):"
 
 #: install_station/custom.py:344
 msgid "Mount point:"
-msgstr ""
+msgstr "จุดเมานต์:"
 
 #: install_station/custom.py:496
 msgid "Partition Scheme"
-msgstr ""
+msgstr "รูปแบบพาร์ทิชัน"
 
 #: install_station/custom.py:515
 msgid "GPT: GUID Partition Table"
-msgstr ""
+msgstr "GPT: ตารางพาร์ทิชัน GUID"
 
 #: install_station/custom.py:516
 msgid "MBR: DOS Partition"
-msgstr ""
+msgstr "MBR: พาร์ทิชัน DOS"
 
 #: install_station/end.py:10
 msgid ""
@@ -126,30 +126,35 @@ msgid ""
 "any changes you make or documents you save will\n"
 "not be preserved on reboot."
 msgstr ""
+"การติดตั้งเสร็จสมบูรณ์ คุณต้องรีสตาร์ต\n"
+"คอมพิวเตอร์เพื่อใช้งานระบบที่ติดตั้งใหม่\n"
+"คุณสามารถใช้สื่อไลฟ์นี้ต่อได้ แต่\n"
+"การเปลี่ยนแปลงหรือเอกสารที่คุณบันทึก\n"
+"จะไม่ถูกเก็บไว้หลังรีบูต"
 
 #: install_station/end.py:31
 msgid "Installation Completed"
-msgstr ""
+msgstr "การติดตั้งเสร็จสมบูรณ์"
 
 #: install_station/end.py:47
 msgid "Restart"
-msgstr ""
+msgstr "รีสตาร์ต"
 
 #: install_station/end.py:49
 msgid "Continue"
-msgstr ""
+msgstr "ดำเนินการต่อ"
 
 #: install_station/error.py:17
 msgid "Installation Error"
-msgstr ""
+msgstr "ข้อผิดพลาดในการติดตั้ง"
 
 #: install_station/error.py:28
 msgid "Installation has failed!"
-msgstr ""
+msgstr "การติดตั้งล้มเหลว!"
 
 #: install_station/error.py:33
 msgid "GhostBSD issue system"
-msgstr ""
+msgstr "ระบบรายงานปัญหาของ GhostBSD"
 
 #: install_station/error.py:35
 #, python-brace-format
@@ -157,380 +162,391 @@ msgid ""
 "Please report the issue to {anchor}, and \n"
 "be sure to provide /tmp/.pc-sysinstall/pc-sysinstall.log."
 msgstr ""
+"โปรดรายงานปัญหาที่ {anchor} และ \n"
+"แนบไฟล์ /tmp/.pc-sysinstall/pc-sysinstall.log"
 
 #: install_station/error.py:45
 msgid "Ok"
-msgstr ""
+msgstr "ตกลง"
 
 #: install_station/install_type.py:94
 msgid "How do you want to install GhostBSD?"
-msgstr ""
+msgstr "คุณต้องการติดตั้ง GhostBSD อย่างไร?"
 
 #: install_station/install_type.py:100
 msgid ""
 "<b>Disks Configuration</b>\n"
-"Install GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 "
-"configurations."
+"Install GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 configurations."
 msgstr ""
+"<b>การกำหนดค่าดิสก์</b>\n"
+"ติดตั้ง GhostBSD ด้วยการกำหนดค่า Stripe, Mirror, RAIDZ1, RAIDZ2 หรือ RAIDZ3"
 
 #: install_station/install_type.py:113
 msgid ""
 "<b>Multi-Boot Configuration</b>\n"
 "Install GhostBSD with ZFS alongside other operating systems."
 msgstr ""
+"<b>การกำหนดค่าบูตหลายระบบ</b>\n"
+"ติดตั้ง GhostBSD ด้วย ZFS ควบคู่กับระบบปฏิบัติการอื่น"
 
 #: install_station/install.py:46
 msgid "Creating ghostbsd_installation.cfg"
-msgstr ""
+msgstr "กำลังสร้าง ghostbsd_installation.cfg"
 
 #: install_station/install.py:50
 msgid "Deleting partition"
-msgstr ""
+msgstr "กำลังลบพาร์ทิชัน"
 
 #: install_station/install.py:55
 msgid "Creating disk partition"
-msgstr ""
+msgstr "กำลังสร้างพาร์ทิชันดิสก์"
 
 #: install_station/install.py:60
 msgid "Creating new partitions"
-msgstr ""
+msgstr "กำลังสร้างพาร์ทิชันใหม่"
 
 #: install_station/install.py:90
 msgid "Installation in progress"
-msgstr ""
+msgstr "กำลังติดตั้ง"
 
 #: install_station/install.py:102
 msgid ""
 "Thank you for choosing GhostBSD!\n"
 "\n"
-"We believe every computer operating system should be simple, elegant, secure "
-"and protect your privacy while being easy to use. GhostBSD is simplifying "
-"FreeBSD for those who lack the technical expertise required to use it and "
-"lower the entry-level of using BSD. \n"
+"We believe every computer operating system should be simple, elegant, secure and protect your privacy while being easy to use. GhostBSD is simplifying FreeBSD for those who lack the technical expertise required to use it and lower the entry-level of using BSD. \n"
 "\n"
 "We hope you'll enjoy our BSD operating system."
 msgstr ""
+"ขอบคุณที่เลือก GhostBSD!\n"
+"\n"
+"เราเชื่อว่าระบบปฏิบัติการทุกระบบควรเรียบง่าย สวยงาม ปลอดภัย และปกป้องความเป็นส่วนตัวของคุณ พร้อมทั้งใช้งานง่าย GhostBSD ทำให้ FreeBSD ง่ายขึ้นสำหรับผู้ที่ขาดความเชี่ยวชาญทางเทคนิค และลดอุปสรรคในการเริ่มใช้ BSD \n"
+"\n"
+"เราหวังว่าคุณจะเพลิดเพลินกับระบบปฏิบัติการ BSD ของเรา"
 
 #: install_station/interface_controller.py:24
 #: install_station/interface_controller.py:35
 msgid "Back"
-msgstr ""
+msgstr "ย้อนกลับ"
 
 #: install_station/interface_controller.py:26
 #: install_station/interface_controller.py:36
 msgid "Cancel"
-msgstr ""
+msgstr "ยกเลิก"
 
 #: install_station/interface_controller.py:28
 #: install_station/interface_controller.py:37
 #: install_station/interface_controller.py:281
 msgid "Next"
-msgstr ""
+msgstr "ถัดไป"
 
 #: install_station/interface_controller.py:129
 #: install_station/interface_controller.py:130 install_station/language.py:101
 msgid "Welcome to GhostBSD"
-msgstr ""
+msgstr "ยินดีต้อนรับสู่ GhostBSD"
 
 #: install_station/interface_controller.py:139
 msgid "Button"
-msgstr ""
+msgstr "ปุ่ม"
 
 #: install_station/interface_controller.py:160
 msgid "Keyboard Setup"
-msgstr ""
+msgstr "ตั้งค่าแป้นพิมพ์"
 
 #: install_station/interface_controller.py:172
 msgid "Network Setup"
-msgstr ""
+msgstr "ตั้งค่าเครือข่าย"
 
 #: install_station/interface_controller.py:183
 msgid "Try Or Install GhostBSD"
-msgstr ""
+msgstr "ทดลองใช้หรือติดตั้ง GhostBSD"
 
 #: install_station/interface_controller.py:194
 msgid "Installation Types"
-msgstr ""
+msgstr "ประเภทการติดตั้ง"
 
 #: install_station/interface_controller.py:222
 msgid "Custom Configuration"
-msgstr ""
+msgstr "การกำหนดค่าแบบกำหนดเอง"
 
 #: install_station/interface_controller.py:232
 msgid "ZFS Configuration"
-msgstr ""
+msgstr "การกำหนดค่า ZFS"
 
 #: install_station/interface_controller.py:249
 msgid "Install"
-msgstr ""
+msgstr "ติดตั้ง"
 
 #: install_station/interface_controller.py:259
 msgid "Installation Progress"
-msgstr ""
+msgstr "ความคืบหน้าการติดตั้ง"
 
 #: install_station/interface_controller.py:266
 msgid "Progress Bar"
-msgstr ""
+msgstr "แถบความคืบหน้า"
 
 #: install_station/keyboard.py:45
 msgid "Type here to test your keyboard"
-msgstr ""
+msgstr "พิมพ์ที่นี่เพื่อทดสอบแป้นพิมพ์"
 
 #: install_station/keyboard.py:102
 msgid "Keyboard Layout"
-msgstr ""
+msgstr "ผังแป้นพิมพ์"
 
 #: install_station/keyboard.py:122
 msgid "Keyboard Models"
-msgstr ""
+msgstr "รุ่นแป้นพิมพ์"
 
 #: install_station/keyboard.py:230
 msgid "English (US)"
-msgstr ""
+msgstr "อังกฤษ (สหรัฐอเมริกา)"
 
 #: install_station/keyboard.py:231
 msgid "English (Canada)"
-msgstr ""
+msgstr "อังกฤษ (แคนาดา)"
 
 #: install_station/keyboard.py:232
 msgid "French (Canada)"
-msgstr ""
+msgstr "ฝรั่งเศส (แคนาดา)"
 
 #: install_station/language.py:93 install_station/language.py:197
 msgid "Please select your language:"
-msgstr ""
+msgstr "โปรดเลือกภาษาของคุณ:"
 
 #: install_station/language.py:99 install_station/language.py:116
 msgid "Language"
-msgstr ""
+msgstr "ภาษา"
 
 #: install_station/network_setup.py:155
 msgid "Network card connected to the internet"
-msgstr ""
+msgstr "การ์ดเครือข่ายเชื่อมต่ออินเทอร์เน็ตแล้ว"
 
 #: install_station/network_setup.py:161
 msgid "Network card not connected to the internet"
-msgstr ""
+msgstr "การ์ดเครือข่ายไม่ได้เชื่อมต่ออินเทอร์เน็ต"
 
 #: install_station/network_setup.py:164
 msgid "No network card detected"
-msgstr ""
+msgstr "ไม่พบการ์ดเครือข่าย"
 
 #: install_station/network_setup.py:173
 msgid "WiFi card detected and connected to an access point"
-msgstr ""
+msgstr "พบการ์ด Wi-Fi และเชื่อมต่อกับจุดเข้าใช้งานแล้ว"
 
 #: install_station/network_setup.py:177
 msgid "WiFi card detected but not connected to an access point"
-msgstr ""
+msgstr "พบการ์ด Wi-Fi แต่ไม่ได้เชื่อมต่อกับจุดเข้าใช้งาน"
 
 #: install_station/network_setup.py:180
 msgid "WiFi card not detected or not supported"
-msgstr ""
+msgstr "ไม่พบการ์ด Wi-Fi หรือไม่รองรับ"
 
 #: install_station/network_setup.py:202 install_station/network_setup.py:271
 msgid "Rescan"
-msgstr ""
+msgstr "สแกนใหม่"
 
 #: install_station/network_setup.py:359 install_station/network_setup.py:507
 #: install_station/network_setup.py:678
 #, python-brace-format
 msgid "Could not connect to {ssid}"
-msgstr ""
+msgstr "ไม่สามารถเชื่อมต่อกับ {ssid}"
 
 #: install_station/network_setup.py:401
 #, python-brace-format
 msgid "Connecting to {ssid}..."
-msgstr ""
+msgstr "กำลังเชื่อมต่อกับ {ssid}..."
 
 #: install_station/network_setup.py:433
 #, python-brace-format
 msgid "Connected to {ssid}, but it could not be saved"
-msgstr ""
+msgstr "เชื่อมต่อกับ {ssid} แล้ว แต่ไม่สามารถบันทึกเครือข่ายได้"
 
 #: install_station/network_setup.py:494
 msgid "Wi-Fi Network Authentication Required"
-msgstr ""
+msgstr "ต้องยืนยันตัวตนสำหรับเครือข่าย Wi-Fi"
 
 #: install_station/network_setup.py:509
 #, python-brace-format
 msgid "Authentication required by {ssid} Wi-Fi Network"
-msgstr ""
+msgstr "เครือข่าย Wi-Fi {ssid} ต้องการการยืนยันตัวตน"
 
 #: install_station/network_setup.py:512 install_station/network_setup.py:730
 msgid "Password:"
-msgstr ""
+msgstr "รหัสผ่าน:"
 
 #: install_station/network_setup.py:515
 msgid "Show password"
-msgstr ""
+msgstr "แสดงรหัสผ่าน"
 
 #: install_station/network_setup.py:670
 msgid "Enterprise Wi-Fi Authentication"
-msgstr ""
+msgstr "การยืนยันตัวตน Wi-Fi สำหรับองค์กร"
 
 #: install_station/network_setup.py:680
 #, python-brace-format
 msgid "Enterprise Authentication for {ssid}"
-msgstr ""
+msgstr "การยืนยันตัวตนสำหรับองค์กรของ {ssid}"
 
 #: install_station/network_setup.py:686
 #, python-brace-format
 msgid "Security: {security}"
-msgstr ""
+msgstr "ความปลอดภัย: {security}"
 
 #: install_station/network_setup.py:700
 msgid "EAP Method:"
-msgstr ""
+msgstr "วิธี EAP:"
 
 #: install_station/network_setup.py:709
 msgid "Inner Auth:"
-msgstr ""
+msgstr "การยืนยันตัวตนภายใน:"
 
 #: install_station/network_setup.py:714
 msgid "Username:"
-msgstr ""
+msgstr "ชื่อผู้ใช้:"
 
 #: install_station/network_setup.py:718
 msgid "Optional - for privacy"
-msgstr ""
+msgstr "ไม่บังคับ เพื่อความเป็นส่วนตัว"
 
 #: install_station/network_setup.py:719
 msgid "Anonymous ID:"
-msgstr ""
+msgstr "ID นิรนาม:"
 
 #: install_station/network_setup.py:727
 msgid "Show"
-msgstr ""
+msgstr "แสดง"
 
 #: install_station/network_setup.py:734
 msgid "Certificates (*.pem, *.crt, *.cer)"
-msgstr ""
+msgstr "ใบรับรอง (*.pem, *.crt, *.cer)"
 
 #: install_station/network_setup.py:736
 msgid "Select CA Certificate"
-msgstr ""
+msgstr "เลือกใบรับรอง CA"
 
 #: install_station/network_setup.py:741
 msgid "CA Certificate:"
-msgstr ""
+msgstr "ใบรับรอง CA:"
 
 #: install_station/network_setup.py:746
 msgid "Select Client Certificate"
-msgstr ""
+msgstr "เลือกใบรับรองไคลเอนต์"
 
 #: install_station/network_setup.py:749
 msgid "Client Cert:"
-msgstr ""
+msgstr "ใบรับรองไคลเอนต์:"
 
 #: install_station/network_setup.py:754
 msgid "Select Private Key"
-msgstr ""
+msgstr "เลือกคีย์ส่วนตัว"
 
 #: install_station/network_setup.py:755
 msgid "Key files (*.pem, *.key, *.p12)"
-msgstr ""
+msgstr "ไฟล์คีย์ (*.pem, *.key, *.p12)"
 
 #: install_station/network_setup.py:759
 msgid "Private Key:"
-msgstr ""
+msgstr "คีย์ส่วนตัว:"
 
 #: install_station/network_setup.py:766
 msgid "Key Password:"
-msgstr ""
+msgstr "รหัสผ่านคีย์:"
 
 #: install_station/try_install.py:102
 msgid "What would you like to do?"
-msgstr ""
+msgstr "คุณต้องการทำอะไร?"
 
 #: install_station/try_install.py:109
 msgid ""
 "<b>Install GhostBSD</b>\n"
 "Install GhostBSD on your computer."
 msgstr ""
+"<b>ติดตั้ง GhostBSD</b>\n"
+"ติดตั้ง GhostBSD ลงในคอมพิวเตอร์ของคุณ"
 
 #: install_station/try_install.py:122
 msgid ""
 "<b>Try GhostBSD</b>\n"
 "Run GhostBSD without installing to your computer."
 msgstr ""
+"<b>ทดลองใช้ GhostBSD</b>\n"
+"เรียกใช้ GhostBSD โดยไม่ต้องติดตั้งลงในคอมพิวเตอร์"
 
 #: install_station/use_zfs.py:176
 msgid "(select the smallest disk first)"
-msgstr ""
+msgstr "(เลือกดิสก์ที่เล็กที่สุดก่อน)"
 
 #: install_station/use_zfs.py:180
 msgid "Select 1 or more drives, no redundancy"
-msgstr ""
+msgstr "เลือกไดรฟ์ 1 ตัวขึ้นไป ไม่มีการสำรองข้อมูล"
 
 #: install_station/use_zfs.py:184
 msgid "Select 2 or more drives for mirroring"
-msgstr ""
+msgstr "เลือกไดรฟ์ 2 ตัวขึ้นไปสำหรับการทำมิเรอร์"
 
 #: install_station/use_zfs.py:188
 msgid "Select 3 drives for RAIDZ1"
-msgstr ""
+msgstr "เลือกไดรฟ์ 3 ตัวสำหรับ RAIDZ1"
 
 #: install_station/use_zfs.py:192
 msgid "Select 4 drives for RAIDZ2"
-msgstr ""
+msgstr "เลือกไดรฟ์ 4 ตัวสำหรับ RAIDZ2"
 
 #: install_station/use_zfs.py:196
 msgid "Select 5 drives for RAIDZ3"
-msgstr ""
+msgstr "เลือกไดรฟ์ 5 ตัวสำหรับ RAIDZ3"
 
 #: install_station/use_zfs.py:270
 msgid "Disk"
-msgstr ""
+msgstr "ดิสก์"
 
 #: install_station/use_zfs.py:277
 msgid "Size(MB)"
-msgstr ""
+msgstr "ขนาด (MB)"
 
 #: install_station/use_zfs.py:283
 msgid "Name"
-msgstr ""
+msgstr "ชื่อ"
 
 #: install_station/use_zfs.py:287
 msgid "Check"
-msgstr ""
+msgstr "เลือก"
 
 #: install_station/use_zfs.py:301
 msgid "Please select one drive"
-msgstr ""
+msgstr "โปรดเลือกไดรฟ์หนึ่งตัว"
 
 #: install_station/use_zfs.py:307
 msgid "Pool Layout"
-msgstr ""
+msgstr "รูปแบบพูล"
 
 #: install_station/use_zfs.py:319
 msgid "Pool Name"
-msgstr ""
+msgstr "ชื่อพูล"
 
 #: install_station/use_zfs.py:325
 msgid "Swap Size(MB)"
-msgstr ""
+msgstr "ขนาด swap (MB)"
 
 #: install_station/use_zfs.py:346
 msgid "Encrypt Disk (GELI)"
-msgstr ""
+msgstr "เข้ารหัสดิสก์ (GELI)"
 
 #: install_station/use_zfs.py:351
 msgid "Password"
-msgstr ""
+msgstr "รหัสผ่าน"
 
 #: install_station/use_zfs.py:361
 msgid "Confirm"
-msgstr ""
+msgstr "ยืนยัน"
 
 #: install_station/use_zfs.py:509
 msgid "Warning"
-msgstr ""
+msgstr "คำเตือน"
 
 #: install_station/use_zfs.py:520
 msgid "Smallest disk need to be SELECTED first!\n"
-msgstr ""
+msgstr "ต้องเลือกดิสก์ที่เล็กที่สุดก่อน!\n"
 
 #: install_station/use_zfs.py:521
 msgid "All the disk selected will reset."
-msgstr ""
+msgstr "ดิสก์ที่เลือกทั้งหมดจะถูกรีเซ็ต"
