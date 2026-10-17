@@ -13,111 +13,111 @@ msgstr ""
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: install_station/boot_manager.py:121
 #: install_station/interface_controller.py:247
 msgid "Boot Option"
-msgstr ""
+msgstr "Käynnistysvalinta"
 
 #: install_station/boot_manager.py:135
 msgid "Setup rEFInd boot manager"
-msgstr ""
+msgstr "Asenna rEFInd-käynnistyksenhallinta"
 
 #: install_station/boot_manager.py:149
 msgid "Setup FreeBSD boot manager"
-msgstr ""
+msgstr "Asenna FreeBSD:n käynnistyksenhallinta"
 
 #: install_station/boot_manager.py:164
 #, python-brace-format
 msgid "FreeBSD {loader} loader only"
-msgstr ""
+msgstr "Vain FreeBSD:n {loader}-lataaja"
 
 #: install_station/common.py:123
 msgid "Space not allowed"
-msgstr ""
+msgstr "Välilyönnit eivät ole sallittuja"
 
 #: install_station/common.py:125 install_station/common.py:127
 msgid "Super Weak"
-msgstr ""
+msgstr "Äärimmäisen heikko"
 
 #: install_station/common.py:129 install_station/common.py:135
 msgid "Very Weak"
-msgstr ""
+msgstr "Hyvin heikko"
 
 #: install_station/common.py:131 install_station/common.py:137
 #: install_station/common.py:143
 msgid "Fairly Weak"
-msgstr ""
+msgstr "Melko heikko"
 
 #: install_station/common.py:133 install_station/common.py:139
 #: install_station/common.py:145 install_station/common.py:151
 msgid "Weak"
-msgstr ""
+msgstr "Heikko"
 
 #: install_station/common.py:141 install_station/common.py:147
 #: install_station/common.py:153 install_station/common.py:159
 msgid "Strong"
-msgstr ""
+msgstr "Vahva"
 
 #: install_station/common.py:149 install_station/common.py:155
 #: install_station/common.py:161 install_station/common.py:167
 msgid "Fairly Strong"
-msgstr ""
+msgstr "Melko vahva"
 
 #: install_station/common.py:157 install_station/common.py:163
 msgid "Very Strong"
-msgstr ""
+msgstr "Hyvin vahva"
 
 #: install_station/common.py:165 install_station/common.py:169
 msgid "Super Strong"
-msgstr ""
+msgstr "Äärimmäisen vahva"
 
 #: install_station/custom.py:248
 msgid "Create"
-msgstr ""
+msgstr "Luo"
 
 #: install_station/custom.py:252
 msgid "Delete"
-msgstr ""
+msgstr "Poista"
 
 #: install_station/custom.py:256
 msgid "Revert"
-msgstr ""
+msgstr "Palauta"
 
 #: install_station/custom.py:260
 msgid "Auto"
-msgstr ""
+msgstr "Automaattinen"
 
 #: install_station/custom.py:328 install_station/custom.py:566
 msgid "Add Partition"
-msgstr ""
+msgstr "Lisää osio"
 
 #: install_station/custom.py:342
 msgid "Type:"
-msgstr ""
+msgstr "Tyyppi:"
 
 #: install_station/custom.py:343 install_station/custom.py:580
 msgid "Size(MB):"
-msgstr ""
+msgstr "Koko (Mt):"
 
 #: install_station/custom.py:344
 msgid "Mount point:"
-msgstr ""
+msgstr "Liitoskohta:"
 
 #: install_station/custom.py:496
 msgid "Partition Scheme"
-msgstr ""
+msgstr "Osiointimalli"
 
 #: install_station/custom.py:515
 msgid "GPT: GUID Partition Table"
-msgstr ""
+msgstr "GPT: GUID-osiotaulu"
 
 #: install_station/custom.py:516
 msgid "MBR: DOS Partition"
-msgstr ""
+msgstr "MBR: DOS-osio"
 
 #: install_station/end.py:10
 msgid ""
@@ -127,30 +127,35 @@ msgid ""
 "any changes you make or documents you save will\n"
 "not be preserved on reboot."
 msgstr ""
+"Asennus on valmis. Käynnistä tietokone uudelleen,\n"
+"jotta voit käyttää uutta asennusta.\n"
+"Voit jatkaa tämän live-median käyttöä, mutta\n"
+"tekemiäsi muutoksia ja tallentamiasi asiakirjoja\n"
+"ei säilytetä uudelleenkäynnistyksen jälkeen."
 
 #: install_station/end.py:31
 msgid "Installation Completed"
-msgstr ""
+msgstr "Asennus valmis"
 
 #: install_station/end.py:47
 msgid "Restart"
-msgstr ""
+msgstr "Käynnistä uudelleen"
 
 #: install_station/end.py:49
 msgid "Continue"
-msgstr ""
+msgstr "Jatka"
 
 #: install_station/error.py:17
 msgid "Installation Error"
-msgstr ""
+msgstr "Asennusvirhe"
 
 #: install_station/error.py:28
 msgid "Installation has failed!"
-msgstr ""
+msgstr "Asennus epäonnistui!"
 
 #: install_station/error.py:33
 msgid "GhostBSD issue system"
-msgstr ""
+msgstr "GhostBSD:n vikailmoitusjärjestelmään"
 
 #: install_station/error.py:35
 #, python-brace-format
@@ -158,380 +163,391 @@ msgid ""
 "Please report the issue to {anchor}, and \n"
 "be sure to provide /tmp/.pc-sysinstall/pc-sysinstall.log."
 msgstr ""
+"Ilmoita ongelmasta {anchor} ja \n"
+"liitä mukaan /tmp/.pc-sysinstall/pc-sysinstall.log."
 
 #: install_station/error.py:45
 msgid "Ok"
-msgstr ""
+msgstr "OK"
 
 #: install_station/install_type.py:94
 msgid "How do you want to install GhostBSD?"
-msgstr ""
+msgstr "Miten haluat asentaa GhostBSD:n?"
 
 #: install_station/install_type.py:100
 msgid ""
 "<b>Disks Configuration</b>\n"
-"Install GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 "
-"configurations."
+"Install GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 configurations."
 msgstr ""
+"<b>Levykokoonpano</b>\n"
+"Asenna GhostBSD Stripe-, Mirror-, RAIDZ1-, RAIDZ2- tai RAIDZ3-kokoonpanolla."
 
 #: install_station/install_type.py:113
 msgid ""
 "<b>Multi-Boot Configuration</b>\n"
 "Install GhostBSD with ZFS alongside other operating systems."
 msgstr ""
+"<b>Monikäynnistyskokoonpano</b>\n"
+"Asenna GhostBSD ZFS:llä muiden käyttöjärjestelmien rinnalle."
 
 #: install_station/install.py:46
 msgid "Creating ghostbsd_installation.cfg"
-msgstr ""
+msgstr "Luodaan ghostbsd_installation.cfg"
 
 #: install_station/install.py:50
 msgid "Deleting partition"
-msgstr ""
+msgstr "Poistetaan osiota"
 
 #: install_station/install.py:55
 msgid "Creating disk partition"
-msgstr ""
+msgstr "Luodaan levyosiota"
 
 #: install_station/install.py:60
 msgid "Creating new partitions"
-msgstr ""
+msgstr "Luodaan uusia osioita"
 
 #: install_station/install.py:90
 msgid "Installation in progress"
-msgstr ""
+msgstr "Asennus käynnissä"
 
 #: install_station/install.py:102
 msgid ""
 "Thank you for choosing GhostBSD!\n"
 "\n"
-"We believe every computer operating system should be simple, elegant, secure "
-"and protect your privacy while being easy to use. GhostBSD is simplifying "
-"FreeBSD for those who lack the technical expertise required to use it and "
-"lower the entry-level of using BSD. \n"
+"We believe every computer operating system should be simple, elegant, secure and protect your privacy while being easy to use. GhostBSD is simplifying FreeBSD for those who lack the technical expertise required to use it and lower the entry-level of using BSD. \n"
 "\n"
 "We hope you'll enjoy our BSD operating system."
 msgstr ""
+"Kiitos, että valitsit GhostBSD:n!\n"
+"\n"
+"Uskomme, että jokaisen käyttöjärjestelmän tulee olla yksinkertainen, tyylikäs ja turvallinen ja suojata yksityisyyttäsi, mutta silti helppokäyttöinen. GhostBSD yksinkertaistaa FreeBSD:tä niille, joilta puuttuu tarvittava tekninen osaaminen, ja madaltaa BSD:n käyttöönoton kynnystä. \n"
+"\n"
+"Toivomme, että nautit BSD-käyttöjärjestelmästämme."
 
 #: install_station/interface_controller.py:24
 #: install_station/interface_controller.py:35
 msgid "Back"
-msgstr ""
+msgstr "Takaisin"
 
 #: install_station/interface_controller.py:26
 #: install_station/interface_controller.py:36
 msgid "Cancel"
-msgstr ""
+msgstr "Peruuta"
 
 #: install_station/interface_controller.py:28
 #: install_station/interface_controller.py:37
 #: install_station/interface_controller.py:281
 msgid "Next"
-msgstr ""
+msgstr "Seuraava"
 
 #: install_station/interface_controller.py:129
 #: install_station/interface_controller.py:130 install_station/language.py:101
 msgid "Welcome to GhostBSD"
-msgstr ""
+msgstr "Tervetuloa GhostBSD:hen"
 
 #: install_station/interface_controller.py:139
 msgid "Button"
-msgstr ""
+msgstr "Painike"
 
 #: install_station/interface_controller.py:160
 msgid "Keyboard Setup"
-msgstr ""
+msgstr "Näppäimistön asetukset"
 
 #: install_station/interface_controller.py:172
 msgid "Network Setup"
-msgstr ""
+msgstr "Verkkoasetukset"
 
 #: install_station/interface_controller.py:183
 msgid "Try Or Install GhostBSD"
-msgstr ""
+msgstr "Kokeile tai asenna GhostBSD"
 
 #: install_station/interface_controller.py:194
 msgid "Installation Types"
-msgstr ""
+msgstr "Asennustyypit"
 
 #: install_station/interface_controller.py:222
 msgid "Custom Configuration"
-msgstr ""
+msgstr "Mukautettu kokoonpano"
 
 #: install_station/interface_controller.py:232
 msgid "ZFS Configuration"
-msgstr ""
+msgstr "ZFS-kokoonpano"
 
 #: install_station/interface_controller.py:249
 msgid "Install"
-msgstr ""
+msgstr "Asenna"
 
 #: install_station/interface_controller.py:259
 msgid "Installation Progress"
-msgstr ""
+msgstr "Asennuksen edistyminen"
 
 #: install_station/interface_controller.py:266
 msgid "Progress Bar"
-msgstr ""
+msgstr "Edistymispalkki"
 
 #: install_station/keyboard.py:45
 msgid "Type here to test your keyboard"
-msgstr ""
+msgstr "Kirjoita tähän testataksesi näppäimistöä"
 
 #: install_station/keyboard.py:102
 msgid "Keyboard Layout"
-msgstr ""
+msgstr "Näppäimistöasettelu"
 
 #: install_station/keyboard.py:122
 msgid "Keyboard Models"
-msgstr ""
+msgstr "Näppäimistömallit"
 
 #: install_station/keyboard.py:230
 msgid "English (US)"
-msgstr ""
+msgstr "Englanti (Yhdysvallat)"
 
 #: install_station/keyboard.py:231
 msgid "English (Canada)"
-msgstr ""
+msgstr "Englanti (Kanada)"
 
 #: install_station/keyboard.py:232
 msgid "French (Canada)"
-msgstr ""
+msgstr "Ranska (Kanada)"
 
 #: install_station/language.py:93 install_station/language.py:197
 msgid "Please select your language:"
-msgstr ""
+msgstr "Valitse kieli:"
 
 #: install_station/language.py:99 install_station/language.py:116
 msgid "Language"
-msgstr ""
+msgstr "Kieli"
 
 #: install_station/network_setup.py:155
 msgid "Network card connected to the internet"
-msgstr ""
+msgstr "Verkkokortti on yhdistetty internetiin"
 
 #: install_station/network_setup.py:161
 msgid "Network card not connected to the internet"
-msgstr ""
+msgstr "Verkkokorttia ei ole yhdistetty internetiin"
 
 #: install_station/network_setup.py:164
 msgid "No network card detected"
-msgstr ""
+msgstr "Verkkokorttia ei löytynyt"
 
 #: install_station/network_setup.py:173
 msgid "WiFi card detected and connected to an access point"
-msgstr ""
+msgstr "Wi-Fi-kortti löytyi ja on yhdistetty tukiasemaan"
 
 #: install_station/network_setup.py:177
 msgid "WiFi card detected but not connected to an access point"
-msgstr ""
+msgstr "Wi-Fi-kortti löytyi, mutta sitä ei ole yhdistetty tukiasemaan"
 
 #: install_station/network_setup.py:180
 msgid "WiFi card not detected or not supported"
-msgstr ""
+msgstr "Wi-Fi-korttia ei löytynyt tai sitä ei tueta"
 
 #: install_station/network_setup.py:202 install_station/network_setup.py:271
 msgid "Rescan"
-msgstr ""
+msgstr "Etsi uudelleen"
 
 #: install_station/network_setup.py:359 install_station/network_setup.py:507
 #: install_station/network_setup.py:678
 #, python-brace-format
 msgid "Could not connect to {ssid}"
-msgstr ""
+msgstr "Yhteyden muodostaminen verkkoon {ssid} epäonnistui"
 
 #: install_station/network_setup.py:401
 #, python-brace-format
 msgid "Connecting to {ssid}..."
-msgstr ""
+msgstr "Yhdistetään verkkoon {ssid}..."
 
 #: install_station/network_setup.py:433
 #, python-brace-format
 msgid "Connected to {ssid}, but it could not be saved"
-msgstr ""
+msgstr "Yhdistetty verkkoon {ssid}, mutta verkkoa ei voitu tallentaa"
 
 #: install_station/network_setup.py:494
 msgid "Wi-Fi Network Authentication Required"
-msgstr ""
+msgstr "Wi-Fi-verkon todennus vaaditaan"
 
 #: install_station/network_setup.py:509
 #, python-brace-format
 msgid "Authentication required by {ssid} Wi-Fi Network"
-msgstr ""
+msgstr "Wi-Fi-verkko {ssid} vaatii todennuksen"
 
 #: install_station/network_setup.py:512 install_station/network_setup.py:730
 msgid "Password:"
-msgstr ""
+msgstr "Salasana:"
 
 #: install_station/network_setup.py:515
 msgid "Show password"
-msgstr ""
+msgstr "Näytä salasana"
 
 #: install_station/network_setup.py:670
 msgid "Enterprise Wi-Fi Authentication"
-msgstr ""
+msgstr "Yritysten Wi-Fi-todennus"
 
 #: install_station/network_setup.py:680
 #, python-brace-format
 msgid "Enterprise Authentication for {ssid}"
-msgstr ""
+msgstr "Yritystodennus verkolle {ssid}"
 
 #: install_station/network_setup.py:686
 #, python-brace-format
 msgid "Security: {security}"
-msgstr ""
+msgstr "Suojaus: {security}"
 
 #: install_station/network_setup.py:700
 msgid "EAP Method:"
-msgstr ""
+msgstr "EAP-menetelmä:"
 
 #: install_station/network_setup.py:709
 msgid "Inner Auth:"
-msgstr ""
+msgstr "Sisäinen todennus:"
 
 #: install_station/network_setup.py:714
 msgid "Username:"
-msgstr ""
+msgstr "Käyttäjänimi:"
 
 #: install_station/network_setup.py:718
 msgid "Optional - for privacy"
-msgstr ""
+msgstr "Valinnainen, yksityisyyden vuoksi"
 
 #: install_station/network_setup.py:719
 msgid "Anonymous ID:"
-msgstr ""
+msgstr "Anonyymi tunnus:"
 
 #: install_station/network_setup.py:727
 msgid "Show"
-msgstr ""
+msgstr "Näytä"
 
 #: install_station/network_setup.py:734
 msgid "Certificates (*.pem, *.crt, *.cer)"
-msgstr ""
+msgstr "Varmenteet (*.pem, *.crt, *.cer)"
 
 #: install_station/network_setup.py:736
 msgid "Select CA Certificate"
-msgstr ""
+msgstr "Valitse CA-varmenne"
 
 #: install_station/network_setup.py:741
 msgid "CA Certificate:"
-msgstr ""
+msgstr "CA-varmenne:"
 
 #: install_station/network_setup.py:746
 msgid "Select Client Certificate"
-msgstr ""
+msgstr "Valitse asiakasvarmenne"
 
 #: install_station/network_setup.py:749
 msgid "Client Cert:"
-msgstr ""
+msgstr "Asiakasvarm.:"
 
 #: install_station/network_setup.py:754
 msgid "Select Private Key"
-msgstr ""
+msgstr "Valitse yksityinen avain"
 
 #: install_station/network_setup.py:755
 msgid "Key files (*.pem, *.key, *.p12)"
-msgstr ""
+msgstr "Avaintiedostot (*.pem, *.key, *.p12)"
 
 #: install_station/network_setup.py:759
 msgid "Private Key:"
-msgstr ""
+msgstr "Yksityinen avain:"
 
 #: install_station/network_setup.py:766
 msgid "Key Password:"
-msgstr ""
+msgstr "Avaimen salasana:"
 
 #: install_station/try_install.py:102
 msgid "What would you like to do?"
-msgstr ""
+msgstr "Mitä haluat tehdä?"
 
 #: install_station/try_install.py:109
 msgid ""
 "<b>Install GhostBSD</b>\n"
 "Install GhostBSD on your computer."
 msgstr ""
+"<b>Asenna GhostBSD</b>\n"
+"Asenna GhostBSD tietokoneellesi."
 
 #: install_station/try_install.py:122
 msgid ""
 "<b>Try GhostBSD</b>\n"
 "Run GhostBSD without installing to your computer."
 msgstr ""
+"<b>Kokeile GhostBSD:tä</b>\n"
+"Käytä GhostBSD:tä asentamatta sitä tietokoneellesi."
 
 #: install_station/use_zfs.py:176
 msgid "(select the smallest disk first)"
-msgstr ""
+msgstr "(valitse pienin levy ensin)"
 
 #: install_station/use_zfs.py:180
 msgid "Select 1 or more drives, no redundancy"
-msgstr ""
+msgstr "Valitse vähintään 1 levy, ei vikasietoisuutta"
 
 #: install_station/use_zfs.py:184
 msgid "Select 2 or more drives for mirroring"
-msgstr ""
+msgstr "Valitse vähintään 2 levyä peilausta varten"
 
 #: install_station/use_zfs.py:188
 msgid "Select 3 drives for RAIDZ1"
-msgstr ""
+msgstr "Valitse 3 levyä RAIDZ1:tä varten"
 
 #: install_station/use_zfs.py:192
 msgid "Select 4 drives for RAIDZ2"
-msgstr ""
+msgstr "Valitse 4 levyä RAIDZ2:ta varten"
 
 #: install_station/use_zfs.py:196
 msgid "Select 5 drives for RAIDZ3"
-msgstr ""
+msgstr "Valitse 5 levyä RAIDZ3:a varten"
 
 #: install_station/use_zfs.py:270
 msgid "Disk"
-msgstr ""
+msgstr "Levy"
 
 #: install_station/use_zfs.py:277
 msgid "Size(MB)"
-msgstr ""
+msgstr "Koko (Mt)"
 
 #: install_station/use_zfs.py:283
 msgid "Name"
-msgstr ""
+msgstr "Nimi"
 
 #: install_station/use_zfs.py:287
 msgid "Check"
-msgstr ""
+msgstr "Valinta"
 
 #: install_station/use_zfs.py:301
 msgid "Please select one drive"
-msgstr ""
+msgstr "Valitse yksi levy"
 
 #: install_station/use_zfs.py:307
 msgid "Pool Layout"
-msgstr ""
+msgstr "Poolin asettelu"
 
 #: install_station/use_zfs.py:319
 msgid "Pool Name"
-msgstr ""
+msgstr "Poolin nimi"
 
 #: install_station/use_zfs.py:325
 msgid "Swap Size(MB)"
-msgstr ""
+msgstr "Swapin koko (Mt)"
 
 #: install_station/use_zfs.py:346
 msgid "Encrypt Disk (GELI)"
-msgstr ""
+msgstr "Salaa levy (GELI)"
 
 #: install_station/use_zfs.py:351
 msgid "Password"
-msgstr ""
+msgstr "Salasana"
 
 #: install_station/use_zfs.py:361
 msgid "Confirm"
-msgstr ""
+msgstr "Vahvista"
 
 #: install_station/use_zfs.py:509
 msgid "Warning"
-msgstr ""
+msgstr "Varoitus"
 
 #: install_station/use_zfs.py:520
 msgid "Smallest disk need to be SELECTED first!\n"
-msgstr ""
+msgstr "Pienin levy on VALITTAVA ensin!\n"
 
 #: install_station/use_zfs.py:521
 msgid "All the disk selected will reset."
-msgstr ""
+msgstr "Kaikki valitut levyt tyhjennetään."

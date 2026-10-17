@@ -13,112 +13,111 @@ msgstr ""
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: install_station/boot_manager.py:121
 #: install_station/interface_controller.py:247
 msgid "Boot Option"
-msgstr ""
+msgstr "Opcja rozruchu"
 
 #: install_station/boot_manager.py:135
 msgid "Setup rEFInd boot manager"
-msgstr ""
+msgstr "Zainstaluj menedżer rozruchu rEFInd"
 
 #: install_station/boot_manager.py:149
 msgid "Setup FreeBSD boot manager"
-msgstr ""
+msgstr "Zainstaluj menedżer rozruchu FreeBSD"
 
 #: install_station/boot_manager.py:164
 #, python-brace-format
 msgid "FreeBSD {loader} loader only"
-msgstr ""
+msgstr "Tylko program ładujący FreeBSD {loader}"
 
 #: install_station/common.py:123
 msgid "Space not allowed"
-msgstr ""
+msgstr "Spacje są niedozwolone"
 
 #: install_station/common.py:125 install_station/common.py:127
 msgid "Super Weak"
-msgstr ""
+msgstr "Skrajnie słabe"
 
 #: install_station/common.py:129 install_station/common.py:135
 msgid "Very Weak"
-msgstr ""
+msgstr "Bardzo słabe"
 
 #: install_station/common.py:131 install_station/common.py:137
 #: install_station/common.py:143
 msgid "Fairly Weak"
-msgstr ""
+msgstr "Dość słabe"
 
 #: install_station/common.py:133 install_station/common.py:139
 #: install_station/common.py:145 install_station/common.py:151
 msgid "Weak"
-msgstr ""
+msgstr "Słabe"
 
 #: install_station/common.py:141 install_station/common.py:147
 #: install_station/common.py:153 install_station/common.py:159
 msgid "Strong"
-msgstr ""
+msgstr "Silne"
 
 #: install_station/common.py:149 install_station/common.py:155
 #: install_station/common.py:161 install_station/common.py:167
 msgid "Fairly Strong"
-msgstr ""
+msgstr "Dość silne"
 
 #: install_station/common.py:157 install_station/common.py:163
 msgid "Very Strong"
-msgstr ""
+msgstr "Bardzo silne"
 
 #: install_station/common.py:165 install_station/common.py:169
 msgid "Super Strong"
-msgstr ""
+msgstr "Skrajnie silne"
 
 #: install_station/custom.py:248
 msgid "Create"
-msgstr ""
+msgstr "Utwórz"
 
 #: install_station/custom.py:252
 msgid "Delete"
-msgstr ""
+msgstr "Usuń"
 
 #: install_station/custom.py:256
 msgid "Revert"
-msgstr ""
+msgstr "Cofnij zmiany"
 
 #: install_station/custom.py:260
 msgid "Auto"
-msgstr ""
+msgstr "Automatycznie"
 
 #: install_station/custom.py:328 install_station/custom.py:566
 msgid "Add Partition"
-msgstr ""
+msgstr "Dodaj partycję"
 
 #: install_station/custom.py:342
 msgid "Type:"
-msgstr ""
+msgstr "Typ:"
 
 #: install_station/custom.py:343 install_station/custom.py:580
 msgid "Size(MB):"
-msgstr ""
+msgstr "Rozmiar (MB):"
 
 #: install_station/custom.py:344
 msgid "Mount point:"
-msgstr ""
+msgstr "Punkt montowania:"
 
 #: install_station/custom.py:496
 msgid "Partition Scheme"
-msgstr ""
+msgstr "Schemat partycjonowania"
 
 #: install_station/custom.py:515
 msgid "GPT: GUID Partition Table"
-msgstr ""
+msgstr "GPT: tablica partycji GUID"
 
 #: install_station/custom.py:516
 msgid "MBR: DOS Partition"
-msgstr ""
+msgstr "MBR: partycja DOS"
 
 #: install_station/end.py:10
 msgid ""
@@ -128,30 +127,35 @@ msgid ""
 "any changes you make or documents you save will\n"
 "not be preserved on reboot."
 msgstr ""
+"Instalacja została zakończona. Aby korzystać z nowej\n"
+"instalacji, należy ponownie uruchomić komputer.\n"
+"Można nadal używać tego nośnika live, ale\n"
+"wprowadzone zmiany i zapisane dokumenty nie\n"
+"zostaną zachowane po ponownym uruchomieniu."
 
 #: install_station/end.py:31
 msgid "Installation Completed"
-msgstr ""
+msgstr "Instalacja zakończona"
 
 #: install_station/end.py:47
 msgid "Restart"
-msgstr ""
+msgstr "Uruchom ponownie"
 
 #: install_station/end.py:49
 msgid "Continue"
-msgstr ""
+msgstr "Kontynuuj"
 
 #: install_station/error.py:17
 msgid "Installation Error"
-msgstr ""
+msgstr "Błąd instalacji"
 
 #: install_station/error.py:28
 msgid "Installation has failed!"
-msgstr ""
+msgstr "Instalacja nie powiodła się!"
 
 #: install_station/error.py:33
 msgid "GhostBSD issue system"
-msgstr ""
+msgstr "systemie zgłaszania błędów GhostBSD"
 
 #: install_station/error.py:35
 #, python-brace-format
@@ -159,380 +163,391 @@ msgid ""
 "Please report the issue to {anchor}, and \n"
 "be sure to provide /tmp/.pc-sysinstall/pc-sysinstall.log."
 msgstr ""
+"Zgłoś problem w {anchor} i \n"
+"dołącz plik /tmp/.pc-sysinstall/pc-sysinstall.log."
 
 #: install_station/error.py:45
 msgid "Ok"
-msgstr ""
+msgstr "OK"
 
 #: install_station/install_type.py:94
 msgid "How do you want to install GhostBSD?"
-msgstr ""
+msgstr "Jak chcesz zainstalować GhostBSD?"
 
 #: install_station/install_type.py:100
 msgid ""
 "<b>Disks Configuration</b>\n"
-"Install GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 "
-"configurations."
+"Install GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 configurations."
 msgstr ""
+"<b>Konfiguracja dysków</b>\n"
+"Zainstaluj GhostBSD w konfiguracji Stripe, Mirror, RAIDZ1, RAIDZ2 lub RAIDZ3."
 
 #: install_station/install_type.py:113
 msgid ""
 "<b>Multi-Boot Configuration</b>\n"
 "Install GhostBSD with ZFS alongside other operating systems."
 msgstr ""
+"<b>Konfiguracja wielosystemowa</b>\n"
+"Zainstaluj GhostBSD z ZFS obok innych systemów operacyjnych."
 
 #: install_station/install.py:46
 msgid "Creating ghostbsd_installation.cfg"
-msgstr ""
+msgstr "Tworzenie ghostbsd_installation.cfg"
 
 #: install_station/install.py:50
 msgid "Deleting partition"
-msgstr ""
+msgstr "Usuwanie partycji"
 
 #: install_station/install.py:55
 msgid "Creating disk partition"
-msgstr ""
+msgstr "Tworzenie partycji dysku"
 
 #: install_station/install.py:60
 msgid "Creating new partitions"
-msgstr ""
+msgstr "Tworzenie nowych partycji"
 
 #: install_station/install.py:90
 msgid "Installation in progress"
-msgstr ""
+msgstr "Trwa instalacja"
 
 #: install_station/install.py:102
 msgid ""
 "Thank you for choosing GhostBSD!\n"
 "\n"
-"We believe every computer operating system should be simple, elegant, secure "
-"and protect your privacy while being easy to use. GhostBSD is simplifying "
-"FreeBSD for those who lack the technical expertise required to use it and "
-"lower the entry-level of using BSD. \n"
+"We believe every computer operating system should be simple, elegant, secure and protect your privacy while being easy to use. GhostBSD is simplifying FreeBSD for those who lack the technical expertise required to use it and lower the entry-level of using BSD. \n"
 "\n"
 "We hope you'll enjoy our BSD operating system."
 msgstr ""
+"Dziękujemy za wybranie GhostBSD!\n"
+"\n"
+"Wierzymy, że każdy system operacyjny powinien być prosty, elegancki, bezpieczny i chronić Twoją prywatność, a przy tym łatwy w obsłudze. GhostBSD upraszcza FreeBSD dla osób, którym brakuje wiedzy technicznej, i obniża próg wejścia do BSD. \n"
+"\n"
+"Mamy nadzieję, że polubisz nasz system operacyjny BSD."
 
 #: install_station/interface_controller.py:24
 #: install_station/interface_controller.py:35
 msgid "Back"
-msgstr ""
+msgstr "Wstecz"
 
 #: install_station/interface_controller.py:26
 #: install_station/interface_controller.py:36
 msgid "Cancel"
-msgstr ""
+msgstr "Anuluj"
 
 #: install_station/interface_controller.py:28
 #: install_station/interface_controller.py:37
 #: install_station/interface_controller.py:281
 msgid "Next"
-msgstr ""
+msgstr "Dalej"
 
 #: install_station/interface_controller.py:129
 #: install_station/interface_controller.py:130 install_station/language.py:101
 msgid "Welcome to GhostBSD"
-msgstr ""
+msgstr "Witamy w GhostBSD"
 
 #: install_station/interface_controller.py:139
 msgid "Button"
-msgstr ""
+msgstr "Przycisk"
 
 #: install_station/interface_controller.py:160
 msgid "Keyboard Setup"
-msgstr ""
+msgstr "Konfiguracja klawiatury"
 
 #: install_station/interface_controller.py:172
 msgid "Network Setup"
-msgstr ""
+msgstr "Konfiguracja sieci"
 
 #: install_station/interface_controller.py:183
 msgid "Try Or Install GhostBSD"
-msgstr ""
+msgstr "Wypróbuj lub zainstaluj GhostBSD"
 
 #: install_station/interface_controller.py:194
 msgid "Installation Types"
-msgstr ""
+msgstr "Typy instalacji"
 
 #: install_station/interface_controller.py:222
 msgid "Custom Configuration"
-msgstr ""
+msgstr "Konfiguracja niestandardowa"
 
 #: install_station/interface_controller.py:232
 msgid "ZFS Configuration"
-msgstr ""
+msgstr "Konfiguracja ZFS"
 
 #: install_station/interface_controller.py:249
 msgid "Install"
-msgstr ""
+msgstr "Zainstaluj"
 
 #: install_station/interface_controller.py:259
 msgid "Installation Progress"
-msgstr ""
+msgstr "Postęp instalacji"
 
 #: install_station/interface_controller.py:266
 msgid "Progress Bar"
-msgstr ""
+msgstr "Pasek postępu"
 
 #: install_station/keyboard.py:45
 msgid "Type here to test your keyboard"
-msgstr ""
+msgstr "Pisz tutaj, aby przetestować klawiaturę"
 
 #: install_station/keyboard.py:102
 msgid "Keyboard Layout"
-msgstr ""
+msgstr "Układ klawiatury"
 
 #: install_station/keyboard.py:122
 msgid "Keyboard Models"
-msgstr ""
+msgstr "Modele klawiatury"
 
 #: install_station/keyboard.py:230
 msgid "English (US)"
-msgstr ""
+msgstr "Angielski (USA)"
 
 #: install_station/keyboard.py:231
 msgid "English (Canada)"
-msgstr ""
+msgstr "Angielski (Kanada)"
 
 #: install_station/keyboard.py:232
 msgid "French (Canada)"
-msgstr ""
+msgstr "Francuski (Kanada)"
 
 #: install_station/language.py:93 install_station/language.py:197
 msgid "Please select your language:"
-msgstr ""
+msgstr "Wybierz język:"
 
 #: install_station/language.py:99 install_station/language.py:116
 msgid "Language"
-msgstr ""
+msgstr "Język"
 
 #: install_station/network_setup.py:155
 msgid "Network card connected to the internet"
-msgstr ""
+msgstr "Karta sieciowa połączona z internetem"
 
 #: install_station/network_setup.py:161
 msgid "Network card not connected to the internet"
-msgstr ""
+msgstr "Karta sieciowa niepołączona z internetem"
 
 #: install_station/network_setup.py:164
 msgid "No network card detected"
-msgstr ""
+msgstr "Nie wykryto karty sieciowej"
 
 #: install_station/network_setup.py:173
 msgid "WiFi card detected and connected to an access point"
-msgstr ""
+msgstr "Wykryto kartę Wi-Fi połączoną z punktem dostępu"
 
 #: install_station/network_setup.py:177
 msgid "WiFi card detected but not connected to an access point"
-msgstr ""
+msgstr "Wykryto kartę Wi-Fi, ale nie jest połączona z punktem dostępu"
 
 #: install_station/network_setup.py:180
 msgid "WiFi card not detected or not supported"
-msgstr ""
+msgstr "Nie wykryto karty Wi-Fi lub nie jest obsługiwana"
 
 #: install_station/network_setup.py:202 install_station/network_setup.py:271
 msgid "Rescan"
-msgstr ""
+msgstr "Wyszukaj ponownie"
 
 #: install_station/network_setup.py:359 install_station/network_setup.py:507
 #: install_station/network_setup.py:678
 #, python-brace-format
 msgid "Could not connect to {ssid}"
-msgstr ""
+msgstr "Nie można połączyć się z {ssid}"
 
 #: install_station/network_setup.py:401
 #, python-brace-format
 msgid "Connecting to {ssid}..."
-msgstr ""
+msgstr "Łączenie z {ssid}..."
 
 #: install_station/network_setup.py:433
 #, python-brace-format
 msgid "Connected to {ssid}, but it could not be saved"
-msgstr ""
+msgstr "Połączono z {ssid}, ale nie udało się zapisać sieci"
 
 #: install_station/network_setup.py:494
 msgid "Wi-Fi Network Authentication Required"
-msgstr ""
+msgstr "Wymagane uwierzytelnienie w sieci Wi-Fi"
 
 #: install_station/network_setup.py:509
 #, python-brace-format
 msgid "Authentication required by {ssid} Wi-Fi Network"
-msgstr ""
+msgstr "Sieć Wi-Fi {ssid} wymaga uwierzytelnienia"
 
 #: install_station/network_setup.py:512 install_station/network_setup.py:730
 msgid "Password:"
-msgstr ""
+msgstr "Hasło:"
 
 #: install_station/network_setup.py:515
 msgid "Show password"
-msgstr ""
+msgstr "Pokaż hasło"
 
 #: install_station/network_setup.py:670
 msgid "Enterprise Wi-Fi Authentication"
-msgstr ""
+msgstr "Uwierzytelnianie Wi-Fi w trybie Enterprise"
 
 #: install_station/network_setup.py:680
 #, python-brace-format
 msgid "Enterprise Authentication for {ssid}"
-msgstr ""
+msgstr "Uwierzytelnianie Enterprise dla {ssid}"
 
 #: install_station/network_setup.py:686
 #, python-brace-format
 msgid "Security: {security}"
-msgstr ""
+msgstr "Zabezpieczenia: {security}"
 
 #: install_station/network_setup.py:700
 msgid "EAP Method:"
-msgstr ""
+msgstr "Metoda EAP:"
 
 #: install_station/network_setup.py:709
 msgid "Inner Auth:"
-msgstr ""
+msgstr "Uwierz. wewnętrzne:"
 
 #: install_station/network_setup.py:714
 msgid "Username:"
-msgstr ""
+msgstr "Nazwa użytkownika:"
 
 #: install_station/network_setup.py:718
 msgid "Optional - for privacy"
-msgstr ""
+msgstr "Opcjonalne, dla prywatności"
 
 #: install_station/network_setup.py:719
 msgid "Anonymous ID:"
-msgstr ""
+msgstr "Anonimowy identyfikator:"
 
 #: install_station/network_setup.py:727
 msgid "Show"
-msgstr ""
+msgstr "Pokaż"
 
 #: install_station/network_setup.py:734
 msgid "Certificates (*.pem, *.crt, *.cer)"
-msgstr ""
+msgstr "Certyfikaty (*.pem, *.crt, *.cer)"
 
 #: install_station/network_setup.py:736
 msgid "Select CA Certificate"
-msgstr ""
+msgstr "Wybierz certyfikat CA"
 
 #: install_station/network_setup.py:741
 msgid "CA Certificate:"
-msgstr ""
+msgstr "Certyfikat CA:"
 
 #: install_station/network_setup.py:746
 msgid "Select Client Certificate"
-msgstr ""
+msgstr "Wybierz certyfikat klienta"
 
 #: install_station/network_setup.py:749
 msgid "Client Cert:"
-msgstr ""
+msgstr "Cert. klienta:"
 
 #: install_station/network_setup.py:754
 msgid "Select Private Key"
-msgstr ""
+msgstr "Wybierz klucz prywatny"
 
 #: install_station/network_setup.py:755
 msgid "Key files (*.pem, *.key, *.p12)"
-msgstr ""
+msgstr "Pliki kluczy (*.pem, *.key, *.p12)"
 
 #: install_station/network_setup.py:759
 msgid "Private Key:"
-msgstr ""
+msgstr "Klucz prywatny:"
 
 #: install_station/network_setup.py:766
 msgid "Key Password:"
-msgstr ""
+msgstr "Hasło klucza:"
 
 #: install_station/try_install.py:102
 msgid "What would you like to do?"
-msgstr ""
+msgstr "Co chcesz zrobić?"
 
 #: install_station/try_install.py:109
 msgid ""
 "<b>Install GhostBSD</b>\n"
 "Install GhostBSD on your computer."
 msgstr ""
+"<b>Zainstaluj GhostBSD</b>\n"
+"Zainstaluj GhostBSD na komputerze."
 
 #: install_station/try_install.py:122
 msgid ""
 "<b>Try GhostBSD</b>\n"
 "Run GhostBSD without installing to your computer."
 msgstr ""
+"<b>Wypróbuj GhostBSD</b>\n"
+"Uruchom GhostBSD bez instalowania na komputerze."
 
 #: install_station/use_zfs.py:176
 msgid "(select the smallest disk first)"
-msgstr ""
+msgstr "(najpierw wybierz najmniejszy dysk)"
 
 #: install_station/use_zfs.py:180
 msgid "Select 1 or more drives, no redundancy"
-msgstr ""
+msgstr "Wybierz 1 lub więcej dysków, bez nadmiarowości"
 
 #: install_station/use_zfs.py:184
 msgid "Select 2 or more drives for mirroring"
-msgstr ""
+msgstr "Wybierz 2 lub więcej dysków do lustra"
 
 #: install_station/use_zfs.py:188
 msgid "Select 3 drives for RAIDZ1"
-msgstr ""
+msgstr "Wybierz 3 dyski dla RAIDZ1"
 
 #: install_station/use_zfs.py:192
 msgid "Select 4 drives for RAIDZ2"
-msgstr ""
+msgstr "Wybierz 4 dyski dla RAIDZ2"
 
 #: install_station/use_zfs.py:196
 msgid "Select 5 drives for RAIDZ3"
-msgstr ""
+msgstr "Wybierz 5 dysków dla RAIDZ3"
 
 #: install_station/use_zfs.py:270
 msgid "Disk"
-msgstr ""
+msgstr "Dysk"
 
 #: install_station/use_zfs.py:277
 msgid "Size(MB)"
-msgstr ""
+msgstr "Rozmiar (MB)"
 
 #: install_station/use_zfs.py:283
 msgid "Name"
-msgstr ""
+msgstr "Nazwa"
 
 #: install_station/use_zfs.py:287
 msgid "Check"
-msgstr ""
+msgstr "Wybór"
 
 #: install_station/use_zfs.py:301
 msgid "Please select one drive"
-msgstr ""
+msgstr "Wybierz jeden dysk"
 
 #: install_station/use_zfs.py:307
 msgid "Pool Layout"
-msgstr ""
+msgstr "Układ puli"
 
 #: install_station/use_zfs.py:319
 msgid "Pool Name"
-msgstr ""
+msgstr "Nazwa puli"
 
 #: install_station/use_zfs.py:325
 msgid "Swap Size(MB)"
-msgstr ""
+msgstr "Rozmiar swap (MB)"
 
 #: install_station/use_zfs.py:346
 msgid "Encrypt Disk (GELI)"
-msgstr ""
+msgstr "Zaszyfruj dysk (GELI)"
 
 #: install_station/use_zfs.py:351
 msgid "Password"
-msgstr ""
+msgstr "Hasło"
 
 #: install_station/use_zfs.py:361
 msgid "Confirm"
-msgstr ""
+msgstr "Potwierdź"
 
 #: install_station/use_zfs.py:509
 msgid "Warning"
-msgstr ""
+msgstr "Ostrzeżenie"
 
 #: install_station/use_zfs.py:520
 msgid "Smallest disk need to be SELECTED first!\n"
-msgstr ""
+msgstr "Najmniejszy dysk musi zostać WYBRANY jako pierwszy!\n"
 
 #: install_station/use_zfs.py:521
 msgid "All the disk selected will reset."
-msgstr ""
+msgstr "Wszystkie wybrane dyski zostaną wyczyszczone."

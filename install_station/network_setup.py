@@ -355,10 +355,7 @@ class NetworkSetup:
             cls.connect_in_background(network, wifi_card)
         elif network['security'] == 'OPEN':
             if save_open_network(ssid, wifi_card) is None:
-                cls.wifi_connection_label.set_label(
-                    get_text("Could not connect to {ssid}").format(ssid=ssid)
-                )
-                cls.wifi_connection_image.set_from_stock(Gtk.STOCK_NO, 5)
+                cls.connection_failed(ssid)
             else:
                 cls.connect_in_background(network, wifi_card)
         elif network['enterprise']:
@@ -467,8 +464,23 @@ class NetworkSetup:
         cls.end_connection_attempt()
         if network['enterprise']:
             cls.enterprise_authentication(network, card, True)
-        elif network['security'] != 'OPEN':
+        elif network['security'] == 'OPEN':
+            cls.connection_failed(network['ssid'])
+        else:
             cls.authentication(network, card, True)
+
+    @classmethod
+    def connection_failed(cls, ssid: str) -> None:
+        """
+        Show on the WiFi status line that the network did not connect.
+
+        Args:
+            ssid: WiFi network SSID
+        """
+        cls.wifi_connection_label.set_label(
+            get_text("Could not connect to {ssid}").format(ssid=ssid)
+        )
+        cls.wifi_connection_image.set_from_stock(Gtk.STOCK_NO, 5)
 
     @classmethod
     def on_check(cls, widget: Gtk.CheckButton) -> None:

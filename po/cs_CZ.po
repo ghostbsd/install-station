@@ -13,111 +13,111 @@ msgstr ""
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: install_station/boot_manager.py:121
 #: install_station/interface_controller.py:247
 msgid "Boot Option"
-msgstr ""
+msgstr "Možnost spouštění"
 
 #: install_station/boot_manager.py:135
 msgid "Setup rEFInd boot manager"
-msgstr ""
+msgstr "Nastavit zavaděč rEFInd"
 
 #: install_station/boot_manager.py:149
 msgid "Setup FreeBSD boot manager"
-msgstr ""
+msgstr "Nastavit zavaděč FreeBSD"
 
 #: install_station/boot_manager.py:164
 #, python-brace-format
 msgid "FreeBSD {loader} loader only"
-msgstr ""
+msgstr "Pouze zavaděč FreeBSD {loader}"
 
 #: install_station/common.py:123
 msgid "Space not allowed"
-msgstr ""
+msgstr "Mezery nejsou povoleny"
 
 #: install_station/common.py:125 install_station/common.py:127
 msgid "Super Weak"
-msgstr ""
+msgstr "Extrémně slabé"
 
 #: install_station/common.py:129 install_station/common.py:135
 msgid "Very Weak"
-msgstr ""
+msgstr "Velmi slabé"
 
 #: install_station/common.py:131 install_station/common.py:137
 #: install_station/common.py:143
 msgid "Fairly Weak"
-msgstr ""
+msgstr "Docela slabé"
 
 #: install_station/common.py:133 install_station/common.py:139
 #: install_station/common.py:145 install_station/common.py:151
 msgid "Weak"
-msgstr ""
+msgstr "Slabé"
 
 #: install_station/common.py:141 install_station/common.py:147
 #: install_station/common.py:153 install_station/common.py:159
 msgid "Strong"
-msgstr ""
+msgstr "Silné"
 
 #: install_station/common.py:149 install_station/common.py:155
 #: install_station/common.py:161 install_station/common.py:167
 msgid "Fairly Strong"
-msgstr ""
+msgstr "Docela silné"
 
 #: install_station/common.py:157 install_station/common.py:163
 msgid "Very Strong"
-msgstr ""
+msgstr "Velmi silné"
 
 #: install_station/common.py:165 install_station/common.py:169
 msgid "Super Strong"
-msgstr ""
+msgstr "Extrémně silné"
 
 #: install_station/custom.py:248
 msgid "Create"
-msgstr ""
+msgstr "Vytvořit"
 
 #: install_station/custom.py:252
 msgid "Delete"
-msgstr ""
+msgstr "Smazat"
 
 #: install_station/custom.py:256
 msgid "Revert"
-msgstr ""
+msgstr "Vrátit změny"
 
 #: install_station/custom.py:260
 msgid "Auto"
-msgstr ""
+msgstr "Automaticky"
 
 #: install_station/custom.py:328 install_station/custom.py:566
 msgid "Add Partition"
-msgstr ""
+msgstr "Přidat oddíl"
 
 #: install_station/custom.py:342
 msgid "Type:"
-msgstr ""
+msgstr "Typ:"
 
 #: install_station/custom.py:343 install_station/custom.py:580
 msgid "Size(MB):"
-msgstr ""
+msgstr "Velikost (MB):"
 
 #: install_station/custom.py:344
 msgid "Mount point:"
-msgstr ""
+msgstr "Přípojný bod:"
 
 #: install_station/custom.py:496
 msgid "Partition Scheme"
-msgstr ""
+msgstr "Schéma oddílů"
 
 #: install_station/custom.py:515
 msgid "GPT: GUID Partition Table"
-msgstr ""
+msgstr "GPT: tabulka oddílů GUID"
 
 #: install_station/custom.py:516
 msgid "MBR: DOS Partition"
-msgstr ""
+msgstr "MBR: oddíl DOS"
 
 #: install_station/end.py:10
 msgid ""
@@ -127,30 +127,35 @@ msgid ""
 "any changes you make or documents you save will\n"
 "not be preserved on reboot."
 msgstr ""
+"Instalace je dokončena. Abyste mohli novou instalaci\n"
+"používat, musíte restartovat počítač.\n"
+"Toto live médium můžete dál používat, ale\n"
+"provedené změny a uložené dokumenty se\n"
+"po restartu nezachovají."
 
 #: install_station/end.py:31
 msgid "Installation Completed"
-msgstr ""
+msgstr "Instalace dokončena"
 
 #: install_station/end.py:47
 msgid "Restart"
-msgstr ""
+msgstr "Restartovat"
 
 #: install_station/end.py:49
 msgid "Continue"
-msgstr ""
+msgstr "Pokračovat"
 
 #: install_station/error.py:17
 msgid "Installation Error"
-msgstr ""
+msgstr "Chyba instalace"
 
 #: install_station/error.py:28
 msgid "Installation has failed!"
-msgstr ""
+msgstr "Instalace selhala!"
 
 #: install_station/error.py:33
 msgid "GhostBSD issue system"
-msgstr ""
+msgstr "systému hlášení chyb GhostBSD"
 
 #: install_station/error.py:35
 #, python-brace-format
@@ -158,380 +163,391 @@ msgid ""
 "Please report the issue to {anchor}, and \n"
 "be sure to provide /tmp/.pc-sysinstall/pc-sysinstall.log."
 msgstr ""
+"Nahlaste prosím problém v {anchor} a \n"
+"přiložte soubor /tmp/.pc-sysinstall/pc-sysinstall.log."
 
 #: install_station/error.py:45
 msgid "Ok"
-msgstr ""
+msgstr "OK"
 
 #: install_station/install_type.py:94
 msgid "How do you want to install GhostBSD?"
-msgstr ""
+msgstr "Jak chcete GhostBSD nainstalovat?"
 
 #: install_station/install_type.py:100
 msgid ""
 "<b>Disks Configuration</b>\n"
-"Install GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 "
-"configurations."
+"Install GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 configurations."
 msgstr ""
+"<b>Konfigurace disků</b>\n"
+"Nainstalovat GhostBSD v konfiguraci Stripe, Mirror, RAIDZ1, RAIDZ2 nebo RAIDZ3."
 
 #: install_station/install_type.py:113
 msgid ""
 "<b>Multi-Boot Configuration</b>\n"
 "Install GhostBSD with ZFS alongside other operating systems."
 msgstr ""
+"<b>Konfigurace více systémů</b>\n"
+"Nainstalovat GhostBSD se ZFS vedle jiných operačních systémů."
 
 #: install_station/install.py:46
 msgid "Creating ghostbsd_installation.cfg"
-msgstr ""
+msgstr "Vytváření ghostbsd_installation.cfg"
 
 #: install_station/install.py:50
 msgid "Deleting partition"
-msgstr ""
+msgstr "Mazání oddílu"
 
 #: install_station/install.py:55
 msgid "Creating disk partition"
-msgstr ""
+msgstr "Vytváření oddílu disku"
 
 #: install_station/install.py:60
 msgid "Creating new partitions"
-msgstr ""
+msgstr "Vytváření nových oddílů"
 
 #: install_station/install.py:90
 msgid "Installation in progress"
-msgstr ""
+msgstr "Probíhá instalace"
 
 #: install_station/install.py:102
 msgid ""
 "Thank you for choosing GhostBSD!\n"
 "\n"
-"We believe every computer operating system should be simple, elegant, secure "
-"and protect your privacy while being easy to use. GhostBSD is simplifying "
-"FreeBSD for those who lack the technical expertise required to use it and "
-"lower the entry-level of using BSD. \n"
+"We believe every computer operating system should be simple, elegant, secure and protect your privacy while being easy to use. GhostBSD is simplifying FreeBSD for those who lack the technical expertise required to use it and lower the entry-level of using BSD. \n"
 "\n"
 "We hope you'll enjoy our BSD operating system."
 msgstr ""
+"Děkujeme, že jste si vybrali GhostBSD!\n"
+"\n"
+"Věříme, že každý operační systém by měl být jednoduchý, elegantní, bezpečný a chránit vaše soukromí, a přitom se snadno používat. GhostBSD zjednodušuje FreeBSD pro ty, kterým chybí potřebné technické znalosti, a snižuje vstupní bariéru do světa BSD. \n"
+"\n"
+"Doufáme, že si náš operační systém BSD oblíbíte."
 
 #: install_station/interface_controller.py:24
 #: install_station/interface_controller.py:35
 msgid "Back"
-msgstr ""
+msgstr "Zpět"
 
 #: install_station/interface_controller.py:26
 #: install_station/interface_controller.py:36
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 #: install_station/interface_controller.py:28
 #: install_station/interface_controller.py:37
 #: install_station/interface_controller.py:281
 msgid "Next"
-msgstr ""
+msgstr "Další"
 
 #: install_station/interface_controller.py:129
 #: install_station/interface_controller.py:130 install_station/language.py:101
 msgid "Welcome to GhostBSD"
-msgstr ""
+msgstr "Vítejte v GhostBSD"
 
 #: install_station/interface_controller.py:139
 msgid "Button"
-msgstr ""
+msgstr "Tlačítko"
 
 #: install_station/interface_controller.py:160
 msgid "Keyboard Setup"
-msgstr ""
+msgstr "Nastavení klávesnice"
 
 #: install_station/interface_controller.py:172
 msgid "Network Setup"
-msgstr ""
+msgstr "Nastavení sítě"
 
 #: install_station/interface_controller.py:183
 msgid "Try Or Install GhostBSD"
-msgstr ""
+msgstr "Vyzkoušet nebo nainstalovat GhostBSD"
 
 #: install_station/interface_controller.py:194
 msgid "Installation Types"
-msgstr ""
+msgstr "Typy instalace"
 
 #: install_station/interface_controller.py:222
 msgid "Custom Configuration"
-msgstr ""
+msgstr "Vlastní konfigurace"
 
 #: install_station/interface_controller.py:232
 msgid "ZFS Configuration"
-msgstr ""
+msgstr "Konfigurace ZFS"
 
 #: install_station/interface_controller.py:249
 msgid "Install"
-msgstr ""
+msgstr "Nainstalovat"
 
 #: install_station/interface_controller.py:259
 msgid "Installation Progress"
-msgstr ""
+msgstr "Průběh instalace"
 
 #: install_station/interface_controller.py:266
 msgid "Progress Bar"
-msgstr ""
+msgstr "Ukazatel průběhu"
 
 #: install_station/keyboard.py:45
 msgid "Type here to test your keyboard"
-msgstr ""
+msgstr "Pište sem pro vyzkoušení klávesnice"
 
 #: install_station/keyboard.py:102
 msgid "Keyboard Layout"
-msgstr ""
+msgstr "Rozložení klávesnice"
 
 #: install_station/keyboard.py:122
 msgid "Keyboard Models"
-msgstr ""
+msgstr "Modely klávesnice"
 
 #: install_station/keyboard.py:230
 msgid "English (US)"
-msgstr ""
+msgstr "Angličtina (USA)"
 
 #: install_station/keyboard.py:231
 msgid "English (Canada)"
-msgstr ""
+msgstr "Angličtina (Kanada)"
 
 #: install_station/keyboard.py:232
 msgid "French (Canada)"
-msgstr ""
+msgstr "Francouzština (Kanada)"
 
 #: install_station/language.py:93 install_station/language.py:197
 msgid "Please select your language:"
-msgstr ""
+msgstr "Vyberte svůj jazyk:"
 
 #: install_station/language.py:99 install_station/language.py:116
 msgid "Language"
-msgstr ""
+msgstr "Jazyk"
 
 #: install_station/network_setup.py:155
 msgid "Network card connected to the internet"
-msgstr ""
+msgstr "Síťová karta je připojena k internetu"
 
 #: install_station/network_setup.py:161
 msgid "Network card not connected to the internet"
-msgstr ""
+msgstr "Síťová karta není připojena k internetu"
 
 #: install_station/network_setup.py:164
 msgid "No network card detected"
-msgstr ""
+msgstr "Nebyla nalezena žádná síťová karta"
 
 #: install_station/network_setup.py:173
 msgid "WiFi card detected and connected to an access point"
-msgstr ""
+msgstr "Karta Wi-Fi nalezena a připojena k přístupovému bodu"
 
 #: install_station/network_setup.py:177
 msgid "WiFi card detected but not connected to an access point"
-msgstr ""
+msgstr "Karta Wi-Fi nalezena, ale není připojena k přístupovému bodu"
 
 #: install_station/network_setup.py:180
 msgid "WiFi card not detected or not supported"
-msgstr ""
+msgstr "Karta Wi-Fi nenalezena nebo není podporována"
 
 #: install_station/network_setup.py:202 install_station/network_setup.py:271
 msgid "Rescan"
-msgstr ""
+msgstr "Hledat znovu"
 
 #: install_station/network_setup.py:359 install_station/network_setup.py:507
 #: install_station/network_setup.py:678
 #, python-brace-format
 msgid "Could not connect to {ssid}"
-msgstr ""
+msgstr "Nelze se připojit k {ssid}"
 
 #: install_station/network_setup.py:401
 #, python-brace-format
 msgid "Connecting to {ssid}..."
-msgstr ""
+msgstr "Připojování k {ssid}..."
 
 #: install_station/network_setup.py:433
 #, python-brace-format
 msgid "Connected to {ssid}, but it could not be saved"
-msgstr ""
+msgstr "Připojeno k {ssid}, ale síť se nepodařilo uložit"
 
 #: install_station/network_setup.py:494
 msgid "Wi-Fi Network Authentication Required"
-msgstr ""
+msgstr "Je vyžadováno ověření sítě Wi-Fi"
 
 #: install_station/network_setup.py:509
 #, python-brace-format
 msgid "Authentication required by {ssid} Wi-Fi Network"
-msgstr ""
+msgstr "Síť Wi-Fi {ssid} vyžaduje ověření"
 
 #: install_station/network_setup.py:512 install_station/network_setup.py:730
 msgid "Password:"
-msgstr ""
+msgstr "Heslo:"
 
 #: install_station/network_setup.py:515
 msgid "Show password"
-msgstr ""
+msgstr "Zobrazit heslo"
 
 #: install_station/network_setup.py:670
 msgid "Enterprise Wi-Fi Authentication"
-msgstr ""
+msgstr "Podnikové ověření Wi-Fi"
 
 #: install_station/network_setup.py:680
 #, python-brace-format
 msgid "Enterprise Authentication for {ssid}"
-msgstr ""
+msgstr "Podnikové ověření pro {ssid}"
 
 #: install_station/network_setup.py:686
 #, python-brace-format
 msgid "Security: {security}"
-msgstr ""
+msgstr "Zabezpečení: {security}"
 
 #: install_station/network_setup.py:700
 msgid "EAP Method:"
-msgstr ""
+msgstr "Metoda EAP:"
 
 #: install_station/network_setup.py:709
 msgid "Inner Auth:"
-msgstr ""
+msgstr "Vnitřní ověření:"
 
 #: install_station/network_setup.py:714
 msgid "Username:"
-msgstr ""
+msgstr "Uživatelské jméno:"
 
 #: install_station/network_setup.py:718
 msgid "Optional - for privacy"
-msgstr ""
+msgstr "Volitelné, pro soukromí"
 
 #: install_station/network_setup.py:719
 msgid "Anonymous ID:"
-msgstr ""
+msgstr "Anonymní ID:"
 
 #: install_station/network_setup.py:727
 msgid "Show"
-msgstr ""
+msgstr "Zobrazit"
 
 #: install_station/network_setup.py:734
 msgid "Certificates (*.pem, *.crt, *.cer)"
-msgstr ""
+msgstr "Certifikáty (*.pem, *.crt, *.cer)"
 
 #: install_station/network_setup.py:736
 msgid "Select CA Certificate"
-msgstr ""
+msgstr "Vyberte certifikát CA"
 
 #: install_station/network_setup.py:741
 msgid "CA Certificate:"
-msgstr ""
+msgstr "Certifikát CA:"
 
 #: install_station/network_setup.py:746
 msgid "Select Client Certificate"
-msgstr ""
+msgstr "Vyberte certifikát klienta"
 
 #: install_station/network_setup.py:749
 msgid "Client Cert:"
-msgstr ""
+msgstr "Cert. klienta:"
 
 #: install_station/network_setup.py:754
 msgid "Select Private Key"
-msgstr ""
+msgstr "Vyberte soukromý klíč"
 
 #: install_station/network_setup.py:755
 msgid "Key files (*.pem, *.key, *.p12)"
-msgstr ""
+msgstr "Soubory klíčů (*.pem, *.key, *.p12)"
 
 #: install_station/network_setup.py:759
 msgid "Private Key:"
-msgstr ""
+msgstr "Soukromý klíč:"
 
 #: install_station/network_setup.py:766
 msgid "Key Password:"
-msgstr ""
+msgstr "Heslo klíče:"
 
 #: install_station/try_install.py:102
 msgid "What would you like to do?"
-msgstr ""
+msgstr "Co chcete udělat?"
 
 #: install_station/try_install.py:109
 msgid ""
 "<b>Install GhostBSD</b>\n"
 "Install GhostBSD on your computer."
 msgstr ""
+"<b>Nainstalovat GhostBSD</b>\n"
+"Nainstalovat GhostBSD do počítače."
 
 #: install_station/try_install.py:122
 msgid ""
 "<b>Try GhostBSD</b>\n"
 "Run GhostBSD without installing to your computer."
 msgstr ""
+"<b>Vyzkoušet GhostBSD</b>\n"
+"Spustit GhostBSD bez instalace do počítače."
 
 #: install_station/use_zfs.py:176
 msgid "(select the smallest disk first)"
-msgstr ""
+msgstr "(nejprve vyberte nejmenší disk)"
 
 #: install_station/use_zfs.py:180
 msgid "Select 1 or more drives, no redundancy"
-msgstr ""
+msgstr "Vyberte 1 nebo více disků, bez redundance"
 
 #: install_station/use_zfs.py:184
 msgid "Select 2 or more drives for mirroring"
-msgstr ""
+msgstr "Vyberte 2 nebo více disků pro zrcadlení"
 
 #: install_station/use_zfs.py:188
 msgid "Select 3 drives for RAIDZ1"
-msgstr ""
+msgstr "Vyberte 3 disky pro RAIDZ1"
 
 #: install_station/use_zfs.py:192
 msgid "Select 4 drives for RAIDZ2"
-msgstr ""
+msgstr "Vyberte 4 disky pro RAIDZ2"
 
 #: install_station/use_zfs.py:196
 msgid "Select 5 drives for RAIDZ3"
-msgstr ""
+msgstr "Vyberte 5 disků pro RAIDZ3"
 
 #: install_station/use_zfs.py:270
 msgid "Disk"
-msgstr ""
+msgstr "Disk"
 
 #: install_station/use_zfs.py:277
 msgid "Size(MB)"
-msgstr ""
+msgstr "Velikost (MB)"
 
 #: install_station/use_zfs.py:283
 msgid "Name"
-msgstr ""
+msgstr "Název"
 
 #: install_station/use_zfs.py:287
 msgid "Check"
-msgstr ""
+msgstr "Výběr"
 
 #: install_station/use_zfs.py:301
 msgid "Please select one drive"
-msgstr ""
+msgstr "Vyberte jeden disk"
 
 #: install_station/use_zfs.py:307
 msgid "Pool Layout"
-msgstr ""
+msgstr "Rozvržení poolu"
 
 #: install_station/use_zfs.py:319
 msgid "Pool Name"
-msgstr ""
+msgstr "Název poolu"
 
 #: install_station/use_zfs.py:325
 msgid "Swap Size(MB)"
-msgstr ""
+msgstr "Velikost swapu (MB)"
 
 #: install_station/use_zfs.py:346
 msgid "Encrypt Disk (GELI)"
-msgstr ""
+msgstr "Šifrovat disk (GELI)"
 
 #: install_station/use_zfs.py:351
 msgid "Password"
-msgstr ""
+msgstr "Heslo"
 
 #: install_station/use_zfs.py:361
 msgid "Confirm"
-msgstr ""
+msgstr "Potvrdit"
 
 #: install_station/use_zfs.py:509
 msgid "Warning"
-msgstr ""
+msgstr "Varování"
 
 #: install_station/use_zfs.py:520
 msgid "Smallest disk need to be SELECTED first!\n"
-msgstr ""
+msgstr "Nejmenší disk musí být VYBRÁN jako první!\n"
 
 #: install_station/use_zfs.py:521
 msgid "All the disk selected will reset."
-msgstr ""
+msgstr "Všechny vybrané disky budou vymazány."

@@ -13,111 +13,111 @@ msgstr ""
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: install_station/boot_manager.py:121
 #: install_station/interface_controller.py:247
 msgid "Boot Option"
-msgstr ""
+msgstr "Startalternativ"
 
 #: install_station/boot_manager.py:135
 msgid "Setup rEFInd boot manager"
-msgstr ""
+msgstr "Installera starthanteraren rEFInd"
 
 #: install_station/boot_manager.py:149
 msgid "Setup FreeBSD boot manager"
-msgstr ""
+msgstr "Installera starthanteraren för FreeBSD"
 
 #: install_station/boot_manager.py:164
 #, python-brace-format
 msgid "FreeBSD {loader} loader only"
-msgstr ""
+msgstr "Endast FreeBSD-starthanteraren {loader}"
 
 #: install_station/common.py:123
 msgid "Space not allowed"
-msgstr ""
+msgstr "Mellanslag är inte tillåtet"
 
 #: install_station/common.py:125 install_station/common.py:127
 msgid "Super Weak"
-msgstr ""
+msgstr "Extremt svagt"
 
 #: install_station/common.py:129 install_station/common.py:135
 msgid "Very Weak"
-msgstr ""
+msgstr "Mycket svagt"
 
 #: install_station/common.py:131 install_station/common.py:137
 #: install_station/common.py:143
 msgid "Fairly Weak"
-msgstr ""
+msgstr "Ganska svagt"
 
 #: install_station/common.py:133 install_station/common.py:139
 #: install_station/common.py:145 install_station/common.py:151
 msgid "Weak"
-msgstr ""
+msgstr "Svagt"
 
 #: install_station/common.py:141 install_station/common.py:147
 #: install_station/common.py:153 install_station/common.py:159
 msgid "Strong"
-msgstr ""
+msgstr "Starkt"
 
 #: install_station/common.py:149 install_station/common.py:155
 #: install_station/common.py:161 install_station/common.py:167
 msgid "Fairly Strong"
-msgstr ""
+msgstr "Ganska starkt"
 
 #: install_station/common.py:157 install_station/common.py:163
 msgid "Very Strong"
-msgstr ""
+msgstr "Mycket starkt"
 
 #: install_station/common.py:165 install_station/common.py:169
 msgid "Super Strong"
-msgstr ""
+msgstr "Extremt starkt"
 
 #: install_station/custom.py:248
 msgid "Create"
-msgstr ""
+msgstr "Skapa"
 
 #: install_station/custom.py:252
 msgid "Delete"
-msgstr ""
+msgstr "Ta bort"
 
 #: install_station/custom.py:256
 msgid "Revert"
-msgstr ""
+msgstr "Återställ"
 
 #: install_station/custom.py:260
 msgid "Auto"
-msgstr ""
+msgstr "Automatiskt"
 
 #: install_station/custom.py:328 install_station/custom.py:566
 msgid "Add Partition"
-msgstr ""
+msgstr "Lägg till partition"
 
 #: install_station/custom.py:342
 msgid "Type:"
-msgstr ""
+msgstr "Typ:"
 
 #: install_station/custom.py:343 install_station/custom.py:580
 msgid "Size(MB):"
-msgstr ""
+msgstr "Storlek (MB):"
 
 #: install_station/custom.py:344
 msgid "Mount point:"
-msgstr ""
+msgstr "Monteringspunkt:"
 
 #: install_station/custom.py:496
 msgid "Partition Scheme"
-msgstr ""
+msgstr "Partitionsschema"
 
 #: install_station/custom.py:515
 msgid "GPT: GUID Partition Table"
-msgstr ""
+msgstr "GPT: GUID-partitionstabell"
 
 #: install_station/custom.py:516
 msgid "MBR: DOS Partition"
-msgstr ""
+msgstr "MBR: DOS-partition"
 
 #: install_station/end.py:10
 msgid ""
@@ -127,30 +127,35 @@ msgid ""
 "any changes you make or documents you save will\n"
 "not be preserved on reboot."
 msgstr ""
+"Installationen är klar. Du måste starta om\n"
+"datorn för att använda den nya installationen.\n"
+"Du kan fortsätta använda det här live-mediet, men\n"
+"ändringar du gör och dokument du sparar\n"
+"bevaras inte vid omstart."
 
 #: install_station/end.py:31
 msgid "Installation Completed"
-msgstr ""
+msgstr "Installationen är klar"
 
 #: install_station/end.py:47
 msgid "Restart"
-msgstr ""
+msgstr "Starta om"
 
 #: install_station/end.py:49
 msgid "Continue"
-msgstr ""
+msgstr "Fortsätt"
 
 #: install_station/error.py:17
 msgid "Installation Error"
-msgstr ""
+msgstr "Installationsfel"
 
 #: install_station/error.py:28
 msgid "Installation has failed!"
-msgstr ""
+msgstr "Installationen misslyckades!"
 
 #: install_station/error.py:33
 msgid "GhostBSD issue system"
-msgstr ""
+msgstr "GhostBSD:s ärendesystem"
 
 #: install_station/error.py:35
 #, python-brace-format
@@ -158,380 +163,391 @@ msgid ""
 "Please report the issue to {anchor}, and \n"
 "be sure to provide /tmp/.pc-sysinstall/pc-sysinstall.log."
 msgstr ""
+"Rapportera problemet i {anchor} och \n"
+"bifoga /tmp/.pc-sysinstall/pc-sysinstall.log."
 
 #: install_station/error.py:45
 msgid "Ok"
-msgstr ""
+msgstr "OK"
 
 #: install_station/install_type.py:94
 msgid "How do you want to install GhostBSD?"
-msgstr ""
+msgstr "Hur vill du installera GhostBSD?"
 
 #: install_station/install_type.py:100
 msgid ""
 "<b>Disks Configuration</b>\n"
-"Install GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 "
-"configurations."
+"Install GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 configurations."
 msgstr ""
+"<b>Diskkonfiguration</b>\n"
+"Installera GhostBSD med Stripe-, Mirror-, RAIDZ1-, RAIDZ2- eller RAIDZ3-konfiguration."
 
 #: install_station/install_type.py:113
 msgid ""
 "<b>Multi-Boot Configuration</b>\n"
 "Install GhostBSD with ZFS alongside other operating systems."
 msgstr ""
+"<b>Konfiguration för flera system</b>\n"
+"Installera GhostBSD med ZFS bredvid andra operativsystem."
 
 #: install_station/install.py:46
 msgid "Creating ghostbsd_installation.cfg"
-msgstr ""
+msgstr "Skapar ghostbsd_installation.cfg"
 
 #: install_station/install.py:50
 msgid "Deleting partition"
-msgstr ""
+msgstr "Tar bort partition"
 
 #: install_station/install.py:55
 msgid "Creating disk partition"
-msgstr ""
+msgstr "Skapar diskpartition"
 
 #: install_station/install.py:60
 msgid "Creating new partitions"
-msgstr ""
+msgstr "Skapar nya partitioner"
 
 #: install_station/install.py:90
 msgid "Installation in progress"
-msgstr ""
+msgstr "Installation pågår"
 
 #: install_station/install.py:102
 msgid ""
 "Thank you for choosing GhostBSD!\n"
 "\n"
-"We believe every computer operating system should be simple, elegant, secure "
-"and protect your privacy while being easy to use. GhostBSD is simplifying "
-"FreeBSD for those who lack the technical expertise required to use it and "
-"lower the entry-level of using BSD. \n"
+"We believe every computer operating system should be simple, elegant, secure and protect your privacy while being easy to use. GhostBSD is simplifying FreeBSD for those who lack the technical expertise required to use it and lower the entry-level of using BSD. \n"
 "\n"
 "We hope you'll enjoy our BSD operating system."
 msgstr ""
+"Tack för att du valde GhostBSD!\n"
+"\n"
+"Vi anser att varje operativsystem ska vara enkelt, elegant och säkert och skydda din integritet, samtidigt som det är lätt att använda. GhostBSD förenklar FreeBSD för dem som saknar den tekniska kunskap som krävs och sänker tröskeln för att använda BSD. \n"
+"\n"
+"Vi hoppas att du kommer att trivas med vårt BSD-operativsystem."
 
 #: install_station/interface_controller.py:24
 #: install_station/interface_controller.py:35
 msgid "Back"
-msgstr ""
+msgstr "Tillbaka"
 
 #: install_station/interface_controller.py:26
 #: install_station/interface_controller.py:36
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 #: install_station/interface_controller.py:28
 #: install_station/interface_controller.py:37
 #: install_station/interface_controller.py:281
 msgid "Next"
-msgstr ""
+msgstr "Nästa"
 
 #: install_station/interface_controller.py:129
 #: install_station/interface_controller.py:130 install_station/language.py:101
 msgid "Welcome to GhostBSD"
-msgstr ""
+msgstr "Välkommen till GhostBSD"
 
 #: install_station/interface_controller.py:139
 msgid "Button"
-msgstr ""
+msgstr "Knapp"
 
 #: install_station/interface_controller.py:160
 msgid "Keyboard Setup"
-msgstr ""
+msgstr "Tangentbordsinställning"
 
 #: install_station/interface_controller.py:172
 msgid "Network Setup"
-msgstr ""
+msgstr "Nätverksinställning"
 
 #: install_station/interface_controller.py:183
 msgid "Try Or Install GhostBSD"
-msgstr ""
+msgstr "Prova eller installera GhostBSD"
 
 #: install_station/interface_controller.py:194
 msgid "Installation Types"
-msgstr ""
+msgstr "Installationstyper"
 
 #: install_station/interface_controller.py:222
 msgid "Custom Configuration"
-msgstr ""
+msgstr "Anpassad konfiguration"
 
 #: install_station/interface_controller.py:232
 msgid "ZFS Configuration"
-msgstr ""
+msgstr "ZFS-konfiguration"
 
 #: install_station/interface_controller.py:249
 msgid "Install"
-msgstr ""
+msgstr "Installera"
 
 #: install_station/interface_controller.py:259
 msgid "Installation Progress"
-msgstr ""
+msgstr "Installationsförlopp"
 
 #: install_station/interface_controller.py:266
 msgid "Progress Bar"
-msgstr ""
+msgstr "Förloppsindikator"
 
 #: install_station/keyboard.py:45
 msgid "Type here to test your keyboard"
-msgstr ""
+msgstr "Skriv här för att testa tangentbordet"
 
 #: install_station/keyboard.py:102
 msgid "Keyboard Layout"
-msgstr ""
+msgstr "Tangentbordslayout"
 
 #: install_station/keyboard.py:122
 msgid "Keyboard Models"
-msgstr ""
+msgstr "Tangentbordsmodeller"
 
 #: install_station/keyboard.py:230
 msgid "English (US)"
-msgstr ""
+msgstr "Engelska (USA)"
 
 #: install_station/keyboard.py:231
 msgid "English (Canada)"
-msgstr ""
+msgstr "Engelska (Kanada)"
 
 #: install_station/keyboard.py:232
 msgid "French (Canada)"
-msgstr ""
+msgstr "Franska (Kanada)"
 
 #: install_station/language.py:93 install_station/language.py:197
 msgid "Please select your language:"
-msgstr ""
+msgstr "Välj ditt språk:"
 
 #: install_station/language.py:99 install_station/language.py:116
 msgid "Language"
-msgstr ""
+msgstr "Språk"
 
 #: install_station/network_setup.py:155
 msgid "Network card connected to the internet"
-msgstr ""
+msgstr "Nätverkskortet är anslutet till internet"
 
 #: install_station/network_setup.py:161
 msgid "Network card not connected to the internet"
-msgstr ""
+msgstr "Nätverkskortet är inte anslutet till internet"
 
 #: install_station/network_setup.py:164
 msgid "No network card detected"
-msgstr ""
+msgstr "Inget nätverkskort hittades"
 
 #: install_station/network_setup.py:173
 msgid "WiFi card detected and connected to an access point"
-msgstr ""
+msgstr "Wi-Fi-kort hittades och är anslutet till en åtkomstpunkt"
 
 #: install_station/network_setup.py:177
 msgid "WiFi card detected but not connected to an access point"
-msgstr ""
+msgstr "Wi-Fi-kort hittades men är inte anslutet till en åtkomstpunkt"
 
 #: install_station/network_setup.py:180
 msgid "WiFi card not detected or not supported"
-msgstr ""
+msgstr "Wi-Fi-kort hittades inte eller stöds inte"
 
 #: install_station/network_setup.py:202 install_station/network_setup.py:271
 msgid "Rescan"
-msgstr ""
+msgstr "Sök igen"
 
 #: install_station/network_setup.py:359 install_station/network_setup.py:507
 #: install_station/network_setup.py:678
 #, python-brace-format
 msgid "Could not connect to {ssid}"
-msgstr ""
+msgstr "Kunde inte ansluta till {ssid}"
 
 #: install_station/network_setup.py:401
 #, python-brace-format
 msgid "Connecting to {ssid}..."
-msgstr ""
+msgstr "Ansluter till {ssid}..."
 
 #: install_station/network_setup.py:433
 #, python-brace-format
 msgid "Connected to {ssid}, but it could not be saved"
-msgstr ""
+msgstr "Ansluten till {ssid}, men nätverket kunde inte sparas"
 
 #: install_station/network_setup.py:494
 msgid "Wi-Fi Network Authentication Required"
-msgstr ""
+msgstr "Autentisering för Wi-Fi-nätverk krävs"
 
 #: install_station/network_setup.py:509
 #, python-brace-format
 msgid "Authentication required by {ssid} Wi-Fi Network"
-msgstr ""
+msgstr "Wi-Fi-nätverket {ssid} kräver autentisering"
 
 #: install_station/network_setup.py:512 install_station/network_setup.py:730
 msgid "Password:"
-msgstr ""
+msgstr "Lösenord:"
 
 #: install_station/network_setup.py:515
 msgid "Show password"
-msgstr ""
+msgstr "Visa lösenord"
 
 #: install_station/network_setup.py:670
 msgid "Enterprise Wi-Fi Authentication"
-msgstr ""
+msgstr "Wi-Fi-autentisering för företag"
 
 #: install_station/network_setup.py:680
 #, python-brace-format
 msgid "Enterprise Authentication for {ssid}"
-msgstr ""
+msgstr "Företagsautentisering för {ssid}"
 
 #: install_station/network_setup.py:686
 #, python-brace-format
 msgid "Security: {security}"
-msgstr ""
+msgstr "Säkerhet: {security}"
 
 #: install_station/network_setup.py:700
 msgid "EAP Method:"
-msgstr ""
+msgstr "EAP-metod:"
 
 #: install_station/network_setup.py:709
 msgid "Inner Auth:"
-msgstr ""
+msgstr "Inre autentisering:"
 
 #: install_station/network_setup.py:714
 msgid "Username:"
-msgstr ""
+msgstr "Användarnamn:"
 
 #: install_station/network_setup.py:718
 msgid "Optional - for privacy"
-msgstr ""
+msgstr "Valfritt, för integritet"
 
 #: install_station/network_setup.py:719
 msgid "Anonymous ID:"
-msgstr ""
+msgstr "Anonymt ID:"
 
 #: install_station/network_setup.py:727
 msgid "Show"
-msgstr ""
+msgstr "Visa"
 
 #: install_station/network_setup.py:734
 msgid "Certificates (*.pem, *.crt, *.cer)"
-msgstr ""
+msgstr "Certifikat (*.pem, *.crt, *.cer)"
 
 #: install_station/network_setup.py:736
 msgid "Select CA Certificate"
-msgstr ""
+msgstr "Välj CA-certifikat"
 
 #: install_station/network_setup.py:741
 msgid "CA Certificate:"
-msgstr ""
+msgstr "CA-certifikat:"
 
 #: install_station/network_setup.py:746
 msgid "Select Client Certificate"
-msgstr ""
+msgstr "Välj klientcertifikat"
 
 #: install_station/network_setup.py:749
 msgid "Client Cert:"
-msgstr ""
+msgstr "Klientcert.:"
 
 #: install_station/network_setup.py:754
 msgid "Select Private Key"
-msgstr ""
+msgstr "Välj privat nyckel"
 
 #: install_station/network_setup.py:755
 msgid "Key files (*.pem, *.key, *.p12)"
-msgstr ""
+msgstr "Nyckelfiler (*.pem, *.key, *.p12)"
 
 #: install_station/network_setup.py:759
 msgid "Private Key:"
-msgstr ""
+msgstr "Privat nyckel:"
 
 #: install_station/network_setup.py:766
 msgid "Key Password:"
-msgstr ""
+msgstr "Nyckellösenord:"
 
 #: install_station/try_install.py:102
 msgid "What would you like to do?"
-msgstr ""
+msgstr "Vad vill du göra?"
 
 #: install_station/try_install.py:109
 msgid ""
 "<b>Install GhostBSD</b>\n"
 "Install GhostBSD on your computer."
 msgstr ""
+"<b>Installera GhostBSD</b>\n"
+"Installera GhostBSD på din dator."
 
 #: install_station/try_install.py:122
 msgid ""
 "<b>Try GhostBSD</b>\n"
 "Run GhostBSD without installing to your computer."
 msgstr ""
+"<b>Prova GhostBSD</b>\n"
+"Kör GhostBSD utan att installera det på din dator."
 
 #: install_station/use_zfs.py:176
 msgid "(select the smallest disk first)"
-msgstr ""
+msgstr "(välj den minsta disken först)"
 
 #: install_station/use_zfs.py:180
 msgid "Select 1 or more drives, no redundancy"
-msgstr ""
+msgstr "Välj 1 eller fler diskar, ingen redundans"
 
 #: install_station/use_zfs.py:184
 msgid "Select 2 or more drives for mirroring"
-msgstr ""
+msgstr "Välj 2 eller fler diskar för spegling"
 
 #: install_station/use_zfs.py:188
 msgid "Select 3 drives for RAIDZ1"
-msgstr ""
+msgstr "Välj 3 diskar för RAIDZ1"
 
 #: install_station/use_zfs.py:192
 msgid "Select 4 drives for RAIDZ2"
-msgstr ""
+msgstr "Välj 4 diskar för RAIDZ2"
 
 #: install_station/use_zfs.py:196
 msgid "Select 5 drives for RAIDZ3"
-msgstr ""
+msgstr "Välj 5 diskar för RAIDZ3"
 
 #: install_station/use_zfs.py:270
 msgid "Disk"
-msgstr ""
+msgstr "Disk"
 
 #: install_station/use_zfs.py:277
 msgid "Size(MB)"
-msgstr ""
+msgstr "Storlek (MB)"
 
 #: install_station/use_zfs.py:283
 msgid "Name"
-msgstr ""
+msgstr "Namn"
 
 #: install_station/use_zfs.py:287
 msgid "Check"
-msgstr ""
+msgstr "Val"
 
 #: install_station/use_zfs.py:301
 msgid "Please select one drive"
-msgstr ""
+msgstr "Välj en disk"
 
 #: install_station/use_zfs.py:307
 msgid "Pool Layout"
-msgstr ""
+msgstr "Poollayout"
 
 #: install_station/use_zfs.py:319
 msgid "Pool Name"
-msgstr ""
+msgstr "Poolnamn"
 
 #: install_station/use_zfs.py:325
 msgid "Swap Size(MB)"
-msgstr ""
+msgstr "Swapstorlek (MB)"
 
 #: install_station/use_zfs.py:346
 msgid "Encrypt Disk (GELI)"
-msgstr ""
+msgstr "Kryptera disk (GELI)"
 
 #: install_station/use_zfs.py:351
 msgid "Password"
-msgstr ""
+msgstr "Lösenord"
 
 #: install_station/use_zfs.py:361
 msgid "Confirm"
-msgstr ""
+msgstr "Bekräfta"
 
 #: install_station/use_zfs.py:509
 msgid "Warning"
-msgstr ""
+msgstr "Varning"
 
 #: install_station/use_zfs.py:520
 msgid "Smallest disk need to be SELECTED first!\n"
-msgstr ""
+msgstr "Den minsta disken måste VÄLJAS först!\n"
 
 #: install_station/use_zfs.py:521
 msgid "All the disk selected will reset."
-msgstr ""
+msgstr "Alla valda diskar kommer att nollställas."

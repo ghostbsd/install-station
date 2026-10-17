@@ -177,12 +177,10 @@ msgstr "Comment voulez-vous installer GhostBSD ?"
 #: install_station/install_type.py:100
 msgid ""
 "<b>Disks Configuration</b>\n"
-"Install GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 "
-"configurations."
+"Install GhostBSD using Stripe, Mirror, RAIDZ1, RAIDZ2, or RAIDZ3 configurations."
 msgstr ""
 "<b>Configuration des disques</b>\n"
-"Installer GhostBSD en utilisant les configurations Stripe, Mirror, RAIDZ1, "
-"RAIDZ2, ou RAIDZ3."
+"Installer GhostBSD en utilisant les configurations Stripe, Mirror, RAIDZ1, RAIDZ2, ou RAIDZ3."
 
 #: install_station/install_type.py:113
 msgid ""
@@ -216,20 +214,13 @@ msgstr "Installation en cours"
 msgid ""
 "Thank you for choosing GhostBSD!\n"
 "\n"
-"We believe every computer operating system should be simple, elegant, secure "
-"and protect your privacy while being easy to use. GhostBSD is simplifying "
-"FreeBSD for those who lack the technical expertise required to use it and "
-"lower the entry-level of using BSD. \n"
+"We believe every computer operating system should be simple, elegant, secure and protect your privacy while being easy to use. GhostBSD is simplifying FreeBSD for those who lack the technical expertise required to use it and lower the entry-level of using BSD. \n"
 "\n"
 "We hope you'll enjoy our BSD operating system."
 msgstr ""
 "Merci d'avoir choisi GhostBSD !\n"
 "\n"
-"Nous croyons que chaque système d'exploitation devrait être simple, élégant, "
-"sécurisé et protéger votre vie privée tout en étant facile à utiliser. "
-"GhostBSD simplifie FreeBSD pour ceux qui manquent de l'expertise technique "
-"nécessaire pour l'utiliser et abaisse le niveau d'entrée d'utilisation de "
-"BSD. \n"
+"Nous croyons que chaque système d'exploitation devrait être simple, élégant, sécurisé et protéger votre vie privée tout en étant facile à utiliser. GhostBSD simplifie FreeBSD pour ceux qui manquent de l'expertise technique nécessaire pour l'utiliser et abaisse le niveau d'entrée d'utilisation de BSD. \n"
 "\n"
 "Nous espérons que vous apprécierez notre système d'exploitation BSD."
 
@@ -259,18 +250,16 @@ msgid "Button"
 msgstr "Bouton"
 
 #: install_station/interface_controller.py:160
-#, fuzzy
 msgid "Keyboard Setup"
-msgstr "Disposition du clavier"
+msgstr "Configuration du clavier"
 
 #: install_station/interface_controller.py:172
 msgid "Network Setup"
 msgstr "Configuration réseau"
 
 #: install_station/interface_controller.py:183
-#, fuzzy
 msgid "Try Or Install GhostBSD"
-msgstr "Installer GhostBSD"
+msgstr "Essayer ou installer GhostBSD"
 
 #: install_station/interface_controller.py:194
 msgid "Installation Types"
@@ -321,9 +310,8 @@ msgid "French (Canada)"
 msgstr "Français (Canada)"
 
 #: install_station/language.py:93 install_station/language.py:197
-#, fuzzy
 msgid "Please select your language:"
-msgstr "Veuillez sélectionner un lecteur"
+msgstr "Veuillez choisir votre langue :"
 
 #: install_station/language.py:99 install_station/language.py:116
 msgid "Language"
@@ -355,23 +343,23 @@ msgstr "Carte WiFi non détectée ou non prise en charge"
 
 #: install_station/network_setup.py:202 install_station/network_setup.py:271
 msgid "Rescan"
-msgstr ""
+msgstr "Actualiser"
 
 #: install_station/network_setup.py:359 install_station/network_setup.py:507
 #: install_station/network_setup.py:678
 #, python-brace-format
 msgid "Could not connect to {ssid}"
-msgstr ""
+msgstr "Impossible de se connecter à {ssid}"
 
 #: install_station/network_setup.py:401
 #, python-brace-format
 msgid "Connecting to {ssid}..."
-msgstr ""
+msgstr "Connexion à {ssid}..."
 
 #: install_station/network_setup.py:433
 #, python-brace-format
 msgid "Connected to {ssid}, but it could not be saved"
-msgstr ""
+msgstr "Connecté à {ssid}, mais le réseau n'a pas pu être enregistré"
 
 #: install_station/network_setup.py:494
 msgid "Wi-Fi Network Authentication Required"
@@ -391,126 +379,122 @@ msgid "Show password"
 msgstr "Afficher le mot de passe"
 
 #: install_station/network_setup.py:670
-#, fuzzy
 msgid "Enterprise Wi-Fi Authentication"
-msgstr "L'authentification du réseau Wi-Fi {ssid} a échoué"
+msgstr "Authentification Wi-Fi entreprise"
 
 #: install_station/network_setup.py:680
 #, python-brace-format
 msgid "Enterprise Authentication for {ssid}"
-msgstr ""
+msgstr "Authentification entreprise pour {ssid}"
 
 #: install_station/network_setup.py:686
 #, python-brace-format
 msgid "Security: {security}"
-msgstr ""
+msgstr "Sécurité : {security}"
 
 #: install_station/network_setup.py:700
 msgid "EAP Method:"
-msgstr ""
+msgstr "Méthode EAP :"
 
 #: install_station/network_setup.py:709
 msgid "Inner Auth:"
-msgstr ""
+msgstr "Auth. interne :"
 
 #: install_station/network_setup.py:714
 msgid "Username:"
-msgstr ""
+msgstr "Nom d'utilisateur :"
 
 #: install_station/network_setup.py:718
 msgid "Optional - for privacy"
-msgstr ""
+msgstr "Facultatif, pour la confidentialité"
 
 #: install_station/network_setup.py:719
 msgid "Anonymous ID:"
-msgstr ""
+msgstr "Identité anonyme :"
 
 #: install_station/network_setup.py:727
 msgid "Show"
-msgstr ""
+msgstr "Afficher"
 
 #: install_station/network_setup.py:734
 msgid "Certificates (*.pem, *.crt, *.cer)"
-msgstr ""
+msgstr "Certificats (*.pem, *.crt, *.cer)"
 
 #: install_station/network_setup.py:736
 msgid "Select CA Certificate"
-msgstr ""
+msgstr "Choisir le certificat CA"
 
 #: install_station/network_setup.py:741
 msgid "CA Certificate:"
-msgstr ""
+msgstr "Certificat CA :"
 
 #: install_station/network_setup.py:746
 msgid "Select Client Certificate"
-msgstr ""
+msgstr "Choisir le certificat client"
 
 #: install_station/network_setup.py:749
 msgid "Client Cert:"
-msgstr ""
+msgstr "Cert. client :"
 
 #: install_station/network_setup.py:754
 msgid "Select Private Key"
-msgstr ""
+msgstr "Choisir la clé privée"
 
 #: install_station/network_setup.py:755
 msgid "Key files (*.pem, *.key, *.p12)"
-msgstr ""
+msgstr "Fichiers de clé (*.pem, *.key, *.p12)"
 
 #: install_station/network_setup.py:759
 msgid "Private Key:"
-msgstr ""
+msgstr "Clé privée :"
 
 #: install_station/network_setup.py:766
-#, fuzzy
 msgid "Key Password:"
-msgstr "Mot de passe :"
+msgstr "Mot de passe de la clé :"
 
 #: install_station/try_install.py:102
 msgid "What would you like to do?"
-msgstr ""
+msgstr "Que voulez-vous faire ?"
 
 #: install_station/try_install.py:109
 msgid ""
 "<b>Install GhostBSD</b>\n"
 "Install GhostBSD on your computer."
 msgstr ""
+"<b>Installer GhostBSD</b>\n"
+"Installer GhostBSD sur votre ordinateur."
 
 #: install_station/try_install.py:122
 msgid ""
 "<b>Try GhostBSD</b>\n"
 "Run GhostBSD without installing to your computer."
 msgstr ""
+"<b>Essayer GhostBSD</b>\n"
+"Utiliser GhostBSD sans l'installer sur votre ordinateur."
 
 #: install_station/use_zfs.py:176
-#, fuzzy
 msgid "(select the smallest disk first)"
-msgstr ""
-"Veuillez sélectionner 3 disques pour RAIDZ1 (sélectionnez d'abord le plus "
-"petit disque)"
+msgstr "(choisissez d'abord le plus petit disque)"
 
 #: install_station/use_zfs.py:180
 msgid "Select 1 or more drives, no redundancy"
-msgstr ""
+msgstr "Choisissez 1 disque ou plus, sans redondance"
 
 #: install_station/use_zfs.py:184
 msgid "Select 2 or more drives for mirroring"
-msgstr ""
+msgstr "Choisissez 2 disques ou plus pour le miroir"
 
 #: install_station/use_zfs.py:188
-#, fuzzy
 msgid "Select 3 drives for RAIDZ1"
-msgstr "3 disques RAIDZ1"
+msgstr "Choisissez 3 disques pour RAIDZ1"
 
 #: install_station/use_zfs.py:192
-#, fuzzy
 msgid "Select 4 drives for RAIDZ2"
-msgstr "4 disques RAIDZ2"
+msgstr "Choisissez 4 disques pour RAIDZ2"
 
 #: install_station/use_zfs.py:196
-#, fuzzy
 msgid "Select 5 drives for RAIDZ3"
-msgstr "5 disques RAIDZ3"
+msgstr "Choisissez 5 disques pour RAIDZ3"
 
 #: install_station/use_zfs.py:270
 msgid "Disk"
@@ -533,24 +517,20 @@ msgid "Please select one drive"
 msgstr "Veuillez sélectionner un lecteur"
 
 #: install_station/use_zfs.py:307
-#, fuzzy
 msgid "Pool Layout"
-msgstr "Disposition du clavier"
+msgstr "Disposition du pool"
 
 #: install_station/use_zfs.py:319
-#, fuzzy
 msgid "Pool Name"
-msgstr "<b>Nom du pool</b>"
+msgstr "Nom du pool"
 
 #: install_station/use_zfs.py:325
-#, fuzzy
 msgid "Swap Size(MB)"
-msgstr "Taille (Mo)"
+msgstr "Taille du swap (Mo)"
 
 #: install_station/use_zfs.py:346
-#, fuzzy
 msgid "Encrypt Disk (GELI)"
-msgstr "Chiffrer le disque"
+msgstr "Chiffrer le disque (GELI)"
 
 #: install_station/use_zfs.py:351
 msgid "Password"
@@ -558,7 +538,7 @@ msgstr "Mot de passe"
 
 #: install_station/use_zfs.py:361
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmer"
 
 #: install_station/use_zfs.py:509
 msgid "Warning"
@@ -588,8 +568,8 @@ msgstr "Tous les disques sélectionnés seront réinitialisés."
 
 #~ msgid "Please select 2 drive for mirroring (select the smallest disk first)"
 #~ msgstr ""
-#~ "Veuillez sélectionner 2 disques pour la mise en miroir (sélectionnez "
-#~ "d'abord le plus petit disque)"
+#~ "Veuillez sélectionner 2 disques pour la mise en miroir (sélectionnez d'abord "
+#~ "le plus petit disque)"
 
 #~ msgid "Please select 4 drive for RAIDZ2 (select the smallest disk first)"
 #~ msgstr ""
@@ -625,10 +605,7 @@ msgstr "Tous les disques sélectionnés seront réinitialisés."
 
 #~ msgid ""
 #~ "To run GhostBSD without installing, select \"Try GhostBSD\".\n"
-#~ "To install GhostBSD on your computer hard disc drive, click \"Install "
-#~ "GhostBSD\"."
+#~ "To install GhostBSD on your computer hard disc drive, click \"Install GhostBSD\"."
 #~ msgstr ""
-#~ "Pour exécuter GhostBSD sans l'installer, sélectionnez \"Essayez "
-#~ "GhostBSD\".\n"
-#~ "Pour installer GhostBSD sur le disque dur de votre ordinateur, cliquez "
-#~ "sur \"Installer GhostBSD\"."
+#~ "Pour exécuter GhostBSD sans l'installer, sélectionnez \"Essayez GhostBSD\".\n"
+#~ "Pour installer GhostBSD sur le disque dur de votre ordinateur, cliquez sur \"Installer GhostBSD\"."
