@@ -14,6 +14,9 @@ stop_cmd=":"
 
 install_station_start()
 {
+    HOME=/root dbus-run-session -- \
+        gsettings set org.mate.background show-desktop-icons false
+
     cat > /root/.xinitrc <<'EOF'
 /usr/local/libexec/mate-settings-daemon &
 marco &
@@ -25,6 +28,9 @@ EOF
     su -l root -c "startx -- :0 vt09"
 
     rm -f /root/.xinitrc
+
+    HOME=/root dbus-run-session -- \
+        gsettings reset org.mate.background show-desktop-icons
 }
 
 load_rc_config $name
