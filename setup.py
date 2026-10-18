@@ -14,7 +14,7 @@ from DistUtilsExtra.command.build_i18n import build_i18n
 from DistUtilsExtra.command.clean_i18n import clean_i18n
 
 prefix = sys.prefix
-__VERSION__ = '0.9'
+__VERSION__ = '1.0'
 PROGRAM_VERSION = __VERSION__
 
 
