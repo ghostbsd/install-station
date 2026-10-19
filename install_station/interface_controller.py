@@ -5,6 +5,7 @@ This module provides the main navigation interface and button controls
 for the Install Station GTK application wizard.
 """
 import gi
+from subprocess import Popen
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from install_station.install import InstallProgress, InstallWindow
@@ -141,10 +142,23 @@ class Interface:
         return interface_box
 
     @classmethod
-    def delete(cls, _widget: Gtk.Widget, _event=None) -> None:
-        """Close the main window."""
-        InstallationData.reset()
-        Gtk.main_quit()
+    def delete(cls, _widget: Gtk.Widget, _event=None) -> bool:
+        """Ask to cancel the installation and restart the computer."""
+        dialog = Gtk.MessageDialog(
+            transient_for=Window.window,
+            modal=True,
+            message_type=Gtk.MessageType.QUESTION,
+            text=get_text("Cancel the installation and restart the computer?")
+        )
+        dialog.add_buttons(
+            get_text("No"), Gtk.ResponseType.NO,
+            get_text("Restart"), Gtk.ResponseType.YES
+        )
+        response = dialog.run()
+        dialog.destroy()
+        if response == Gtk.ResponseType.YES:
+            Popen('shutdown -r now', shell=True)
+        return True
 
     @classmethod
     def next_page(cls, _widget: Gtk.Button) -> None:
